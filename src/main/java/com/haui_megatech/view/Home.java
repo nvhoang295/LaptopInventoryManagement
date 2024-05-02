@@ -56,14 +56,14 @@ public class Home extends javax.swing.JFrame {
         logoutTab = new javax.swing.JPanel();
         logoutLabel = new javax.swing.JLabel();
         productPanel = new javax.swing.JPanel();
-        productPanel1 = new javax.swing.JPanel();
-        productPanel2 = new javax.swing.JPanel();
-        productPanel3 = new javax.swing.JPanel();
-        productPanel4 = new javax.swing.JPanel();
-        productPanel5 = new javax.swing.JPanel();
-        productPanel6 = new javax.swing.JPanel();
-        productPanel7 = new javax.swing.JPanel();
-        productPanel8 = new javax.swing.JPanel();
+        providerPanel = new javax.swing.JPanel();
+        importProductPanel = new javax.swing.JPanel();
+        importBillPanel = new javax.swing.JPanel();
+        exportProductPanel = new javax.swing.JPanel();
+        exportBillPanel = new javax.swing.JPanel();
+        inStockPanel = new javax.swing.JPanel();
+        userPanel = new javax.swing.JPanel();
+        statisticPanel = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1280, 800));
@@ -83,6 +83,11 @@ public class Home extends javax.swing.JFrame {
 
         productTab.setBackground(new java.awt.Color(255, 255, 255));
         productTab.setPreferredSize(new java.awt.Dimension(240, 40));
+        productTab.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                productTabMouseClicked(evt);
+            }
+        });
 
         productLabel.setBackground(new java.awt.Color(255, 255, 255));
         productLabel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -112,6 +117,11 @@ public class Home extends javax.swing.JFrame {
 
         providerTab.setBackground(new java.awt.Color(255, 255, 255));
         providerTab.setPreferredSize(new java.awt.Dimension(240, 40));
+        providerTab.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                providerTabMouseClicked(evt);
+            }
+        });
 
         providerLabel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         providerLabel.setText("NHÀ CUNG CẤP");
@@ -141,6 +151,11 @@ public class Home extends javax.swing.JFrame {
 
         importProductTab.setBackground(new java.awt.Color(255, 255, 255));
         importProductTab.setPreferredSize(new java.awt.Dimension(240, 40));
+        importProductTab.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                importProductTabMouseClicked(evt);
+            }
+        });
 
         importProductLabel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         importProductLabel.setText("NHẬP HÀNG");
@@ -170,6 +185,11 @@ public class Home extends javax.swing.JFrame {
 
         importBillTab.setBackground(new java.awt.Color(255, 255, 255));
         importBillTab.setPreferredSize(new java.awt.Dimension(240, 40));
+        importBillTab.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                importBillTabMouseClicked(evt);
+            }
+        });
 
         importBillLabel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         importBillLabel.setText("PHIẾU NHẬP");
@@ -199,6 +219,11 @@ public class Home extends javax.swing.JFrame {
 
         exportProductTab.setBackground(new java.awt.Color(255, 255, 255));
         exportProductTab.setPreferredSize(new java.awt.Dimension(240, 40));
+        exportProductTab.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                exportProductTabMouseClicked(evt);
+            }
+        });
 
         exportProductLabel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         exportProductLabel.setText("XUẤT HÀNG");
@@ -228,6 +253,11 @@ public class Home extends javax.swing.JFrame {
 
         exportBillTab.setBackground(new java.awt.Color(255, 255, 255));
         exportBillTab.setPreferredSize(new java.awt.Dimension(240, 40));
+        exportBillTab.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                exportBillTabMouseClicked(evt);
+            }
+        });
 
         exportBillLabel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         exportBillLabel.setText("PHIẾU XUẤT");
@@ -257,6 +287,11 @@ public class Home extends javax.swing.JFrame {
 
         inStockTab.setBackground(new java.awt.Color(255, 255, 255));
         inStockTab.setPreferredSize(new java.awt.Dimension(240, 40));
+        inStockTab.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                inStockTabMouseClicked(evt);
+            }
+        });
 
         inStockLabel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         inStockLabel.setText("TỒN KHO");
@@ -286,6 +321,11 @@ public class Home extends javax.swing.JFrame {
 
         userTab.setBackground(new java.awt.Color(255, 255, 255));
         userTab.setPreferredSize(new java.awt.Dimension(240, 40));
+        userTab.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                userTabMouseClicked(evt);
+            }
+        });
 
         userLabel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         userLabel.setText("TÀI KHOẢN");
@@ -315,6 +355,11 @@ public class Home extends javax.swing.JFrame {
 
         statisticsTab.setBackground(new java.awt.Color(255, 255, 255));
         statisticsTab.setPreferredSize(new java.awt.Dimension(240, 40));
+        statisticsTab.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                statisticsTabMouseClicked(evt);
+            }
+        });
 
         statisticsLabel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         statisticsLabel.setText("THỐNG KÊ");
@@ -344,6 +389,11 @@ public class Home extends javax.swing.JFrame {
 
         updateInfoTab.setBackground(new java.awt.Color(255, 255, 255));
         updateInfoTab.setPreferredSize(new java.awt.Dimension(240, 40));
+        updateInfoTab.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                updateInfoTabMouseClicked(evt);
+            }
+        });
 
         updateInfoLabel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         updateInfoLabel.setText("ĐỔI THÔNG TIN");
@@ -373,6 +423,11 @@ public class Home extends javax.swing.JFrame {
 
         logoutTab.setBackground(new java.awt.Color(255, 255, 255));
         logoutTab.setPreferredSize(new java.awt.Dimension(240, 40));
+        logoutTab.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                logoutTabMouseClicked(evt);
+            }
+        });
 
         logoutLabel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         logoutLabel.setText("ĐĂNG XUẤT");
@@ -474,191 +529,246 @@ public class Home extends javax.swing.JFrame {
 
         getContentPane().add(productPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 0, 1040, 830));
 
-        productPanel1.setBackground(new java.awt.Color(204, 204, 255));
-        productPanel1.setPreferredSize(new java.awt.Dimension(720, 640));
+        providerPanel.setBackground(new java.awt.Color(204, 204, 255));
+        providerPanel.setPreferredSize(new java.awt.Dimension(720, 640));
 
-        javax.swing.GroupLayout productPanel1Layout = new javax.swing.GroupLayout(productPanel1);
-        productPanel1.setLayout(productPanel1Layout);
-        productPanel1Layout.setHorizontalGroup(
-            productPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout providerPanelLayout = new javax.swing.GroupLayout(providerPanel);
+        providerPanel.setLayout(providerPanelLayout);
+        providerPanelLayout.setHorizontalGroup(
+            providerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 1040, Short.MAX_VALUE)
         );
-        productPanel1Layout.setVerticalGroup(
-            productPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        providerPanelLayout.setVerticalGroup(
+            providerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 0, Short.MAX_VALUE)
         );
 
-        getContentPane().add(productPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 0, 1040, 830));
+        getContentPane().add(providerPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 0, 1040, 830));
 
-        productPanel2.setBackground(new java.awt.Color(204, 255, 51));
-        productPanel2.setPreferredSize(new java.awt.Dimension(720, 640));
+        importProductPanel.setBackground(new java.awt.Color(204, 255, 51));
+        importProductPanel.setPreferredSize(new java.awt.Dimension(720, 640));
 
-        javax.swing.GroupLayout productPanel2Layout = new javax.swing.GroupLayout(productPanel2);
-        productPanel2.setLayout(productPanel2Layout);
-        productPanel2Layout.setHorizontalGroup(
-            productPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout importProductPanelLayout = new javax.swing.GroupLayout(importProductPanel);
+        importProductPanel.setLayout(importProductPanelLayout);
+        importProductPanelLayout.setHorizontalGroup(
+            importProductPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 1040, Short.MAX_VALUE)
         );
-        productPanel2Layout.setVerticalGroup(
-            productPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        importProductPanelLayout.setVerticalGroup(
+            importProductPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 0, Short.MAX_VALUE)
         );
 
-        getContentPane().add(productPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 0, 1040, 830));
+        getContentPane().add(importProductPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 0, 1040, 830));
 
-        productPanel3.setBackground(new java.awt.Color(0, 255, 255));
-        productPanel3.setPreferredSize(new java.awt.Dimension(720, 640));
+        importBillPanel.setBackground(new java.awt.Color(0, 255, 255));
+        importBillPanel.setPreferredSize(new java.awt.Dimension(720, 640));
 
-        javax.swing.GroupLayout productPanel3Layout = new javax.swing.GroupLayout(productPanel3);
-        productPanel3.setLayout(productPanel3Layout);
-        productPanel3Layout.setHorizontalGroup(
-            productPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout importBillPanelLayout = new javax.swing.GroupLayout(importBillPanel);
+        importBillPanel.setLayout(importBillPanelLayout);
+        importBillPanelLayout.setHorizontalGroup(
+            importBillPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 1040, Short.MAX_VALUE)
         );
-        productPanel3Layout.setVerticalGroup(
-            productPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        importBillPanelLayout.setVerticalGroup(
+            importBillPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 0, Short.MAX_VALUE)
         );
 
-        getContentPane().add(productPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 0, 1040, 830));
+        getContentPane().add(importBillPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 0, 1040, 830));
 
-        productPanel4.setBackground(new java.awt.Color(204, 255, 255));
-        productPanel4.setPreferredSize(new java.awt.Dimension(720, 640));
+        exportProductPanel.setBackground(new java.awt.Color(204, 255, 255));
+        exportProductPanel.setPreferredSize(new java.awt.Dimension(720, 640));
 
-        javax.swing.GroupLayout productPanel4Layout = new javax.swing.GroupLayout(productPanel4);
-        productPanel4.setLayout(productPanel4Layout);
-        productPanel4Layout.setHorizontalGroup(
-            productPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout exportProductPanelLayout = new javax.swing.GroupLayout(exportProductPanel);
+        exportProductPanel.setLayout(exportProductPanelLayout);
+        exportProductPanelLayout.setHorizontalGroup(
+            exportProductPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 1040, Short.MAX_VALUE)
         );
-        productPanel4Layout.setVerticalGroup(
-            productPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        exportProductPanelLayout.setVerticalGroup(
+            exportProductPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 0, Short.MAX_VALUE)
         );
 
-        getContentPane().add(productPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 0, 1040, 830));
+        getContentPane().add(exportProductPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 0, 1040, 830));
 
-        productPanel5.setBackground(new java.awt.Color(204, 255, 255));
-        productPanel5.setPreferredSize(new java.awt.Dimension(720, 640));
+        exportBillPanel.setBackground(new java.awt.Color(204, 255, 255));
+        exportBillPanel.setPreferredSize(new java.awt.Dimension(720, 640));
 
-        javax.swing.GroupLayout productPanel5Layout = new javax.swing.GroupLayout(productPanel5);
-        productPanel5.setLayout(productPanel5Layout);
-        productPanel5Layout.setHorizontalGroup(
-            productPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout exportBillPanelLayout = new javax.swing.GroupLayout(exportBillPanel);
+        exportBillPanel.setLayout(exportBillPanelLayout);
+        exportBillPanelLayout.setHorizontalGroup(
+            exportBillPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 1040, Short.MAX_VALUE)
         );
-        productPanel5Layout.setVerticalGroup(
-            productPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        exportBillPanelLayout.setVerticalGroup(
+            exportBillPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 0, Short.MAX_VALUE)
         );
 
-        getContentPane().add(productPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 0, 1040, 830));
+        getContentPane().add(exportBillPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 0, 1040, 830));
 
-        productPanel6.setBackground(new java.awt.Color(204, 255, 255));
-        productPanel6.setPreferredSize(new java.awt.Dimension(720, 640));
+        inStockPanel.setBackground(new java.awt.Color(204, 255, 255));
+        inStockPanel.setPreferredSize(new java.awt.Dimension(720, 640));
 
-        javax.swing.GroupLayout productPanel6Layout = new javax.swing.GroupLayout(productPanel6);
-        productPanel6.setLayout(productPanel6Layout);
-        productPanel6Layout.setHorizontalGroup(
-            productPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout inStockPanelLayout = new javax.swing.GroupLayout(inStockPanel);
+        inStockPanel.setLayout(inStockPanelLayout);
+        inStockPanelLayout.setHorizontalGroup(
+            inStockPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 1040, Short.MAX_VALUE)
         );
-        productPanel6Layout.setVerticalGroup(
-            productPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        inStockPanelLayout.setVerticalGroup(
+            inStockPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 0, Short.MAX_VALUE)
         );
 
-        getContentPane().add(productPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 0, 1040, 830));
+        getContentPane().add(inStockPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 0, 1040, 830));
 
-        productPanel7.setBackground(new java.awt.Color(204, 255, 255));
-        productPanel7.setPreferredSize(new java.awt.Dimension(720, 640));
+        userPanel.setBackground(new java.awt.Color(204, 255, 255));
+        userPanel.setPreferredSize(new java.awt.Dimension(720, 640));
 
-        javax.swing.GroupLayout productPanel7Layout = new javax.swing.GroupLayout(productPanel7);
-        productPanel7.setLayout(productPanel7Layout);
-        productPanel7Layout.setHorizontalGroup(
-            productPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout userPanelLayout = new javax.swing.GroupLayout(userPanel);
+        userPanel.setLayout(userPanelLayout);
+        userPanelLayout.setHorizontalGroup(
+            userPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 1040, Short.MAX_VALUE)
         );
-        productPanel7Layout.setVerticalGroup(
-            productPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        userPanelLayout.setVerticalGroup(
+            userPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 0, Short.MAX_VALUE)
         );
 
-        getContentPane().add(productPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 0, 1040, 830));
+        getContentPane().add(userPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 0, 1040, 830));
 
-        productPanel8.setBackground(new java.awt.Color(204, 255, 255));
-        productPanel8.setPreferredSize(new java.awt.Dimension(720, 640));
+        statisticPanel.setBackground(new java.awt.Color(204, 255, 255));
+        statisticPanel.setPreferredSize(new java.awt.Dimension(720, 640));
 
-        javax.swing.GroupLayout productPanel8Layout = new javax.swing.GroupLayout(productPanel8);
-        productPanel8.setLayout(productPanel8Layout);
-        productPanel8Layout.setHorizontalGroup(
-            productPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout statisticPanelLayout = new javax.swing.GroupLayout(statisticPanel);
+        statisticPanel.setLayout(statisticPanelLayout);
+        statisticPanelLayout.setHorizontalGroup(
+            statisticPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 1040, Short.MAX_VALUE)
         );
-        productPanel8Layout.setVerticalGroup(
-            productPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        statisticPanelLayout.setVerticalGroup(
+            statisticPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 0, Short.MAX_VALUE)
         );
 
-        getContentPane().add(productPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 0, 1040, 830));
+        getContentPane().add(statisticPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 0, 1040, 830));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void productLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_productLabelMouseClicked
         // TODO add your handling code here:
-        System.out.println("Inside product label");
+        System.out.println("Inside Product label");
     }//GEN-LAST:event_productLabelMouseClicked
 
     private void providerLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_providerLabelMouseClicked
         // TODO add your handling code here:
-        System.out.println("Inside provider label");
+        System.out.println("Inside Provider label");
     }//GEN-LAST:event_providerLabelMouseClicked
 
     private void importProductLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_importProductLabelMouseClicked
         // TODO add your handling code here:
-        
+        System.out.println("Inside Import Product label");
     }//GEN-LAST:event_importProductLabelMouseClicked
 
     private void importBillLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_importBillLabelMouseClicked
         // TODO add your handling code here:
-        
+        System.out.println("Inside Import Bill label");
     }//GEN-LAST:event_importBillLabelMouseClicked
 
     private void exportProductLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exportProductLabelMouseClicked
         // TODO add your handling code here:
-        
+        System.out.println("Inside Export Product label");
     }//GEN-LAST:event_exportProductLabelMouseClicked
-
-    private void exportBillLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exportBillLabelMouseClicked
-        // TODO add your handling code here:
-        
-    }//GEN-LAST:event_exportBillLabelMouseClicked
-
-    private void inStockLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_inStockLabelMouseClicked
-        // TODO add your handling code here:
-        
-    }//GEN-LAST:event_inStockLabelMouseClicked
 
     private void statisticsLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_statisticsLabelMouseClicked
         // TODO add your handling code here:
-        
+        System.out.println("Inside Statistic label");
     }//GEN-LAST:event_statisticsLabelMouseClicked
 
     private void userLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_userLabelMouseClicked
         // TODO add your handling code here:
-        
+        System.out.println("Inside User label");
     }//GEN-LAST:event_userLabelMouseClicked
 
     private void updateInfoLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_updateInfoLabelMouseClicked
         // TODO add your handling code here:
-        
+        System.out.println("Inside Update Info label");
     }//GEN-LAST:event_updateInfoLabelMouseClicked
 
     private void logoutLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logoutLabelMouseClicked
         // TODO add your handling code here:
-        
+        System.out.println("Inside Logout label");
     }//GEN-LAST:event_logoutLabelMouseClicked
+
+    private void productTabMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_productTabMouseClicked
+        // TODO add your handling code here:
+        this.productLabelMouseClicked(evt);
+    }//GEN-LAST:event_productTabMouseClicked
+
+    private void providerTabMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_providerTabMouseClicked
+        // TODO add your handling code here:
+        this.providerLabelMouseClicked(evt);
+    }//GEN-LAST:event_providerTabMouseClicked
+
+    private void importProductTabMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_importProductTabMouseClicked
+        // TODO add your handling code here:
+        this.importProductLabelMouseClicked(evt);
+    }//GEN-LAST:event_importProductTabMouseClicked
+
+    private void importBillTabMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_importBillTabMouseClicked
+        // TODO add your handling code here:
+        this.importBillLabelMouseClicked(evt);
+    }//GEN-LAST:event_importBillTabMouseClicked
+
+    private void exportProductTabMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exportProductTabMouseClicked
+        // TODO add your handling code here:
+        this.exportProductLabelMouseClicked(evt);
+    }//GEN-LAST:event_exportProductTabMouseClicked
+
+    private void exportBillTabMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exportBillTabMouseClicked
+        // TODO add your handling code here:
+        this.exportBillLabelMouseClicked(evt);
+    }//GEN-LAST:event_exportBillTabMouseClicked
+
+    private void exportBillLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exportBillLabelMouseClicked
+        // TODO add your handling code here:
+        System.out.println("Inside Export Bill label");
+    }//GEN-LAST:event_exportBillLabelMouseClicked
+
+    private void inStockLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_inStockLabelMouseClicked
+        // TODO add your handling code here:
+        System.out.println("Inside In Stock label");
+    }//GEN-LAST:event_inStockLabelMouseClicked
+
+    private void inStockTabMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_inStockTabMouseClicked
+        // TODO add your handling code here:
+        this.inStockLabelMouseClicked(evt);
+    }//GEN-LAST:event_inStockTabMouseClicked
+
+    private void userTabMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_userTabMouseClicked
+        // TODO add your handling code here:
+        this.userLabelMouseClicked(evt);
+    }//GEN-LAST:event_userTabMouseClicked
+
+    private void statisticsTabMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_statisticsTabMouseClicked
+        // TODO add your handling code here:
+        this.statisticsLabelMouseClicked(evt);
+    }//GEN-LAST:event_statisticsTabMouseClicked
+
+    private void updateInfoTabMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_updateInfoTabMouseClicked
+        // TODO add your handling code here:
+        this.updateInfoLabelMouseClicked(evt);
+    }//GEN-LAST:event_updateInfoTabMouseClicked
+
+    private void logoutTabMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logoutTabMouseClicked
+        // TODO add your handling code here:
+        this.logoutLabelMouseClicked(evt);
+    }//GEN-LAST:event_logoutTabMouseClicked
 
     /**
      * @param args the command line arguments
@@ -695,36 +805,36 @@ public class Home extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel exportBillLabel;
+    private javax.swing.JPanel exportBillPanel;
     private javax.swing.JPanel exportBillTab;
     private javax.swing.JLabel exportProductLabel;
+    private javax.swing.JPanel exportProductPanel;
     private javax.swing.JPanel exportProductTab;
     private javax.swing.JLabel importBillLabel;
+    private javax.swing.JPanel importBillPanel;
     private javax.swing.JPanel importBillTab;
     private javax.swing.JLabel importProductLabel;
+    private javax.swing.JPanel importProductPanel;
     private javax.swing.JPanel importProductTab;
     private javax.swing.JLabel inStockLabel;
+    private javax.swing.JPanel inStockPanel;
     private javax.swing.JPanel inStockTab;
     private javax.swing.JLabel logoutLabel;
     private javax.swing.JPanel logoutTab;
     private javax.swing.JLabel productLabel;
     private javax.swing.JPanel productPanel;
-    private javax.swing.JPanel productPanel1;
-    private javax.swing.JPanel productPanel2;
-    private javax.swing.JPanel productPanel3;
-    private javax.swing.JPanel productPanel4;
-    private javax.swing.JPanel productPanel5;
-    private javax.swing.JPanel productPanel6;
-    private javax.swing.JPanel productPanel7;
-    private javax.swing.JPanel productPanel8;
     private javax.swing.JPanel productTab;
     private javax.swing.JLabel providerLabel;
+    private javax.swing.JPanel providerPanel;
     private javax.swing.JPanel providerTab;
     private javax.swing.JPanel sidebarPanel;
+    private javax.swing.JPanel statisticPanel;
     private javax.swing.JLabel statisticsLabel;
     private javax.swing.JPanel statisticsTab;
     private javax.swing.JLabel updateInfoLabel;
     private javax.swing.JPanel updateInfoTab;
     private javax.swing.JLabel userLabel;
+    private javax.swing.JPanel userPanel;
     private javax.swing.JPanel userTab;
     private javax.swing.JLabel username;
     private javax.swing.JLabel welcomeMessage;
