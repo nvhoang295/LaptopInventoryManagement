@@ -18,7 +18,7 @@ public class Home extends javax.swing.JFrame {
      */
     public Home() {
         initComponents();
-        
+
     }
 
     /**
@@ -56,6 +56,7 @@ public class Home extends javax.swing.JFrame {
         logoutTab = new javax.swing.JPanel();
         logoutLabel = new javax.swing.JLabel();
         productPanel = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
         providerPanel = new javax.swing.JPanel();
         importProductPanel = new javax.swing.JPanel();
         importBillPanel = new javax.swing.JPanel();
@@ -516,15 +517,23 @@ public class Home extends javax.swing.JFrame {
         productPanel.setBackground(new java.awt.Color(204, 255, 255));
         productPanel.setPreferredSize(new java.awt.Dimension(720, 640));
 
+        jLabel1.setText("Product panel");
+
         javax.swing.GroupLayout productPanelLayout = new javax.swing.GroupLayout(productPanel);
         productPanel.setLayout(productPanelLayout);
         productPanelLayout.setHorizontalGroup(
             productPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1040, Short.MAX_VALUE)
+            .addGroup(productPanelLayout.createSequentialGroup()
+                .addGap(452, 452, 452)
+                .addComponent(jLabel1)
+                .addContainerGap(514, Short.MAX_VALUE))
         );
         productPanelLayout.setVerticalGroup(
             productPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(productPanelLayout.createSequentialGroup()
+                .addGap(284, 284, 284)
+                .addComponent(jLabel1)
+                .addContainerGap(530, Short.MAX_VALUE))
         );
 
         getContentPane().add(productPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 0, 1040, 830));
@@ -660,49 +669,185 @@ public class Home extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void setActiveTab(String tabName) {
+        switch (tabName) {
+            case "product" -> {
+                this.productTab.setBackground(Color.YELLOW);
+                this.providerTab.setBackground(Color.WHITE);
+                this.importProductTab.setBackground(Color.WHITE);
+                this.importBillTab.setBackground(Color.WHITE);
+                this.exportProductTab.setBackground(Color.WHITE);
+                this.exportBillTab.setBackground(Color.WHITE);
+                this.inStockTab.setBackground(Color.WHITE);
+                this.userTab.setBackground(Color.WHITE);
+                this.statisticsTab.setBackground(Color.WHITE);
+                break;
+            }
+            case "provider" -> {
+                this.productTab.setBackground(Color.WHITE);
+                this.providerTab.setBackground(Color.YELLOW);
+                this.importProductTab.setBackground(Color.WHITE);
+                this.importBillTab.setBackground(Color.WHITE);
+                this.exportProductTab.setBackground(Color.WHITE);
+                this.exportBillTab.setBackground(Color.WHITE);
+                this.inStockTab.setBackground(Color.WHITE);
+                this.userTab.setBackground(Color.WHITE);
+                this.statisticsTab.setBackground(Color.WHITE);
+                break;
+            }
+            case "import-product" -> {
+                this.productTab.setBackground(Color.WHITE);
+                this.providerTab.setBackground(Color.WHITE);
+                this.importProductTab.setBackground(Color.YELLOW);
+                this.importBillTab.setBackground(Color.WHITE);
+                this.exportProductTab.setBackground(Color.WHITE);
+                this.exportBillTab.setBackground(Color.WHITE);
+                this.inStockTab.setBackground(Color.WHITE);
+                this.userTab.setBackground(Color.WHITE);
+                this.statisticsTab.setBackground(Color.WHITE);
+                break;
+            }
+            case "import-bill" -> {
+                this.productTab.setBackground(Color.WHITE);
+                this.providerTab.setBackground(Color.WHITE);
+                this.importProductTab.setBackground(Color.WHITE);
+                this.importBillTab.setBackground(Color.YELLOW);
+                this.exportProductTab.setBackground(Color.WHITE);
+                this.exportBillTab.setBackground(Color.WHITE);
+                this.inStockTab.setBackground(Color.WHITE);
+                this.userTab.setBackground(Color.WHITE);
+                this.statisticsTab.setBackground(Color.WHITE);
+                break;
+            }
+            case "export-product" -> {
+                this.productTab.setBackground(Color.WHITE);
+                this.providerTab.setBackground(Color.WHITE);
+                this.importProductTab.setBackground(Color.WHITE);
+                this.importBillTab.setBackground(Color.WHITE);
+                this.exportProductTab.setBackground(Color.YELLOW);
+                this.exportBillTab.setBackground(Color.WHITE);
+                this.inStockTab.setBackground(Color.WHITE);
+                this.userTab.setBackground(Color.WHITE);
+                this.statisticsTab.setBackground(Color.WHITE);
+                break;
+            }
+            case "export-bill" -> {
+                this.productTab.setBackground(Color.WHITE);
+                this.providerTab.setBackground(Color.WHITE);
+                this.importProductTab.setBackground(Color.WHITE);
+                this.importBillTab.setBackground(Color.WHITE);
+                this.exportProductTab.setBackground(Color.WHITE);
+                this.exportBillTab.setBackground(Color.YELLOW);
+                this.inStockTab.setBackground(Color.WHITE);
+                this.userTab.setBackground(Color.WHITE);
+                this.statisticsTab.setBackground(Color.WHITE);
+                break;
+            }
+            case "in-stock" -> {
+                this.productTab.setBackground(Color.WHITE);
+                this.providerTab.setBackground(Color.WHITE);
+                this.importProductTab.setBackground(Color.WHITE);
+                this.importBillTab.setBackground(Color.WHITE);
+                this.exportProductTab.setBackground(Color.WHITE);
+                this.exportBillTab.setBackground(Color.WHITE);
+                this.inStockTab.setBackground(Color.YELLOW);
+                this.userTab.setBackground(Color.WHITE);
+                this.statisticsTab.setBackground(Color.WHITE);
+                break;
+            }
+            case "user" -> {
+                this.productTab.setBackground(Color.WHITE);
+                this.providerTab.setBackground(Color.WHITE);
+                this.importProductTab.setBackground(Color.WHITE);
+                this.importBillTab.setBackground(Color.WHITE);
+                this.exportProductTab.setBackground(Color.WHITE);
+                this.exportBillTab.setBackground(Color.WHITE);
+                this.inStockTab.setBackground(Color.WHITE);
+                this.userTab.setBackground(Color.YELLOW);
+                this.statisticsTab.setBackground(Color.WHITE);
+                break;
+            }
+            case "statistics" -> {
+                this.productTab.setBackground(Color.WHITE);
+                this.providerTab.setBackground(Color.WHITE);
+                this.importProductTab.setBackground(Color.WHITE);
+                this.importBillTab.setBackground(Color.WHITE);
+                this.exportProductTab.setBackground(Color.WHITE);
+                this.exportBillTab.setBackground(Color.WHITE);
+                this.inStockTab.setBackground(Color.WHITE);
+                this.userTab.setBackground(Color.WHITE);
+                this.statisticsTab.setBackground(Color.YELLOW);
+                break;
+            }
+
+            default -> {
+                this.productTab.setBackground(Color.WHITE);
+                this.providerTab.setBackground(Color.WHITE);
+                this.importProductTab.setBackground(Color.WHITE);
+                this.importBillTab.setBackground(Color.WHITE);
+                this.exportProductTab.setBackground(Color.WHITE);
+                this.exportBillTab.setBackground(Color.WHITE);
+                this.inStockTab.setBackground(Color.WHITE);
+                this.userTab.setBackground(Color.WHITE);
+                this.statisticsTab.setBackground(Color.WHITE);
+                break;
+            }
+        }
+    }
+
     private void productLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_productLabelMouseClicked
         // TODO add your handling code here:
         System.out.println("Inside Product label");
+        this.setActiveTab("product");
+
     }//GEN-LAST:event_productLabelMouseClicked
 
     private void providerLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_providerLabelMouseClicked
         // TODO add your handling code here:
         System.out.println("Inside Provider label");
+        this.setActiveTab("provider");
     }//GEN-LAST:event_providerLabelMouseClicked
 
     private void importProductLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_importProductLabelMouseClicked
         // TODO add your handling code here:
         System.out.println("Inside Import Product label");
+        this.setActiveTab("import-product");
     }//GEN-LAST:event_importProductLabelMouseClicked
 
     private void importBillLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_importBillLabelMouseClicked
         // TODO add your handling code here:
         System.out.println("Inside Import Bill label");
+        this.setActiveTab("import-bill");
     }//GEN-LAST:event_importBillLabelMouseClicked
 
     private void exportProductLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exportProductLabelMouseClicked
         // TODO add your handling code here:
         System.out.println("Inside Export Product label");
+        this.setActiveTab("export-product");
     }//GEN-LAST:event_exportProductLabelMouseClicked
 
     private void statisticsLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_statisticsLabelMouseClicked
         // TODO add your handling code here:
         System.out.println("Inside Statistic label");
+        this.setActiveTab("statistics");
     }//GEN-LAST:event_statisticsLabelMouseClicked
 
     private void userLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_userLabelMouseClicked
         // TODO add your handling code here:
         System.out.println("Inside User label");
+        this.setActiveTab("user");
     }//GEN-LAST:event_userLabelMouseClicked
 
     private void updateInfoLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_updateInfoLabelMouseClicked
         // TODO add your handling code here:
         System.out.println("Inside Update Info label");
+        this.setActiveTab("");
     }//GEN-LAST:event_updateInfoLabelMouseClicked
 
     private void logoutLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logoutLabelMouseClicked
         // TODO add your handling code here:
         System.out.println("Inside Logout label");
+        this.setActiveTab("");
     }//GEN-LAST:event_logoutLabelMouseClicked
 
     private void productTabMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_productTabMouseClicked
@@ -738,11 +883,15 @@ public class Home extends javax.swing.JFrame {
     private void exportBillLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exportBillLabelMouseClicked
         // TODO add your handling code here:
         System.out.println("Inside Export Bill label");
+        this.setActiveTab("export-bill");
+
     }//GEN-LAST:event_exportBillLabelMouseClicked
 
     private void inStockLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_inStockLabelMouseClicked
         // TODO add your handling code here:
         System.out.println("Inside In Stock label");
+        this.setActiveTab("in-stock");
+
     }//GEN-LAST:event_inStockLabelMouseClicked
 
     private void inStockTabMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_inStockTabMouseClicked
@@ -819,6 +968,7 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JLabel inStockLabel;
     private javax.swing.JPanel inStockPanel;
     private javax.swing.JPanel inStockTab;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel logoutLabel;
     private javax.swing.JPanel logoutTab;
     private javax.swing.JLabel productLabel;
