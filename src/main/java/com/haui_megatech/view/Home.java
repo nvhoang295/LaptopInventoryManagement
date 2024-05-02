@@ -18,7 +18,8 @@ public class Home extends javax.swing.JFrame {
      */
     public Home() {
         initComponents();
-
+        this.setActiveTab("product");
+        this.setDisplayedPanel("product");
     }
 
     /**
@@ -58,13 +59,21 @@ public class Home extends javax.swing.JFrame {
         productPanel = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         providerPanel = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
         importProductPanel = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
         importBillPanel = new javax.swing.JPanel();
+        jLabel4 = new javax.swing.JLabel();
         exportProductPanel = new javax.swing.JPanel();
+        jLabel5 = new javax.swing.JLabel();
         exportBillPanel = new javax.swing.JPanel();
+        jLabel6 = new javax.swing.JLabel();
         inStockPanel = new javax.swing.JPanel();
+        jLabel7 = new javax.swing.JLabel();
         userPanel = new javax.swing.JPanel();
-        statisticPanel = new javax.swing.JPanel();
+        jLabel8 = new javax.swing.JLabel();
+        statisticsPanel = new javax.swing.JPanel();
+        jLabel9 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1280, 800));
@@ -517,7 +526,7 @@ public class Home extends javax.swing.JFrame {
         productPanel.setBackground(new java.awt.Color(204, 255, 255));
         productPanel.setPreferredSize(new java.awt.Dimension(720, 640));
 
-        jLabel1.setText("Product panel");
+        jLabel1.setText("Product");
 
         javax.swing.GroupLayout productPanelLayout = new javax.swing.GroupLayout(productPanel);
         productPanel.setLayout(productPanelLayout);
@@ -526,7 +535,7 @@ public class Home extends javax.swing.JFrame {
             .addGroup(productPanelLayout.createSequentialGroup()
                 .addGap(452, 452, 452)
                 .addComponent(jLabel1)
-                .addContainerGap(514, Short.MAX_VALUE))
+                .addContainerGap(546, Short.MAX_VALUE))
         );
         productPanelLayout.setVerticalGroup(
             productPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -541,15 +550,23 @@ public class Home extends javax.swing.JFrame {
         providerPanel.setBackground(new java.awt.Color(204, 204, 255));
         providerPanel.setPreferredSize(new java.awt.Dimension(720, 640));
 
+        jLabel2.setText("Provider");
+
         javax.swing.GroupLayout providerPanelLayout = new javax.swing.GroupLayout(providerPanel);
         providerPanel.setLayout(providerPanelLayout);
         providerPanelLayout.setHorizontalGroup(
             providerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1040, Short.MAX_VALUE)
+            .addGroup(providerPanelLayout.createSequentialGroup()
+                .addGap(452, 452, 452)
+                .addComponent(jLabel2)
+                .addContainerGap(544, Short.MAX_VALUE))
         );
         providerPanelLayout.setVerticalGroup(
             providerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(providerPanelLayout.createSequentialGroup()
+                .addGap(284, 284, 284)
+                .addComponent(jLabel2)
+                .addContainerGap(530, Short.MAX_VALUE))
         );
 
         getContentPane().add(providerPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 0, 1040, 830));
@@ -557,15 +574,23 @@ public class Home extends javax.swing.JFrame {
         importProductPanel.setBackground(new java.awt.Color(204, 255, 51));
         importProductPanel.setPreferredSize(new java.awt.Dimension(720, 640));
 
+        jLabel3.setText("Import Product");
+
         javax.swing.GroupLayout importProductPanelLayout = new javax.swing.GroupLayout(importProductPanel);
         importProductPanel.setLayout(importProductPanelLayout);
         importProductPanelLayout.setHorizontalGroup(
             importProductPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1040, Short.MAX_VALUE)
+            .addGroup(importProductPanelLayout.createSequentialGroup()
+                .addGap(452, 452, 452)
+                .addComponent(jLabel3)
+                .addContainerGap(507, Short.MAX_VALUE))
         );
         importProductPanelLayout.setVerticalGroup(
             importProductPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(importProductPanelLayout.createSequentialGroup()
+                .addGap(284, 284, 284)
+                .addComponent(jLabel3)
+                .addContainerGap(530, Short.MAX_VALUE))
         );
 
         getContentPane().add(importProductPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 0, 1040, 830));
@@ -573,15 +598,23 @@ public class Home extends javax.swing.JFrame {
         importBillPanel.setBackground(new java.awt.Color(0, 255, 255));
         importBillPanel.setPreferredSize(new java.awt.Dimension(720, 640));
 
+        jLabel4.setText("Import Bill");
+
         javax.swing.GroupLayout importBillPanelLayout = new javax.swing.GroupLayout(importBillPanel);
         importBillPanel.setLayout(importBillPanelLayout);
         importBillPanelLayout.setHorizontalGroup(
             importBillPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1040, Short.MAX_VALUE)
+            .addGroup(importBillPanelLayout.createSequentialGroup()
+                .addGap(452, 452, 452)
+                .addComponent(jLabel4)
+                .addContainerGap(533, Short.MAX_VALUE))
         );
         importBillPanelLayout.setVerticalGroup(
             importBillPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(importBillPanelLayout.createSequentialGroup()
+                .addGap(284, 284, 284)
+                .addComponent(jLabel4)
+                .addContainerGap(530, Short.MAX_VALUE))
         );
 
         getContentPane().add(importBillPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 0, 1040, 830));
@@ -589,15 +622,23 @@ public class Home extends javax.swing.JFrame {
         exportProductPanel.setBackground(new java.awt.Color(204, 255, 255));
         exportProductPanel.setPreferredSize(new java.awt.Dimension(720, 640));
 
+        jLabel5.setText("Export Product");
+
         javax.swing.GroupLayout exportProductPanelLayout = new javax.swing.GroupLayout(exportProductPanel);
         exportProductPanel.setLayout(exportProductPanelLayout);
         exportProductPanelLayout.setHorizontalGroup(
             exportProductPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1040, Short.MAX_VALUE)
+            .addGroup(exportProductPanelLayout.createSequentialGroup()
+                .addGap(452, 452, 452)
+                .addComponent(jLabel5)
+                .addContainerGap(509, Short.MAX_VALUE))
         );
         exportProductPanelLayout.setVerticalGroup(
             exportProductPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(exportProductPanelLayout.createSequentialGroup()
+                .addGap(284, 284, 284)
+                .addComponent(jLabel5)
+                .addContainerGap(530, Short.MAX_VALUE))
         );
 
         getContentPane().add(exportProductPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 0, 1040, 830));
@@ -605,15 +646,23 @@ public class Home extends javax.swing.JFrame {
         exportBillPanel.setBackground(new java.awt.Color(204, 255, 255));
         exportBillPanel.setPreferredSize(new java.awt.Dimension(720, 640));
 
+        jLabel6.setText("Export Bill");
+
         javax.swing.GroupLayout exportBillPanelLayout = new javax.swing.GroupLayout(exportBillPanel);
         exportBillPanel.setLayout(exportBillPanelLayout);
         exportBillPanelLayout.setHorizontalGroup(
             exportBillPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1040, Short.MAX_VALUE)
+            .addGroup(exportBillPanelLayout.createSequentialGroup()
+                .addGap(452, 452, 452)
+                .addComponent(jLabel6)
+                .addContainerGap(535, Short.MAX_VALUE))
         );
         exportBillPanelLayout.setVerticalGroup(
             exportBillPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(exportBillPanelLayout.createSequentialGroup()
+                .addGap(284, 284, 284)
+                .addComponent(jLabel6)
+                .addContainerGap(530, Short.MAX_VALUE))
         );
 
         getContentPane().add(exportBillPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 0, 1040, 830));
@@ -621,15 +670,23 @@ public class Home extends javax.swing.JFrame {
         inStockPanel.setBackground(new java.awt.Color(204, 255, 255));
         inStockPanel.setPreferredSize(new java.awt.Dimension(720, 640));
 
+        jLabel7.setText("In Stock");
+
         javax.swing.GroupLayout inStockPanelLayout = new javax.swing.GroupLayout(inStockPanel);
         inStockPanel.setLayout(inStockPanelLayout);
         inStockPanelLayout.setHorizontalGroup(
             inStockPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1040, Short.MAX_VALUE)
+            .addGroup(inStockPanelLayout.createSequentialGroup()
+                .addGap(452, 452, 452)
+                .addComponent(jLabel7)
+                .addContainerGap(546, Short.MAX_VALUE))
         );
         inStockPanelLayout.setVerticalGroup(
             inStockPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(inStockPanelLayout.createSequentialGroup()
+                .addGap(284, 284, 284)
+                .addComponent(jLabel7)
+                .addContainerGap(530, Short.MAX_VALUE))
         );
 
         getContentPane().add(inStockPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 0, 1040, 830));
@@ -637,34 +694,50 @@ public class Home extends javax.swing.JFrame {
         userPanel.setBackground(new java.awt.Color(204, 255, 255));
         userPanel.setPreferredSize(new java.awt.Dimension(720, 640));
 
+        jLabel8.setText("User");
+
         javax.swing.GroupLayout userPanelLayout = new javax.swing.GroupLayout(userPanel);
         userPanel.setLayout(userPanelLayout);
         userPanelLayout.setHorizontalGroup(
             userPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1040, Short.MAX_VALUE)
+            .addGroup(userPanelLayout.createSequentialGroup()
+                .addGap(452, 452, 452)
+                .addComponent(jLabel8)
+                .addContainerGap(565, Short.MAX_VALUE))
         );
         userPanelLayout.setVerticalGroup(
             userPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(userPanelLayout.createSequentialGroup()
+                .addGap(284, 284, 284)
+                .addComponent(jLabel8)
+                .addContainerGap(530, Short.MAX_VALUE))
         );
 
         getContentPane().add(userPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 0, 1040, 830));
 
-        statisticPanel.setBackground(new java.awt.Color(204, 255, 255));
-        statisticPanel.setPreferredSize(new java.awt.Dimension(720, 640));
+        statisticsPanel.setBackground(new java.awt.Color(204, 255, 255));
+        statisticsPanel.setPreferredSize(new java.awt.Dimension(720, 640));
 
-        javax.swing.GroupLayout statisticPanelLayout = new javax.swing.GroupLayout(statisticPanel);
-        statisticPanel.setLayout(statisticPanelLayout);
-        statisticPanelLayout.setHorizontalGroup(
-            statisticPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1040, Short.MAX_VALUE)
+        jLabel9.setText("Statistic");
+
+        javax.swing.GroupLayout statisticsPanelLayout = new javax.swing.GroupLayout(statisticsPanel);
+        statisticsPanel.setLayout(statisticsPanelLayout);
+        statisticsPanelLayout.setHorizontalGroup(
+            statisticsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(statisticsPanelLayout.createSequentialGroup()
+                .addGap(452, 452, 452)
+                .addComponent(jLabel9)
+                .addContainerGap(547, Short.MAX_VALUE))
         );
-        statisticPanelLayout.setVerticalGroup(
-            statisticPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+        statisticsPanelLayout.setVerticalGroup(
+            statisticsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(statisticsPanelLayout.createSequentialGroup()
+                .addGap(284, 284, 284)
+                .addComponent(jLabel9)
+                .addContainerGap(530, Short.MAX_VALUE))
         );
 
-        getContentPane().add(statisticPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 0, 1040, 830));
+        getContentPane().add(statisticsPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 0, 1040, 830));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -795,58 +868,182 @@ public class Home extends javax.swing.JFrame {
         }
     }
 
+    private void setDisplayedPanel(String tabName) {
+        switch (tabName) {
+            case "product" -> {
+                this.productPanel.setVisible(true);
+                this.providerPanel.setVisible(false);
+                this.importProductPanel.setVisible(false);
+                this.importBillPanel.setVisible(false);
+                this.exportProductPanel.setVisible(false);
+                this.exportBillPanel.setVisible(false);
+                this.inStockPanel.setVisible(false);
+                this.userPanel.setVisible(false);
+                this.statisticsPanel.setVisible(false);
+                break;
+            }
+            case "provider" -> {
+                this.productPanel.setVisible(false);
+                this.providerPanel.setVisible(true);
+                this.importProductPanel.setVisible(false);
+                this.importBillPanel.setVisible(false);
+                this.exportProductPanel.setVisible(false);
+                this.exportBillPanel.setVisible(false);
+                this.inStockPanel.setVisible(false);
+                this.userPanel.setVisible(false);
+                this.statisticsPanel.setVisible(false);
+                break;
+            }
+            case "import-product" -> {
+                this.productPanel.setVisible(false);
+                this.providerPanel.setVisible(false);
+                this.importProductPanel.setVisible(true);
+                this.importBillPanel.setVisible(false);
+                this.exportProductPanel.setVisible(false);
+                this.exportBillPanel.setVisible(false);
+                this.inStockPanel.setVisible(false);
+                this.userPanel.setVisible(false);
+                this.statisticsPanel.setVisible(false);
+                break;
+            }
+            case "import-bill" -> {
+                this.productPanel.setVisible(false);
+                this.providerPanel.setVisible(false);
+                this.importProductPanel.setVisible(false);
+                this.importBillPanel.setVisible(true);
+                this.exportProductPanel.setVisible(false);
+                this.exportBillPanel.setVisible(false);
+                this.inStockPanel.setVisible(false);
+                this.userPanel.setVisible(false);
+                this.statisticsPanel.setVisible(false);
+                break;
+            }
+            case "export-product" -> {
+                this.productPanel.setVisible(false);
+                this.providerPanel.setVisible(false);
+                this.importProductPanel.setVisible(false);
+                this.importBillPanel.setVisible(false);
+                this.exportProductPanel.setVisible(true);
+                this.exportBillPanel.setVisible(false);
+                this.inStockPanel.setVisible(false);
+                this.userPanel.setVisible(false);
+                this.statisticsPanel.setVisible(false);
+                break;
+            }
+            case "export-bill" -> {
+                this.productPanel.setVisible(false);
+                this.providerPanel.setVisible(false);
+                this.importProductPanel.setVisible(false);
+                this.importBillPanel.setVisible(false);
+                this.exportProductPanel.setVisible(false);
+                this.exportBillPanel.setVisible(true);
+                this.inStockPanel.setVisible(false);
+                this.userPanel.setVisible(false);
+                this.statisticsPanel.setVisible(false);
+                break;
+            }
+            case "in-stock" -> {
+                this.productPanel.setVisible(false);
+                this.providerPanel.setVisible(false);
+                this.importProductPanel.setVisible(false);
+                this.importBillPanel.setVisible(false);
+                this.exportProductPanel.setVisible(false);
+                this.exportBillPanel.setVisible(false);
+                this.inStockPanel.setVisible(true);
+                this.userPanel.setVisible(false);
+                this.statisticsPanel.setVisible(false);
+                break;
+            }
+            case "user" -> {
+                this.productPanel.setVisible(false);
+                this.providerPanel.setVisible(false);
+                this.importProductPanel.setVisible(false);
+                this.importBillPanel.setVisible(false);
+                this.exportProductPanel.setVisible(false);
+                this.exportBillPanel.setVisible(false);
+                this.inStockPanel.setVisible(false);
+                this.userPanel.setVisible(true);
+                this.statisticsPanel.setVisible(false);
+                break;
+            }
+            case "statistics" -> {
+                this.productPanel.setVisible(false);
+                this.providerPanel.setVisible(false);
+                this.importProductPanel.setVisible(false);
+                this.importBillPanel.setVisible(false);
+                this.exportProductPanel.setVisible(false);
+                this.exportBillPanel.setVisible(false);
+                this.inStockPanel.setVisible(false);
+                this.userPanel.setVisible(false);
+                this.statisticsPanel.setVisible(true);
+                break;
+            }
+
+            default -> {
+                this.productPanel.setVisible(false);
+                this.providerPanel.setVisible(false);
+                this.importProductPanel.setVisible(false);
+                this.importBillPanel.setVisible(false);
+                this.exportProductPanel.setVisible(false);
+                this.exportBillPanel.setVisible(false);
+                this.inStockPanel.setVisible(false);
+                this.userPanel.setVisible(false);
+                this.statisticsPanel.setVisible(false);
+                break;
+            }
+        }
+    }
+
     private void productLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_productLabelMouseClicked
         // TODO add your handling code here:
-        System.out.println("Inside Product label");
         this.setActiveTab("product");
+        this.setDisplayedPanel("product");
 
     }//GEN-LAST:event_productLabelMouseClicked
 
     private void providerLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_providerLabelMouseClicked
         // TODO add your handling code here:
-        System.out.println("Inside Provider label");
         this.setActiveTab("provider");
+        this.setDisplayedPanel("provider");
     }//GEN-LAST:event_providerLabelMouseClicked
 
     private void importProductLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_importProductLabelMouseClicked
         // TODO add your handling code here:
-        System.out.println("Inside Import Product label");
         this.setActiveTab("import-product");
+        this.setDisplayedPanel("import-product");
     }//GEN-LAST:event_importProductLabelMouseClicked
 
     private void importBillLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_importBillLabelMouseClicked
         // TODO add your handling code here:
-        System.out.println("Inside Import Bill label");
         this.setActiveTab("import-bill");
+        this.setDisplayedPanel("import-bill");
     }//GEN-LAST:event_importBillLabelMouseClicked
 
     private void exportProductLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exportProductLabelMouseClicked
         // TODO add your handling code here:
-        System.out.println("Inside Export Product label");
         this.setActiveTab("export-product");
+        this.setDisplayedPanel("export-product");
     }//GEN-LAST:event_exportProductLabelMouseClicked
 
     private void statisticsLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_statisticsLabelMouseClicked
         // TODO add your handling code here:
-        System.out.println("Inside Statistic label");
         this.setActiveTab("statistics");
+        this.setDisplayedPanel("statistics");
     }//GEN-LAST:event_statisticsLabelMouseClicked
 
     private void userLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_userLabelMouseClicked
         // TODO add your handling code here:
-        System.out.println("Inside User label");
         this.setActiveTab("user");
+        this.setDisplayedPanel("user");
     }//GEN-LAST:event_userLabelMouseClicked
 
     private void updateInfoLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_updateInfoLabelMouseClicked
         // TODO add your handling code here:
-        System.out.println("Inside Update Info label");
         this.setActiveTab("");
     }//GEN-LAST:event_updateInfoLabelMouseClicked
 
     private void logoutLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logoutLabelMouseClicked
         // TODO add your handling code here:
-        System.out.println("Inside Logout label");
         this.setActiveTab("");
     }//GEN-LAST:event_logoutLabelMouseClicked
 
@@ -882,15 +1079,15 @@ public class Home extends javax.swing.JFrame {
 
     private void exportBillLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exportBillLabelMouseClicked
         // TODO add your handling code here:
-        System.out.println("Inside Export Bill label");
         this.setActiveTab("export-bill");
+        this.setDisplayedPanel("export-bill");
 
     }//GEN-LAST:event_exportBillLabelMouseClicked
 
     private void inStockLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_inStockLabelMouseClicked
         // TODO add your handling code here:
-        System.out.println("Inside In Stock label");
         this.setActiveTab("in-stock");
+        this.setDisplayedPanel("in-stock");
 
     }//GEN-LAST:event_inStockLabelMouseClicked
 
@@ -969,6 +1166,14 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JPanel inStockPanel;
     private javax.swing.JPanel inStockTab;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JLabel logoutLabel;
     private javax.swing.JPanel logoutTab;
     private javax.swing.JLabel productLabel;
@@ -978,8 +1183,8 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JPanel providerPanel;
     private javax.swing.JPanel providerTab;
     private javax.swing.JPanel sidebarPanel;
-    private javax.swing.JPanel statisticPanel;
     private javax.swing.JLabel statisticsLabel;
+    private javax.swing.JPanel statisticsPanel;
     private javax.swing.JPanel statisticsTab;
     private javax.swing.JLabel updateInfoLabel;
     private javax.swing.JPanel updateInfoTab;
