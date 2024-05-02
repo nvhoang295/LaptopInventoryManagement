@@ -18,6 +18,7 @@ public class Home extends javax.swing.JFrame {
      */
     public Home() {
         initComponents();
+        this.setLocationRelativeTo(null);
         this.setActiveTab("product");
         this.setDisplayedPanel("product");
     }
