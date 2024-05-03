@@ -4,8 +4,9 @@
  */
 package com.haui_megatech.view;
 
-import com.haui_megatech.theme.GlobalColor;
 import java.awt.Color;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 
 /**
  *
@@ -21,6 +22,7 @@ public class Home extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         this.setActiveTab("product");
         this.setDisplayedPanel("product");
+        this.setBackground(Color.WHITE);
     }
 
     /**
@@ -32,6 +34,8 @@ public class Home extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        logoutDiaglog = new javax.swing.JDialog();
+        jPanel1 = new javax.swing.JPanel();
         sidebarPanel = new javax.swing.JPanel();
         welcomeMessage = new javax.swing.JLabel();
         username = new javax.swing.JLabel();
@@ -62,7 +66,28 @@ public class Home extends javax.swing.JFrame {
         providerPanel = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         importProductPanel = new javax.swing.JPanel();
-        jLabel3 = new javax.swing.JLabel();
+        searchImportProductPanel = new javax.swing.JPanel();
+        searchImportProductTextField = new javax.swing.JTextField();
+        searchImportProductRefreshButton = new javax.swing.JButton();
+        importProductScrollPanel = new javax.swing.JScrollPane();
+        importProductTable = new javax.swing.JTable();
+        importProductQuantityLabel = new javax.swing.JLabel();
+        importProductQuantityTextField = new javax.swing.JTextField();
+        importProductAddButton = new javax.swing.JButton();
+        importBillIdLabel = new javax.swing.JLabel();
+        importBillIdTextField = new javax.swing.JTextField();
+        providerNameLabel = new javax.swing.JLabel();
+        providerNameComboBox = new javax.swing.JComboBox<>();
+        importProductBillCreatorLabel = new javax.swing.JTextField();
+        importProductBillCreatorTextField = new javax.swing.JLabel();
+        importProductBillScrollPane = new javax.swing.JScrollPane();
+        importProductBillTable = new javax.swing.JTable();
+        jButton18 = new javax.swing.JButton();
+        jButton12 = new javax.swing.JButton();
+        jButton17 = new javax.swing.JButton();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jButton19 = new javax.swing.JButton();
         importBillPanel = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         exportProductPanel = new javax.swing.JPanel();
@@ -76,9 +101,36 @@ public class Home extends javax.swing.JFrame {
         statisticsPanel = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
 
+        logoutDiaglog.setMinimumSize(new java.awt.Dimension(400, 300));
+
+        jPanel1.setMinimumSize(new java.awt.Dimension(400, 300));
+        jPanel1.setName(""); // NOI18N
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 400, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 300, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout logoutDiaglogLayout = new javax.swing.GroupLayout(logoutDiaglog.getContentPane());
+        logoutDiaglog.getContentPane().setLayout(logoutDiaglogLayout);
+        logoutDiaglogLayout.setHorizontalGroup(
+            logoutDiaglogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        logoutDiaglogLayout.setVerticalGroup(
+            logoutDiaglogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMinimumSize(new java.awt.Dimension(1280, 800));
-        setPreferredSize(new java.awt.Dimension(1280, 800));
+        setMinimumSize(new java.awt.Dimension(1400, 830));
+        setPreferredSize(new java.awt.Dimension(1400, 830));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         sidebarPanel.setBackground(new java.awt.Color(51, 153, 255));
@@ -519,13 +571,13 @@ public class Home extends javax.swing.JFrame {
                 .addComponent(updateInfoTab, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(logoutTab, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(93, Short.MAX_VALUE))
+                .addContainerGap(53, Short.MAX_VALUE))
         );
 
         getContentPane().add(sidebarPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 840));
 
         productPanel.setBackground(new java.awt.Color(204, 255, 255));
-        productPanel.setPreferredSize(new java.awt.Dimension(720, 640));
+        productPanel.setPreferredSize(new java.awt.Dimension(1140, 830));
 
         jLabel1.setText("Product");
 
@@ -536,7 +588,7 @@ public class Home extends javax.swing.JFrame {
             .addGroup(productPanelLayout.createSequentialGroup()
                 .addGap(452, 452, 452)
                 .addComponent(jLabel1)
-                .addContainerGap(546, Short.MAX_VALUE))
+                .addContainerGap(646, Short.MAX_VALUE))
         );
         productPanelLayout.setVerticalGroup(
             productPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -546,10 +598,10 @@ public class Home extends javax.swing.JFrame {
                 .addContainerGap(530, Short.MAX_VALUE))
         );
 
-        getContentPane().add(productPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 0, 1040, 830));
+        getContentPane().add(productPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 0, 1140, 830));
 
         providerPanel.setBackground(new java.awt.Color(204, 204, 255));
-        providerPanel.setPreferredSize(new java.awt.Dimension(720, 640));
+        providerPanel.setPreferredSize(new java.awt.Dimension(1140, 830));
 
         jLabel2.setText("Provider");
 
@@ -560,7 +612,7 @@ public class Home extends javax.swing.JFrame {
             .addGroup(providerPanelLayout.createSequentialGroup()
                 .addGap(452, 452, 452)
                 .addComponent(jLabel2)
-                .addContainerGap(544, Short.MAX_VALUE))
+                .addContainerGap(644, Short.MAX_VALUE))
         );
         providerPanelLayout.setVerticalGroup(
             providerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -570,34 +622,234 @@ public class Home extends javax.swing.JFrame {
                 .addContainerGap(530, Short.MAX_VALUE))
         );
 
-        getContentPane().add(providerPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 0, 1040, 830));
+        getContentPane().add(providerPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 0, 1140, 830));
 
-        importProductPanel.setBackground(new java.awt.Color(204, 255, 51));
-        importProductPanel.setPreferredSize(new java.awt.Dimension(720, 640));
+        importProductPanel.setBackground(new java.awt.Color(255, 255, 255));
+        importProductPanel.setPreferredSize(new java.awt.Dimension(1140, 830));
 
-        jLabel3.setText("Import Product");
+        searchImportProductPanel.setBackground(new java.awt.Color(255, 255, 255));
+        searchImportProductPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Tìm kiếm", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 14))); // NOI18N
+        searchImportProductPanel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+
+        searchImportProductTextField.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        searchImportProductTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchImportProductTextFieldActionPerformed(evt);
+            }
+        });
+
+        searchImportProductRefreshButton.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        searchImportProductRefreshButton.setText("Làm Mới");
+        searchImportProductRefreshButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchImportProductRefreshButtonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout searchImportProductPanelLayout = new javax.swing.GroupLayout(searchImportProductPanel);
+        searchImportProductPanel.setLayout(searchImportProductPanelLayout);
+        searchImportProductPanelLayout.setHorizontalGroup(
+            searchImportProductPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(searchImportProductPanelLayout.createSequentialGroup()
+                .addContainerGap(16, Short.MAX_VALUE)
+                .addComponent(searchImportProductTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(searchImportProductRefreshButton, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(16, 16, 16))
+        );
+        searchImportProductPanelLayout.setVerticalGroup(
+            searchImportProductPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(searchImportProductPanelLayout.createSequentialGroup()
+                .addGap(16, 16, 16)
+                .addGroup(searchImportProductPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(searchImportProductRefreshButton, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(searchImportProductTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(18, Short.MAX_VALUE))
+        );
+
+        importProductScrollPanel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+
+        importProductTable.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        importProductTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Mã máy", "Tên máy", "Số lượng", "Đơn giá"
+            }
+        ));
+        importProductScrollPanel.setViewportView(importProductTable);
+
+        importProductQuantityLabel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        importProductQuantityLabel.setText("Số Lượng: ");
+
+        importProductQuantityTextField.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        importProductQuantityTextField.setText("10");
+        importProductQuantityTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                importProductQuantityTextFieldActionPerformed(evt);
+            }
+        });
+
+        importProductAddButton.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        importProductAddButton.setText("THÊM");
+        importProductAddButton.setMaximumSize(new java.awt.Dimension(64, 22));
+        importProductAddButton.setMinimumSize(new java.awt.Dimension(64, 22));
+        importProductAddButton.setPreferredSize(new java.awt.Dimension(64, 22));
+        importProductAddButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                importProductAddButtonActionPerformed(evt);
+            }
+        });
+
+        importBillIdLabel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        importBillIdLabel.setText("Mã phiếu nhập:");
+
+        importBillIdTextField.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+
+        providerNameLabel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        providerNameLabel.setText("Nhà cung cấp:");
+
+        providerNameComboBox.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        providerNameComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Công Ty TNHH Minh Nghĩa", "Công ty TNHH Hoàng Việt", "Công ty TNHH Hoàng Phúc" }));
+
+        importProductBillCreatorLabel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        importProductBillCreatorLabel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                importProductBillCreatorLabelActionPerformed(evt);
+            }
+        });
+
+        importProductBillCreatorTextField.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        importProductBillCreatorTextField.setText("Người tạo phiếu:");
+
+        importProductBillTable.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        importProductBillTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
+            },
+            new String [] {
+                "STT", "Mã SP", "Tên SP", "Số lượng", "Đơn giá"
+            }
+        ));
+        importProductBillScrollPane.setViewportView(importProductBillTable);
+
+        jButton18.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jButton18.setText("Nhập excel");
+        jButton18.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton18ActionPerformed(evt);
+            }
+        });
+
+        jButton12.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jButton12.setText("Sửa số lượng");
+
+        jButton17.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jButton17.setText("Xóa sản phẩm");
+
+        jLabel10.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(204, 0, 51));
+        jLabel10.setText("50,670,000đ");
+
+        jLabel11.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel11.setText("Tổng tiền:");
+
+        jButton19.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jButton19.setText("Nhập hàng");
 
         javax.swing.GroupLayout importProductPanelLayout = new javax.swing.GroupLayout(importProductPanel);
         importProductPanel.setLayout(importProductPanelLayout);
         importProductPanelLayout.setHorizontalGroup(
             importProductPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(importProductPanelLayout.createSequentialGroup()
-                .addGap(452, 452, 452)
-                .addComponent(jLabel3)
-                .addContainerGap(507, Short.MAX_VALUE))
+                .addContainerGap()
+                .addGroup(importProductPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(importProductScrollPanel)
+                    .addComponent(searchImportProductPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(importProductPanelLayout.createSequentialGroup()
+                        .addComponent(importProductQuantityLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(importProductQuantityTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(importProductAddButton, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
+                .addGroup(importProductPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(importProductPanelLayout.createSequentialGroup()
+                        .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(31, 31, 31)
+                        .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton19, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, importProductPanelLayout.createSequentialGroup()
+                        .addComponent(jButton18, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton12, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(75, 75, 75)
+                        .addComponent(jButton17, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(importProductPanelLayout.createSequentialGroup()
+                        .addGroup(importProductPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(importBillIdLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(providerNameLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(importProductBillCreatorTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 76, Short.MAX_VALUE)
+                        .addGroup(importProductPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(importBillIdTextField)
+                            .addComponent(providerNameComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(importProductBillCreatorLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(importProductBillScrollPane))
+                .addGap(35, 35, 35))
         );
         importProductPanelLayout.setVerticalGroup(
             importProductPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(importProductPanelLayout.createSequentialGroup()
-                .addGap(284, 284, 284)
-                .addComponent(jLabel3)
-                .addContainerGap(530, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(searchImportProductPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(importProductScrollPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 614, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(importProductPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(importProductAddButton, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(importProductQuantityTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(importProductQuantityLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel11)
+                    .addComponent(jLabel10))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, importProductPanelLayout.createSequentialGroup()
+                .addGap(16, 16, 16)
+                .addGroup(importProductPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(importBillIdLabel)
+                    .addComponent(importBillIdTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(23, 23, 23)
+                .addGroup(importProductPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(providerNameLabel)
+                    .addComponent(providerNameComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(23, 23, 23)
+                .addGroup(importProductPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(importProductBillCreatorTextField)
+                    .addComponent(importProductBillCreatorLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(importProductBillScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 498, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20)
+                .addGroup(importProductPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton17, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton12, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton18, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton19, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(58, 58, 58))
         );
 
-        getContentPane().add(importProductPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 0, 1040, 830));
+        getContentPane().add(importProductPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 0, 1140, 830));
 
         importBillPanel.setBackground(new java.awt.Color(0, 255, 255));
-        importBillPanel.setPreferredSize(new java.awt.Dimension(720, 640));
+        importBillPanel.setPreferredSize(new java.awt.Dimension(1140, 830));
 
         jLabel4.setText("Import Bill");
 
@@ -608,7 +860,7 @@ public class Home extends javax.swing.JFrame {
             .addGroup(importBillPanelLayout.createSequentialGroup()
                 .addGap(452, 452, 452)
                 .addComponent(jLabel4)
-                .addContainerGap(533, Short.MAX_VALUE))
+                .addContainerGap(633, Short.MAX_VALUE))
         );
         importBillPanelLayout.setVerticalGroup(
             importBillPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -618,10 +870,10 @@ public class Home extends javax.swing.JFrame {
                 .addContainerGap(530, Short.MAX_VALUE))
         );
 
-        getContentPane().add(importBillPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 0, 1040, 830));
+        getContentPane().add(importBillPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 0, 1140, 830));
 
         exportProductPanel.setBackground(new java.awt.Color(204, 255, 255));
-        exportProductPanel.setPreferredSize(new java.awt.Dimension(720, 640));
+        exportProductPanel.setPreferredSize(new java.awt.Dimension(1140, 830));
 
         jLabel5.setText("Export Product");
 
@@ -632,7 +884,7 @@ public class Home extends javax.swing.JFrame {
             .addGroup(exportProductPanelLayout.createSequentialGroup()
                 .addGap(452, 452, 452)
                 .addComponent(jLabel5)
-                .addContainerGap(509, Short.MAX_VALUE))
+                .addContainerGap(609, Short.MAX_VALUE))
         );
         exportProductPanelLayout.setVerticalGroup(
             exportProductPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -642,10 +894,10 @@ public class Home extends javax.swing.JFrame {
                 .addContainerGap(530, Short.MAX_VALUE))
         );
 
-        getContentPane().add(exportProductPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 0, 1040, 830));
+        getContentPane().add(exportProductPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 0, 1140, 830));
 
         exportBillPanel.setBackground(new java.awt.Color(204, 255, 255));
-        exportBillPanel.setPreferredSize(new java.awt.Dimension(720, 640));
+        exportBillPanel.setPreferredSize(new java.awt.Dimension(1140, 830));
 
         jLabel6.setText("Export Bill");
 
@@ -656,7 +908,7 @@ public class Home extends javax.swing.JFrame {
             .addGroup(exportBillPanelLayout.createSequentialGroup()
                 .addGap(452, 452, 452)
                 .addComponent(jLabel6)
-                .addContainerGap(535, Short.MAX_VALUE))
+                .addContainerGap(635, Short.MAX_VALUE))
         );
         exportBillPanelLayout.setVerticalGroup(
             exportBillPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -666,10 +918,10 @@ public class Home extends javax.swing.JFrame {
                 .addContainerGap(530, Short.MAX_VALUE))
         );
 
-        getContentPane().add(exportBillPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 0, 1040, 830));
+        getContentPane().add(exportBillPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 0, 1140, 830));
 
         inStockPanel.setBackground(new java.awt.Color(204, 255, 255));
-        inStockPanel.setPreferredSize(new java.awt.Dimension(720, 640));
+        inStockPanel.setPreferredSize(new java.awt.Dimension(1140, 830));
 
         jLabel7.setText("In Stock");
 
@@ -680,7 +932,7 @@ public class Home extends javax.swing.JFrame {
             .addGroup(inStockPanelLayout.createSequentialGroup()
                 .addGap(452, 452, 452)
                 .addComponent(jLabel7)
-                .addContainerGap(546, Short.MAX_VALUE))
+                .addContainerGap(646, Short.MAX_VALUE))
         );
         inStockPanelLayout.setVerticalGroup(
             inStockPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -690,10 +942,10 @@ public class Home extends javax.swing.JFrame {
                 .addContainerGap(530, Short.MAX_VALUE))
         );
 
-        getContentPane().add(inStockPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 0, 1040, 830));
+        getContentPane().add(inStockPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 0, 1140, 830));
 
         userPanel.setBackground(new java.awt.Color(204, 255, 255));
-        userPanel.setPreferredSize(new java.awt.Dimension(720, 640));
+        userPanel.setPreferredSize(new java.awt.Dimension(1140, 830));
 
         jLabel8.setText("User");
 
@@ -704,7 +956,7 @@ public class Home extends javax.swing.JFrame {
             .addGroup(userPanelLayout.createSequentialGroup()
                 .addGap(452, 452, 452)
                 .addComponent(jLabel8)
-                .addContainerGap(565, Short.MAX_VALUE))
+                .addContainerGap(665, Short.MAX_VALUE))
         );
         userPanelLayout.setVerticalGroup(
             userPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -714,10 +966,10 @@ public class Home extends javax.swing.JFrame {
                 .addContainerGap(530, Short.MAX_VALUE))
         );
 
-        getContentPane().add(userPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 0, 1040, 830));
+        getContentPane().add(userPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 0, 1140, 830));
 
         statisticsPanel.setBackground(new java.awt.Color(204, 255, 255));
-        statisticsPanel.setPreferredSize(new java.awt.Dimension(720, 640));
+        statisticsPanel.setPreferredSize(new java.awt.Dimension(1140, 830));
 
         jLabel9.setText("Statistic");
 
@@ -728,7 +980,7 @@ public class Home extends javax.swing.JFrame {
             .addGroup(statisticsPanelLayout.createSequentialGroup()
                 .addGap(452, 452, 452)
                 .addComponent(jLabel9)
-                .addContainerGap(547, Short.MAX_VALUE))
+                .addContainerGap(647, Short.MAX_VALUE))
         );
         statisticsPanelLayout.setVerticalGroup(
             statisticsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -738,7 +990,7 @@ public class Home extends javax.swing.JFrame {
                 .addContainerGap(530, Short.MAX_VALUE))
         );
 
-        getContentPane().add(statisticsPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 0, 1040, 830));
+        getContentPane().add(statisticsPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 0, 1140, 830));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -1046,6 +1298,9 @@ public class Home extends javax.swing.JFrame {
     private void logoutLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logoutLabelMouseClicked
         // TODO add your handling code here:
         this.setActiveTab("");
+        this.logoutDiaglog.setVisible(true);
+        this.logoutDiaglog.setLocationRelativeTo(this);
+
     }//GEN-LAST:event_logoutLabelMouseClicked
 
     private void productTabMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_productTabMouseClicked
@@ -1117,37 +1372,43 @@ public class Home extends javax.swing.JFrame {
         this.logoutLabelMouseClicked(evt);
     }//GEN-LAST:event_logoutTabMouseClicked
 
+    private void searchImportProductTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchImportProductTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_searchImportProductTextFieldActionPerformed
+
+    private void searchImportProductRefreshButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchImportProductRefreshButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_searchImportProductRefreshButtonActionPerformed
+
+    private void importProductQuantityTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_importProductQuantityTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_importProductQuantityTextFieldActionPerformed
+
+    private void importProductAddButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_importProductAddButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_importProductAddButtonActionPerformed
+
+    private void importProductBillCreatorLabelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_importProductBillCreatorLabelActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_importProductBillCreatorLabelActionPerformed
+
+    private void jButton18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton18ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton18ActionPerformed
+
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
         try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Home.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Home.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Home.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Home.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+            /* Create and display the form */
+            java.awt.EventQueue.invokeLater(() -> {
+                new Home().setVisible(true);
+            });
+        } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | UnsupportedLookAndFeelException e) {
+            e.printStackTrace();
         }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> {
-            new Home().setVisible(true);
-        });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -1157,32 +1418,55 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JLabel exportProductLabel;
     private javax.swing.JPanel exportProductPanel;
     private javax.swing.JPanel exportProductTab;
+    private javax.swing.JLabel importBillIdLabel;
+    private javax.swing.JTextField importBillIdTextField;
     private javax.swing.JLabel importBillLabel;
     private javax.swing.JPanel importBillPanel;
     private javax.swing.JPanel importBillTab;
+    private javax.swing.JButton importProductAddButton;
+    private javax.swing.JTextField importProductBillCreatorLabel;
+    private javax.swing.JLabel importProductBillCreatorTextField;
+    private javax.swing.JScrollPane importProductBillScrollPane;
+    private javax.swing.JTable importProductBillTable;
     private javax.swing.JLabel importProductLabel;
     private javax.swing.JPanel importProductPanel;
+    private javax.swing.JLabel importProductQuantityLabel;
+    private javax.swing.JTextField importProductQuantityTextField;
+    private javax.swing.JScrollPane importProductScrollPanel;
     private javax.swing.JPanel importProductTab;
+    private javax.swing.JTable importProductTable;
     private javax.swing.JLabel inStockLabel;
     private javax.swing.JPanel inStockPanel;
     private javax.swing.JPanel inStockTab;
+    private javax.swing.JButton jButton12;
+    private javax.swing.JButton jButton17;
+    private javax.swing.JButton jButton18;
+    private javax.swing.JButton jButton19;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JDialog logoutDiaglog;
     private javax.swing.JLabel logoutLabel;
     private javax.swing.JPanel logoutTab;
     private javax.swing.JLabel productLabel;
     private javax.swing.JPanel productPanel;
     private javax.swing.JPanel productTab;
     private javax.swing.JLabel providerLabel;
+    private javax.swing.JComboBox<String> providerNameComboBox;
+    private javax.swing.JLabel providerNameLabel;
     private javax.swing.JPanel providerPanel;
     private javax.swing.JPanel providerTab;
+    private javax.swing.JPanel searchImportProductPanel;
+    private javax.swing.JButton searchImportProductRefreshButton;
+    private javax.swing.JTextField searchImportProductTextField;
     private javax.swing.JPanel sidebarPanel;
     private javax.swing.JLabel statisticsLabel;
     private javax.swing.JPanel statisticsPanel;
