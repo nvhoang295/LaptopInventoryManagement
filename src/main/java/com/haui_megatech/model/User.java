@@ -28,6 +28,9 @@ public class User implements Serializable {
     private String email;
     private Gender gender;
     private Date dateOfBirth;
+    private Date whenCreated;
+    private Date lastUpdated;
+    private Integer logined;
 
     public User(
             Integer userId,
@@ -38,7 +41,10 @@ public class User implements Serializable {
             String phoneNumber,
             String email,
             Gender gender,
-            Date dateOfBirth
+            Date dateOfBirth,
+            Date whenCreated,
+            Date lastUpdated,
+            Integer logined
     ) {
         this.userId = userId;
         this.username = username;
@@ -49,6 +55,9 @@ public class User implements Serializable {
         this.email = email;
         this.gender = gender;
         this.dateOfBirth = dateOfBirth;
+        this.whenCreated = whenCreated;
+        this.lastUpdated = lastUpdated;
+        this.logined = logined;
     }
 
     public static Integer getCounter() {
@@ -131,11 +140,38 @@ public class User implements Serializable {
         this.dateOfBirth = dateOfBirth;
     }
 
+    public Date getWhenCreated() {
+        return whenCreated;
+    }
+
+    public void setWhenCreated(Date whenCreated) {
+        this.whenCreated = whenCreated;
+    }
+
+    public Date getLastUpdated() {
+        return lastUpdated;
+    }
+
+    public void setLastUpdated(Date lastUpdated) {
+        this.lastUpdated = lastUpdated;
+    }
+
+    public Integer getLogined() {
+        return logined;
+    }
+
+    public void setLogined(Integer logined) {
+        this.logined = logined;
+    }
+    
+   
+
     public static UserBuilder builder() {
         return new UserBuilder();
     }
 
     public static class UserBuilder {
+
         private Integer userId;
         private String username;
         private String password;
@@ -145,6 +181,9 @@ public class User implements Serializable {
         private String email;
         private Gender gender;
         private Date dateOfBirth;
+        private Date whenCreated;
+        private Date lastUpdated;
+        private Integer logined;
 
         public UserBuilder userId(Integer userId) {
             this.userId = userId;
@@ -190,6 +229,21 @@ public class User implements Serializable {
             this.dateOfBirth = dateOfBirth;
             return this;
         }
+        
+        public UserBuilder whenCreated(Date whenCreated) {
+            this.whenCreated = whenCreated;
+            return this;
+        }
+        
+        public UserBuilder lastUpdated(Date lastUpdated) {
+            this.lastUpdated = lastUpdated;
+            return this;
+        }
+        
+        public UserBuilder logined(Integer logined) {
+            this.logined = logined;
+            return this;
+        }
 
         public User build() {
             return new User(
@@ -201,7 +255,10 @@ public class User implements Serializable {
                     this.phoneNumber,
                     this.email,
                     this.gender,
-                    this.dateOfBirth
+                    this.dateOfBirth,
+                    this.whenCreated,
+                    this.lastUpdated,
+                    this.logined
             );
         }
 
