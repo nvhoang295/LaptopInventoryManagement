@@ -13,6 +13,7 @@ import java.util.Date;
  * @author vieth
  */
 public class User implements Serializable {
+
     @Serial
     private static final long serialVersionUID = 1L;
 
@@ -28,7 +29,17 @@ public class User implements Serializable {
     private Gender gender;
     private Date dateOfBirth;
 
-    public User(Integer userId, String username, String password, String firstName, String lastName, String phoneNumber, String email, Gender gender, Date dateOfBirth) {
+    public User(
+            Integer userId,
+            String username,
+            String password,
+            String firstName,
+            String lastName,
+            String phoneNumber,
+            String email,
+            Gender gender,
+            Date dateOfBirth
+    ) {
         this.userId = userId;
         this.username = username;
         this.password = password;
@@ -181,7 +192,17 @@ public class User implements Serializable {
         }
 
         public User build() {
-            return new User(this.userId, this.username, this.password, this.firstName, this.lastName, this.phoneNumber, this.email, this.gender, this.dateOfBirth);
+            return new User(
+                    this.userId,
+                    this.username,
+                    this.password,
+                    this.firstName,
+                    this.lastName,
+                    this.phoneNumber,
+                    this.email,
+                    this.gender,
+                    this.dateOfBirth
+            );
         }
 
     }
