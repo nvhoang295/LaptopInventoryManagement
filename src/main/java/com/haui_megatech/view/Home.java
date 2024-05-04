@@ -82,12 +82,12 @@ public class Home extends javax.swing.JFrame {
         importProductBillCreatorTextField = new javax.swing.JLabel();
         importProductBillScrollPane = new javax.swing.JScrollPane();
         importProductBillTable = new javax.swing.JTable();
-        jButton18 = new javax.swing.JButton();
-        jButton12 = new javax.swing.JButton();
-        jButton17 = new javax.swing.JButton();
-        jLabel10 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
-        jButton19 = new javax.swing.JButton();
+        importBillItemFromExcelButton = new javax.swing.JButton();
+        editBillItemButton = new javax.swing.JButton();
+        removeBillItemButton = new javax.swing.JButton();
+        totalValueLabel = new javax.swing.JLabel();
+        totalImportBillLabel = new javax.swing.JLabel();
+        importBillProductButton = new javax.swing.JButton();
         importBillPanel = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         exportProductPanel = new javax.swing.JPanel();
@@ -740,29 +740,29 @@ public class Home extends javax.swing.JFrame {
         ));
         importProductBillScrollPane.setViewportView(importProductBillTable);
 
-        jButton18.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jButton18.setText("Nhập excel");
-        jButton18.addActionListener(new java.awt.event.ActionListener() {
+        importBillItemFromExcelButton.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        importBillItemFromExcelButton.setText("Nhập excel");
+        importBillItemFromExcelButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton18ActionPerformed(evt);
+                importBillItemFromExcelButtonActionPerformed(evt);
             }
         });
 
-        jButton12.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jButton12.setText("Sửa số lượng");
+        editBillItemButton.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        editBillItemButton.setText("Sửa số lượng");
 
-        jButton17.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jButton17.setText("Xóa sản phẩm");
+        removeBillItemButton.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        removeBillItemButton.setText("Xóa sản phẩm");
 
-        jLabel10.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        jLabel10.setForeground(new java.awt.Color(204, 0, 51));
-        jLabel10.setText("50,670,000đ");
+        totalValueLabel.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        totalValueLabel.setForeground(new java.awt.Color(204, 0, 51));
+        totalValueLabel.setText("50,670,000đ");
 
-        jLabel11.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel11.setText("Tổng tiền:");
+        totalImportBillLabel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        totalImportBillLabel.setText("Tổng tiền:");
 
-        jButton19.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jButton19.setText("Nhập hàng");
+        importBillProductButton.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        importBillProductButton.setText("Nhập hàng");
 
         javax.swing.GroupLayout importProductPanelLayout = new javax.swing.GroupLayout(importProductPanel);
         importProductPanel.setLayout(importProductPanelLayout);
@@ -782,17 +782,17 @@ public class Home extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(importProductPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(importProductPanelLayout.createSequentialGroup()
-                        .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(totalImportBillLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(31, 31, 31)
-                        .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(totalValueLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton19, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(importBillProductButton, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, importProductPanelLayout.createSequentialGroup()
-                        .addComponent(jButton18, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(importBillItemFromExcelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton12, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(editBillItemButton, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(75, 75, 75)
-                        .addComponent(jButton17, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(removeBillItemButton, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(importProductPanelLayout.createSequentialGroup()
                         .addGroup(importProductPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(importBillIdLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -818,8 +818,8 @@ public class Home extends javax.swing.JFrame {
                     .addComponent(importProductAddButton, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(importProductQuantityTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(importProductQuantityLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel11)
-                    .addComponent(jLabel10))
+                    .addComponent(totalImportBillLabel)
+                    .addComponent(totalValueLabel))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, importProductPanelLayout.createSequentialGroup()
                 .addGap(16, 16, 16)
@@ -838,11 +838,11 @@ public class Home extends javax.swing.JFrame {
                 .addComponent(importProductBillScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 498, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(20, 20, 20)
                 .addGroup(importProductPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton17, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton12, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton18, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(removeBillItemButton, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(editBillItemButton, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(importBillItemFromExcelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton19, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(importBillProductButton, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(58, 58, 58))
         );
 
@@ -1392,9 +1392,9 @@ public class Home extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_importProductBillCreatorLabelActionPerformed
 
-    private void jButton18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton18ActionPerformed
+    private void importBillItemFromExcelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_importBillItemFromExcelButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton18ActionPerformed
+    }//GEN-LAST:event_importBillItemFromExcelButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1407,11 +1407,11 @@ public class Home extends javax.swing.JFrame {
                 new Home().setVisible(true);
             });
         } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | UnsupportedLookAndFeelException e) {
-            e.printStackTrace();
         }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton editBillItemButton;
     private javax.swing.JLabel exportBillLabel;
     private javax.swing.JPanel exportBillPanel;
     private javax.swing.JPanel exportBillTab;
@@ -1420,8 +1420,10 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JPanel exportProductTab;
     private javax.swing.JLabel importBillIdLabel;
     private javax.swing.JTextField importBillIdTextField;
+    private javax.swing.JButton importBillItemFromExcelButton;
     private javax.swing.JLabel importBillLabel;
     private javax.swing.JPanel importBillPanel;
+    private javax.swing.JButton importBillProductButton;
     private javax.swing.JPanel importBillTab;
     private javax.swing.JButton importProductAddButton;
     private javax.swing.JTextField importProductBillCreatorLabel;
@@ -1438,13 +1440,7 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JLabel inStockLabel;
     private javax.swing.JPanel inStockPanel;
     private javax.swing.JPanel inStockTab;
-    private javax.swing.JButton jButton12;
-    private javax.swing.JButton jButton17;
-    private javax.swing.JButton jButton18;
-    private javax.swing.JButton jButton19;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -1464,6 +1460,7 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JLabel providerNameLabel;
     private javax.swing.JPanel providerPanel;
     private javax.swing.JPanel providerTab;
+    private javax.swing.JButton removeBillItemButton;
     private javax.swing.JPanel searchImportProductPanel;
     private javax.swing.JButton searchImportProductRefreshButton;
     private javax.swing.JTextField searchImportProductTextField;
@@ -1471,6 +1468,8 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JLabel statisticsLabel;
     private javax.swing.JPanel statisticsPanel;
     private javax.swing.JPanel statisticsTab;
+    private javax.swing.JLabel totalImportBillLabel;
+    private javax.swing.JLabel totalValueLabel;
     private javax.swing.JLabel updateInfoLabel;
     private javax.swing.JPanel updateInfoTab;
     private javax.swing.JLabel userLabel;
