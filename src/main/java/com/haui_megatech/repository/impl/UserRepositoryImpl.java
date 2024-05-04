@@ -4,6 +4,8 @@
  */
 package com.haui_megatech.repository.impl;
 
+import com.haui_megatech.ApplicationContext;
+import com.haui_megatech.Main;
 import com.haui_megatech.model.User;
 import com.haui_megatech.repository.UserRepository;
 import java.io.FileInputStream;
@@ -20,11 +22,17 @@ import java.util.Optional;
  * @author vieth
  */
 public class UserRepositoryImpl implements UserRepository {
-
+    private final String absDataPath;
+    
+    public UserRepositoryImpl(String absDataPath) {
+        this.absDataPath = absDataPath;
+    }
+    
     @Override
     public Optional<User> save(User user) {
         List<User> users;
-        try (ObjectInputStream ois = new ObjectInputStream((new FileInputStream("")))) {
+       
+        try (ObjectInputStream ois = new ObjectInputStream((new FileInputStream(absDataPath)))) {
             users = (List<User>) ois.readObject();
             if (users == null) {
                 users = new ArrayList<>();
@@ -34,7 +42,7 @@ public class UserRepositoryImpl implements UserRepository {
             throw new RuntimeException(e);
         }
 
-        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(""))) {
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(absDataPath))) {
             oos.writeObject(users);
             return Optional.of(user);
         } catch (IOException e) {
@@ -44,7 +52,7 @@ public class UserRepositoryImpl implements UserRepository {
 
     @Override
     public List<User> saveAll(List<User> users) {
-        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(""))) {
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(absDataPath))) {
             oos.writeObject(users);
             return users;
         } catch (IOException e) {
@@ -60,13 +68,15 @@ public class UserRepositoryImpl implements UserRepository {
 
     @Override
     public List<User> getList() {
+        System.out.println(absDataPath);
         List<User> users;
-        try (ObjectInputStream ois = new ObjectInputStream((new FileInputStream("")))) {
+        try (ObjectInputStream ois = new ObjectInputStream((new FileInputStream(absDataPath)))) {
             users = (List<User>) ois.readObject();
         } catch (IOException | ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
         return users;
     }
+    
 
 }

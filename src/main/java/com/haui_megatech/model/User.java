@@ -46,7 +46,7 @@ public class User implements Serializable {
             Date lastUpdated,
             Integer logined
     ) {
-        this.id = id;
+        this.id = counter++;
         this.username = username;
         this.password = password;
         this.firstName = firstName;
@@ -60,12 +60,8 @@ public class User implements Serializable {
         this.logined = logined;
     }
 
-    public static Integer getCounter() {
-        return counter;
-    }
-
-    public static void setCounter(Integer counter) {
-        User.counter = counter;
+    public static void setCounter(Integer value) {
+        counter = value;
     }
 
     public Integer geId() {
@@ -163,8 +159,11 @@ public class User implements Serializable {
     public void setLogined(Integer logined) {
         this.logined = logined;
     }
-    
-   
+
+    @Override
+    public String toString() {
+        return "User{" + "id=" + id + ", username=" + username + ", password=" + password + ", firstName=" + firstName + ", lastName=" + lastName + ", phoneNumber=" + phoneNumber + ", email=" + email + ", gender=" + gender + ", dateOfBirth=" + dateOfBirth + ", whenCreated=" + whenCreated + ", lastUpdated=" + lastUpdated + ", logined=" + logined + '}';
+    }
 
     public static UserBuilder builder() {
         return new UserBuilder();
@@ -229,17 +228,17 @@ public class User implements Serializable {
             this.dateOfBirth = dateOfBirth;
             return this;
         }
-        
+
         public UserBuilder whenCreated(Date whenCreated) {
             this.whenCreated = whenCreated;
             return this;
         }
-        
+
         public UserBuilder lastUpdated(Date lastUpdated) {
             this.lastUpdated = lastUpdated;
             return this;
         }
-        
+
         public UserBuilder logined(Integer logined) {
             this.logined = logined;
             return this;
