@@ -166,7 +166,7 @@ public class Home extends javax.swing.JFrame {
         productTabLayout.setHorizontalGroup(
             productTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(productTabLayout.createSequentialGroup()
-                .addGap(64, 64, 64)
+                .addGap(65, 65, 65)
                 .addComponent(productLabel)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -200,9 +200,9 @@ public class Home extends javax.swing.JFrame {
         providerTabLayout.setHorizontalGroup(
             providerTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, providerTabLayout.createSequentialGroup()
-                .addGap(64, 64, 64)
+                .addContainerGap(65, Short.MAX_VALUE)
                 .addComponent(providerLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(32, 32, 32))
+                .addGap(31, 31, 31))
         );
         providerTabLayout.setVerticalGroup(
             providerTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
