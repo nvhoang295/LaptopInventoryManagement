@@ -19,7 +19,7 @@ public class User implements Serializable {
 
     private static Integer counter;
 
-    private Integer userId;
+    private Integer id;
     private String username;
     private String password;
     private String firstName;
@@ -33,7 +33,7 @@ public class User implements Serializable {
     private Integer logined;
 
     public User(
-            Integer userId,
+            Integer id,
             String username,
             String password,
             String firstName,
@@ -46,7 +46,7 @@ public class User implements Serializable {
             Date lastUpdated,
             Integer logined
     ) {
-        this.userId = userId;
+        this.id = id;
         this.username = username;
         this.password = password;
         this.firstName = firstName;
@@ -68,12 +68,12 @@ public class User implements Serializable {
         User.counter = counter;
     }
 
-    public Integer getUserId() {
-        return userId;
+    public Integer geId() {
+        return id;
     }
 
-    public void setUserId(Integer userId) {
-        this.userId = userId;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getUsername() {
@@ -172,7 +172,7 @@ public class User implements Serializable {
 
     public static class UserBuilder {
 
-        private Integer userId;
+        private Integer id;
         private String username;
         private String password;
         private String firstName;
@@ -185,8 +185,8 @@ public class User implements Serializable {
         private Date lastUpdated;
         private Integer logined;
 
-        public UserBuilder userId(Integer userId) {
-            this.userId = userId;
+        public UserBuilder id(Integer id) {
+            this.id = id;
             return this;
         }
 
@@ -247,7 +247,7 @@ public class User implements Serializable {
 
         public User build() {
             return new User(
-                    this.userId,
+                    this.id,
                     this.username,
                     this.password,
                     this.firstName,
