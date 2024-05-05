@@ -68,7 +68,6 @@ public class UserRepositoryImpl implements UserRepository {
 
     @Override
     public List<User> getList() {
-        System.out.println(absDataPath);
         List<User> users;
         try (ObjectInputStream ois = new ObjectInputStream((new FileInputStream(absDataPath)))) {
             users = (List<User>) ois.readObject();

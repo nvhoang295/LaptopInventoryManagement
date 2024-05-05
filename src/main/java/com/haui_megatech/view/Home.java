@@ -4,15 +4,29 @@
  */
 package com.haui_megatech.view;
 
+import com.haui_megatech.ApplicationContext;
+import com.haui_megatech.controller.UserController;
+import com.haui_megatech.repository.impl.UserRepositoryImpl;
+import com.haui_megatech.service.impl.UserServiceImpl;
 import java.awt.Color;
+import javax.swing.JTable;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author vieth
  */
 public class Home extends javax.swing.JFrame {
+
+    private final UserController userController = new UserController(
+            new UserServiceImpl(
+                    new UserRepositoryImpl(
+                            ApplicationContext.ABS_USERS_DATA_PATH
+                    )
+            )
+    );
 
     /**
      * Creates new form Home
@@ -23,6 +37,41 @@ public class Home extends javax.swing.JFrame {
         this.setActiveTab("product");
         this.setDisplayedPanel("product");
         this.setBackground(Color.WHITE);
+    }
+
+    private void loadDataToTableUsers() {
+        String[] tableHeader = {
+            "ID",
+            "Tên đăng nhập",
+            "Tên",
+            "Họ đệm",
+            "Giới tính",
+            "Số điện thoại",
+            "Email"
+        };
+        DefaultTableModel tableModel = new DefaultTableModel(null, tableHeader) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
+        
+        userController.getList().forEach(item -> {
+            System.out.println(item);
+            tableModel.addRow(
+                    new Object[]{
+                        item.getId() != null ? item.getId() : "",
+                        item.getUsername() != null ? item.getUsername() : "",
+                        item.getFirstName() != null ? item.getFirstName() : "",
+                        item.getLastName() != null ? item.getLastName() : "",
+                        item.getGender() != null ? item.getGender().getName() : "",
+                        item.getPhoneNumber() != null ? item.getPhoneNumber() : "",
+                        item.getEmail() != null ? item.getEmail() : ""
+                    }
+            );
+        });
+        
+        usersTable.setModel(tableModel);
     }
 
     /**
@@ -62,7 +111,19 @@ public class Home extends javax.swing.JFrame {
         logoutTab = new javax.swing.JPanel();
         logoutLabel = new javax.swing.JLabel();
         productPanel = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        usersScrollPanel1 = new javax.swing.JScrollPane();
+        usersTable1 = new javax.swing.JTable();
+        searchUsersPanel1 = new javax.swing.JPanel();
+        productBrandsComboBox = new javax.swing.JComboBox<>();
+        searchProductsTextField1 = new javax.swing.JTextField();
+        searchProductsButton1 = new javax.swing.JButton();
+        userFunctionPanel1 = new javax.swing.JPanel();
+        jSeparator2 = new javax.swing.JToolBar.Separator();
+        importUsersFromExcelButton1 = new javax.swing.JButton();
+        exportUsersToExcelButton1 = new javax.swing.JButton();
+        editUserButton1 = new javax.swing.JButton();
+        addUserButton1 = new javax.swing.JButton();
+        deleteUserButton1 = new javax.swing.JButton();
         providerPanel = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         importProductPanel = new javax.swing.JPanel();
@@ -97,7 +158,19 @@ public class Home extends javax.swing.JFrame {
         inStockPanel = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         userPanel = new javax.swing.JPanel();
-        jLabel8 = new javax.swing.JLabel();
+        usersScrollPanel = new javax.swing.JScrollPane();
+        usersTable = new javax.swing.JTable();
+        searchUsersPanel = new javax.swing.JPanel();
+        userRolesComboBox = new javax.swing.JComboBox<>();
+        searchUsersTextField = new javax.swing.JTextField();
+        searchUsersButton = new javax.swing.JButton();
+        userFunctionPanel = new javax.swing.JPanel();
+        jSeparator1 = new javax.swing.JToolBar.Separator();
+        importUsersFromExcelButton = new javax.swing.JButton();
+        exportUsersToExcelButton = new javax.swing.JButton();
+        editUserButton = new javax.swing.JButton();
+        addUserButton = new javax.swing.JButton();
+        deleteUserButton = new javax.swing.JButton();
         statisticsPanel = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
 
@@ -579,23 +652,157 @@ public class Home extends javax.swing.JFrame {
         productPanel.setBackground(new java.awt.Color(204, 255, 255));
         productPanel.setPreferredSize(new java.awt.Dimension(1140, 830));
 
-        jLabel1.setText("Product");
+        usersTable1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        usersTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+
+            }
+        ));
+        usersScrollPanel1.setViewportView(usersTable1);
+
+        searchUsersPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        searchUsersPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Tìm kiếm", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 14))); // NOI18N
+
+        productBrandsComboBox.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        productBrandsComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        searchProductsTextField1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+
+        searchProductsButton1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        searchProductsButton1.setText("Làm mới");
+
+        javax.swing.GroupLayout searchUsersPanel1Layout = new javax.swing.GroupLayout(searchUsersPanel1);
+        searchUsersPanel1.setLayout(searchUsersPanel1Layout);
+        searchUsersPanel1Layout.setHorizontalGroup(
+            searchUsersPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(searchUsersPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(productBrandsComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(searchProductsTextField1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(searchProductsButton1)
+                .addContainerGap())
+        );
+        searchUsersPanel1Layout.setVerticalGroup(
+            searchUsersPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(searchUsersPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(searchUsersPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(productBrandsComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(searchProductsTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(searchProductsButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(13, Short.MAX_VALUE))
+        );
+
+        userFunctionPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        userFunctionPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Chức năng", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 14))); // NOI18N
+        userFunctionPanel1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+
+        jSeparator2.setOrientation(javax.swing.SwingConstants.VERTICAL);
+
+        importUsersFromExcelButton1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        importUsersFromExcelButton1.setText("Nhập Excel");
+        importUsersFromExcelButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                importUsersFromExcelButton1ActionPerformed(evt);
+            }
+        });
+
+        exportUsersToExcelButton1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        exportUsersToExcelButton1.setText("Xuất Excel");
+        exportUsersToExcelButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                exportUsersToExcelButton1ActionPerformed(evt);
+            }
+        });
+
+        editUserButton1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        editUserButton1.setText("Sửa");
+        editUserButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editUserButton1ActionPerformed(evt);
+            }
+        });
+
+        addUserButton1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        addUserButton1.setText("Thêm");
+        addUserButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addUserButton1ActionPerformed(evt);
+            }
+        });
+
+        deleteUserButton1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        deleteUserButton1.setText("Xoá");
+        deleteUserButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteUserButton1ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout userFunctionPanel1Layout = new javax.swing.GroupLayout(userFunctionPanel1);
+        userFunctionPanel1.setLayout(userFunctionPanel1Layout);
+        userFunctionPanel1Layout.setHorizontalGroup(
+            userFunctionPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(userFunctionPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(addUserButton1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
+                .addComponent(editUserButton1)
+                .addGap(24, 24, 24)
+                .addComponent(deleteUserButton1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(importUsersFromExcelButton1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(exportUsersToExcelButton1)
+                .addGap(6, 6, 6))
+        );
+        userFunctionPanel1Layout.setVerticalGroup(
+            userFunctionPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(userFunctionPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(userFunctionPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jSeparator2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, userFunctionPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(importUsersFromExcelButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(exportUsersToExcelButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, userFunctionPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(addUserButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(editUserButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(deleteUserButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout productPanelLayout = new javax.swing.GroupLayout(productPanel);
         productPanel.setLayout(productPanelLayout);
         productPanelLayout.setHorizontalGroup(
             productPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(productPanelLayout.createSequentialGroup()
-                .addGap(452, 452, 452)
-                .addComponent(jLabel1)
-                .addContainerGap(646, Short.MAX_VALUE))
+                .addContainerGap()
+                .addGroup(productPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(usersScrollPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(productPanelLayout.createSequentialGroup()
+                        .addComponent(userFunctionPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(searchUsersPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap(31, Short.MAX_VALUE))
         );
         productPanelLayout.setVerticalGroup(
             productPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(productPanelLayout.createSequentialGroup()
-                .addGap(284, 284, 284)
-                .addComponent(jLabel1)
-                .addContainerGap(530, Short.MAX_VALUE))
+                .addGap(14, 14, 14)
+                .addGroup(productPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(userFunctionPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(searchUsersPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(usersScrollPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 658, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(59, Short.MAX_VALUE))
         );
 
         getContentPane().add(productPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 0, 1140, 830));
@@ -947,23 +1154,157 @@ public class Home extends javax.swing.JFrame {
         userPanel.setBackground(new java.awt.Color(204, 255, 255));
         userPanel.setPreferredSize(new java.awt.Dimension(1140, 830));
 
-        jLabel8.setText("User");
+        usersTable.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        usersTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+
+            }
+        ));
+        usersScrollPanel.setViewportView(usersTable);
+
+        searchUsersPanel.setBackground(new java.awt.Color(255, 255, 255));
+        searchUsersPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Tìm kiếm", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 14))); // NOI18N
+
+        userRolesComboBox.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        userRolesComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        searchUsersTextField.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+
+        searchUsersButton.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        searchUsersButton.setText("Làm mới");
+
+        javax.swing.GroupLayout searchUsersPanelLayout = new javax.swing.GroupLayout(searchUsersPanel);
+        searchUsersPanel.setLayout(searchUsersPanelLayout);
+        searchUsersPanelLayout.setHorizontalGroup(
+            searchUsersPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(searchUsersPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(userRolesComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(searchUsersTextField)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(searchUsersButton)
+                .addContainerGap())
+        );
+        searchUsersPanelLayout.setVerticalGroup(
+            searchUsersPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(searchUsersPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(searchUsersPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(userRolesComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(searchUsersTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(searchUsersButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(13, Short.MAX_VALUE))
+        );
+
+        userFunctionPanel.setBackground(new java.awt.Color(255, 255, 255));
+        userFunctionPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Chức năng", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 14))); // NOI18N
+        userFunctionPanel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+
+        jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
+
+        importUsersFromExcelButton.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        importUsersFromExcelButton.setText("Nhập Excel");
+        importUsersFromExcelButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                importUsersFromExcelButtonActionPerformed(evt);
+            }
+        });
+
+        exportUsersToExcelButton.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        exportUsersToExcelButton.setText("Xuất Excel");
+        exportUsersToExcelButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                exportUsersToExcelButtonActionPerformed(evt);
+            }
+        });
+
+        editUserButton.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        editUserButton.setText("Sửa");
+        editUserButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editUserButtonActionPerformed(evt);
+            }
+        });
+
+        addUserButton.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        addUserButton.setText("Thêm");
+        addUserButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addUserButtonActionPerformed(evt);
+            }
+        });
+
+        deleteUserButton.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        deleteUserButton.setText("Xoá");
+        deleteUserButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteUserButtonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout userFunctionPanelLayout = new javax.swing.GroupLayout(userFunctionPanel);
+        userFunctionPanel.setLayout(userFunctionPanelLayout);
+        userFunctionPanelLayout.setHorizontalGroup(
+            userFunctionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(userFunctionPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(addUserButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
+                .addComponent(editUserButton)
+                .addGap(24, 24, 24)
+                .addComponent(deleteUserButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(importUsersFromExcelButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(exportUsersToExcelButton)
+                .addGap(6, 6, 6))
+        );
+        userFunctionPanelLayout.setVerticalGroup(
+            userFunctionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(userFunctionPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(userFunctionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jSeparator1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, userFunctionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(importUsersFromExcelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(exportUsersToExcelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, userFunctionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(addUserButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(editUserButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(deleteUserButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout userPanelLayout = new javax.swing.GroupLayout(userPanel);
         userPanel.setLayout(userPanelLayout);
         userPanelLayout.setHorizontalGroup(
             userPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(userPanelLayout.createSequentialGroup()
-                .addGap(452, 452, 452)
-                .addComponent(jLabel8)
-                .addContainerGap(665, Short.MAX_VALUE))
+                .addContainerGap()
+                .addGroup(userPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(usersScrollPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 1103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(userPanelLayout.createSequentialGroup()
+                        .addComponent(userFunctionPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(searchUsersPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap(31, Short.MAX_VALUE))
         );
         userPanelLayout.setVerticalGroup(
             userPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(userPanelLayout.createSequentialGroup()
-                .addGap(284, 284, 284)
-                .addComponent(jLabel8)
-                .addContainerGap(530, Short.MAX_VALUE))
+                .addGap(14, 14, 14)
+                .addGroup(userPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(userFunctionPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(searchUsersPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(usersScrollPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 658, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(59, Short.MAX_VALUE))
         );
 
         getContentPane().add(userPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 0, 1140, 830));
@@ -1288,6 +1629,7 @@ public class Home extends javax.swing.JFrame {
         // TODO add your handling code here:
         this.setActiveTab("user");
         this.setDisplayedPanel("user");
+        this.loadDataToTableUsers();
     }//GEN-LAST:event_userLabelMouseClicked
 
     private void updateInfoLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_updateInfoLabelMouseClicked
@@ -1396,10 +1738,51 @@ public class Home extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_importBillItemFromExcelButtonActionPerformed
 
+    private void importUsersFromExcelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_importUsersFromExcelButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_importUsersFromExcelButtonActionPerformed
+
+    private void exportUsersToExcelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exportUsersToExcelButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_exportUsersToExcelButtonActionPerformed
+
+    private void editUserButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editUserButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_editUserButtonActionPerformed
+
+    private void addUserButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addUserButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_addUserButtonActionPerformed
+
+    private void deleteUserButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteUserButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_deleteUserButtonActionPerformed
+
+    private void importUsersFromExcelButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_importUsersFromExcelButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_importUsersFromExcelButton1ActionPerformed
+
+    private void exportUsersToExcelButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exportUsersToExcelButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_exportUsersToExcelButton1ActionPerformed
+
+    private void editUserButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editUserButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_editUserButton1ActionPerformed
+
+    private void addUserButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addUserButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_addUserButton1ActionPerformed
+
+    private void deleteUserButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteUserButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_deleteUserButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
+        ApplicationContext.init();
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
             /* Create and display the form */
@@ -1411,13 +1794,21 @@ public class Home extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton addUserButton;
+    private javax.swing.JButton addUserButton1;
+    private javax.swing.JButton deleteUserButton;
+    private javax.swing.JButton deleteUserButton1;
     private javax.swing.JButton editBillItemButton;
+    private javax.swing.JButton editUserButton;
+    private javax.swing.JButton editUserButton1;
     private javax.swing.JLabel exportBillLabel;
     private javax.swing.JPanel exportBillPanel;
     private javax.swing.JPanel exportBillTab;
     private javax.swing.JLabel exportProductLabel;
     private javax.swing.JPanel exportProductPanel;
     private javax.swing.JPanel exportProductTab;
+    private javax.swing.JButton exportUsersToExcelButton;
+    private javax.swing.JButton exportUsersToExcelButton1;
     private javax.swing.JLabel importBillIdLabel;
     private javax.swing.JTextField importBillIdTextField;
     private javax.swing.JButton importBillItemFromExcelButton;
@@ -1437,21 +1828,24 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JScrollPane importProductScrollPanel;
     private javax.swing.JPanel importProductTab;
     private javax.swing.JTable importProductTable;
+    private javax.swing.JButton importUsersFromExcelButton;
+    private javax.swing.JButton importUsersFromExcelButton1;
     private javax.swing.JLabel inStockLabel;
     private javax.swing.JPanel inStockPanel;
     private javax.swing.JPanel inStockTab;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JToolBar.Separator jSeparator1;
+    private javax.swing.JToolBar.Separator jSeparator2;
     private javax.swing.JDialog logoutDiaglog;
     private javax.swing.JLabel logoutLabel;
     private javax.swing.JPanel logoutTab;
+    private javax.swing.JComboBox<String> productBrandsComboBox;
     private javax.swing.JLabel productLabel;
     private javax.swing.JPanel productPanel;
     private javax.swing.JPanel productTab;
@@ -1464,6 +1858,12 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JPanel searchImportProductPanel;
     private javax.swing.JButton searchImportProductRefreshButton;
     private javax.swing.JTextField searchImportProductTextField;
+    private javax.swing.JButton searchProductsButton1;
+    private javax.swing.JTextField searchProductsTextField1;
+    private javax.swing.JButton searchUsersButton;
+    private javax.swing.JPanel searchUsersPanel;
+    private javax.swing.JPanel searchUsersPanel1;
+    private javax.swing.JTextField searchUsersTextField;
     private javax.swing.JPanel sidebarPanel;
     private javax.swing.JLabel statisticsLabel;
     private javax.swing.JPanel statisticsPanel;
@@ -1472,10 +1872,17 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JLabel totalValueLabel;
     private javax.swing.JLabel updateInfoLabel;
     private javax.swing.JPanel updateInfoTab;
+    private javax.swing.JPanel userFunctionPanel;
+    private javax.swing.JPanel userFunctionPanel1;
     private javax.swing.JLabel userLabel;
     private javax.swing.JPanel userPanel;
+    private javax.swing.JComboBox<String> userRolesComboBox;
     private javax.swing.JPanel userTab;
     private javax.swing.JLabel username;
+    private javax.swing.JScrollPane usersScrollPanel;
+    private javax.swing.JScrollPane usersScrollPanel1;
+    private javax.swing.JTable usersTable;
+    private javax.swing.JTable usersTable1;
     private javax.swing.JLabel welcomeMessage;
     // End of variables declaration//GEN-END:variables
 }

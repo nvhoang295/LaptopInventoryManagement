@@ -64,7 +64,7 @@ public class User implements Serializable {
         counter = value;
     }
 
-    public Integer geId() {
+    public Integer getId() {
         return id;
     }
 
