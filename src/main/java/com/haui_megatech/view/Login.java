@@ -63,7 +63,10 @@ public class Login extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jPasswordField1 = new javax.swing.JPasswordField();
         errorLoginDiaglog = new javax.swing.JDialog();
+        jPanel2 = new javax.swing.JPanel();
         errorLoginMessage = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
         left = new javax.swing.JPanel();
         right = new javax.swing.JPanel();
         dangNhapTittle = new javax.swing.JLabel();
@@ -252,27 +255,43 @@ public class Login extends javax.swing.JFrame {
         recoveryPasswordDiaglog.getContentPane().add(updateNewPasswordPanel);
         updateNewPasswordPanel.setBounds(0, 0, 700, 500);
 
-        errorLoginDiaglog.setMaximumSize(new java.awt.Dimension(400, 300));
-        errorLoginDiaglog.setMinimumSize(new java.awt.Dimension(400, 300));
+        errorLoginDiaglog.setTitle("Lỗi đăng nhập");
+        errorLoginDiaglog.setMaximumSize(new java.awt.Dimension(520, 300));
+        errorLoginDiaglog.setMinimumSize(new java.awt.Dimension(520, 300));
+        errorLoginDiaglog.setPreferredSize(new java.awt.Dimension(520, 300));
+        errorLoginDiaglog.setSize(new java.awt.Dimension(520, 300));
+        errorLoginDiaglog.getContentPane().setLayout(null);
 
-        errorLoginMessage.setText("jLabel1");
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel2.setMaximumSize(new java.awt.Dimension(520, 300));
+        jPanel2.setMinimumSize(new java.awt.Dimension(520, 300));
+        jPanel2.setPreferredSize(new java.awt.Dimension(520, 300));
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        javax.swing.GroupLayout errorLoginDiaglogLayout = new javax.swing.GroupLayout(errorLoginDiaglog.getContentPane());
-        errorLoginDiaglog.getContentPane().setLayout(errorLoginDiaglogLayout);
-        errorLoginDiaglogLayout.setHorizontalGroup(
-            errorLoginDiaglogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(errorLoginDiaglogLayout.createSequentialGroup()
-                .addGap(158, 158, 158)
-                .addComponent(errorLoginMessage)
-                .addContainerGap(205, Short.MAX_VALUE))
-        );
-        errorLoginDiaglogLayout.setVerticalGroup(
-            errorLoginDiaglogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(errorLoginDiaglogLayout.createSequentialGroup()
-                .addGap(121, 121, 121)
-                .addComponent(errorLoginMessage)
-                .addContainerGap(163, Short.MAX_VALUE))
-        );
+        errorLoginMessage.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        errorLoginMessage.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        errorLoginMessage.setText("tên đăng nhập hoặc mật khẩu không được để trôngsldjfdlfjdlfjdfdjflfjljfldjsffljflfj");
+        errorLoginMessage.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        errorLoginMessage.setMaximumSize(new java.awt.Dimension(520, 70));
+        errorLoginMessage.setMinimumSize(new java.awt.Dimension(400, 70));
+        errorLoginMessage.setPreferredSize(new java.awt.Dimension(400, 70));
+        jPanel2.add(errorLoginMessage, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 80, 520, 70));
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("Lỗi đăng nhập");
+        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 500, -1));
+
+        jButton1.setBackground(new java.awt.Color(44, 43, 196));
+        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(255, 255, 255));
+        jButton1.setText("OK");
+        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton1.setPreferredSize(new java.awt.Dimension(300, 200));
+        jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 180, 150, 40));
+
+        errorLoginDiaglog.getContentPane().add(jPanel2);
+        jPanel2.setBounds(0, 0, 520, 300);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Đăng nhập");
@@ -452,11 +471,14 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JDialog errorLoginDiaglog;
     private javax.swing.JLabel errorLoginMessage;
     private javax.swing.JLabel forget;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPasswordField jPasswordField1;
