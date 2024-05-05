@@ -16,22 +16,24 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 /**
  *
  * @author vieth
  */
 public class UserRepositoryImpl implements UserRepository {
+
     private final String absDataPath;
-    
+
     public UserRepositoryImpl(String absDataPath) {
         this.absDataPath = absDataPath;
     }
-    
+
     @Override
     public Optional<User> save(User user) {
         List<User> users;
-       
+
         try (ObjectInputStream ois = new ObjectInputStream((new FileInputStream(absDataPath)))) {
             users = (List<User>) ois.readObject();
             if (users == null) {
@@ -76,6 +78,5 @@ public class UserRepositoryImpl implements UserRepository {
         }
         return users;
     }
-    
 
 }

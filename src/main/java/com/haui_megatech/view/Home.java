@@ -6,9 +6,11 @@ package com.haui_megatech.view;
 
 import com.haui_megatech.ApplicationContext;
 import com.haui_megatech.controller.UserController;
+import com.haui_megatech.model.User;
 import com.haui_megatech.repository.impl.UserRepositoryImpl;
 import com.haui_megatech.service.impl.UserServiceImpl;
 import java.awt.Color;
+import java.util.List;
 import javax.swing.JTable;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
@@ -37,9 +39,10 @@ public class Home extends javax.swing.JFrame {
         this.setActiveTab("product");
         this.setDisplayedPanel("product");
         this.setBackground(Color.WHITE);
+        this.loginedUsername.setText(ApplicationContext.getLoginedUser().getUsername());
     }
 
-    private void loadDataToTableUsers() {
+    private void loadDataToTableUsers(String keyword) {
         String[] tableHeader = {
             "ID",
             "Tên đăng nhập",
@@ -55,9 +58,13 @@ public class Home extends javax.swing.JFrame {
                 return false;
             }
         };
+        System.out.println(keyword);
+        List<User> users = keyword != null && !keyword.isEmpty()
+                ? userController.searchList(keyword)
+                : userController.getList();
+                
         
-        userController.getList().forEach(item -> {
-            System.out.println(item);
+        users.forEach(item -> {
             tableModel.addRow(
                     new Object[]{
                         item.getId() != null ? item.getId() : "",
@@ -70,7 +77,7 @@ public class Home extends javax.swing.JFrame {
                     }
             );
         });
-        
+
         usersTable.setModel(tableModel);
     }
 
@@ -87,7 +94,7 @@ public class Home extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         sidebarPanel = new javax.swing.JPanel();
         welcomeMessage = new javax.swing.JLabel();
-        username = new javax.swing.JLabel();
+        loginedUsername = new javax.swing.JLabel();
         productTab = new javax.swing.JPanel();
         productLabel = new javax.swing.JLabel();
         providerTab = new javax.swing.JPanel();
@@ -211,11 +218,11 @@ public class Home extends javax.swing.JFrame {
 
         welcomeMessage.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         welcomeMessage.setForeground(new java.awt.Color(255, 255, 255));
-        welcomeMessage.setText("Chào mừng");
+        welcomeMessage.setText("Chào mừng, ");
 
-        username.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        username.setForeground(new java.awt.Color(255, 255, 0));
-        username.setText("Admin");
+        loginedUsername.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        loginedUsername.setForeground(new java.awt.Color(255, 255, 0));
+        loginedUsername.setText("Admin");
 
         productTab.setBackground(new java.awt.Color(255, 255, 255));
         productTab.setPreferredSize(new java.awt.Dimension(240, 40));
@@ -602,27 +609,25 @@ public class Home extends javax.swing.JFrame {
             .addComponent(exportProductTab, javax.swing.GroupLayout.DEFAULT_SIZE, 256, Short.MAX_VALUE)
             .addComponent(exportBillTab, javax.swing.GroupLayout.DEFAULT_SIZE, 256, Short.MAX_VALUE)
             .addComponent(inStockTab, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 256, Short.MAX_VALUE)
-            .addGroup(sidebarPanelLayout.createSequentialGroup()
-                .addGap(84, 84, 84)
-                .addGroup(sidebarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(welcomeMessage)
-                    .addGroup(sidebarPanelLayout.createSequentialGroup()
-                        .addGap(16, 16, 16)
-                        .addComponent(username)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addComponent(userTab, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 256, Short.MAX_VALUE)
             .addComponent(statisticsTab, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 256, Short.MAX_VALUE)
             .addComponent(updateInfoTab, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 256, Short.MAX_VALUE)
             .addComponent(logoutTab, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 256, Short.MAX_VALUE)
+            .addGroup(sidebarPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(welcomeMessage)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(loginedUsername)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         sidebarPanelLayout.setVerticalGroup(
             sidebarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(sidebarPanelLayout.createSequentialGroup()
-                .addGap(25, 25, 25)
-                .addComponent(welcomeMessage)
-                .addGap(18, 18, 18)
-                .addComponent(username)
-                .addGap(94, 94, 94)
+                .addContainerGap()
+                .addGroup(sidebarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(welcomeMessage)
+                    .addComponent(loginedUsername))
+                .addGap(156, 156, 156)
                 .addComponent(productTab, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(providerTab, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -644,7 +649,7 @@ public class Home extends javax.swing.JFrame {
                 .addComponent(updateInfoTab, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(logoutTab, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(53, Short.MAX_VALUE))
+                .addContainerGap(93, Short.MAX_VALUE))
         );
 
         getContentPane().add(sidebarPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 840));
@@ -1172,6 +1177,11 @@ public class Home extends javax.swing.JFrame {
         userRolesComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         searchUsersTextField.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        searchUsersTextField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                searchUsersTextFieldKeyReleased(evt);
+            }
+        });
 
         searchUsersButton.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         searchUsersButton.setText("Làm mới");
@@ -1629,7 +1639,7 @@ public class Home extends javax.swing.JFrame {
         // TODO add your handling code here:
         this.setActiveTab("user");
         this.setDisplayedPanel("user");
-        this.loadDataToTableUsers();
+        this.loadDataToTableUsers(null);
     }//GEN-LAST:event_userLabelMouseClicked
 
     private void updateInfoLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_updateInfoLabelMouseClicked
@@ -1778,6 +1788,11 @@ public class Home extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_deleteUserButton1ActionPerformed
 
+    private void searchUsersTextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchUsersTextFieldKeyReleased
+        String keyword = searchUsersTextField.getText();
+        loadDataToTableUsers(keyword);
+    }//GEN-LAST:event_searchUsersTextFieldKeyReleased
+
     /**
      * @param args the command line arguments
      */
@@ -1786,7 +1801,11 @@ public class Home extends javax.swing.JFrame {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
             /* Create and display the form */
             java.awt.EventQueue.invokeLater(() -> {
-                new Home().setVisible(true);
+                if (ApplicationContext.getLoginedUser() == null) {
+                    Login.main(new String[]{});
+                } else {
+                    new Home().setVisible(true);
+                }
             });
         } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | UnsupportedLookAndFeelException e) {
         }
@@ -1841,6 +1860,7 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JToolBar.Separator jSeparator1;
     private javax.swing.JToolBar.Separator jSeparator2;
+    private javax.swing.JLabel loginedUsername;
     private javax.swing.JDialog logoutDiaglog;
     private javax.swing.JLabel logoutLabel;
     private javax.swing.JPanel logoutTab;
@@ -1877,7 +1897,6 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JPanel userPanel;
     private javax.swing.JComboBox<String> userRolesComboBox;
     private javax.swing.JPanel userTab;
-    private javax.swing.JLabel username;
     private javax.swing.JScrollPane usersScrollPanel;
     private javax.swing.JScrollPane usersScrollPanel1;
     private javax.swing.JTable usersTable;
