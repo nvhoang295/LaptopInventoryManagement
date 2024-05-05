@@ -22,4 +22,8 @@ public class UserController {
     public List<User> getList() {
         return userService.getList();
     }
+    
+    public List<User> searchList(String keyword) {
+        return userService.searchList(keyword);
+    }
 }

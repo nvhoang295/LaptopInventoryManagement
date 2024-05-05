@@ -6,9 +6,11 @@ package com.haui_megatech.view;
 
 import com.haui_megatech.ApplicationContext;
 import com.haui_megatech.controller.UserController;
+import com.haui_megatech.model.User;
 import com.haui_megatech.repository.impl.UserRepositoryImpl;
 import com.haui_megatech.service.impl.UserServiceImpl;
 import java.awt.Color;
+import java.util.List;
 import javax.swing.JTable;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
@@ -40,7 +42,7 @@ public class Home extends javax.swing.JFrame {
         this.loginedUsername.setText(ApplicationContext.getLoginedUser().getUsername());
     }
 
-    private void loadDataToTableUsers() {
+    private void loadDataToTableUsers(String keyword) {
         String[] tableHeader = {
             "ID",
             "Tên đăng nhập",
@@ -56,9 +58,13 @@ public class Home extends javax.swing.JFrame {
                 return false;
             }
         };
-
-        userController.getList().forEach(item -> {
-            System.out.println(item);
+        System.out.println(keyword);
+        List<User> users = keyword != null && !keyword.isEmpty()
+                ? userController.searchList(keyword)
+                : userController.getList();
+                
+        
+        users.forEach(item -> {
             tableModel.addRow(
                     new Object[]{
                         item.getId() != null ? item.getId() : "",
@@ -1171,6 +1177,11 @@ public class Home extends javax.swing.JFrame {
         userRolesComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         searchUsersTextField.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        searchUsersTextField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                searchUsersTextFieldKeyReleased(evt);
+            }
+        });
 
         searchUsersButton.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         searchUsersButton.setText("Làm mới");
@@ -1628,7 +1639,7 @@ public class Home extends javax.swing.JFrame {
         // TODO add your handling code here:
         this.setActiveTab("user");
         this.setDisplayedPanel("user");
-        this.loadDataToTableUsers();
+        this.loadDataToTableUsers(null);
     }//GEN-LAST:event_userLabelMouseClicked
 
     private void updateInfoLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_updateInfoLabelMouseClicked
@@ -1776,6 +1787,11 @@ public class Home extends javax.swing.JFrame {
     private void deleteUserButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteUserButton1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_deleteUserButton1ActionPerformed
+
+    private void searchUsersTextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchUsersTextFieldKeyReleased
+        String keyword = searchUsersTextField.getText();
+        loadDataToTableUsers(keyword);
+    }//GEN-LAST:event_searchUsersTextFieldKeyReleased
 
     /**
      * @param args the command line arguments

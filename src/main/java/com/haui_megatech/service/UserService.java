@@ -13,4 +13,5 @@ import java.util.*;
  */
 public interface UserService {
     List<User> getList();
+    List<User> searchList(String keyword);
 }
