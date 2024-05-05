@@ -4,6 +4,7 @@
  */
 package com.haui_megatech;
 
+import com.haui_megatech.model.User;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -13,7 +14,8 @@ import java.util.Map;
  */
 public class ApplicationContext {
     private static Map<String, Object> beans = new HashMap<>();
-    public static String ABS_USERS_DATA_PATH;
+    public static String ABS_USERS_DATA_PATH = init();
+    private static User loginedUser;
     
     public static void putBean(String beanName, Object bean) {
         beans.put(beanName, bean);
@@ -23,14 +25,22 @@ public class ApplicationContext {
         return beans.get("beanName");
     }
     
-    public static void init() {
+    public static User getLoginedUser() {
+        return loginedUser;
+    }
+    
+    public static void setLoginedUser(User user) {
+        loginedUser = user;
+    }
+    
+    public static String init() {
          // file:/D:/Workspace/6_Side_Projects/LaptopInventoryManagement/target/classes/com/haui_megatech/
         String mainClassPath = Main.class.getResource("").toString();
         
         String rootProjectPath = mainClassPath.substring(0, mainClassPath.indexOf("/target"));
         
-        ABS_USERS_DATA_PATH = rootProjectPath + "/src/main/java/com/haui_megatech/data/users.dat";
-        ABS_USERS_DATA_PATH = ABS_USERS_DATA_PATH.replace("file:/", "");
+        String absUsersDataPath = rootProjectPath + "/src/main/java/com/haui_megatech/data/users.dat";
+        return absUsersDataPath.replace("file:/", "");
     }
     
     

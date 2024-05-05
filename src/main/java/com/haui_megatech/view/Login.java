@@ -4,6 +4,12 @@
  */
 package com.haui_megatech.view;
 
+import com.haui_megatech.ApplicationContext;
+import com.haui_megatech.controller.AuthController;
+import com.haui_megatech.dto.AuthRequestDTO;
+import com.haui_megatech.dto.CommonResponseDTO;
+import com.haui_megatech.repository.impl.UserRepositoryImpl;
+import com.haui_megatech.service.impl.AuthServiceImpl;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
@@ -12,7 +18,13 @@ import javax.swing.UnsupportedLookAndFeelException;
  * @author caoth
  */
 public class Login extends javax.swing.JFrame {
-
+    private final AuthController authController = new AuthController(
+            new AuthServiceImpl(
+                    new UserRepositoryImpl(ApplicationContext.ABS_USERS_DATA_PATH)
+            )
+    );
+    
+    
     /**
      * Creates new form Login_
      */
@@ -50,6 +62,8 @@ public class Login extends javax.swing.JFrame {
         jPanel4 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jPasswordField1 = new javax.swing.JPasswordField();
+        errorLoginDiaglog = new javax.swing.JDialog();
+        errorLoginMessage = new javax.swing.JLabel();
         left = new javax.swing.JPanel();
         right = new javax.swing.JPanel();
         dangNhapTittle = new javax.swing.JLabel();
@@ -63,6 +77,7 @@ public class Login extends javax.swing.JFrame {
         recoveryPasswordDiaglog.setTitle("Khôi phục mật khẩu");
         recoveryPasswordDiaglog.setBackground(new java.awt.Color(255, 255, 255));
         recoveryPasswordDiaglog.setMinimumSize(new java.awt.Dimension(700, 500));
+        recoveryPasswordDiaglog.setPreferredSize(new java.awt.Dimension(700, 500));
         recoveryPasswordDiaglog.setSize(new java.awt.Dimension(700, 500));
         recoveryPasswordDiaglog.getContentPane().setLayout(null);
 
@@ -237,6 +252,28 @@ public class Login extends javax.swing.JFrame {
         recoveryPasswordDiaglog.getContentPane().add(updateNewPasswordPanel);
         updateNewPasswordPanel.setBounds(0, 0, 700, 500);
 
+        errorLoginDiaglog.setMaximumSize(new java.awt.Dimension(400, 300));
+        errorLoginDiaglog.setMinimumSize(new java.awt.Dimension(400, 300));
+
+        errorLoginMessage.setText("jLabel1");
+
+        javax.swing.GroupLayout errorLoginDiaglogLayout = new javax.swing.GroupLayout(errorLoginDiaglog.getContentPane());
+        errorLoginDiaglog.getContentPane().setLayout(errorLoginDiaglogLayout);
+        errorLoginDiaglogLayout.setHorizontalGroup(
+            errorLoginDiaglogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(errorLoginDiaglogLayout.createSequentialGroup()
+                .addGap(158, 158, 158)
+                .addComponent(errorLoginMessage)
+                .addContainerGap(205, Short.MAX_VALUE))
+        );
+        errorLoginDiaglogLayout.setVerticalGroup(
+            errorLoginDiaglogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(errorLoginDiaglogLayout.createSequentialGroup()
+                .addGap(121, 121, 121)
+                .addComponent(errorLoginMessage)
+                .addContainerGap(163, Short.MAX_VALUE))
+        );
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Đăng nhập");
         setSize(new java.awt.Dimension(1384, 750));
@@ -284,6 +321,11 @@ public class Login extends javax.swing.JFrame {
         loginBtn.setForeground(new java.awt.Color(255, 255, 255));
         loginBtn.setText("Đăng nhập");
         loginBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        loginBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                loginBtnMouseClicked(evt);
+            }
+        });
 
         forget.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         forget.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -377,6 +419,20 @@ public class Login extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
 
+    private void loginBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_loginBtnMouseClicked
+        String username = uName.getText();
+        String password = String.valueOf(uPass.getPassword());
+        CommonResponseDTO response = authController.authenticate(new AuthRequestDTO(username, password));
+        if (response.success()) {
+            this.dispose();
+            Home.main(new String[]{});
+        } else {
+            errorLoginDiaglog.setVisible(true);
+            errorLoginDiaglog.setLocationRelativeTo(null);
+            errorLoginMessage.setText(response.message());
+        }
+    }//GEN-LAST:event_loginBtnMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -393,6 +449,8 @@ public class Login extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel dangNhapTittle;
+    private javax.swing.JDialog errorLoginDiaglog;
+    private javax.swing.JLabel errorLoginMessage;
     private javax.swing.JLabel forget;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

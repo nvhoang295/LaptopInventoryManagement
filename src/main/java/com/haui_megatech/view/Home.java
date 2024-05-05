@@ -649,7 +649,7 @@ public class Home extends javax.swing.JFrame {
 
         getContentPane().add(sidebarPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 840));
 
-        productPanel.setBackground(new java.awt.Color(204, 255, 255));
+        productPanel.setBackground(new java.awt.Color(255, 255, 255));
         productPanel.setPreferredSize(new java.awt.Dimension(1140, 830));
 
         usersTable1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -1782,7 +1782,6 @@ public class Home extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        ApplicationContext.init();
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
             /* Create and display the form */
