@@ -4,6 +4,12 @@
  */
 package com.haui_megatech.view;
 
+import com.haui_megatech.ApplicationContext;
+import com.haui_megatech.controller.AuthController;
+import com.haui_megatech.dto.AuthRequestDTO;
+import com.haui_megatech.dto.CommonResponseDTO;
+import com.haui_megatech.repository.impl.UserRepositoryImpl;
+import com.haui_megatech.service.impl.AuthServiceImpl;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
@@ -12,7 +18,13 @@ import javax.swing.UnsupportedLookAndFeelException;
  * @author caoth
  */
 public class Login extends javax.swing.JFrame {
-
+    private final AuthController authController = new AuthController(
+            new AuthServiceImpl(
+                    new UserRepositoryImpl(ApplicationContext.ABS_USERS_DATA_PATH)
+            )
+    );
+    
+    
     /**
      * Creates new form Login_
      */
@@ -35,7 +47,7 @@ public class Login extends javax.swing.JFrame {
         sendRestEmailButton = new javax.swing.JButton();
         sendResetEmailLabel = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         sendResetCodePanel = new javax.swing.JPanel();
@@ -50,6 +62,8 @@ public class Login extends javax.swing.JFrame {
         jPanel4 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jPasswordField1 = new javax.swing.JPasswordField();
+        errorLoginDiaglog = new javax.swing.JDialog();
+        errorLoginMessage = new javax.swing.JLabel();
         left = new javax.swing.JPanel();
         right = new javax.swing.JPanel();
         dangNhapTittle = new javax.swing.JLabel();
@@ -90,28 +104,27 @@ public class Login extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(44, 43, 196));
 
-        jLabel1.setBackground(new java.awt.Color(44, 43, 196));
-        jLabel1.setOpaque(true);
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("KHÔI PHỤC MẬT KHẨU");
+        jLabel5.setBackground(new java.awt.Color(44, 43, 196));
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel5.setText("KHÔI PHỤC MẬT KHẨU");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 688, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, 688, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, 108, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         sendResetEmailPanel.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 700, 120));
@@ -239,6 +252,28 @@ public class Login extends javax.swing.JFrame {
         recoveryPasswordDiaglog.getContentPane().add(updateNewPasswordPanel);
         updateNewPasswordPanel.setBounds(0, 0, 700, 500);
 
+        errorLoginDiaglog.setMaximumSize(new java.awt.Dimension(400, 300));
+        errorLoginDiaglog.setMinimumSize(new java.awt.Dimension(400, 300));
+
+        errorLoginMessage.setText("jLabel1");
+
+        javax.swing.GroupLayout errorLoginDiaglogLayout = new javax.swing.GroupLayout(errorLoginDiaglog.getContentPane());
+        errorLoginDiaglog.getContentPane().setLayout(errorLoginDiaglogLayout);
+        errorLoginDiaglogLayout.setHorizontalGroup(
+            errorLoginDiaglogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(errorLoginDiaglogLayout.createSequentialGroup()
+                .addGap(158, 158, 158)
+                .addComponent(errorLoginMessage)
+                .addContainerGap(205, Short.MAX_VALUE))
+        );
+        errorLoginDiaglogLayout.setVerticalGroup(
+            errorLoginDiaglogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(errorLoginDiaglogLayout.createSequentialGroup()
+                .addGap(121, 121, 121)
+                .addComponent(errorLoginMessage)
+                .addContainerGap(163, Short.MAX_VALUE))
+        );
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Đăng nhập");
         setSize(new java.awt.Dimension(1384, 750));
@@ -286,6 +321,11 @@ public class Login extends javax.swing.JFrame {
         loginBtn.setForeground(new java.awt.Color(255, 255, 255));
         loginBtn.setText("Đăng nhập");
         loginBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        loginBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                loginBtnMouseClicked(evt);
+            }
+        });
 
         forget.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         forget.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -379,6 +419,20 @@ public class Login extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
 
+    private void loginBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_loginBtnMouseClicked
+        String username = uName.getText();
+        String password = String.valueOf(uPass.getPassword());
+        CommonResponseDTO response = authController.authenticate(new AuthRequestDTO(username, password));
+        if (response.success()) {
+            this.dispose();
+            Home.main(new String[]{});
+        } else {
+            errorLoginDiaglog.setVisible(true);
+            errorLoginDiaglog.setLocationRelativeTo(null);
+            errorLoginMessage.setText(response.message());
+        }
+    }//GEN-LAST:event_loginBtnMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -395,11 +449,13 @@ public class Login extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel dangNhapTittle;
+    private javax.swing.JDialog errorLoginDiaglog;
+    private javax.swing.JLabel errorLoginMessage;
     private javax.swing.JLabel forget;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
