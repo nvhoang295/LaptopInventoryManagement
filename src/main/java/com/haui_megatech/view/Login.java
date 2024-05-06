@@ -20,7 +20,7 @@ import javax.swing.UnsupportedLookAndFeelException;
 public class Login extends javax.swing.JFrame {
     private final AuthController authController = new AuthController(
             new AuthServiceImpl(
-                    new UserRepositoryImpl(ApplicationContext.ABS_USERS_DATA_PATH)
+                    new UserRepositoryImpl()
             )
     );
     

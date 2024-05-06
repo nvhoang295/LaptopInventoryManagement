@@ -11,7 +11,6 @@ import com.haui_megatech.repository.impl.UserRepositoryImpl;
 import com.haui_megatech.service.impl.UserServiceImpl;
 import java.awt.Color;
 import java.util.List;
-import javax.swing.JTable;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.table.DefaultTableModel;
@@ -24,9 +23,7 @@ public class Home extends javax.swing.JFrame {
 
     private final UserController userController = new UserController(
             new UserServiceImpl(
-                    new UserRepositoryImpl(
-                            ApplicationContext.ABS_USERS_DATA_PATH
-                    )
+                    new UserRepositoryImpl()
             )
     );
 
@@ -60,10 +57,9 @@ public class Home extends javax.swing.JFrame {
         };
         System.out.println(keyword);
         List<User> users = keyword != null && !keyword.isEmpty()
-                ? userController.searchList(keyword)
-                : userController.getList();
-                
-        
+                ? userController.searchList(keyword).items()
+                : userController.getList().items();
+
         users.forEach(item -> {
             tableModel.addRow(
                     new Object[]{

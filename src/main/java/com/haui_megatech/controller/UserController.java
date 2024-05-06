@@ -6,7 +6,8 @@ package com.haui_megatech.controller;
 
 import com.haui_megatech.model.User;
 import com.haui_megatech.service.UserService;
-import java.util.List;
+import com.haui_megatech.dto.*;
+
 
 /**
  *
@@ -19,11 +20,11 @@ public class UserController {
         this.userService = userService;
     }
     
-    public List<User> getList() {
+    public ListItemsResponseDTO<User> getList() {
         return userService.getList();
     }
     
-    public List<User> searchList(String keyword) {
+    public ListItemsResponseDTO<User> searchList(String keyword) {
         return userService.searchList(keyword);
     }
 }
