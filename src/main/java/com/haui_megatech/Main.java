@@ -8,18 +8,20 @@ import com.haui_megatech.view.*;
 import com.haui_megatech.model.*;
 import com.haui_megatech.repository.*;
 import com.haui_megatech.repository.impl.*;
+import java.io.PrintWriter;
 import java.util.*;
-
 
 /**
  *
  * @author vieth
  */
 public class Main {
-    
+
     public static void main(String[] args) {
-       ApplicationContext.initAll();
-       Login.main(new String[]{});
+        ApplicationContext.initAll();
+        Login.main(new String[]{});
+        System.out.println("");
+
     }
-    
+
 }
