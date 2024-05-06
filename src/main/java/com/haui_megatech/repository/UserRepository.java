@@ -17,7 +17,7 @@ public interface UserRepository {
 
     Optional<User> save(User user);
 
-    ListItemsResponseDTO<User> saveAll(List<User> users);
+    List<User> saveAll(List<User> users);
 
     Optional<User> findByUsername(String username);
 

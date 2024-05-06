@@ -55,12 +55,12 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public ListItemsResponseDTO<User> saveAll(List<User> users) {
+    public List<User> saveAll(List<User> users) {
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(absDataPath))) {
             oos.writeObject(users);
-            return ListItemsResponseDTO.builder().items(users).build();
+            return users;
         } catch (IOException e) {
-            return ListItemsResponseDTO.builder().message(ErrorMessageConstant.File.SAVE_FILE).build();
+            return null;
         }
     }
 

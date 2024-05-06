@@ -4,15 +4,18 @@
  */
 package com.haui_megatech.service;
 
+import com.haui_megatech.dto.ListItemsResponseDTO;
 import com.haui_megatech.model.*;
 import java.util.*;
+import com.haui_megatech.dto.*;
 
 /**
  *
  * @author vieth
  */
 public interface UserService {
-    List<User> getList();
-    List<User> searchList(String keyword);
+    ListItemsResponseDTO<User> getList();
+    ListItemsResponseDTO<User> searchList(String keyword);
+    CommonResponseDTO save(User user);
     
 }
