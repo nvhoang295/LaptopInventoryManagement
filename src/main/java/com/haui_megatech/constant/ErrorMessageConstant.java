@@ -14,4 +14,8 @@ public class ErrorMessageConstant {
         public static final String PASSWORD_NOT_CORRECT = "Mật khẩu không chính khác.";
         public static final String BLANK_INPUT = "Tên đăng nhập hoặc mật khẩu không được để trống.";
     }
+    
+    public static final class File {
+        public static final String SAVE_FILE = "Lỗi, lưu file không thành công."
+    }
 }

@@ -80,7 +80,6 @@ public class Login extends javax.swing.JFrame {
         recoveryPasswordDiaglog.setTitle("Khôi phục mật khẩu");
         recoveryPasswordDiaglog.setBackground(new java.awt.Color(255, 255, 255));
         recoveryPasswordDiaglog.setMinimumSize(new java.awt.Dimension(700, 500));
-        recoveryPasswordDiaglog.setPreferredSize(new java.awt.Dimension(700, 500));
         recoveryPasswordDiaglog.setSize(new java.awt.Dimension(700, 500));
         recoveryPasswordDiaglog.getContentPane().setLayout(null);
 
@@ -288,6 +287,11 @@ public class Login extends javax.swing.JFrame {
         jButton1.setText("OK");
         jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton1.setPreferredSize(new java.awt.Dimension(300, 200));
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton1MouseClicked(evt);
+            }
+        });
         jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 180, 150, 40));
 
         errorLoginDiaglog.getContentPane().add(jPanel2);
@@ -451,6 +455,11 @@ public class Login extends javax.swing.JFrame {
             errorLoginMessage.setText(response.message());
         }
     }//GEN-LAST:event_loginBtnMouseClicked
+
+    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+        // TODO add your handling code here:
+        errorLoginDiaglog.dispose();
+    }//GEN-LAST:event_jButton1MouseClicked
 
     /**
      * @param args the command line arguments

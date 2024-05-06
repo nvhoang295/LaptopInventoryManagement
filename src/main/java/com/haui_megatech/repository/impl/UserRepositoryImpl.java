@@ -6,6 +6,8 @@ package com.haui_megatech.repository.impl;
 
 import com.haui_megatech.ApplicationContext;
 import com.haui_megatech.Main;
+import com.haui_megatech.constant.ErrorMessageConstant;
+import com.haui_megatech.dto.ListItemsResponseDTO;
 import com.haui_megatech.model.User;
 import com.haui_megatech.repository.UserRepository;
 import java.io.FileInputStream;
@@ -53,12 +55,12 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public List<User> saveAll(List<User> users) {
+    public ListItemsResponseDTO<User> saveAll(List<User> users) {
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(absDataPath))) {
             oos.writeObject(users);
-            return users;
+            return ListItemsResponseDTO.builder().items(users).build();
         } catch (IOException e) {
-            return List.of();
+            return ListItemsResponseDTO.builder().message(ErrorMessageConstant.File.SAVE_FILE).build();
         }
     }
 

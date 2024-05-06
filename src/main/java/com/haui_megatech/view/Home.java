@@ -1156,9 +1156,10 @@ public class Home extends javax.swing.JFrame {
 
         getContentPane().add(inStockPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 0, 1140, 830));
 
-        userPanel.setBackground(new java.awt.Color(204, 255, 255));
+        userPanel.setBackground(new java.awt.Color(255, 255, 255));
         userPanel.setPreferredSize(new java.awt.Dimension(1140, 830));
 
+        usersTable.setAutoCreateRowSorter(true);
         usersTable.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         usersTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
