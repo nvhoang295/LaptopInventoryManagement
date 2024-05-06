@@ -6,6 +6,8 @@ package com.haui_megatech.repository.impl;
 
 import com.haui_megatech.ApplicationContext;
 import com.haui_megatech.Main;
+import com.haui_megatech.constant.ErrorMessageConstant;
+import com.haui_megatech.dto.ListItemsResponseDTO;
 import com.haui_megatech.model.User;
 import com.haui_megatech.repository.UserRepository;
 import java.io.FileInputStream;
@@ -24,17 +26,13 @@ import java.util.stream.Collectors;
  */
 public class UserRepositoryImpl implements UserRepository {
 
-    private final String absDataPath;
-
-    public UserRepositoryImpl(String absDataPath) {
-        this.absDataPath = absDataPath;
-    }
+    private final String ABS_DATA_PATH = ApplicationContext.ABS_USERS_DATA_PATH;
 
     @Override
     public Optional<User> save(User user) {
         List<User> users;
 
-        try (ObjectInputStream ois = new ObjectInputStream((new FileInputStream(absDataPath)))) {
+        try (ObjectInputStream ois = new ObjectInputStream((new FileInputStream(ABS_DATA_PATH)))) {
             users = (List<User>) ois.readObject();
             if (users == null) {
                 users = new ArrayList<>();
@@ -44,7 +42,7 @@ public class UserRepositoryImpl implements UserRepository {
             throw new RuntimeException(e);
         }
 
-        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(absDataPath))) {
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(ABS_DATA_PATH))) {
             oos.writeObject(users);
             return Optional.of(user);
         } catch (IOException e) {
@@ -54,11 +52,11 @@ public class UserRepositoryImpl implements UserRepository {
 
     @Override
     public List<User> saveAll(List<User> users) {
-        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(absDataPath))) {
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(ABS_DATA_PATH))) {
             oos.writeObject(users);
             return users;
         } catch (IOException e) {
-            return List.of();
+            return null;
         }
     }
 
@@ -71,7 +69,7 @@ public class UserRepositoryImpl implements UserRepository {
     @Override
     public List<User> getList() {
         List<User> users;
-        try (ObjectInputStream ois = new ObjectInputStream((new FileInputStream(absDataPath)))) {
+        try (ObjectInputStream ois = new ObjectInputStream((new FileInputStream(ABS_DATA_PATH)))) {
             users = (List<User>) ois.readObject();
         } catch (IOException | ClassNotFoundException e) {
             throw new RuntimeException(e);

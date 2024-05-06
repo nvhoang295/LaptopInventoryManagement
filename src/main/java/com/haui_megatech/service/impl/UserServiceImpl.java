@@ -4,10 +4,13 @@
  */
 package com.haui_megatech.service.impl;
 
+import com.haui_megatech.constant.ErrorMessageConstant;
+import com.haui_megatech.dto.CommonResponseDTO;
+import com.haui_megatech.dto.ListItemsResponseDTO;
 import com.haui_megatech.model.User;
 import com.haui_megatech.service.*;
 import com.haui_megatech.repository.*;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -23,23 +26,47 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<User> getList() {
-        return userRepository.getList();
+    public ListItemsResponseDTO<User> getList() {
+        return ListItemsResponseDTO
+                .<User>builder()
+                .items(userRepository.getList())
+                .build();
     }
 
     @Override
-    public List<User> searchList(String keyword) {
-        return this.getList().parallelStream()
-                .filter(item -> {
-                    StringBuilder temp = new StringBuilder();
-                    temp.append(item.getUsername())
-                            .append(item.getFirstName())
-                            .append(item.getLastName())
-                            .append(item.getPhoneNumber())
-                            .append(item.getEmail());
-                    return temp.toString().contains(keyword);
-                })
-                .collect(Collectors.toList());
+    public ListItemsResponseDTO<User> searchList(String keyword) {
+        return ListItemsResponseDTO
+                .<User>builder()
+                .items(
+                        userRepository.getList().parallelStream()
+                                .filter(item -> {
+                                    return new StringBuilder()
+                                            .append(item.getUsername())
+                                            .append(item.getFirstName())
+                                            .append(item.getLastName())
+                                            .append(item.getPhoneNumber())
+                                            .append(item.getEmail())
+                                            .toString()
+                                            .contains(keyword);
+                                })
+                                .collect(Collectors.toList())
+                )
+                .build();
+    }
+
+    @Override
+    public CommonResponseDTO save(User user) {
+        Optional<User> savedUser = userRepository.save(user);
+        return savedUser.isEmpty()
+                ? CommonResponseDTO
+                        .builder()
+                        .success(true)
+                        .build()
+                : CommonResponseDTO
+                        .builder()
+                        .success(false)
+                        .message(ErrorMessageConstant.User.SAVE)
+                        .build();
     }
 
 }

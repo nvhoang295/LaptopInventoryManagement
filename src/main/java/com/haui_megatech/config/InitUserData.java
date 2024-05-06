@@ -17,9 +17,9 @@ import java.util.*;
 public class InitUserData {
 
     public static void main(String[] args) {
-        ApplicationContext.init();
+        ApplicationContext.initAbsUsersDataPath();
         User.setCounter(1);
-        UserRepository userRepository = new UserRepositoryImpl(ApplicationContext.ABS_USERS_DATA_PATH);
+        UserRepository userRepository = new UserRepositoryImpl();
         User.setCounter(1);
         userRepository.saveAll(
                 List.of(

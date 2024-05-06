@@ -9,9 +9,23 @@ package com.haui_megatech.constant;
  * @author vieth
  */
 public class ErrorMessageConstant {
+
     public static final class Auth {
+
         public static final String NOT_FOUND = "Không tìm thấy người dùng.";
         public static final String PASSWORD_NOT_CORRECT = "Mật khẩu không chính khác.";
         public static final String BLANK_INPUT = "Tên đăng nhập hoặc mật khẩu không được để trống.";
+    }
+
+    public static final class File {
+
+        public static final String SAVE_FILE = "Lỗi, lưu file không thành công.";
+        public static final String READ_FILE = "Lỗi, đọc file không thành công.";
+    }
+
+    public static final class User {
+
+        public static final String SAVE = "Lưu người dùng không thành công.";
+
     }
 }

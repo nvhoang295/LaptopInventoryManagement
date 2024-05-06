@@ -4,6 +4,7 @@
  */
 package com.haui_megatech.repository;
 
+import com.haui_megatech.dto.ListItemsResponseDTO;
 import com.haui_megatech.model.User;
 import java.util.List;
 import java.util.Optional;

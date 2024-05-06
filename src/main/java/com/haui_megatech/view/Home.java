@@ -11,7 +11,6 @@ import com.haui_megatech.repository.impl.UserRepositoryImpl;
 import com.haui_megatech.service.impl.UserServiceImpl;
 import java.awt.Color;
 import java.util.List;
-import javax.swing.JTable;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.table.DefaultTableModel;
@@ -24,9 +23,7 @@ public class Home extends javax.swing.JFrame {
 
     private final UserController userController = new UserController(
             new UserServiceImpl(
-                    new UserRepositoryImpl(
-                            ApplicationContext.ABS_USERS_DATA_PATH
-                    )
+                    new UserRepositoryImpl()
             )
     );
 
@@ -60,10 +57,9 @@ public class Home extends javax.swing.JFrame {
         };
         System.out.println(keyword);
         List<User> users = keyword != null && !keyword.isEmpty()
-                ? userController.searchList(keyword)
-                : userController.getList();
-                
-        
+                ? userController.searchList(keyword).items()
+                : userController.getList().items();
+
         users.forEach(item -> {
             tableModel.addRow(
                     new Object[]{
@@ -1156,9 +1152,10 @@ public class Home extends javax.swing.JFrame {
 
         getContentPane().add(inStockPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 0, 1140, 830));
 
-        userPanel.setBackground(new java.awt.Color(204, 255, 255));
+        userPanel.setBackground(new java.awt.Color(255, 255, 255));
         userPanel.setPreferredSize(new java.awt.Dimension(1140, 830));
 
+        usersTable.setAutoCreateRowSorter(true);
         usersTable.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         usersTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {

@@ -16,4 +16,31 @@ public record CommonResponseDTO(
         this.success = success;
         this.message = message;
     }
+    
+    public static CommonResponseDTOBuilder builder() {
+        return new CommonResponseDTOBuilder();
+    }
+    
+    public static class CommonResponseDTOBuilder{
+        private Boolean success;
+        private String message;
+        
+        public CommonResponseDTOBuilder() {
+            
+        }
+        
+        public CommonResponseDTOBuilder success(Boolean success) {
+            this.success = success;
+            return this;
+        }
+        
+        public CommonResponseDTOBuilder message(String message) {
+            this.message = message;
+            return this;
+        }
+        
+        public CommonResponseDTO build() {
+            return new CommonResponseDTO(success, message);
+        }
+    }
 }
