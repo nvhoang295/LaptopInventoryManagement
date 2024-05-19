@@ -63,10 +63,10 @@ public class Login extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jPasswordField1 = new javax.swing.JPasswordField();
         errorLoginDiaglog = new javax.swing.JDialog();
-        jPanel2 = new javax.swing.JPanel();
+        errorLoginMainPanel = new javax.swing.JPanel();
         errorLoginMessage = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        errorLoginHeadingLabel = new javax.swing.JLabel();
+        errorLoginOkButton = new javax.swing.JButton();
         left = new javax.swing.JPanel();
         right = new javax.swing.JPanel();
         dangNhapTittle = new javax.swing.JLabel();
@@ -255,17 +255,15 @@ public class Login extends javax.swing.JFrame {
         updateNewPasswordPanel.setBounds(0, 0, 700, 500);
 
         errorLoginDiaglog.setTitle("Lỗi đăng nhập");
-        errorLoginDiaglog.setMaximumSize(new java.awt.Dimension(520, 300));
         errorLoginDiaglog.setMinimumSize(new java.awt.Dimension(520, 300));
-        errorLoginDiaglog.setPreferredSize(new java.awt.Dimension(520, 300));
         errorLoginDiaglog.setSize(new java.awt.Dimension(520, 300));
         errorLoginDiaglog.getContentPane().setLayout(null);
 
-        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel2.setMaximumSize(new java.awt.Dimension(520, 300));
-        jPanel2.setMinimumSize(new java.awt.Dimension(520, 300));
-        jPanel2.setPreferredSize(new java.awt.Dimension(520, 300));
-        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        errorLoginMainPanel.setBackground(new java.awt.Color(255, 255, 255));
+        errorLoginMainPanel.setMaximumSize(new java.awt.Dimension(520, 300));
+        errorLoginMainPanel.setMinimumSize(new java.awt.Dimension(520, 300));
+        errorLoginMainPanel.setPreferredSize(new java.awt.Dimension(520, 300));
+        errorLoginMainPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         errorLoginMessage.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         errorLoginMessage.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -274,31 +272,32 @@ public class Login extends javax.swing.JFrame {
         errorLoginMessage.setMaximumSize(new java.awt.Dimension(520, 70));
         errorLoginMessage.setMinimumSize(new java.awt.Dimension(400, 70));
         errorLoginMessage.setPreferredSize(new java.awt.Dimension(400, 70));
-        jPanel2.add(errorLoginMessage, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 80, 520, 70));
+        errorLoginMainPanel.add(errorLoginMessage, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 80, 520, 70));
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Lỗi đăng nhập");
-        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 500, -1));
+        errorLoginHeadingLabel.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        errorLoginHeadingLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        errorLoginHeadingLabel.setText("Lỗi đăng nhập");
+        errorLoginMainPanel.add(errorLoginHeadingLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 500, -1));
 
-        jButton1.setBackground(new java.awt.Color(44, 43, 196));
-        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("OK");
-        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton1.setPreferredSize(new java.awt.Dimension(300, 200));
-        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+        errorLoginOkButton.setBackground(new java.awt.Color(44, 43, 196));
+        errorLoginOkButton.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        errorLoginOkButton.setForeground(new java.awt.Color(255, 255, 255));
+        errorLoginOkButton.setText("OK");
+        errorLoginOkButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        errorLoginOkButton.setPreferredSize(new java.awt.Dimension(300, 200));
+        errorLoginOkButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton1MouseClicked(evt);
+                errorLoginOkButtonMouseClicked(evt);
             }
         });
-        jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 180, 150, 40));
+        errorLoginMainPanel.add(errorLoginOkButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 180, 150, 40));
 
-        errorLoginDiaglog.getContentPane().add(jPanel2);
-        jPanel2.setBounds(0, 0, 520, 300);
+        errorLoginDiaglog.getContentPane().add(errorLoginMainPanel);
+        errorLoginMainPanel.setBounds(0, 0, 520, 300);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Đăng nhập");
+        setBounds(new java.awt.Rectangle(10, 10, 0, 0));
         setSize(new java.awt.Dimension(1384, 750));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -445,7 +444,13 @@ public class Login extends javax.swing.JFrame {
     private void loginBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_loginBtnMouseClicked
         String username = uName.getText();
         String password = String.valueOf(uPass.getPassword());
-        CommonResponseDTO response = authController.authenticate(new AuthRequestDTO(username, password));
+        CommonResponseDTO response = authController.authenticate(
+                AuthRequestDTO
+                        .builder()
+                        .username(username)
+                        .password(password)
+                        .build()
+        );
         if (response.success()) {
             this.dispose();
             Home.main(new String[]{});
@@ -456,10 +461,10 @@ public class Login extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_loginBtnMouseClicked
 
-    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+    private void errorLoginOkButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_errorLoginOkButtonMouseClicked
         // TODO add your handling code here:
         errorLoginDiaglog.dispose();
-    }//GEN-LAST:event_jButton1MouseClicked
+    }//GEN-LAST:event_errorLoginOkButtonMouseClicked
 
     /**
      * @param args the command line arguments
@@ -478,16 +483,16 @@ public class Login extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel dangNhapTittle;
     private javax.swing.JDialog errorLoginDiaglog;
+    private javax.swing.JLabel errorLoginHeadingLabel;
+    private javax.swing.JPanel errorLoginMainPanel;
     private javax.swing.JLabel errorLoginMessage;
+    private javax.swing.JButton errorLoginOkButton;
     private javax.swing.JLabel forget;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPasswordField jPasswordField1;
