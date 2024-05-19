@@ -16,4 +16,29 @@ public record AuthRequestDTO(
         this.username = username;
         this.password = password;
     }
+    
+    public static AuthRequestDTOBuilder builder() {
+        return new AuthRequestDTOBuilder();
+    }
+    
+    public static class AuthRequestDTOBuilder {
+        private String username;
+        private String password;
+        
+        public AuthRequestDTOBuilder() {}
+        
+        public AuthRequestDTOBuilder username(String username) {
+            this.username = username;
+            return this;
+        }
+        
+        public AuthRequestDTOBuilder password(String password) {
+            this.password = password;
+            return this;
+        }
+        
+        public AuthRequestDTO build() {
+            return new AuthRequestDTO(this.username, this.password);
+        }
+    }
 }

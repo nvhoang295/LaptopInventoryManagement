@@ -4,6 +4,7 @@
  */
 package com.haui_megatech.model;
 
+import com.haui_megatech.repository.UserRepository;
 import java.io.Serial;
 import java.io.Serializable;
 import java.util.Date;
@@ -31,6 +32,7 @@ public class User implements Serializable {
     private Date whenCreated;
     private Date lastUpdated;
     private Integer logined;
+    private Date lastLogined;
 
     public User(
             Integer id,
@@ -44,9 +46,10 @@ public class User implements Serializable {
             Date dateOfBirth,
             Date whenCreated,
             Date lastUpdated,
-            Integer logined
+            Integer logined,
+            Date lastLogined
     ) {
-        this.id = counter++;
+        this.id = ++counter;
         this.username = username;
         this.password = password;
         this.firstName = firstName;
@@ -58,10 +61,15 @@ public class User implements Serializable {
         this.whenCreated = whenCreated;
         this.lastUpdated = lastUpdated;
         this.logined = logined;
+        this.lastLogined = lastLogined;
     }
 
     public static void setCounter(Integer value) {
         counter = value;
+    }
+    
+    public static Integer getCounter() {
+        return counter;
     }
 
     public Integer getId() {
@@ -160,6 +168,14 @@ public class User implements Serializable {
         this.logined = logined;
     }
 
+    public Date getLastLogined() {
+        return lastLogined;
+    }
+
+    public void setLastLogined(Date lastLogined) {
+        this.lastLogined = lastLogined;
+    }
+
     @Override
     public String toString() {
         return "User{" + "id=" + id + ", username=" + username + ", password=" + password + ", firstName=" + firstName + ", lastName=" + lastName + ", phoneNumber=" + phoneNumber + ", email=" + email + ", gender=" + gender + ", dateOfBirth=" + dateOfBirth + ", whenCreated=" + whenCreated + ", lastUpdated=" + lastUpdated + ", logined=" + logined + '}';
@@ -183,6 +199,7 @@ public class User implements Serializable {
         private Date whenCreated;
         private Date lastUpdated;
         private Integer logined;
+        private Date lastLogined;
 
         public UserBuilder id(Integer id) {
             this.id = id;
@@ -244,6 +261,11 @@ public class User implements Serializable {
             return this;
         }
 
+        public UserBuilder lastLogined(Date lastLogined) {
+            this.lastLogined = lastLogined;
+            return this;
+        }
+
         public User build() {
             return new User(
                     this.id,
@@ -257,7 +279,8 @@ public class User implements Serializable {
                     this.dateOfBirth,
                     this.whenCreated,
                     this.lastUpdated,
-                    this.logined
+                    this.logined,
+                    this.lastLogined
             );
         }
 

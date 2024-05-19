@@ -11,7 +11,6 @@ import com.haui_megatech.repository.impl.UserRepositoryImpl;
 import com.haui_megatech.service.impl.UserServiceImpl;
 import java.awt.Color;
 import java.util.List;
-import javax.swing.JTable;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.table.DefaultTableModel;
@@ -24,9 +23,7 @@ public class Home extends javax.swing.JFrame {
 
     private final UserController userController = new UserController(
             new UserServiceImpl(
-                    new UserRepositoryImpl(
-                            ApplicationContext.ABS_USERS_DATA_PATH
-                    )
+                    new UserRepositoryImpl()
             )
     );
 
@@ -60,10 +57,9 @@ public class Home extends javax.swing.JFrame {
         };
         System.out.println(keyword);
         List<User> users = keyword != null && !keyword.isEmpty()
-                ? userController.searchList(keyword)
-                : userController.getList();
-                
-        
+                ? userController.searchList(keyword).items()
+                : userController.getList().items();
+
         users.forEach(item -> {
             tableModel.addRow(
                     new Object[]{
@@ -92,6 +88,23 @@ public class Home extends javax.swing.JFrame {
 
         logoutDiaglog = new javax.swing.JDialog();
         jPanel1 = new javax.swing.JPanel();
+        addUserDiaglog = new javax.swing.JDialog();
+        usernameLabel = new javax.swing.JLabel();
+        usernameTextField = new javax.swing.JTextField();
+        passwordLabel = new javax.swing.JLabel();
+        passwordField = new javax.swing.JPasswordField();
+        confirmPasswordLabel = new javax.swing.JLabel();
+        confirmPasswordField = new javax.swing.JPasswordField();
+        firstNameLabel = new javax.swing.JLabel();
+        firstNameTextField = new javax.swing.JTextField();
+        lastNameLabel = new javax.swing.JLabel();
+        lastNameTextField = new javax.swing.JTextField();
+        phoneNumberLabel = new javax.swing.JLabel();
+        phoneNumberTextField = new javax.swing.JTextField();
+        emailLabel = new javax.swing.JLabel();
+        emailTextField = new javax.swing.JTextField();
+        confirmEmailOTPLabel = new javax.swing.JLabel();
+        confirmEmailOTPTextField = new javax.swing.JTextField();
         sidebarPanel = new javax.swing.JPanel();
         welcomeMessage = new javax.swing.JLabel();
         loginedUsername = new javax.swing.JLabel();
@@ -207,6 +220,80 @@ public class Home extends javax.swing.JFrame {
             logoutDiaglogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
+
+        addUserDiaglog.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        usernameLabel.setText("Tên đăng nhập");
+        addUserDiaglog.getContentPane().add(usernameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 40, -1, -1));
+
+        usernameTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                usernameTextFieldActionPerformed(evt);
+            }
+        });
+        addUserDiaglog.getContentPane().add(usernameTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 30, 200, 30));
+
+        passwordLabel.setText("Mật khẩu");
+        addUserDiaglog.getContentPane().add(passwordLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, -1, -1));
+
+        passwordField.setText("jPasswordField1");
+        addUserDiaglog.getContentPane().add(passwordField, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 70, 200, 30));
+
+        confirmPasswordLabel.setText("Xác nhận mật khẩu");
+        addUserDiaglog.getContentPane().add(confirmPasswordLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 120, -1, -1));
+
+        confirmPasswordField.setText("jPasswordField1");
+        addUserDiaglog.getContentPane().add(confirmPasswordField, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 110, 200, 30));
+
+        firstNameLabel.setText("Tên");
+        addUserDiaglog.getContentPane().add(firstNameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 160, -1, -1));
+
+        firstNameTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                firstNameTextFieldActionPerformed(evt);
+            }
+        });
+        addUserDiaglog.getContentPane().add(firstNameTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 150, 200, 30));
+
+        lastNameLabel.setText("Họ đệm");
+        addUserDiaglog.getContentPane().add(lastNameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 200, -1, -1));
+
+        lastNameTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                lastNameTextFieldActionPerformed(evt);
+            }
+        });
+        addUserDiaglog.getContentPane().add(lastNameTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 190, 200, 30));
+
+        phoneNumberLabel.setText("Số điện thoại");
+        addUserDiaglog.getContentPane().add(phoneNumberLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 240, -1, -1));
+
+        phoneNumberTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                phoneNumberTextFieldActionPerformed(evt);
+            }
+        });
+        addUserDiaglog.getContentPane().add(phoneNumberTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 230, 200, 30));
+
+        emailLabel.setText("Địa chỉ email");
+        addUserDiaglog.getContentPane().add(emailLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 280, -1, -1));
+
+        emailTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                emailTextFieldActionPerformed(evt);
+            }
+        });
+        addUserDiaglog.getContentPane().add(emailTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 270, 200, 30));
+
+        confirmEmailOTPLabel.setText("Mã xác nhận");
+        addUserDiaglog.getContentPane().add(confirmEmailOTPLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 320, -1, -1));
+
+        confirmEmailOTPTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                confirmEmailOTPTextFieldActionPerformed(evt);
+            }
+        });
+        addUserDiaglog.getContentPane().add(confirmEmailOTPTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 310, 200, 30));
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1400, 830));
@@ -1156,9 +1243,10 @@ public class Home extends javax.swing.JFrame {
 
         getContentPane().add(inStockPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 0, 1140, 830));
 
-        userPanel.setBackground(new java.awt.Color(204, 255, 255));
+        userPanel.setBackground(new java.awt.Color(255, 255, 255));
         userPanel.setPreferredSize(new java.awt.Dimension(1140, 830));
 
+        usersTable.setAutoCreateRowSorter(true);
         usersTable.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         usersTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -1242,6 +1330,11 @@ public class Home extends javax.swing.JFrame {
 
         addUserButton.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         addUserButton.setText("Thêm");
+        addUserButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                addUserButtonMouseClicked(evt);
+            }
+        });
         addUserButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 addUserButtonActionPerformed(evt);
@@ -1793,6 +1886,36 @@ public class Home extends javax.swing.JFrame {
         loadDataToTableUsers(keyword);
     }//GEN-LAST:event_searchUsersTextFieldKeyReleased
 
+    private void addUserButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addUserButtonMouseClicked
+        addUserDiaglog.setLocationRelativeTo(this);
+        addUserDiaglog.setVisible(true);
+        
+    }//GEN-LAST:event_addUserButtonMouseClicked
+
+    private void usernameTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usernameTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_usernameTextFieldActionPerformed
+
+    private void firstNameTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_firstNameTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_firstNameTextFieldActionPerformed
+
+    private void lastNameTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lastNameTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_lastNameTextFieldActionPerformed
+
+    private void phoneNumberTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_phoneNumberTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_phoneNumberTextFieldActionPerformed
+
+    private void emailTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_emailTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_emailTextFieldActionPerformed
+
+    private void confirmEmailOTPTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmEmailOTPTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_confirmEmailOTPTextFieldActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1814,11 +1937,18 @@ public class Home extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addUserButton;
     private javax.swing.JButton addUserButton1;
+    private javax.swing.JDialog addUserDiaglog;
+    private javax.swing.JLabel confirmEmailOTPLabel;
+    private javax.swing.JTextField confirmEmailOTPTextField;
+    private javax.swing.JPasswordField confirmPasswordField;
+    private javax.swing.JLabel confirmPasswordLabel;
     private javax.swing.JButton deleteUserButton;
     private javax.swing.JButton deleteUserButton1;
     private javax.swing.JButton editBillItemButton;
     private javax.swing.JButton editUserButton;
     private javax.swing.JButton editUserButton1;
+    private javax.swing.JLabel emailLabel;
+    private javax.swing.JTextField emailTextField;
     private javax.swing.JLabel exportBillLabel;
     private javax.swing.JPanel exportBillPanel;
     private javax.swing.JPanel exportBillTab;
@@ -1827,6 +1957,8 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JPanel exportProductTab;
     private javax.swing.JButton exportUsersToExcelButton;
     private javax.swing.JButton exportUsersToExcelButton1;
+    private javax.swing.JLabel firstNameLabel;
+    private javax.swing.JTextField firstNameTextField;
     private javax.swing.JLabel importBillIdLabel;
     private javax.swing.JTextField importBillIdTextField;
     private javax.swing.JButton importBillItemFromExcelButton;
@@ -1860,10 +1992,16 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JToolBar.Separator jSeparator1;
     private javax.swing.JToolBar.Separator jSeparator2;
+    private javax.swing.JLabel lastNameLabel;
+    private javax.swing.JTextField lastNameTextField;
     private javax.swing.JLabel loginedUsername;
     private javax.swing.JDialog logoutDiaglog;
     private javax.swing.JLabel logoutLabel;
     private javax.swing.JPanel logoutTab;
+    private javax.swing.JPasswordField passwordField;
+    private javax.swing.JLabel passwordLabel;
+    private javax.swing.JLabel phoneNumberLabel;
+    private javax.swing.JTextField phoneNumberTextField;
     private javax.swing.JComboBox<String> productBrandsComboBox;
     private javax.swing.JLabel productLabel;
     private javax.swing.JPanel productPanel;
@@ -1897,6 +2035,8 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JPanel userPanel;
     private javax.swing.JComboBox<String> userRolesComboBox;
     private javax.swing.JPanel userTab;
+    private javax.swing.JLabel usernameLabel;
+    private javax.swing.JTextField usernameTextField;
     private javax.swing.JScrollPane usersScrollPanel;
     private javax.swing.JScrollPane usersScrollPanel1;
     private javax.swing.JTable usersTable;
