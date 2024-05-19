@@ -4,6 +4,12 @@
  */
 package com.haui_megatech.view;
 
+import com.haui_megatech.ApplicationContext;
+import com.haui_megatech.controller.AuthController;
+import com.haui_megatech.dto.AuthRequestDTO;
+import com.haui_megatech.dto.CommonResponseDTO;
+import com.haui_megatech.repository.impl.UserRepositoryImpl;
+import com.haui_megatech.service.impl.AuthServiceImpl;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
@@ -12,7 +18,13 @@ import javax.swing.UnsupportedLookAndFeelException;
  * @author caoth
  */
 public class Login extends javax.swing.JFrame {
-
+    private final AuthController authController = new AuthController(
+            new AuthServiceImpl(
+                    new UserRepositoryImpl()
+            )
+    );
+    
+    
     /**
      * Creates new form Login_
      */
@@ -34,12 +46,27 @@ public class Login extends javax.swing.JFrame {
         sendResetEmailPanel = new javax.swing.JPanel();
         sendRestEmailButton = new javax.swing.JButton();
         sendResetEmailLabel = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel5 = new javax.swing.JLabel();
+        jTextField1 = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
         sendResetCodePanel = new javax.swing.JPanel();
         sendResetCodeButton = new javax.swing.JButton();
         sendResetCodeLabel = new javax.swing.JLabel();
+        jTextField2 = new javax.swing.JTextField();
+        jPanel3 = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
         updateNewPasswordPanel = new javax.swing.JPanel();
         updateNewPasswordButton = new javax.swing.JButton();
         updateNewPasswordLabel = new javax.swing.JLabel();
+        jPanel4 = new javax.swing.JPanel();
+        jLabel4 = new javax.swing.JLabel();
+        jPasswordField1 = new javax.swing.JPasswordField();
+        errorLoginDiaglog = new javax.swing.JDialog();
+        errorLoginMainPanel = new javax.swing.JPanel();
+        errorLoginMessage = new javax.swing.JLabel();
+        errorLoginHeadingLabel = new javax.swing.JLabel();
+        errorLoginOkButton = new javax.swing.JButton();
         left = new javax.swing.JPanel();
         right = new javax.swing.JPanel();
         dangNhapTittle = new javax.swing.JLabel();
@@ -50,139 +77,227 @@ public class Login extends javax.swing.JFrame {
         loginBtn = new javax.swing.JButton();
         forget = new javax.swing.JLabel();
 
-        recoveryPasswordDiaglog.setMinimumSize(new java.awt.Dimension(400, 300));
+        recoveryPasswordDiaglog.setTitle("Khôi phục mật khẩu");
+        recoveryPasswordDiaglog.setBackground(new java.awt.Color(255, 255, 255));
+        recoveryPasswordDiaglog.setMinimumSize(new java.awt.Dimension(700, 500));
+        recoveryPasswordDiaglog.setSize(new java.awt.Dimension(700, 500));
+        recoveryPasswordDiaglog.getContentPane().setLayout(null);
 
-        sendResetEmailPanel.setMinimumSize(new java.awt.Dimension(400, 300));
+        sendResetEmailPanel.setBackground(new java.awt.Color(255, 255, 255));
+        sendResetEmailPanel.setMinimumSize(new java.awt.Dimension(700, 500));
+        sendResetEmailPanel.setPreferredSize(new java.awt.Dimension(700, 500));
+        sendResetEmailPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        sendRestEmailButton.setBackground(new java.awt.Color(44, 43, 196));
+        sendRestEmailButton.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        sendRestEmailButton.setForeground(new java.awt.Color(255, 255, 255));
         sendRestEmailButton.setText("Gửi mã xác nhận");
+        sendRestEmailButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         sendRestEmailButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 sendRestEmailButtonActionPerformed(evt);
             }
         });
+        sendResetEmailPanel.add(sendRestEmailButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 270, 580, 44));
 
+        sendResetEmailLabel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         sendResetEmailLabel.setText("Nhập địa chỉ email");
+        sendResetEmailPanel.add(sendResetEmailLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 170, -1, -1));
 
-        javax.swing.GroupLayout sendResetEmailPanelLayout = new javax.swing.GroupLayout(sendResetEmailPanel);
-        sendResetEmailPanel.setLayout(sendResetEmailPanelLayout);
-        sendResetEmailPanelLayout.setHorizontalGroup(
-            sendResetEmailPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, sendResetEmailPanelLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(sendRestEmailButton)
-                .addGap(37, 37, 37))
-            .addGroup(sendResetEmailPanelLayout.createSequentialGroup()
-                .addGap(96, 96, 96)
-                .addComponent(sendResetEmailLabel)
-                .addContainerGap(205, Short.MAX_VALUE))
+        jPanel1.setBackground(new java.awt.Color(44, 43, 196));
+
+        jLabel5.setBackground(new java.awt.Color(44, 43, 196));
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel5.setText("KHÔI PHỤC MẬT KHẨU");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, 688, Short.MAX_VALUE)
+                .addContainerGap())
         );
-        sendResetEmailPanelLayout.setVerticalGroup(
-            sendResetEmailPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(sendResetEmailPanelLayout.createSequentialGroup()
-                .addGap(64, 64, 64)
-                .addComponent(sendResetEmailLabel)
-                .addGap(49, 49, 49)
-                .addComponent(sendRestEmailButton)
-                .addContainerGap(148, Short.MAX_VALUE))
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, 108, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
+        sendResetEmailPanel.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 700, 120));
+
+        jTextField1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField1ActionPerformed(evt);
+            }
+        });
+        sendResetEmailPanel.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 200, 580, 44));
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel2.setText("Quay về trang đăng nhập");
+        jLabel2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        sendResetEmailPanel.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 330, 370, 40));
+
+        recoveryPasswordDiaglog.getContentPane().add(sendResetEmailPanel);
+        sendResetEmailPanel.setBounds(0, 0, 700, 500);
+
+        sendResetCodePanel.setBackground(new java.awt.Color(255, 255, 255));
+        sendResetCodePanel.setMinimumSize(new java.awt.Dimension(700, 500));
+        sendResetCodePanel.setPreferredSize(new java.awt.Dimension(700, 500));
+        sendResetCodePanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        sendResetCodeButton.setBackground(new java.awt.Color(44, 43, 196));
+        sendResetCodeButton.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        sendResetCodeButton.setForeground(new java.awt.Color(255, 255, 255));
         sendResetCodeButton.setText("Xác nhận");
+        sendResetCodeButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         sendResetCodeButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 sendResetCodeButtonActionPerformed(evt);
             }
         });
+        sendResetCodePanel.add(sendResetCodeButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 270, 580, 44));
 
+        sendResetCodeLabel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         sendResetCodeLabel.setText("Nhập mã xác nhận");
+        sendResetCodePanel.add(sendResetCodeLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 170, -1, -1));
 
-        javax.swing.GroupLayout sendResetCodePanelLayout = new javax.swing.GroupLayout(sendResetCodePanel);
-        sendResetCodePanel.setLayout(sendResetCodePanelLayout);
-        sendResetCodePanelLayout.setHorizontalGroup(
-            sendResetCodePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, sendResetCodePanelLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(sendResetCodeButton)
-                .addGap(37, 37, 37))
-            .addGroup(sendResetCodePanelLayout.createSequentialGroup()
-                .addGap(96, 96, 96)
-                .addComponent(sendResetCodeLabel)
-                .addContainerGap(204, Short.MAX_VALUE))
+        jTextField2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        sendResetCodePanel.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 200, 580, 44));
+
+        jPanel3.setBackground(new java.awt.Color(44, 43, 196));
+
+        jLabel3.setBackground(new java.awt.Color(44, 43, 196));
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel3.setText("KHÔI PHỤC MẬT KHẨU");
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 688, Short.MAX_VALUE)
+                .addContainerGap())
         );
-        sendResetCodePanelLayout.setVerticalGroup(
-            sendResetCodePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(sendResetCodePanelLayout.createSequentialGroup()
-                .addGap(64, 64, 64)
-                .addComponent(sendResetCodeLabel)
-                .addGap(49, 49, 49)
-                .addComponent(sendResetCodeButton)
-                .addContainerGap(148, Short.MAX_VALUE))
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 108, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
+        sendResetCodePanel.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 700, 120));
+
+        recoveryPasswordDiaglog.getContentPane().add(sendResetCodePanel);
+        sendResetCodePanel.setBounds(0, 0, 700, 500);
+
+        updateNewPasswordPanel.setBackground(new java.awt.Color(255, 255, 255));
+        updateNewPasswordPanel.setPreferredSize(new java.awt.Dimension(700, 500));
+        updateNewPasswordPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        updateNewPasswordButton.setBackground(new java.awt.Color(44, 43, 196));
+        updateNewPasswordButton.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        updateNewPasswordButton.setForeground(new java.awt.Color(255, 255, 255));
         updateNewPasswordButton.setText("Cập nhật mật khẩu");
+        updateNewPasswordButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         updateNewPasswordButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 updateNewPasswordButtonActionPerformed(evt);
             }
         });
+        updateNewPasswordPanel.add(updateNewPasswordButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 270, 580, 44));
 
+        updateNewPasswordLabel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         updateNewPasswordLabel.setText("Nhập mật khẩu mới");
+        updateNewPasswordPanel.add(updateNewPasswordLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 170, -1, -1));
 
-        javax.swing.GroupLayout updateNewPasswordPanelLayout = new javax.swing.GroupLayout(updateNewPasswordPanel);
-        updateNewPasswordPanel.setLayout(updateNewPasswordPanelLayout);
-        updateNewPasswordPanelLayout.setHorizontalGroup(
-            updateNewPasswordPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, updateNewPasswordPanelLayout.createSequentialGroup()
-                .addContainerGap(210, Short.MAX_VALUE)
-                .addComponent(updateNewPasswordButton)
-                .addGap(37, 37, 37))
-            .addGroup(updateNewPasswordPanelLayout.createSequentialGroup()
-                .addGap(134, 134, 134)
-                .addComponent(updateNewPasswordLabel)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        jPanel4.setBackground(new java.awt.Color(44, 43, 196));
+
+        jLabel4.setBackground(new java.awt.Color(44, 43, 196));
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel4.setText("KHÔI PHỤC MẬT KHẨU");
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 688, Short.MAX_VALUE)
+                .addContainerGap())
         );
-        updateNewPasswordPanelLayout.setVerticalGroup(
-            updateNewPasswordPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(updateNewPasswordPanelLayout.createSequentialGroup()
-                .addGap(50, 50, 50)
-                .addComponent(updateNewPasswordLabel)
-                .addGap(63, 63, 63)
-                .addComponent(updateNewPasswordButton)
-                .addContainerGap(126, Short.MAX_VALUE))
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 108, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
-        javax.swing.GroupLayout recoveryPasswordDiaglogLayout = new javax.swing.GroupLayout(recoveryPasswordDiaglog.getContentPane());
-        recoveryPasswordDiaglog.getContentPane().setLayout(recoveryPasswordDiaglogLayout);
-        recoveryPasswordDiaglogLayout.setHorizontalGroup(
-            recoveryPasswordDiaglogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(sendResetCodePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(recoveryPasswordDiaglogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(recoveryPasswordDiaglogLayout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(updateNewPasswordPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGap(16, 16, 16)))
-            .addGroup(recoveryPasswordDiaglogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(recoveryPasswordDiaglogLayout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(sendResetEmailPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addContainerGap()))
-        );
-        recoveryPasswordDiaglogLayout.setVerticalGroup(
-            recoveryPasswordDiaglogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(sendResetCodePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(recoveryPasswordDiaglogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(recoveryPasswordDiaglogLayout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(updateNewPasswordPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGap(16, 16, 16)))
-            .addGroup(recoveryPasswordDiaglogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(recoveryPasswordDiaglogLayout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(sendResetEmailPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addContainerGap()))
-        );
+        updateNewPasswordPanel.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 700, 120));
+
+        jPasswordField1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        updateNewPasswordPanel.add(jPasswordField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 200, 580, 44));
+
+        recoveryPasswordDiaglog.getContentPane().add(updateNewPasswordPanel);
+        updateNewPasswordPanel.setBounds(0, 0, 700, 500);
+
+        errorLoginDiaglog.setTitle("Lỗi đăng nhập");
+        errorLoginDiaglog.setMinimumSize(new java.awt.Dimension(520, 300));
+        errorLoginDiaglog.setSize(new java.awt.Dimension(520, 300));
+        errorLoginDiaglog.getContentPane().setLayout(null);
+
+        errorLoginMainPanel.setBackground(new java.awt.Color(255, 255, 255));
+        errorLoginMainPanel.setMaximumSize(new java.awt.Dimension(520, 300));
+        errorLoginMainPanel.setMinimumSize(new java.awt.Dimension(520, 300));
+        errorLoginMainPanel.setPreferredSize(new java.awt.Dimension(520, 300));
+        errorLoginMainPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        errorLoginMessage.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        errorLoginMessage.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        errorLoginMessage.setText("tên đăng nhập hoặc mật khẩu không được để trôngsldjfdlfjdlfjdfdjflfjljfldjsffljflfj");
+        errorLoginMessage.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        errorLoginMessage.setMaximumSize(new java.awt.Dimension(520, 70));
+        errorLoginMessage.setMinimumSize(new java.awt.Dimension(400, 70));
+        errorLoginMessage.setPreferredSize(new java.awt.Dimension(400, 70));
+        errorLoginMainPanel.add(errorLoginMessage, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 80, 520, 70));
+
+        errorLoginHeadingLabel.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        errorLoginHeadingLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        errorLoginHeadingLabel.setText("Lỗi đăng nhập");
+        errorLoginMainPanel.add(errorLoginHeadingLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 500, -1));
+
+        errorLoginOkButton.setBackground(new java.awt.Color(44, 43, 196));
+        errorLoginOkButton.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        errorLoginOkButton.setForeground(new java.awt.Color(255, 255, 255));
+        errorLoginOkButton.setText("OK");
+        errorLoginOkButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        errorLoginOkButton.setPreferredSize(new java.awt.Dimension(300, 200));
+        errorLoginOkButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                errorLoginOkButtonMouseClicked(evt);
+            }
+        });
+        errorLoginMainPanel.add(errorLoginOkButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 180, 150, 40));
+
+        errorLoginDiaglog.getContentPane().add(errorLoginMainPanel);
+        errorLoginMainPanel.setBounds(0, 0, 520, 300);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Đăng nhập");
+        setBounds(new java.awt.Rectangle(10, 10, 0, 0));
         setSize(new java.awt.Dimension(1384, 750));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -212,6 +327,11 @@ public class Login extends javax.swing.JFrame {
         tendnlabel.setText("Tên đăng nhập");
 
         uName.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        uName.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                uNameActionPerformed(evt);
+            }
+        });
 
         passlabel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         passlabel.setText("Mật khẩu");
@@ -222,10 +342,17 @@ public class Login extends javax.swing.JFrame {
         loginBtn.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         loginBtn.setForeground(new java.awt.Color(255, 255, 255));
         loginBtn.setText("Đăng nhập");
+        loginBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        loginBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                loginBtnMouseClicked(evt);
+            }
+        });
 
         forget.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         forget.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         forget.setText("Quên mật khẩu?");
+        forget.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         forget.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         forget.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -242,14 +369,14 @@ public class Login extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(rightLayout.createSequentialGroup()
                 .addGap(57, 57, 57)
-                .addGroup(rightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(forget, javax.swing.GroupLayout.DEFAULT_SIZE, 581, Short.MAX_VALUE)
+                .addGroup(rightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(forget, javax.swing.GroupLayout.PREFERRED_SIZE, 581, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(tendnlabel)
                     .addComponent(passlabel)
                     .addComponent(uName)
                     .addComponent(uPass)
-                    .addComponent(loginBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 581, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(loginBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(54, 54, 54))
         );
         rightLayout.setVerticalGroup(
             rightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -267,8 +394,8 @@ public class Login extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(loginBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(forget)
-                .addContainerGap(215, Short.MAX_VALUE))
+                .addComponent(forget, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(215, 215, 215))
         );
 
         getContentPane().add(right, new org.netbeans.lib.awtextra.AbsoluteConstraints(692, 0, 692, 750));
@@ -306,6 +433,39 @@ public class Login extends javax.swing.JFrame {
         this.updateNewPasswordPanel.setVisible(false);
     }//GEN-LAST:event_sendRestEmailButtonActionPerformed
 
+    private void uNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uNameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_uNameActionPerformed
+
+    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField1ActionPerformed
+
+    private void loginBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_loginBtnMouseClicked
+        String username = uName.getText();
+        String password = String.valueOf(uPass.getPassword());
+        CommonResponseDTO response = authController.authenticate(
+                AuthRequestDTO
+                        .builder()
+                        .username(username)
+                        .password(password)
+                        .build()
+        );
+        if (response.success()) {
+            this.dispose();
+            Home.main(new String[]{});
+        } else {
+            errorLoginDiaglog.setVisible(true);
+            errorLoginDiaglog.setLocationRelativeTo(null);
+            errorLoginMessage.setText(response.message());
+        }
+    }//GEN-LAST:event_loginBtnMouseClicked
+
+    private void errorLoginOkButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_errorLoginOkButtonMouseClicked
+        // TODO add your handling code here:
+        errorLoginDiaglog.dispose();
+    }//GEN-LAST:event_errorLoginOkButtonMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -322,7 +482,22 @@ public class Login extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel dangNhapTittle;
+    private javax.swing.JDialog errorLoginDiaglog;
+    private javax.swing.JLabel errorLoginHeadingLabel;
+    private javax.swing.JPanel errorLoginMainPanel;
+    private javax.swing.JLabel errorLoginMessage;
+    private javax.swing.JButton errorLoginOkButton;
     private javax.swing.JLabel forget;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPasswordField jPasswordField1;
+    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextField2;
     private javax.swing.JPanel left;
     private javax.swing.JButton loginBtn;
     private javax.swing.JLabel passlabel;
