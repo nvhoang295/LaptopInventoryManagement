@@ -164,6 +164,7 @@ public class PhieuNhap extends javax.swing.JFrame {
         jTextField4.setText("10");
 
         jButton20.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
+        jButton20.setIcon(new javax.swing.ImageIcon("D:\\BTL_Java\\LaptopInventoryManagement\\src\\main\\resources\\icon\\plus.png")); // NOI18N
         jButton20.setText("THÊM");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

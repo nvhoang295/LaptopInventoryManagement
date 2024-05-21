@@ -316,7 +316,7 @@ public class Home extends javax.swing.JFrame {
         productLabel.setBackground(new java.awt.Color(255, 255, 255));
         productLabel.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         productLabel.setIcon(new javax.swing.ImageIcon("D:\\BTL_Java\\LaptopInventoryManagement\\src\\main\\resources\\icon\\product.png")); // NOI18N
-        productLabel.setText("SẢN PHẨM");
+        productLabel.setText("  SẢN PHẨM");
         productLabel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 productLabelMouseClicked(evt);
@@ -329,15 +329,14 @@ public class Home extends javax.swing.JFrame {
             productTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(productTabLayout.createSequentialGroup()
                 .addGap(24, 24, 24)
-                .addComponent(productLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(productLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         productTabLayout.setVerticalGroup(
             productTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, productTabLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(productLabel)
-                .addContainerGap())
+                .addGap(0, 8, Short.MAX_VALUE)
+                .addComponent(productLabel))
         );
 
         providerTab.setBackground(new java.awt.Color(255, 255, 255));
@@ -350,7 +349,7 @@ public class Home extends javax.swing.JFrame {
 
         providerLabel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         providerLabel.setIcon(new javax.swing.ImageIcon("D:\\BTL_Java\\LaptopInventoryManagement\\src\\main\\resources\\icon\\teamwork.png")); // NOI18N
-        providerLabel.setText("NHÀ CUNG CẤP");
+        providerLabel.setText("  NHÀ CUNG CẤP");
         providerLabel.setPreferredSize(new java.awt.Dimension(240, 40));
         providerLabel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -382,7 +381,7 @@ public class Home extends javax.swing.JFrame {
 
         importProductLabel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         importProductLabel.setIcon(new javax.swing.ImageIcon("D:\\BTL_Java\\LaptopInventoryManagement\\src\\main\\resources\\icon\\import.png")); // NOI18N
-        importProductLabel.setText("NHẬP HÀNG");
+        importProductLabel.setText("  NHẬP HÀNG");
         importProductLabel.setPreferredSize(new java.awt.Dimension(240, 40));
         importProductLabel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -396,15 +395,15 @@ public class Home extends javax.swing.JFrame {
             importProductTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(importProductTabLayout.createSequentialGroup()
                 .addGap(24, 24, 24)
-                .addComponent(importProductLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(importProductLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         importProductTabLayout.setVerticalGroup(
             importProductTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(importProductTabLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(importProductLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(importProductLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 28, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         importBillTab.setBackground(new java.awt.Color(255, 255, 255));
@@ -417,7 +416,7 @@ public class Home extends javax.swing.JFrame {
 
         importBillLabel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         importBillLabel.setIcon(new javax.swing.ImageIcon("D:\\BTL_Java\\LaptopInventoryManagement\\src\\main\\resources\\icon\\contract.png")); // NOI18N
-        importBillLabel.setText("PHIẾU NHẬP");
+        importBillLabel.setText("  PHIẾU NHẬP");
         importBillLabel.setPreferredSize(new java.awt.Dimension(240, 40));
         importBillLabel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -436,10 +435,7 @@ public class Home extends javax.swing.JFrame {
         );
         importBillTabLayout.setVerticalGroup(
             importBillTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(importBillTabLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(importBillLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 28, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(importBillLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         exportProductTab.setBackground(new java.awt.Color(255, 255, 255));
@@ -452,7 +448,7 @@ public class Home extends javax.swing.JFrame {
 
         exportProductLabel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         exportProductLabel.setIcon(new javax.swing.ImageIcon("D:\\BTL_Java\\LaptopInventoryManagement\\src\\main\\resources\\icon\\export.png")); // NOI18N
-        exportProductLabel.setText("XUẤT HÀNG");
+        exportProductLabel.setText("  XUẤT HÀNG");
         exportProductLabel.setPreferredSize(new java.awt.Dimension(240, 40));
         exportProductLabel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -467,7 +463,7 @@ public class Home extends javax.swing.JFrame {
             .addGroup(exportProductTabLayout.createSequentialGroup()
                 .addGap(23, 23, 23)
                 .addComponent(exportProductLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(73, Short.MAX_VALUE))
         );
         exportProductTabLayout.setVerticalGroup(
             exportProductTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -487,7 +483,7 @@ public class Home extends javax.swing.JFrame {
 
         exportBillLabel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         exportBillLabel.setIcon(new javax.swing.ImageIcon("D:\\BTL_Java\\LaptopInventoryManagement\\src\\main\\resources\\icon\\checklist.png")); // NOI18N
-        exportBillLabel.setText("PHIẾU XUẤT");
+        exportBillLabel.setText("  PHIẾU XUẤT");
         exportBillLabel.setPreferredSize(new java.awt.Dimension(240, 40));
         exportBillLabel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -501,15 +497,14 @@ public class Home extends javax.swing.JFrame {
             exportBillTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(exportBillTabLayout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addComponent(exportBillLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(exportBillLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         exportBillTabLayout.setVerticalGroup(
             exportBillTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(exportBillTabLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(exportBillLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, exportBillTabLayout.createSequentialGroup()
+                .addComponent(exportBillLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         inStockTab.setBackground(new java.awt.Color(255, 255, 255));
@@ -522,7 +517,7 @@ public class Home extends javax.swing.JFrame {
 
         inStockLabel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         inStockLabel.setIcon(new javax.swing.ImageIcon("D:\\BTL_Java\\LaptopInventoryManagement\\src\\main\\resources\\icon\\inventory.png")); // NOI18N
-        inStockLabel.setText("TỒN KHO");
+        inStockLabel.setText("  TỒN KHO");
         inStockLabel.setPreferredSize(new java.awt.Dimension(240, 40));
         inStockLabel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -536,15 +531,14 @@ public class Home extends javax.swing.JFrame {
             inStockTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(inStockTabLayout.createSequentialGroup()
                 .addGap(21, 21, 21)
-                .addComponent(inStockLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(inStockLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         inStockTabLayout.setVerticalGroup(
             inStockTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(inStockTabLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(inStockLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, inStockTabLayout.createSequentialGroup()
+                .addComponent(inStockLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         userTab.setBackground(new java.awt.Color(255, 255, 255));
@@ -557,7 +551,7 @@ public class Home extends javax.swing.JFrame {
 
         userLabel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         userLabel.setIcon(new javax.swing.ImageIcon("D:\\BTL_Java\\LaptopInventoryManagement\\src\\main\\resources\\icon\\account.png")); // NOI18N
-        userLabel.setText("TÀI KHOẢN");
+        userLabel.setText("  TÀI KHOẢN");
         userLabel.setPreferredSize(new java.awt.Dimension(240, 40));
         userLabel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -570,16 +564,16 @@ public class Home extends javax.swing.JFrame {
         userTabLayout.setHorizontalGroup(
             userTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(userTabLayout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(userLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(17, 17, 17)
+                .addComponent(userLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         userTabLayout.setVerticalGroup(
             userTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(userTabLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(userLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, userTabLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(userLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         statisticsTab.setBackground(new java.awt.Color(255, 255, 255));
@@ -592,7 +586,7 @@ public class Home extends javax.swing.JFrame {
 
         statisticsLabel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         statisticsLabel.setIcon(new javax.swing.ImageIcon("D:\\BTL_Java\\LaptopInventoryManagement\\src\\main\\resources\\icon\\description.png")); // NOI18N
-        statisticsLabel.setText("THỐNG KÊ");
+        statisticsLabel.setText("  THỐNG KÊ");
         statisticsLabel.setPreferredSize(new java.awt.Dimension(240, 40));
         statisticsLabel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -605,15 +599,16 @@ public class Home extends javax.swing.JFrame {
         statisticsTabLayout.setHorizontalGroup(
             statisticsTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(statisticsTabLayout.createSequentialGroup()
-                .addGap(22, 22, 22)
-                .addComponent(statisticsLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(23, 23, 23)
+                .addComponent(statisticsLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         statisticsTabLayout.setVerticalGroup(
             statisticsTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, statisticsTabLayout.createSequentialGroup()
-                .addGap(0, 12, Short.MAX_VALUE)
-                .addComponent(statisticsLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap()
+                .addComponent(statisticsLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 28, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         updateInfoTab.setBackground(new java.awt.Color(255, 255, 255));
@@ -626,7 +621,7 @@ public class Home extends javax.swing.JFrame {
 
         updateInfoLabel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         updateInfoLabel.setIcon(new javax.swing.ImageIcon("D:\\BTL_Java\\LaptopInventoryManagement\\src\\main\\resources\\icon\\exchange.png")); // NOI18N
-        updateInfoLabel.setText("ĐỔI THÔNG TIN");
+        updateInfoLabel.setText("   ĐỔI THÔNG TIN");
         updateInfoLabel.setPreferredSize(new java.awt.Dimension(240, 40));
         updateInfoLabel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -639,16 +634,13 @@ public class Home extends javax.swing.JFrame {
         updateInfoTabLayout.setHorizontalGroup(
             updateInfoTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(updateInfoTabLayout.createSequentialGroup()
-                .addGap(17, 17, 17)
-                .addComponent(updateInfoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(21, 21, 21)
+                .addComponent(updateInfoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         updateInfoTabLayout.setVerticalGroup(
             updateInfoTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, updateInfoTabLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(updateInfoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+            .addComponent(updateInfoLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         logoutTab.setBackground(new java.awt.Color(255, 255, 255));
@@ -661,7 +653,7 @@ public class Home extends javax.swing.JFrame {
 
         logoutLabel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         logoutLabel.setIcon(new javax.swing.ImageIcon("D:\\BTL_Java\\LaptopInventoryManagement\\src\\main\\resources\\icon\\logout.png")); // NOI18N
-        logoutLabel.setText("ĐĂNG XUẤT");
+        logoutLabel.setText(" ĐĂNG XUẤT");
         logoutLabel.setPreferredSize(new java.awt.Dimension(240, 40));
         logoutLabel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -674,15 +666,15 @@ public class Home extends javax.swing.JFrame {
         logoutTabLayout.setHorizontalGroup(
             logoutTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(logoutTabLayout.createSequentialGroup()
-                .addGap(22, 22, 22)
+                .addGap(26, 26, 26)
                 .addComponent(logoutLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         logoutTabLayout.setVerticalGroup(
             logoutTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, logoutTabLayout.createSequentialGroup()
-                .addGap(0, 12, Short.MAX_VALUE)
-                .addComponent(logoutLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(logoutLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout sidebarPanelLayout = new javax.swing.GroupLayout(sidebarPanel);
@@ -693,7 +685,7 @@ public class Home extends javax.swing.JFrame {
             .addComponent(providerTab, javax.swing.GroupLayout.DEFAULT_SIZE, 256, Short.MAX_VALUE)
             .addComponent(importProductTab, javax.swing.GroupLayout.DEFAULT_SIZE, 256, Short.MAX_VALUE)
             .addComponent(importBillTab, javax.swing.GroupLayout.DEFAULT_SIZE, 256, Short.MAX_VALUE)
-            .addComponent(exportProductTab, javax.swing.GroupLayout.DEFAULT_SIZE, 256, Short.MAX_VALUE)
+            .addComponent(exportProductTab, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addComponent(exportBillTab, javax.swing.GroupLayout.DEFAULT_SIZE, 256, Short.MAX_VALUE)
             .addComponent(inStockTab, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 256, Short.MAX_VALUE)
             .addComponent(userTab, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 256, Short.MAX_VALUE)
@@ -701,7 +693,7 @@ public class Home extends javax.swing.JFrame {
             .addComponent(updateInfoTab, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 256, Short.MAX_VALUE)
             .addComponent(logoutTab, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 256, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, sidebarPanelLayout.createSequentialGroup()
-                .addContainerGap(31, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(loginedUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(14, 14, 14))
         );
@@ -719,14 +711,14 @@ public class Home extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(importBillTab, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(exportProductTab, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(exportProductTab, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(exportBillTab, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(inStockTab, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(userTab, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addComponent(statisticsTab, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(updateInfoTab, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1444,7 +1436,7 @@ public class Home extends javax.swing.JFrame {
     private void setActiveTab(String tabName) {
         switch (tabName) {
             case "product" -> {
-                this.productTab.setBackground(Color.YELLOW);
+                this.productTab.setBackground(new Color(179, 229, 252));
                 this.providerTab.setBackground(Color.WHITE);
                 this.importProductTab.setBackground(Color.WHITE);
                 this.importBillTab.setBackground(Color.WHITE);
@@ -1457,7 +1449,7 @@ public class Home extends javax.swing.JFrame {
             }
             case "provider" -> {
                 this.productTab.setBackground(Color.WHITE);
-                this.providerTab.setBackground(Color.YELLOW);
+                this.providerTab.setBackground(new Color(179, 229, 252));
                 this.importProductTab.setBackground(Color.WHITE);
                 this.importBillTab.setBackground(Color.WHITE);
                 this.exportProductTab.setBackground(Color.WHITE);
@@ -1470,7 +1462,7 @@ public class Home extends javax.swing.JFrame {
             case "import-product" -> {
                 this.productTab.setBackground(Color.WHITE);
                 this.providerTab.setBackground(Color.WHITE);
-                this.importProductTab.setBackground(Color.YELLOW);
+                this.importProductTab.setBackground(new Color(179, 229, 252));
                 this.importBillTab.setBackground(Color.WHITE);
                 this.exportProductTab.setBackground(Color.WHITE);
                 this.exportBillTab.setBackground(Color.WHITE);
@@ -1483,7 +1475,7 @@ public class Home extends javax.swing.JFrame {
                 this.productTab.setBackground(Color.WHITE);
                 this.providerTab.setBackground(Color.WHITE);
                 this.importProductTab.setBackground(Color.WHITE);
-                this.importBillTab.setBackground(Color.YELLOW);
+                this.importBillTab.setBackground(new Color(179, 229, 252));
                 this.exportProductTab.setBackground(Color.WHITE);
                 this.exportBillTab.setBackground(Color.WHITE);
                 this.inStockTab.setBackground(Color.WHITE);
@@ -1496,7 +1488,7 @@ public class Home extends javax.swing.JFrame {
                 this.providerTab.setBackground(Color.WHITE);
                 this.importProductTab.setBackground(Color.WHITE);
                 this.importBillTab.setBackground(Color.WHITE);
-                this.exportProductTab.setBackground(Color.YELLOW);
+                this.exportProductTab.setBackground(new Color(179, 229, 252));
                 this.exportBillTab.setBackground(Color.WHITE);
                 this.inStockTab.setBackground(Color.WHITE);
                 this.userTab.setBackground(Color.WHITE);
@@ -1509,7 +1501,7 @@ public class Home extends javax.swing.JFrame {
                 this.importProductTab.setBackground(Color.WHITE);
                 this.importBillTab.setBackground(Color.WHITE);
                 this.exportProductTab.setBackground(Color.WHITE);
-                this.exportBillTab.setBackground(Color.YELLOW);
+                this.exportBillTab.setBackground(new Color(179, 229, 252));
                 this.inStockTab.setBackground(Color.WHITE);
                 this.userTab.setBackground(Color.WHITE);
                 this.statisticsTab.setBackground(Color.WHITE);
@@ -1522,7 +1514,7 @@ public class Home extends javax.swing.JFrame {
                 this.importBillTab.setBackground(Color.WHITE);
                 this.exportProductTab.setBackground(Color.WHITE);
                 this.exportBillTab.setBackground(Color.WHITE);
-                this.inStockTab.setBackground(Color.YELLOW);
+                this.inStockTab.setBackground(new Color(179, 229, 252));
                 this.userTab.setBackground(Color.WHITE);
                 this.statisticsTab.setBackground(Color.WHITE);
                 break;
@@ -1535,7 +1527,7 @@ public class Home extends javax.swing.JFrame {
                 this.exportProductTab.setBackground(Color.WHITE);
                 this.exportBillTab.setBackground(Color.WHITE);
                 this.inStockTab.setBackground(Color.WHITE);
-                this.userTab.setBackground(Color.YELLOW);
+                this.userTab.setBackground(new Color(179, 229, 252));
                 this.statisticsTab.setBackground(Color.WHITE);
                 break;
             }
@@ -1548,7 +1540,7 @@ public class Home extends javax.swing.JFrame {
                 this.exportBillTab.setBackground(Color.WHITE);
                 this.inStockTab.setBackground(Color.WHITE);
                 this.userTab.setBackground(Color.WHITE);
-                this.statisticsTab.setBackground(Color.YELLOW);
+                this.statisticsTab.setBackground(new Color(179, 229, 252));
                 break;
             }
 
