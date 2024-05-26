@@ -148,7 +148,7 @@
                   <Font name="Times New Roman" size="18" style="0"/>
                 </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/LaptopManagement/icon/icons8_add_40px.png"/>
+                  <Image iconType="2" name="D:\BTL_Java\LaptopInventoryManagement\src\main\resources\icon\plus.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Th&#xea;m" postCode="jButton2.setBorderPainted(false);"/>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
@@ -169,7 +169,7 @@
                   <Font name="Times New Roman" size="18" style="0"/>
                 </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/LaptopManagement/icon/icons8_edit_40px.png"/>
+                  <Image iconType="2" name="D:\BTL_Java\LaptopInventoryManagement\src\main\resources\icon\exchange.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="S&#x1eed;a"/>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
@@ -188,7 +188,7 @@
                   <Font name="Times New Roman" size="18" style="0"/>
                 </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/LaptopManagement/icon/icons8_delete_40px.png"/>
+                  <Image iconType="2" name="D:\BTL_Java\LaptopInventoryManagement\src\main\resources\icon\delete.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="X&#xf3;a "/>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
@@ -204,7 +204,7 @@
                   <Font name="Times New Roman" size="18" style="0"/>
                 </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/LaptopManagement/icon/icons8_spreadsheet_file_40px.png"/>
+                  <Image iconType="2" name="D:\BTL_Java\LaptopInventoryManagement\src\main\resources\icon\sheet.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Xu&#x1ea5;t Excel"/>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
@@ -220,7 +220,7 @@
                   <Font name="Times New Roman" size="18" style="0"/>
                 </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/LaptopManagement/icon/icons8_xls_40px.png"/>
+                  <Image iconType="2" name="D:\BTL_Java\LaptopInventoryManagement\src\main\resources\icon\sheet.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Nh&#x1ead;p Excel"/>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
@@ -306,7 +306,7 @@
                   <Font name="Times New Roman" size="18" style="0"/>
                 </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/LaptopManagement/icon/icons8_reset_25px_1.png"/>
+                  <Image iconType="2" name="D:\BTL_Java\LaptopInventoryManagement\src\main\resources\icon\refresh.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="L&#xe0;m m&#x1edb;i"/>
               </Properties>
