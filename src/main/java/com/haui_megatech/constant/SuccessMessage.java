@@ -8,6 +8,6 @@ package com.haui_megatech.constant;
  *
  * @author vieth
  */
-public class SuccessMessageConstant {
+public class SuccessMessage {
     
 }
