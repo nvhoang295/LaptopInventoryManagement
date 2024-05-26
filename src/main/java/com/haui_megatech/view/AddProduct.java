@@ -114,7 +114,7 @@ public class AddProduct extends javax.swing.JFrame {
 
         btnAddProduct.setBackground(new java.awt.Color(51, 102, 255));
         btnAddProduct.setForeground(new java.awt.Color(255, 255, 255));
-        btnAddProduct.setIcon(new javax.swing.ImageIcon("D:\\BTL_Java\\LaptopInventoryManagement\\src\\main\\resources\\icon\\plus.png")); // NOI18N
+        btnAddProduct.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/plus.png"))); // NOI18N
         btnAddProduct.setText("Thêm sản phẩm");
         btnAddProduct.setBorder(null);
         btnAddProduct.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -126,7 +126,7 @@ public class AddProduct extends javax.swing.JFrame {
 
         btnCancel.setBackground(new java.awt.Color(255, 0, 0));
         btnCancel.setForeground(new java.awt.Color(255, 255, 255));
-        btnCancel.setIcon(new javax.swing.ImageIcon("D:\\BTL_Java\\LaptopInventoryManagement\\src\\main\\resources\\icon\\multiply.png")); // NOI18N
+        btnCancel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/multiply.png"))); // NOI18N
         btnCancel.setText("Hủy bỏ");
         btnCancel.setBorder(null);
         btnCancel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
