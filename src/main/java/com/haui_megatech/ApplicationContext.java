@@ -43,7 +43,7 @@ public class ApplicationContext {
     public static void initAll() {
 
         // MEDIUM PRIORITY
-        User.setCounter(userRepository.getList().getLast().getId());
+        User.setCounter(userRepository.getAll().getLast().getId());
 
     }
 

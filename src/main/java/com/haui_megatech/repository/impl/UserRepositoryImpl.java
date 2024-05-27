@@ -27,50 +27,38 @@ import java.util.stream.Collectors;
 public class UserRepositoryImpl implements UserRepository {
 
     private final String ABS_DATA_PATH = ApplicationContext.ABS_USERS_DATA_PATH;
-
-    @Override
-    public Optional<User> save(User user) {
-        List<User> users;
-
-        try (ObjectInputStream ois = new ObjectInputStream((new FileInputStream(ABS_DATA_PATH)))) {
-            users = (List<User>) ois.readObject();
-            if (users == null) {
-                users = new ArrayList<>();
-            }
-            users.add(user);
-        } catch (IOException | ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        }
-
+    
+    private boolean saveToDisk(ArrayList<User> list) {
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(ABS_DATA_PATH))) {
-            oos.writeObject(users);
-            return Optional.of(user);
+            oos.writeObject(list);
+            return true;
         } catch (IOException e) {
-            return Optional.empty();
+            return false;
         }
     }
-
+    
     @Override
-    public List<User> saveAll(List<User> users) {
-        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(ABS_DATA_PATH))) {
-            oos.writeObject(users);
-            return users;
-        } catch (IOException e) {
-            return null;
-        }
+    public boolean add(User user) {
+        ArrayList<User> list = this.getAll();
+        list.add(user);
+
+        return this.saveToDisk(list);
     }
 
     @Override
-    public Optional<User> findByUsername(String username) {
-        List<User> users = this.getList();
-        return users.parallelStream().filter(item -> item.getUsername().equals(username)).findFirst();
+    public boolean addAll(ArrayList<User> users) {
+        ArrayList<User> list = this.getAll();
+        list.addAll(users);
+        
+        return this.saveToDisk(list);
     }
 
     @Override
-    public List<User> getList() {
-        List<User> users;
+    public ArrayList<User> getAll() {
+        ArrayList<User> users;
         try (ObjectInputStream ois = new ObjectInputStream((new FileInputStream(ABS_DATA_PATH)))) {
-            users = (List<User>) ois.readObject();
+            users = (ArrayList<User>) ois.readObject();
+            if (users == null) users = new ArrayList<>();
         } catch (IOException | ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
