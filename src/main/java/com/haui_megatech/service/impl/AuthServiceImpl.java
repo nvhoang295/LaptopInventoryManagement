@@ -5,7 +5,7 @@
 package com.haui_megatech.service.impl;
 
 import com.haui_megatech.ApplicationContext;
-import com.haui_megatech.constant.ErrorMessageConstant;
+import com.haui_megatech.constant.ErrorMessage;
 import com.haui_megatech.dto.AuthRequestDTO;
 import com.haui_megatech.dto.CommonResponseDTO;
 import com.haui_megatech.model.User;
@@ -28,15 +28,15 @@ public class AuthServiceImpl implements AuthService {
     @Override
     public CommonResponseDTO authenticate(AuthRequestDTO request) {
         if (request.username().trim().isEmpty() || request.password().trim().isEmpty())
-            return new CommonResponseDTO(false, ErrorMessageConstant.Auth.BLANK_INPUT);
+            return new CommonResponseDTO(false, ErrorMessage.Auth.BLANK_INPUT);
         
         Optional<User> found = userRepository.findByUsername(request.username());
         
         if (found.isEmpty()) 
-            return new CommonResponseDTO(false, ErrorMessageConstant.Auth.NOT_FOUND);
+            return new CommonResponseDTO(false, ErrorMessage.Auth.NOT_FOUND);
         
         if (!found.get().getPassword().equals(request.password()))
-            return new CommonResponseDTO(false, ErrorMessageConstant.Auth.PASSWORD_NOT_CORRECT);
+            return new CommonResponseDTO(false, ErrorMessage.Auth.PASSWORD_NOT_CORRECT);
 
         ApplicationContext.setLoginedUser(found.get());
         return new CommonResponseDTO(true, null);
