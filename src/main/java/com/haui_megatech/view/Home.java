@@ -648,7 +648,7 @@ public class Home extends javax.swing.JFrame {
         });
 
         logoutLabel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        logoutLabel.setIcon(new javax.swing.ImageIcon("D:\\BTL_Java\\LaptopInventoryManagement\\src\\main\\resources\\icon\\logout.png")); // NOI18N
+        logoutLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/logout.png"))); // NOI18N
         logoutLabel.setText(" ĐĂNG XUẤT");
         logoutLabel.setPreferredSize(new java.awt.Dimension(240, 40));
         logoutLabel.addMouseListener(new java.awt.event.MouseAdapter() {
