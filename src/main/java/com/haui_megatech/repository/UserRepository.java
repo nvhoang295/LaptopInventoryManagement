@@ -6,6 +6,7 @@ package com.haui_megatech.repository;
 
 import com.haui_megatech.dto.ListItemsResponseDTO;
 import com.haui_megatech.model.User;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -15,11 +16,9 @@ import java.util.Optional;
  */
 public interface UserRepository {
 
-    Optional<User> save(User user);
+    boolean add(User user);
 
-    List<User> saveAll(List<User> users);
+    boolean addAll(ArrayList<User> users);
 
-    Optional<User> findByUsername(String username);
-
-    List<User> getList();
+    ArrayList<User> getAll();
 }

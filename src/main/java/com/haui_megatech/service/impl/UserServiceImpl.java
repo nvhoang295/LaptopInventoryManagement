@@ -29,7 +29,7 @@ public class UserServiceImpl implements UserService {
     public ListItemsResponseDTO<User> getList() {
         return ListItemsResponseDTO
                 .<User>builder()
-                .items(userRepository.getList())
+                .items(userRepository.getAll())
                 .build();
     }
 
@@ -37,27 +37,28 @@ public class UserServiceImpl implements UserService {
     public ListItemsResponseDTO<User> searchList(String keyword) {
         return ListItemsResponseDTO
                 .<User>builder()
-                .items(
-                        userRepository.getList().parallelStream()
-                                .filter(item -> {
-                                    return new StringBuilder()
-                                            .append(item.getUsername())
-                                            .append(item.getFirstName())
-                                            .append(item.getLastName())
-                                            .append(item.getPhoneNumber())
-                                            .append(item.getEmail())
-                                            .toString()
-                                            .contains(keyword);
-                                })
-                                .collect(Collectors.toList())
+                .items(userRepository
+                        .getAll()
+                        .parallelStream()
+                        .filter(item -> {
+                            return new StringBuilder()
+                                    .append(item.getUsername())
+                                    .append(item.getFirstName())
+                                    .append(item.getLastName())
+                                    .append(item.getPhoneNumber())
+                                    .append(item.getEmail())
+                                    .toString()
+                                    .contains(keyword);
+                        })
+                        .collect(Collectors.toList())
                 )
                 .build();
     }
 
     @Override
     public CommonResponseDTO save(User user) {
-        Optional<User> savedUser = userRepository.save(user);
-        return savedUser.isEmpty()
+        boolean result = userRepository.add(user);
+        return result
                 ? CommonResponseDTO
                         .builder()
                         .success(true)
