@@ -89,6 +89,10 @@ public class Home extends javax.swing.JFrame {
 
         logoutDiaglog = new javax.swing.JDialog();
         jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jTextField1 = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
         addUserDiaglog = new javax.swing.JDialog();
         usernameLabel = new javax.swing.JLabel();
         usernameTextField = new javax.swing.JTextField();
@@ -133,6 +137,9 @@ public class Home extends javax.swing.JFrame {
         updateInfoLabel = new javax.swing.JLabel();
         logoutTab = new javax.swing.JPanel();
         logoutLabel = new javax.swing.JLabel();
+        jSeparator4 = new javax.swing.JSeparator();
+        jSeparator3 = new javax.swing.JSeparator();
+        jSeparator5 = new javax.swing.JSeparator();
         productPanel = new javax.swing.JPanel();
         usersScrollPanel1 = new javax.swing.JScrollPane();
         usersTable1 = new javax.swing.JTable();
@@ -198,34 +205,58 @@ public class Home extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
 
         logoutDiaglog.setMinimumSize(new java.awt.Dimension(400, 300));
+        logoutDiaglog.setPreferredSize(new java.awt.Dimension(360, 250));
+        logoutDiaglog.setSize(new java.awt.Dimension(360, 250));
 
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setMinimumSize(new java.awt.Dimension(400, 300));
         jPanel1.setName(""); // NOI18N
+        jPanel1.setPreferredSize(new java.awt.Dimension(360, 250));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
-        );
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 0, 0));
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("THOÁT");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 27, 354, -1));
+
+        jTextField1.setEditable(false);
+        jTextField1.setBackground(new java.awt.Color(255, 255, 255));
+        jTextField1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jTextField1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField1.setText("Bạn có chắc chắn muốn thoát ứng dụng?");
+        jTextField1.setActionCommand("<Not Set>");
+        jTextField1.setAutoscrolls(false);
+        jTextField1.setBorder(null);
+        jTextField1.setDisabledTextColor(new java.awt.Color(0, 0, 0));
+        jTextField1.setEnabled(false);
+        jTextField1.setFocusable(false);
+        jTextField1.setScrollOffset(250);
+        jTextField1.setVerifyInputWhenFocusTarget(false);
+        jPanel1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(25, 60, 340, 100));
+
+        jButton1.setBackground(new java.awt.Color(44, 43, 196));
+        jButton1.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        jButton1.setText("Huỷ");
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 170, 80, 30));
+
+        jButton2.setBackground(new java.awt.Color(255, 51, 51));
+        jButton2.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        jButton2.setText("Thoát");
+        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 170, 80, 30));
 
         javax.swing.GroupLayout logoutDiaglogLayout = new javax.swing.GroupLayout(logoutDiaglog.getContentPane());
         logoutDiaglog.getContentPane().setLayout(logoutDiaglogLayout);
         logoutDiaglogLayout.setHorizontalGroup(
             logoutDiaglogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 360, Short.MAX_VALUE)
         );
         logoutDiaglogLayout.setVerticalGroup(
             logoutDiaglogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 250, Short.MAX_VALUE)
         );
 
         addUserDiaglog.setMinimumSize(new java.awt.Dimension(400, 405));
-        addUserDiaglog.setPreferredSize(new java.awt.Dimension(400, 405));
         addUserDiaglog.setSize(new java.awt.Dimension(340, 340));
         addUserDiaglog.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -320,22 +351,27 @@ public class Home extends javax.swing.JFrame {
         setMinimumSize(new java.awt.Dimension(1400, 830));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        sidebarPanel.setBackground(new java.awt.Color(255, 255, 255));
+        sidebarPanel.setBackground(new java.awt.Color(44, 43, 196));
         sidebarPanel.setPreferredSize(new java.awt.Dimension(256, 800));
+        sidebarPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        loginedUsername.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        loginedUsername.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        loginedUsername.setForeground(new java.awt.Color(255, 255, 255));
         loginedUsername.setText("Admin");
+        sidebarPanel.add(loginedUsername, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 0, 211, 100));
 
-        productTab.setBackground(new java.awt.Color(255, 255, 255));
-        productTab.setPreferredSize(new java.awt.Dimension(240, 40));
+        productTab.setBackground(new java.awt.Color(44, 43, 196));
+        productTab.setForeground(new java.awt.Color(255, 255, 255));
+        productTab.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        productTab.setPreferredSize(new java.awt.Dimension(256, 50));
         productTab.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 productTabMouseClicked(evt);
             }
         });
 
-        productLabel.setBackground(new java.awt.Color(255, 255, 255));
         productLabel.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        productLabel.setForeground(new java.awt.Color(255, 255, 255));
         productLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/product.png"))); // NOI18N
         productLabel.setText("  SẢN PHẨM");
         productLabel.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -351,18 +387,22 @@ public class Home extends javax.swing.JFrame {
             .addGroup(productTabLayout.createSequentialGroup()
                 .addGap(24, 24, 24)
                 .addComponent(productLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(47, Short.MAX_VALUE))
         );
         productTabLayout.setVerticalGroup(
             productTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(productTabLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(productLabel)
-                .addContainerGap(8, Short.MAX_VALUE))
+                .addComponent(productLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
-        providerTab.setBackground(new java.awt.Color(255, 255, 255));
-        providerTab.setPreferredSize(new java.awt.Dimension(240, 40));
+        sidebarPanel.add(productTab, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 256, 50));
+
+        providerTab.setBackground(new java.awt.Color(44, 43, 196));
+        providerTab.setForeground(new java.awt.Color(255, 255, 255));
+        providerTab.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        providerTab.setPreferredSize(new java.awt.Dimension(256, 50));
         providerTab.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 providerTabMouseClicked(evt);
@@ -370,9 +410,11 @@ public class Home extends javax.swing.JFrame {
         });
 
         providerLabel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        providerLabel.setForeground(new java.awt.Color(255, 255, 255));
         providerLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/teamwork.png"))); // NOI18N
         providerLabel.setText("  NHÀ CUNG CẤP");
-        providerLabel.setPreferredSize(new java.awt.Dimension(240, 40));
+        providerLabel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        providerLabel.setPreferredSize(new java.awt.Dimension(256, 50));
         providerLabel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 providerLabelMouseClicked(evt);
@@ -386,15 +428,18 @@ public class Home extends javax.swing.JFrame {
             .addGroup(providerTabLayout.createSequentialGroup()
                 .addGap(23, 23, 23)
                 .addComponent(providerLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(48, Short.MAX_VALUE))
         );
         providerTabLayout.setVerticalGroup(
             providerTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(providerLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(providerLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        importProductTab.setBackground(new java.awt.Color(255, 255, 255));
-        importProductTab.setPreferredSize(new java.awt.Dimension(240, 40));
+        sidebarPanel.add(providerTab, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 150, 256, 50));
+
+        importProductTab.setBackground(new java.awt.Color(44, 43, 196));
+        importProductTab.setForeground(new java.awt.Color(255, 255, 255));
+        importProductTab.setPreferredSize(new java.awt.Dimension(256, 50));
         importProductTab.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 importProductTabMouseClicked(evt);
@@ -402,9 +447,10 @@ public class Home extends javax.swing.JFrame {
         });
 
         importProductLabel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        importProductLabel.setForeground(new java.awt.Color(255, 255, 255));
         importProductLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/import.png"))); // NOI18N
         importProductLabel.setText("  NHẬP HÀNG");
-        importProductLabel.setPreferredSize(new java.awt.Dimension(240, 40));
+        importProductLabel.setPreferredSize(new java.awt.Dimension(256, 50));
         importProductLabel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 importProductLabelMouseClicked(evt);
@@ -418,18 +464,20 @@ public class Home extends javax.swing.JFrame {
             .addGroup(importProductTabLayout.createSequentialGroup()
                 .addGap(24, 24, 24)
                 .addComponent(importProductLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(46, Short.MAX_VALUE))
         );
         importProductTabLayout.setVerticalGroup(
             importProductTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(importProductTabLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(importProductLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(importProductLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        importBillTab.setBackground(new java.awt.Color(255, 255, 255));
-        importBillTab.setPreferredSize(new java.awt.Dimension(240, 40));
+        sidebarPanel.add(importProductTab, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 240, 256, 50));
+
+        importBillTab.setBackground(new java.awt.Color(44, 43, 196));
+        importBillTab.setForeground(new java.awt.Color(255, 255, 255));
+        importBillTab.setPreferredSize(new java.awt.Dimension(256, 50));
         importBillTab.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 importBillTabMouseClicked(evt);
@@ -437,9 +485,10 @@ public class Home extends javax.swing.JFrame {
         });
 
         importBillLabel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        importBillLabel.setForeground(new java.awt.Color(255, 255, 255));
         importBillLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/contract.png"))); // NOI18N
         importBillLabel.setText("  PHIẾU NHẬP");
-        importBillLabel.setPreferredSize(new java.awt.Dimension(240, 40));
+        importBillLabel.setPreferredSize(new java.awt.Dimension(256, 50));
         importBillLabel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 importBillLabelMouseClicked(evt);
@@ -453,15 +502,18 @@ public class Home extends javax.swing.JFrame {
             .addGroup(importBillTabLayout.createSequentialGroup()
                 .addGap(24, 24, 24)
                 .addComponent(importBillLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(72, Short.MAX_VALUE))
         );
         importBillTabLayout.setVerticalGroup(
             importBillTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(importBillLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        exportProductTab.setBackground(new java.awt.Color(255, 255, 255));
-        exportProductTab.setPreferredSize(new java.awt.Dimension(240, 40));
+        sidebarPanel.add(importBillTab, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 290, 256, 50));
+
+        exportProductTab.setBackground(new java.awt.Color(44, 43, 196));
+        exportProductTab.setForeground(new java.awt.Color(255, 255, 255));
+        exportProductTab.setPreferredSize(new java.awt.Dimension(256, 50));
         exportProductTab.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 exportProductTabMouseClicked(evt);
@@ -469,9 +521,10 @@ public class Home extends javax.swing.JFrame {
         });
 
         exportProductLabel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        exportProductLabel.setForeground(new java.awt.Color(255, 255, 255));
         exportProductLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/export.png"))); // NOI18N
         exportProductLabel.setText("  XUẤT HÀNG");
-        exportProductLabel.setPreferredSize(new java.awt.Dimension(240, 40));
+        exportProductLabel.setPreferredSize(new java.awt.Dimension(256, 50));
         exportProductLabel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 exportProductLabelMouseClicked(evt);
@@ -491,12 +544,15 @@ public class Home extends javax.swing.JFrame {
             exportProductTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(exportProductTabLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(exportProductLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(39, Short.MAX_VALUE))
+                .addComponent(exportProductLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
-        exportBillTab.setBackground(new java.awt.Color(255, 255, 255));
-        exportBillTab.setPreferredSize(new java.awt.Dimension(240, 40));
+        sidebarPanel.add(exportProductTab, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 340, 256, 50));
+
+        exportBillTab.setBackground(new java.awt.Color(44, 43, 196));
+        exportBillTab.setForeground(new java.awt.Color(255, 255, 255));
+        exportBillTab.setPreferredSize(new java.awt.Dimension(256, 50));
         exportBillTab.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 exportBillTabMouseClicked(evt);
@@ -504,9 +560,10 @@ public class Home extends javax.swing.JFrame {
         });
 
         exportBillLabel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        exportBillLabel.setForeground(new java.awt.Color(255, 255, 255));
         exportBillLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/checklist.png"))); // NOI18N
         exportBillLabel.setText("  PHIẾU XUẤT");
-        exportBillLabel.setPreferredSize(new java.awt.Dimension(240, 40));
+        exportBillLabel.setPreferredSize(new java.awt.Dimension(256, 50));
         exportBillLabel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 exportBillLabelMouseClicked(evt);
@@ -520,17 +577,21 @@ public class Home extends javax.swing.JFrame {
             .addGroup(exportBillTabLayout.createSequentialGroup()
                 .addGap(24, 24, 24)
                 .addComponent(exportBillLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(47, Short.MAX_VALUE))
         );
         exportBillTabLayout.setVerticalGroup(
             exportBillTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, exportBillTabLayout.createSequentialGroup()
-                .addComponent(exportBillLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap()
+                .addComponent(exportBillLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
-        inStockTab.setBackground(new java.awt.Color(255, 255, 255));
-        inStockTab.setPreferredSize(new java.awt.Dimension(240, 40));
+        sidebarPanel.add(exportBillTab, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 390, 256, 50));
+
+        inStockTab.setBackground(new java.awt.Color(44, 43, 196));
+        inStockTab.setForeground(new java.awt.Color(255, 255, 255));
+        inStockTab.setPreferredSize(new java.awt.Dimension(256, 50));
         inStockTab.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 inStockTabMouseClicked(evt);
@@ -538,9 +599,10 @@ public class Home extends javax.swing.JFrame {
         });
 
         inStockLabel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        inStockLabel.setForeground(new java.awt.Color(255, 255, 255));
         inStockLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/inventory.png"))); // NOI18N
         inStockLabel.setText("  TỒN KHO");
-        inStockLabel.setPreferredSize(new java.awt.Dimension(240, 40));
+        inStockLabel.setPreferredSize(new java.awt.Dimension(256, 50));
         inStockLabel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 inStockLabelMouseClicked(evt);
@@ -554,15 +616,18 @@ public class Home extends javax.swing.JFrame {
             .addGroup(inStockTabLayout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addComponent(inStockLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(41, Short.MAX_VALUE))
         );
         inStockTabLayout.setVerticalGroup(
             inStockTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(inStockLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 48, Short.MAX_VALUE)
+            .addComponent(inStockLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        userTab.setBackground(new java.awt.Color(255, 255, 255));
-        userTab.setPreferredSize(new java.awt.Dimension(240, 40));
+        sidebarPanel.add(inStockTab, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 480, 256, 50));
+
+        userTab.setBackground(new java.awt.Color(44, 43, 196));
+        userTab.setForeground(new java.awt.Color(255, 255, 255));
+        userTab.setPreferredSize(new java.awt.Dimension(256, 50));
         userTab.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 userTabMouseClicked(evt);
@@ -570,9 +635,10 @@ public class Home extends javax.swing.JFrame {
         });
 
         userLabel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        userLabel.setForeground(new java.awt.Color(255, 255, 255));
         userLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/account.png"))); // NOI18N
         userLabel.setText("  TÀI KHOẢN");
-        userLabel.setPreferredSize(new java.awt.Dimension(240, 40));
+        userLabel.setPreferredSize(new java.awt.Dimension(256, 50));
         userLabel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 userLabelMouseClicked(evt);
@@ -586,18 +652,21 @@ public class Home extends javax.swing.JFrame {
             .addGroup(userTabLayout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addComponent(userLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(35, Short.MAX_VALUE))
         );
         userTabLayout.setVerticalGroup(
             userTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(userTabLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(userLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(12, Short.MAX_VALUE))
+                .addComponent(userLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
-        statisticsTab.setBackground(new java.awt.Color(255, 255, 255));
-        statisticsTab.setPreferredSize(new java.awt.Dimension(240, 40));
+        sidebarPanel.add(userTab, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 620, 256, 50));
+
+        statisticsTab.setBackground(new java.awt.Color(44, 43, 196));
+        statisticsTab.setForeground(new java.awt.Color(255, 255, 255));
+        statisticsTab.setPreferredSize(new java.awt.Dimension(256, 50));
         statisticsTab.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 statisticsTabMouseClicked(evt);
@@ -605,9 +674,10 @@ public class Home extends javax.swing.JFrame {
         });
 
         statisticsLabel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        statisticsLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/description.png"))); // NOI18N
+        statisticsLabel.setForeground(new java.awt.Color(255, 255, 255));
+        statisticsLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/trend.png"))); // NOI18N
         statisticsLabel.setText("  THỐNG KÊ");
-        statisticsLabel.setPreferredSize(new java.awt.Dimension(240, 40));
+        statisticsLabel.setPreferredSize(new java.awt.Dimension(256, 50));
         statisticsLabel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 statisticsLabelMouseClicked(evt);
@@ -619,17 +689,20 @@ public class Home extends javax.swing.JFrame {
         statisticsTabLayout.setHorizontalGroup(
             statisticsTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(statisticsTabLayout.createSequentialGroup()
-                .addGap(27, 27, 27)
-                .addComponent(statisticsLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(20, 20, 20)
+                .addComponent(statisticsLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(44, Short.MAX_VALUE))
         );
         statisticsTabLayout.setVerticalGroup(
             statisticsTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(statisticsLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 46, Short.MAX_VALUE)
+            .addComponent(statisticsLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        updateInfoTab.setBackground(new java.awt.Color(255, 255, 255));
-        updateInfoTab.setPreferredSize(new java.awt.Dimension(240, 40));
+        sidebarPanel.add(statisticsTab, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 530, 256, 50));
+
+        updateInfoTab.setBackground(new java.awt.Color(44, 43, 196));
+        updateInfoTab.setForeground(new java.awt.Color(255, 255, 255));
+        updateInfoTab.setPreferredSize(new java.awt.Dimension(256, 50));
         updateInfoTab.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 updateInfoTabMouseClicked(evt);
@@ -637,9 +710,10 @@ public class Home extends javax.swing.JFrame {
         });
 
         updateInfoLabel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        updateInfoLabel.setForeground(new java.awt.Color(255, 255, 255));
         updateInfoLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/exchange.png"))); // NOI18N
         updateInfoLabel.setText("   ĐỔI THÔNG TIN");
-        updateInfoLabel.setPreferredSize(new java.awt.Dimension(240, 40));
+        updateInfoLabel.setPreferredSize(new java.awt.Dimension(256, 50));
         updateInfoLabel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 updateInfoLabelMouseClicked(evt);
@@ -653,14 +727,17 @@ public class Home extends javax.swing.JFrame {
             .addGroup(updateInfoTabLayout.createSequentialGroup()
                 .addGap(21, 21, 21)
                 .addComponent(updateInfoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(39, Short.MAX_VALUE))
         );
         updateInfoTabLayout.setVerticalGroup(
             updateInfoTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(updateInfoLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        logoutTab.setBackground(new java.awt.Color(255, 255, 255));
+        sidebarPanel.add(updateInfoTab, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 670, 256, 50));
+
+        logoutTab.setBackground(new java.awt.Color(44, 43, 196));
+        logoutTab.setForeground(new java.awt.Color(255, 255, 255));
         logoutTab.setPreferredSize(new java.awt.Dimension(240, 40));
         logoutTab.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -669,6 +746,8 @@ public class Home extends javax.swing.JFrame {
         });
 
         logoutLabel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        logoutLabel.setForeground(new java.awt.Color(255, 255, 255));
+        logoutLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/logout.png"))); // NOI18N
         logoutLabel.setText(" ĐĂNG XUẤT");
         logoutLabel.setPreferredSize(new java.awt.Dimension(240, 40));
         logoutLabel.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -684,66 +763,26 @@ public class Home extends javax.swing.JFrame {
             .addGroup(logoutTabLayout.createSequentialGroup()
                 .addGap(26, 26, 26)
                 .addComponent(logoutLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(70, Short.MAX_VALUE))
         );
         logoutTabLayout.setVerticalGroup(
             logoutTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, logoutTabLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(logoutLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(logoutLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(5, 5, 5))
         );
 
-        javax.swing.GroupLayout sidebarPanelLayout = new javax.swing.GroupLayout(sidebarPanel);
-        sidebarPanel.setLayout(sidebarPanelLayout);
-        sidebarPanelLayout.setHorizontalGroup(
-            sidebarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(providerTab, javax.swing.GroupLayout.DEFAULT_SIZE, 256, Short.MAX_VALUE)
-            .addComponent(importBillTab, javax.swing.GroupLayout.DEFAULT_SIZE, 256, Short.MAX_VALUE)
-            .addGroup(sidebarPanelLayout.createSequentialGroup()
-                .addComponent(exportProductTab, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addComponent(updateInfoTab, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 256, Short.MAX_VALUE)
-            .addComponent(logoutTab, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 256, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, sidebarPanelLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(loginedUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(14, 14, 14))
-            .addComponent(statisticsTab, javax.swing.GroupLayout.DEFAULT_SIZE, 256, Short.MAX_VALUE)
-            .addComponent(userTab, javax.swing.GroupLayout.DEFAULT_SIZE, 256, Short.MAX_VALUE)
-            .addComponent(inStockTab, javax.swing.GroupLayout.DEFAULT_SIZE, 256, Short.MAX_VALUE)
-            .addComponent(exportBillTab, javax.swing.GroupLayout.DEFAULT_SIZE, 256, Short.MAX_VALUE)
-            .addComponent(productTab, javax.swing.GroupLayout.DEFAULT_SIZE, 256, Short.MAX_VALUE)
-            .addComponent(importProductTab, javax.swing.GroupLayout.DEFAULT_SIZE, 256, Short.MAX_VALUE)
-        );
-        sidebarPanelLayout.setVerticalGroup(
-            sidebarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(sidebarPanelLayout.createSequentialGroup()
-                .addGap(44, 44, 44)
-                .addComponent(loginedUsername)
-                .addGap(37, 37, 37)
-                .addComponent(productTab, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(providerTab, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(importProductTab, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(importBillTab, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(exportProductTab, javax.swing.GroupLayout.DEFAULT_SIZE, 73, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(exportBillTab, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(inStockTab, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(userTab, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(statisticsTab, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(updateInfoTab, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(logoutTab, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(133, Short.MAX_VALUE))
-        );
+        sidebarPanel.add(logoutTab, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 720, 256, 50));
+
+        jSeparator4.setForeground(new java.awt.Color(255, 255, 255));
+        sidebarPanel.add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 220, 260, -1));
+
+        jSeparator3.setForeground(new java.awt.Color(255, 255, 255));
+        sidebarPanel.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 460, 260, -1));
+
+        jSeparator5.setForeground(new java.awt.Color(255, 255, 255));
+        sidebarPanel.add(jSeparator5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 600, 256, -1));
 
         getContentPane().add(sidebarPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 840));
 
@@ -764,14 +803,17 @@ public class Home extends javax.swing.JFrame {
         searchUsersPanel1.setBackground(new java.awt.Color(255, 255, 255));
         searchUsersPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Tìm kiếm", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 14))); // NOI18N
 
-        productBrandsComboBox.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        productBrandsComboBox.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         productBrandsComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        productBrandsComboBox.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
-        searchProductsTextField1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        searchProductsTextField1.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
 
-        searchProductsButton1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        searchProductsButton1.setBackground(new java.awt.Color(65, 120, 190));
+        searchProductsButton1.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         searchProductsButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/refresh.png"))); // NOI18N
         searchProductsButton1.setText("Làm mới");
+        searchProductsButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         javax.swing.GroupLayout searchUsersPanel1Layout = new javax.swing.GroupLayout(searchUsersPanel1);
         searchUsersPanel1.setLayout(searchUsersPanel1Layout);
@@ -779,11 +821,11 @@ public class Home extends javax.swing.JFrame {
             searchUsersPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(searchUsersPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(productBrandsComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(productBrandsComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(searchProductsTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 226, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(searchProductsButton1)
+                .addComponent(searchProductsButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         searchUsersPanel1Layout.setVerticalGroup(
@@ -803,45 +845,55 @@ public class Home extends javax.swing.JFrame {
 
         jSeparator2.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
-        importUsersFromExcelButton1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        importUsersFromExcelButton1.setBackground(new java.awt.Color(1, 169, 84));
+        importUsersFromExcelButton1.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         importUsersFromExcelButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/sheet.png"))); // NOI18N
         importUsersFromExcelButton1.setText("Nhập Excel");
+        importUsersFromExcelButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         importUsersFromExcelButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 importUsersFromExcelButton1ActionPerformed(evt);
             }
         });
 
-        exportUsersToExcelButton1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        exportUsersToExcelButton1.setBackground(new java.awt.Color(0, 155, 110));
+        exportUsersToExcelButton1.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         exportUsersToExcelButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/sheet.png"))); // NOI18N
         exportUsersToExcelButton1.setText("Xuất Excel");
+        exportUsersToExcelButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         exportUsersToExcelButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 exportUsersToExcelButton1ActionPerformed(evt);
             }
         });
 
-        editUserButton1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        editUserButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/exchange.png"))); // NOI18N
+        editUserButton1.setBackground(new java.awt.Color(36, 169, 65));
+        editUserButton1.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        editUserButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/edit_icon.png"))); // NOI18N
         editUserButton1.setText("Sửa");
+        editUserButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         editUserButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 editUserButton1ActionPerformed(evt);
             }
         });
 
-        addUserButton1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        addUserButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/plus.png"))); // NOI18N
+        addUserButton1.setBackground(new java.awt.Color(0, 122, 249));
+        addUserButton1.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        addUserButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/add_circle_icon.png"))); // NOI18N
         addUserButton1.setText("Thêm");
+        addUserButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         addUserButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 addUserButton1ActionPerformed(evt);
             }
         });
 
-        deleteUserButton1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        deleteUserButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/delete.png"))); // NOI18N
+        deleteUserButton1.setBackground(new java.awt.Color(212, 57, 68));
+        deleteUserButton1.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        deleteUserButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/remove_icon.png"))); // NOI18N
         deleteUserButton1.setText("Xoá");
+        deleteUserButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         deleteUserButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 deleteUserButton1ActionPerformed(evt);
@@ -854,18 +906,18 @@ public class Home extends javax.swing.JFrame {
             userFunctionPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(userFunctionPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(addUserButton1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(editUserButton1)
-                .addGap(24, 24, 24)
-                .addComponent(deleteUserButton1)
+                .addComponent(addUserButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(editUserButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(deleteUserButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(importUsersFromExcelButton1)
+                .addComponent(importUsersFromExcelButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(exportUsersToExcelButton1)
-                .addGap(6, 6, 6))
+                .addComponent(exportUsersToExcelButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         userFunctionPanel1Layout.setVerticalGroup(
             userFunctionPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -889,13 +941,13 @@ public class Home extends javax.swing.JFrame {
             productPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(productPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(userFunctionPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(searchUsersPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(31, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, productPanelLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(usersScrollPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(productPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(productPanelLayout.createSequentialGroup()
+                        .addComponent(userFunctionPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(searchUsersPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(usersScrollPanel1, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addContainerGap())
         );
         productPanelLayout.setVerticalGroup(
@@ -910,7 +962,7 @@ public class Home extends javax.swing.JFrame {
                 .addGap(26, 26, 26))
         );
 
-        getContentPane().add(productPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 0, 1140, 830));
+        getContentPane().add(productPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 0, 1170, 830));
 
         providerPanel.setBackground(new java.awt.Color(204, 204, 255));
         providerPanel.setPreferredSize(new java.awt.Dimension(1140, 830));
@@ -943,14 +995,16 @@ public class Home extends javax.swing.JFrame {
         searchImportProductPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Tìm kiếm", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 14))); // NOI18N
         searchImportProductPanel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
-        searchImportProductTextField.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        searchImportProductTextField.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         searchImportProductTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 searchImportProductTextFieldActionPerformed(evt);
             }
         });
 
-        searchImportProductRefreshButton.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        searchImportProductRefreshButton.setBackground(new java.awt.Color(65, 120, 190));
+        searchImportProductRefreshButton.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        searchImportProductRefreshButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/refresh.png"))); // NOI18N
         searchImportProductRefreshButton.setText("Làm Mới");
         searchImportProductRefreshButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -995,10 +1049,10 @@ public class Home extends javax.swing.JFrame {
         ));
         importProductScrollPanel.setViewportView(importProductTable);
 
-        importProductQuantityLabel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        importProductQuantityLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         importProductQuantityLabel.setText("Số Lượng: ");
 
-        importProductQuantityTextField.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        importProductQuantityTextField.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         importProductQuantityTextField.setText("10");
         importProductQuantityTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1006,7 +1060,9 @@ public class Home extends javax.swing.JFrame {
             }
         });
 
-        importProductAddButton.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        importProductAddButton.setBackground(new java.awt.Color(0, 122, 249));
+        importProductAddButton.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        importProductAddButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/add_circle_icon.png"))); // NOI18N
         importProductAddButton.setText("THÊM");
         importProductAddButton.setMaximumSize(new java.awt.Dimension(64, 22));
         importProductAddButton.setMinimumSize(new java.awt.Dimension(64, 22));
@@ -1017,25 +1073,25 @@ public class Home extends javax.swing.JFrame {
             }
         });
 
-        importBillIdLabel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        importBillIdLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         importBillIdLabel.setText("Mã phiếu nhập:");
 
-        importBillIdTextField.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        importBillIdTextField.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
 
-        providerNameLabel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        providerNameLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         providerNameLabel.setText("Nhà cung cấp:");
 
-        providerNameComboBox.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        providerNameComboBox.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         providerNameComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Công Ty TNHH Minh Nghĩa", "Công ty TNHH Hoàng Việt", "Công ty TNHH Hoàng Phúc" }));
 
-        importProductBillCreatorLabel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        importProductBillCreatorLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         importProductBillCreatorLabel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 importProductBillCreatorLabelActionPerformed(evt);
             }
         });
 
-        importProductBillCreatorTextField.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        importProductBillCreatorTextField.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         importProductBillCreatorTextField.setText("Người tạo phiếu:");
 
         importProductBillTable.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -1052,7 +1108,9 @@ public class Home extends javax.swing.JFrame {
         ));
         importProductBillScrollPane.setViewportView(importProductBillTable);
 
-        importBillItemFromExcelButton.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        importBillItemFromExcelButton.setBackground(new java.awt.Color(1, 169, 84));
+        importBillItemFromExcelButton.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        importBillItemFromExcelButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/sheet.png"))); // NOI18N
         importBillItemFromExcelButton.setText("Nhập excel");
         importBillItemFromExcelButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1060,20 +1118,26 @@ public class Home extends javax.swing.JFrame {
             }
         });
 
-        editBillItemButton.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        editBillItemButton.setBackground(new java.awt.Color(36, 169, 65));
+        editBillItemButton.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        editBillItemButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/edit_icon.png"))); // NOI18N
         editBillItemButton.setText("Sửa số lượng");
 
-        removeBillItemButton.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        removeBillItemButton.setBackground(new java.awt.Color(212, 57, 68));
+        removeBillItemButton.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        removeBillItemButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/remove_icon.png"))); // NOI18N
         removeBillItemButton.setText("Xóa sản phẩm");
 
-        totalValueLabel.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        totalValueLabel.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         totalValueLabel.setForeground(new java.awt.Color(204, 0, 51));
         totalValueLabel.setText("50,670,000đ");
 
-        totalImportBillLabel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        totalImportBillLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         totalImportBillLabel.setText("Tổng tiền:");
 
-        importBillProductButton.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        importBillProductButton.setBackground(new java.awt.Color(0, 155, 110));
+        importBillProductButton.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        importBillProductButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/import_icon.png"))); // NOI18N
         importBillProductButton.setText("Nhập hàng");
 
         javax.swing.GroupLayout importProductPanelLayout = new javax.swing.GroupLayout(importProductPanel);
@@ -1094,18 +1158,6 @@ public class Home extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(importProductPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(importProductPanelLayout.createSequentialGroup()
-                        .addComponent(totalImportBillLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(31, 31, 31)
-                        .addComponent(totalValueLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(importBillProductButton, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, importProductPanelLayout.createSequentialGroup()
-                        .addComponent(importBillItemFromExcelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(editBillItemButton, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(75, 75, 75)
-                        .addComponent(removeBillItemButton, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(importProductPanelLayout.createSequentialGroup()
                         .addGroup(importProductPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(importBillIdLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(providerNameLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -1115,7 +1167,22 @@ public class Home extends javax.swing.JFrame {
                             .addComponent(importBillIdTextField)
                             .addComponent(providerNameComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(importProductBillCreatorLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(importProductBillScrollPane))
+                    .addComponent(importProductBillScrollPane)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, importProductPanelLayout.createSequentialGroup()
+                        .addGroup(importProductPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(importProductPanelLayout.createSequentialGroup()
+                                .addComponent(totalImportBillLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(31, 31, 31)
+                                .addComponent(totalValueLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(60, 60, 60))
+                            .addGroup(importProductPanelLayout.createSequentialGroup()
+                                .addComponent(importBillItemFromExcelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(editBillItemButton)
+                                .addGap(48, 48, 48)))
+                        .addGroup(importProductPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(removeBillItemButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(importBillProductButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addGap(35, 35, 35))
         );
         importProductPanelLayout.setVerticalGroup(
@@ -1128,24 +1195,24 @@ public class Home extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(importProductPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(importProductAddButton, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(importProductQuantityTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(importProductQuantityLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(totalImportBillLabel)
-                    .addComponent(totalValueLabel))
+                    .addComponent(importProductQuantityTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(importProductQuantityLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(totalImportBillLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(totalValueLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, importProductPanelLayout.createSequentialGroup()
                 .addGap(16, 16, 16)
                 .addGroup(importProductPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(importBillIdLabel)
-                    .addComponent(importBillIdTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(importBillIdTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(23, 23, 23)
                 .addGroup(importProductPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(providerNameLabel)
-                    .addComponent(providerNameComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(providerNameComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(23, 23, 23)
                 .addGroup(importProductPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(importProductBillCreatorTextField)
-                    .addComponent(importProductBillCreatorLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(importProductBillCreatorLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(importProductBillScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 498, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(20, 20, 20)
@@ -1172,7 +1239,7 @@ public class Home extends javax.swing.JFrame {
             .addGroup(importBillPanelLayout.createSequentialGroup()
                 .addGap(452, 452, 452)
                 .addComponent(jLabel4)
-                .addContainerGap(633, Short.MAX_VALUE))
+                .addContainerGap(632, Short.MAX_VALUE))
         );
         importBillPanelLayout.setVerticalGroup(
             importBillPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1196,7 +1263,7 @@ public class Home extends javax.swing.JFrame {
             .addGroup(exportProductPanelLayout.createSequentialGroup()
                 .addGap(452, 452, 452)
                 .addComponent(jLabel5)
-                .addContainerGap(609, Short.MAX_VALUE))
+                .addContainerGap(610, Short.MAX_VALUE))
         );
         exportProductPanelLayout.setVerticalGroup(
             exportProductPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1220,7 +1287,7 @@ public class Home extends javax.swing.JFrame {
             .addGroup(exportBillPanelLayout.createSequentialGroup()
                 .addGap(452, 452, 452)
                 .addComponent(jLabel6)
-                .addContainerGap(635, Short.MAX_VALUE))
+                .addContainerGap(634, Short.MAX_VALUE))
         );
         exportBillPanelLayout.setVerticalGroup(
             exportBillPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1274,17 +1341,19 @@ public class Home extends javax.swing.JFrame {
         searchUsersPanel.setBackground(new java.awt.Color(255, 255, 255));
         searchUsersPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Tìm kiếm", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 14))); // NOI18N
 
-        userRolesComboBox.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        userRolesComboBox.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         userRolesComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-        searchUsersTextField.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        searchUsersTextField.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         searchUsersTextField.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 searchUsersTextFieldKeyReleased(evt);
             }
         });
 
-        searchUsersButton.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        searchUsersButton.setBackground(new java.awt.Color(65, 120, 190));
+        searchUsersButton.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        searchUsersButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/refresh.png"))); // NOI18N
         searchUsersButton.setText("Làm mới");
 
         javax.swing.GroupLayout searchUsersPanelLayout = new javax.swing.GroupLayout(searchUsersPanel);
@@ -1295,9 +1364,9 @@ public class Home extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(userRolesComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(searchUsersTextField)
+                .addComponent(searchUsersTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 161, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(searchUsersButton)
+                .addComponent(searchUsersButton, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         searchUsersPanelLayout.setVerticalGroup(
@@ -1317,7 +1386,9 @@ public class Home extends javax.swing.JFrame {
 
         jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
-        importUsersFromExcelButton.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        importUsersFromExcelButton.setBackground(new java.awt.Color(1, 169, 84));
+        importUsersFromExcelButton.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        importUsersFromExcelButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/sheet.png"))); // NOI18N
         importUsersFromExcelButton.setText("Nhập Excel");
         importUsersFromExcelButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1325,7 +1396,9 @@ public class Home extends javax.swing.JFrame {
             }
         });
 
-        exportUsersToExcelButton.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        exportUsersToExcelButton.setBackground(new java.awt.Color(0, 155, 110));
+        exportUsersToExcelButton.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        exportUsersToExcelButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/sheet.png"))); // NOI18N
         exportUsersToExcelButton.setText("Xuất Excel");
         exportUsersToExcelButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1333,7 +1406,9 @@ public class Home extends javax.swing.JFrame {
             }
         });
 
-        editUserButton.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        editUserButton.setBackground(new java.awt.Color(36, 169, 65));
+        editUserButton.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        editUserButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/edit_icon.png"))); // NOI18N
         editUserButton.setText("Sửa");
         editUserButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1341,7 +1416,9 @@ public class Home extends javax.swing.JFrame {
             }
         });
 
-        addUserButton.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        addUserButton.setBackground(new java.awt.Color(0, 122, 249));
+        addUserButton.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        addUserButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/add_circle_icon.png"))); // NOI18N
         addUserButton.setText("Thêm");
         addUserButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -1354,7 +1431,9 @@ public class Home extends javax.swing.JFrame {
             }
         });
 
-        deleteUserButton.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        deleteUserButton.setBackground(new java.awt.Color(212, 57, 68));
+        deleteUserButton.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        deleteUserButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/remove_icon.png"))); // NOI18N
         deleteUserButton.setText("Xoá");
         deleteUserButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1368,17 +1447,17 @@ public class Home extends javax.swing.JFrame {
             userFunctionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(userFunctionPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(addUserButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
-                .addComponent(editUserButton)
+                .addComponent(addUserButton, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(editUserButton, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(24, 24, 24)
-                .addComponent(deleteUserButton)
+                .addComponent(deleteUserButton, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(importUsersFromExcelButton)
+                .addComponent(importUsersFromExcelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(exportUsersToExcelButton)
+                .addComponent(exportUsersToExcelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(6, 6, 6))
         );
         userFunctionPanelLayout.setVerticalGroup(
@@ -1403,13 +1482,13 @@ public class Home extends javax.swing.JFrame {
             userPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(userPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(userPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(usersScrollPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 1103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(userPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(usersScrollPanel)
                     .addGroup(userPanelLayout.createSequentialGroup()
                         .addComponent(userFunctionPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(searchUsersPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap(31, Short.MAX_VALUE))
+                        .addComponent(searchUsersPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(31, Short.MAX_VALUE))))
         );
         userPanelLayout.setVerticalGroup(
             userPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1437,7 +1516,7 @@ public class Home extends javax.swing.JFrame {
             .addGroup(statisticsPanelLayout.createSequentialGroup()
                 .addGap(452, 452, 452)
                 .addComponent(jLabel9)
-                .addContainerGap(647, Short.MAX_VALUE))
+                .addContainerGap(646, Short.MAX_VALUE))
         );
         statisticsPanelLayout.setVerticalGroup(
             statisticsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1453,126 +1532,128 @@ public class Home extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void setActiveTab(String tabName) {
+        Color defaultColor = new Color(44, 43, 196);
+        Color activeColor = new Color(126, 142, 241);
         switch (tabName) {
             case "product" -> {
-                this.productTab.setBackground(new Color(179, 229, 252));
-                this.providerTab.setBackground(Color.WHITE);
-                this.importProductTab.setBackground(Color.WHITE);
-                this.importBillTab.setBackground(Color.WHITE);
-                this.exportProductTab.setBackground(Color.WHITE);
-                this.exportBillTab.setBackground(Color.WHITE);
-                this.inStockTab.setBackground(Color.WHITE);
-                this.userTab.setBackground(Color.WHITE);
-                this.statisticsTab.setBackground(Color.WHITE);
+                this.productTab.setBackground(activeColor);
+                this.providerTab.setBackground(defaultColor);
+                this.importProductTab.setBackground(defaultColor);
+                this.importBillTab.setBackground(defaultColor);
+                this.exportProductTab.setBackground(defaultColor);
+                this.exportBillTab.setBackground(defaultColor);
+                this.inStockTab.setBackground(defaultColor);
+                this.userTab.setBackground(defaultColor);
+                this.statisticsTab.setBackground(defaultColor);
                 break;
             }
             case "provider" -> {
-                this.productTab.setBackground(Color.WHITE);
-                this.providerTab.setBackground(new Color(179, 229, 252));
-                this.importProductTab.setBackground(Color.WHITE);
-                this.importBillTab.setBackground(Color.WHITE);
-                this.exportProductTab.setBackground(Color.WHITE);
-                this.exportBillTab.setBackground(Color.WHITE);
-                this.inStockTab.setBackground(Color.WHITE);
-                this.userTab.setBackground(Color.WHITE);
-                this.statisticsTab.setBackground(Color.WHITE);
+                this.productTab.setBackground(defaultColor);
+                this.providerTab.setBackground(activeColor);
+                this.importProductTab.setBackground(defaultColor);
+                this.importBillTab.setBackground(defaultColor);
+                this.exportProductTab.setBackground(defaultColor);
+                this.exportBillTab.setBackground(defaultColor);
+                this.inStockTab.setBackground(defaultColor);
+                this.userTab.setBackground(defaultColor);
+                this.statisticsTab.setBackground(defaultColor);
                 break;
             }
             case "import-product" -> {
-                this.productTab.setBackground(Color.WHITE);
-                this.providerTab.setBackground(Color.WHITE);
-                this.importProductTab.setBackground(new Color(179, 229, 252));
-                this.importBillTab.setBackground(Color.WHITE);
-                this.exportProductTab.setBackground(Color.WHITE);
-                this.exportBillTab.setBackground(Color.WHITE);
-                this.inStockTab.setBackground(Color.WHITE);
-                this.userTab.setBackground(Color.WHITE);
-                this.statisticsTab.setBackground(Color.WHITE);
+                this.productTab.setBackground(defaultColor);
+                this.providerTab.setBackground(defaultColor);
+                this.importProductTab.setBackground(activeColor);
+                this.importBillTab.setBackground(defaultColor);
+                this.exportProductTab.setBackground(defaultColor);
+                this.exportBillTab.setBackground(defaultColor);
+                this.inStockTab.setBackground(defaultColor);
+                this.userTab.setBackground(defaultColor);
+                this.statisticsTab.setBackground(defaultColor);
                 break;
             }
             case "import-bill" -> {
-                this.productTab.setBackground(Color.WHITE);
-                this.providerTab.setBackground(Color.WHITE);
-                this.importProductTab.setBackground(Color.WHITE);
-                this.importBillTab.setBackground(new Color(179, 229, 252));
-                this.exportProductTab.setBackground(Color.WHITE);
-                this.exportBillTab.setBackground(Color.WHITE);
-                this.inStockTab.setBackground(Color.WHITE);
-                this.userTab.setBackground(Color.WHITE);
-                this.statisticsTab.setBackground(Color.WHITE);
+                this.productTab.setBackground(defaultColor);
+                this.providerTab.setBackground(defaultColor);
+                this.importProductTab.setBackground(defaultColor);
+                this.importBillTab.setBackground(activeColor);
+                this.exportProductTab.setBackground(defaultColor);
+                this.exportBillTab.setBackground(defaultColor);
+                this.inStockTab.setBackground(defaultColor);
+                this.userTab.setBackground(defaultColor);
+                this.statisticsTab.setBackground(defaultColor);
                 break;
             }
             case "export-product" -> {
-                this.productTab.setBackground(Color.WHITE);
-                this.providerTab.setBackground(Color.WHITE);
-                this.importProductTab.setBackground(Color.WHITE);
-                this.importBillTab.setBackground(Color.WHITE);
-                this.exportProductTab.setBackground(new Color(179, 229, 252));
-                this.exportBillTab.setBackground(Color.WHITE);
-                this.inStockTab.setBackground(Color.WHITE);
-                this.userTab.setBackground(Color.WHITE);
-                this.statisticsTab.setBackground(Color.WHITE);
+                this.productTab.setBackground(defaultColor);
+                this.providerTab.setBackground(defaultColor);
+                this.importProductTab.setBackground(defaultColor);
+                this.importBillTab.setBackground(defaultColor);
+                this.exportProductTab.setBackground(activeColor);
+                this.exportBillTab.setBackground(defaultColor);
+                this.inStockTab.setBackground(defaultColor);
+                this.userTab.setBackground(defaultColor);
+                this.statisticsTab.setBackground(defaultColor);
                 break;
             }
             case "export-bill" -> {
-                this.productTab.setBackground(Color.WHITE);
-                this.providerTab.setBackground(Color.WHITE);
-                this.importProductTab.setBackground(Color.WHITE);
-                this.importBillTab.setBackground(Color.WHITE);
-                this.exportProductTab.setBackground(Color.WHITE);
-                this.exportBillTab.setBackground(new Color(179, 229, 252));
-                this.inStockTab.setBackground(Color.WHITE);
-                this.userTab.setBackground(Color.WHITE);
-                this.statisticsTab.setBackground(Color.WHITE);
+                this.productTab.setBackground(defaultColor);
+                this.providerTab.setBackground(defaultColor);
+                this.importProductTab.setBackground(defaultColor);
+                this.importBillTab.setBackground(defaultColor);
+                this.exportProductTab.setBackground(defaultColor);
+                this.exportBillTab.setBackground(activeColor);
+                this.inStockTab.setBackground(defaultColor);
+                this.userTab.setBackground(defaultColor);
+                this.statisticsTab.setBackground(defaultColor);
                 break;
             }
             case "in-stock" -> {
-                this.productTab.setBackground(Color.WHITE);
-                this.providerTab.setBackground(Color.WHITE);
-                this.importProductTab.setBackground(Color.WHITE);
-                this.importBillTab.setBackground(Color.WHITE);
-                this.exportProductTab.setBackground(Color.WHITE);
-                this.exportBillTab.setBackground(Color.WHITE);
-                this.inStockTab.setBackground(new Color(179, 229, 252));
-                this.userTab.setBackground(Color.WHITE);
-                this.statisticsTab.setBackground(Color.WHITE);
+                this.productTab.setBackground(defaultColor);
+                this.providerTab.setBackground(defaultColor);
+                this.importProductTab.setBackground(defaultColor);
+                this.importBillTab.setBackground(defaultColor);
+                this.exportProductTab.setBackground(defaultColor);
+                this.exportBillTab.setBackground(defaultColor);
+                this.inStockTab.setBackground(activeColor);
+                this.userTab.setBackground(defaultColor);
+                this.statisticsTab.setBackground(defaultColor);
                 break;
             }
             case "user" -> {
-                this.productTab.setBackground(Color.WHITE);
-                this.providerTab.setBackground(Color.WHITE);
-                this.importProductTab.setBackground(Color.WHITE);
-                this.importBillTab.setBackground(Color.WHITE);
-                this.exportProductTab.setBackground(Color.WHITE);
-                this.exportBillTab.setBackground(Color.WHITE);
-                this.inStockTab.setBackground(Color.WHITE);
-                this.userTab.setBackground(new Color(179, 229, 252));
-                this.statisticsTab.setBackground(Color.WHITE);
+                this.productTab.setBackground(defaultColor);
+                this.providerTab.setBackground(defaultColor);
+                this.importProductTab.setBackground(defaultColor);
+                this.importBillTab.setBackground(defaultColor);
+                this.exportProductTab.setBackground(defaultColor);
+                this.exportBillTab.setBackground(defaultColor);
+                this.inStockTab.setBackground(defaultColor);
+                this.userTab.setBackground(activeColor);
+                this.statisticsTab.setBackground(defaultColor);
                 break;
             }
             case "statistics" -> {
-                this.productTab.setBackground(Color.WHITE);
-                this.providerTab.setBackground(Color.WHITE);
-                this.importProductTab.setBackground(Color.WHITE);
-                this.importBillTab.setBackground(Color.WHITE);
-                this.exportProductTab.setBackground(Color.WHITE);
-                this.exportBillTab.setBackground(Color.WHITE);
-                this.inStockTab.setBackground(Color.WHITE);
-                this.userTab.setBackground(Color.WHITE);
-                this.statisticsTab.setBackground(new Color(179, 229, 252));
+                this.productTab.setBackground(defaultColor);
+                this.providerTab.setBackground(defaultColor);
+                this.importProductTab.setBackground(defaultColor);
+                this.importBillTab.setBackground(defaultColor);
+                this.exportProductTab.setBackground(defaultColor);
+                this.exportBillTab.setBackground(defaultColor);
+                this.inStockTab.setBackground(defaultColor);
+                this.userTab.setBackground(defaultColor);
+                this.statisticsTab.setBackground(activeColor);
                 break;
             }
 
             default -> {
-                this.productTab.setBackground(Color.WHITE);
-                this.providerTab.setBackground(Color.WHITE);
-                this.importProductTab.setBackground(Color.WHITE);
-                this.importBillTab.setBackground(Color.WHITE);
-                this.exportProductTab.setBackground(Color.WHITE);
-                this.exportBillTab.setBackground(Color.WHITE);
-                this.inStockTab.setBackground(Color.WHITE);
-                this.userTab.setBackground(Color.WHITE);
-                this.statisticsTab.setBackground(Color.WHITE);
+                this.productTab.setBackground(defaultColor);
+                this.providerTab.setBackground(defaultColor);
+                this.importProductTab.setBackground(defaultColor);
+                this.importBillTab.setBackground(defaultColor);
+                this.exportProductTab.setBackground(defaultColor);
+                this.exportBillTab.setBackground(defaultColor);
+                this.inStockTab.setBackground(defaultColor);
+                this.userTab.setBackground(defaultColor);
+                this.statisticsTab.setBackground(defaultColor);
                 break;
             }
         }
@@ -2023,6 +2104,9 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JLabel inStockLabel;
     private javax.swing.JPanel inStockPanel;
     private javax.swing.JPanel inStockTab;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -2032,6 +2116,10 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JToolBar.Separator jSeparator1;
     private javax.swing.JToolBar.Separator jSeparator2;
+    private javax.swing.JSeparator jSeparator3;
+    private javax.swing.JSeparator jSeparator4;
+    private javax.swing.JSeparator jSeparator5;
+    private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel lastNameLabel;
     private javax.swing.JTextField lastNameTextField;
     private javax.swing.JLabel loginedUsername;
