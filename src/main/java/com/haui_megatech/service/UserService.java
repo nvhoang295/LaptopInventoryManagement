@@ -17,5 +17,5 @@ public interface UserService {
     ListItemsResponseDTO<User> getList();
     ListItemsResponseDTO<User> searchList(String keyword);
     CommonResponseDTO addOne(User user);
-    
+    CommonResponseDTO deleteOne(Integer id);
 }

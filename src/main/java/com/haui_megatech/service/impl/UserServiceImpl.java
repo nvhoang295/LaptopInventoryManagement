@@ -71,4 +71,23 @@ public class UserServiceImpl implements UserService {
                         .build();
     }
 
+    @Override
+    public CommonResponseDTO deleteOne(Integer id) {
+        Optional<User> found = userRepository.findById(id);
+        if (found.isEmpty()) {
+            return CommonResponseDTO
+                    .builder()
+                    .success(Boolean.FALSE)
+                    .message(ErrorMessage.User.NOT_FOUND)
+                    .build();
+        }
+
+        userRepository.deleteById(id);
+
+        return CommonResponseDTO
+                .builder()
+                .success(Boolean.TRUE)
+                .build();
+    }
+
 }

@@ -77,7 +77,7 @@ public class Home extends javax.swing.JFrame {
                     }
             );
         });
-
+        
         usersTable.setModel(tableModel);
     }
 
@@ -112,8 +112,12 @@ public class Home extends javax.swing.JFrame {
         addUserDiaglogButton = new javax.swing.JButton();
         cancelAddUserDiaglogButton = new javax.swing.JButton();
         sendCodeAddUserDiaglogButton = new javax.swing.JButton();
-        addUserDiaglogMessage = new javax.swing.JDialog();
-        addUserDiaglogMessageLabel = new javax.swing.JLabel();
+        diaglogMessage = new javax.swing.JDialog();
+        diaglogMessageLabel = new javax.swing.JLabel();
+        deleteUserConfirmDiaglog = new javax.swing.JDialog();
+        deleteUserConfirmDiaglogLabel = new javax.swing.JLabel();
+        confirmDeleteUser = new javax.swing.JButton();
+        cancelDeleteUser = new javax.swing.JButton();
         sidebarPanel = new javax.swing.JPanel();
         loginedUsername = new javax.swing.JLabel();
         productTab = new javax.swing.JPanel();
@@ -230,7 +234,6 @@ public class Home extends javax.swing.JFrame {
         );
 
         addUserDiaglog.setMinimumSize(new java.awt.Dimension(400, 455));
-        addUserDiaglog.setPreferredSize(new java.awt.Dimension(400, 455));
         addUserDiaglog.setSize(new java.awt.Dimension(400, 455));
         addUserDiaglog.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -321,26 +324,74 @@ public class Home extends javax.swing.JFrame {
         sendCodeAddUserDiaglogButton.setText("Gửi mã");
         addUserDiaglog.getContentPane().add(sendCodeAddUserDiaglogButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 310, 90, 30));
 
-        addUserDiaglogMessage.setMinimumSize(new java.awt.Dimension(400, 300));
-        addUserDiaglogMessage.setSize(new java.awt.Dimension(400, 300));
+        diaglogMessage.setMinimumSize(new java.awt.Dimension(400, 300));
+        diaglogMessage.setSize(new java.awt.Dimension(400, 300));
 
-        addUserDiaglogMessageLabel.setText("some message...");
+        diaglogMessageLabel.setText("some message...");
 
-        javax.swing.GroupLayout addUserDiaglogMessageLayout = new javax.swing.GroupLayout(addUserDiaglogMessage.getContentPane());
-        addUserDiaglogMessage.getContentPane().setLayout(addUserDiaglogMessageLayout);
-        addUserDiaglogMessageLayout.setHorizontalGroup(
-            addUserDiaglogMessageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(addUserDiaglogMessageLayout.createSequentialGroup()
+        javax.swing.GroupLayout diaglogMessageLayout = new javax.swing.GroupLayout(diaglogMessage.getContentPane());
+        diaglogMessage.getContentPane().setLayout(diaglogMessageLayout);
+        diaglogMessageLayout.setHorizontalGroup(
+            diaglogMessageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(diaglogMessageLayout.createSequentialGroup()
                 .addGap(159, 159, 159)
-                .addComponent(addUserDiaglogMessageLabel)
+                .addComponent(diaglogMessageLabel)
                 .addContainerGap(154, Short.MAX_VALUE))
         );
-        addUserDiaglogMessageLayout.setVerticalGroup(
-            addUserDiaglogMessageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(addUserDiaglogMessageLayout.createSequentialGroup()
+        diaglogMessageLayout.setVerticalGroup(
+            diaglogMessageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(diaglogMessageLayout.createSequentialGroup()
                 .addGap(121, 121, 121)
-                .addComponent(addUserDiaglogMessageLabel)
+                .addComponent(diaglogMessageLabel)
                 .addContainerGap(163, Short.MAX_VALUE))
+        );
+
+        deleteUserConfirmDiaglog.setMinimumSize(new java.awt.Dimension(400, 300));
+        deleteUserConfirmDiaglog.setResizable(false);
+        deleteUserConfirmDiaglog.setSize(new java.awt.Dimension(400, 300));
+
+        deleteUserConfirmDiaglogLabel.setText("Content...");
+
+        confirmDeleteUser.setText("Đồng ý");
+        confirmDeleteUser.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                confirmDeleteUserActionPerformed(evt);
+            }
+        });
+
+        cancelDeleteUser.setText("Huỷ bỏ");
+        cancelDeleteUser.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelDeleteUserActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout deleteUserConfirmDiaglogLayout = new javax.swing.GroupLayout(deleteUserConfirmDiaglog.getContentPane());
+        deleteUserConfirmDiaglog.getContentPane().setLayout(deleteUserConfirmDiaglogLayout);
+        deleteUserConfirmDiaglogLayout.setHorizontalGroup(
+            deleteUserConfirmDiaglogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(deleteUserConfirmDiaglogLayout.createSequentialGroup()
+                .addGroup(deleteUserConfirmDiaglogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(deleteUserConfirmDiaglogLayout.createSequentialGroup()
+                        .addGap(152, 152, 152)
+                        .addComponent(deleteUserConfirmDiaglogLabel))
+                    .addGroup(deleteUserConfirmDiaglogLayout.createSequentialGroup()
+                        .addGap(78, 78, 78)
+                        .addComponent(confirmDeleteUser)
+                        .addGap(58, 58, 58)
+                        .addComponent(cancelDeleteUser)))
+                .addContainerGap(120, Short.MAX_VALUE))
+        );
+        deleteUserConfirmDiaglogLayout.setVerticalGroup(
+            deleteUserConfirmDiaglogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(deleteUserConfirmDiaglogLayout.createSequentialGroup()
+                .addGap(67, 67, 67)
+                .addComponent(deleteUserConfirmDiaglogLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 108, Short.MAX_VALUE)
+                .addGroup(deleteUserConfirmDiaglogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(confirmDeleteUser)
+                    .addComponent(cancelDeleteUser))
+                .addGap(86, 86, 86))
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -1764,7 +1815,12 @@ public class Home extends javax.swing.JFrame {
     }//GEN-LAST:event_exportUsersToExcelButtonActionPerformed
 
     private void editUserButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editUserButtonActionPerformed
-        // TODO add your handling code here:
+        int[] cols = usersTable.getSelectedRows();
+        if (cols.length == 0) {
+            showUserDiaglogMessage(ErrorMessage.User.EMPTY_SELECTED_ROWS);
+            return;
+        }
+        
     }//GEN-LAST:event_editUserButtonActionPerformed
 
     private void addUserButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addUserButtonActionPerformed
@@ -1772,9 +1828,21 @@ public class Home extends javax.swing.JFrame {
     }//GEN-LAST:event_addUserButtonActionPerformed
 
     private void deleteUserButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteUserButtonActionPerformed
-        // TODO add your handling code here:
+        int[] rows = usersTable.getSelectedRows();
+        if (rows.length == 0) {
+            showUserDiaglogMessage(ErrorMessage.User.EMPTY_SELECTED_ROWS);
+            return;
+        }
+        showDeleteUserConfirmDiaglog(String.format("Bạn có chắc chắn xoá %d bản ghi này?", rows.length));
+        
     }//GEN-LAST:event_deleteUserButtonActionPerformed
-
+    
+    private void showDeleteUserConfirmDiaglog(String content) {
+        deleteUserConfirmDiaglog.setVisible(true);
+        deleteUserConfirmDiaglog.setLocationRelativeTo(this);
+        deleteUserConfirmDiaglogLabel.setText(content);
+    }
+    
     private void importUsersFromExcelButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_importUsersFromExcelButton1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_importUsersFromExcelButton1ActionPerformed
@@ -1965,12 +2033,12 @@ public class Home extends javax.swing.JFrame {
                 username, firstName, lastName, phoneNumber, email, 
                 otp, password, confirmPassword)
         ) {
-            showAddUserDiaglogMessage(ErrorMessage.User.BLANK_INPUT);
+            showUserDiaglogMessage(ErrorMessage.User.BLANK_INPUT);
             return;
         }    
         
         if (!password.equals(confirmPassword)) {
-            showAddUserDiaglogMessage(ErrorMessage.User.MISMATCHED_PASSWORD);
+            showUserDiaglogMessage(ErrorMessage.User.MISMATCHED_PASSWORD);
             return;
         }
         
@@ -1985,20 +2053,45 @@ public class Home extends javax.swing.JFrame {
                 .build());
         if (result.success()) {
             addUserDiaglog.setVisible(false);
-            showAddUserDiaglogMessage(SuccessMessage.User.ADDED);            
+            showUserDiaglogMessage(SuccessMessage.User.ADDED);            
             loadDataToTableUsers(null);
         }
     }//GEN-LAST:event_addUserDiaglogButtonActionPerformed
     
-    private void showAddUserDiaglogMessage(String message) {
-        addUserDiaglogMessage.setVisible(true);
-        addUserDiaglogMessage.setLocationRelativeTo(this);
-        addUserDiaglogMessageLabel.setText(message);
+    private void showUserDiaglogMessage(String message) {
+        diaglogMessage.setVisible(true);
+        diaglogMessage.setLocationRelativeTo(this);
+        diaglogMessageLabel.setText(message);
     }
     
     private void cancelAddUserDiaglogButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelAddUserDiaglogButtonActionPerformed
-        // TODO add your handling code here:
+        usernameTextField.setText("");
+        firstNameTextField.setText("");
+        lastNameTextField.setText("");
+        phoneNumberTextField.setText("");
+        emailTextField.setText("");
+        confirmEmailOTPTextField.setText("");
+        passwordField.setText("");
+        confirmPasswordField.setText("");
+        
+        addUserDiaglog.dispose();
     }//GEN-LAST:event_cancelAddUserDiaglogButtonActionPerformed
+
+    private void confirmDeleteUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmDeleteUserActionPerformed
+        deleteUserConfirmDiaglog.dispose();
+        int[] rows = usersTable.getSelectedRows();
+        final int ID_COL_INDEX = 0;
+        for (int row : rows) {
+            userController.deleteOne(Integer.valueOf(usersTable.getValueAt(row, ID_COL_INDEX).toString()));
+        }
+        loadDataToTableUsers(null);
+        showUserDiaglogMessage(String.format("Xoá thành công %d bản ghi.", rows.length));
+        
+    }//GEN-LAST:event_confirmDeleteUserActionPerformed
+
+    private void cancelDeleteUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelDeleteUserActionPerformed
+        deleteUserConfirmDiaglog.dispose();
+    }//GEN-LAST:event_cancelDeleteUserActionPerformed
 
     /**
      * @param args the command line arguments
@@ -2023,15 +2116,19 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JButton addUserButton1;
     private javax.swing.JDialog addUserDiaglog;
     private javax.swing.JButton addUserDiaglogButton;
-    private javax.swing.JDialog addUserDiaglogMessage;
-    private javax.swing.JLabel addUserDiaglogMessageLabel;
     private javax.swing.JButton cancelAddUserDiaglogButton;
+    private javax.swing.JButton cancelDeleteUser;
+    private javax.swing.JButton confirmDeleteUser;
     private javax.swing.JLabel confirmEmailOTPLabel;
     private javax.swing.JTextField confirmEmailOTPTextField;
     private javax.swing.JPasswordField confirmPasswordField;
     private javax.swing.JLabel confirmPasswordLabel;
     private javax.swing.JButton deleteUserButton;
     private javax.swing.JButton deleteUserButton1;
+    private javax.swing.JDialog deleteUserConfirmDiaglog;
+    private javax.swing.JLabel deleteUserConfirmDiaglogLabel;
+    private javax.swing.JDialog diaglogMessage;
+    private javax.swing.JLabel diaglogMessageLabel;
     private javax.swing.JButton editBillItemButton;
     private javax.swing.JButton editUserButton;
     private javax.swing.JButton editUserButton1;

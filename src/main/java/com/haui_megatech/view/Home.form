@@ -50,9 +50,6 @@
         <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
           <Dimension value="[400, 455]"/>
         </Property>
-        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-          <Dimension value="[400, 455]"/>
-        </Property>
         <Property name="size" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
           <Dimension value="[400, 455]"/>
         </Property>
@@ -254,7 +251,7 @@
         </Component>
       </SubComponents>
     </Container>
-    <Container class="javax.swing.JDialog" name="addUserDiaglogMessage">
+    <Container class="javax.swing.JDialog" name="diaglogMessage">
       <Properties>
         <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
           <Dimension value="[400, 300]"/>
@@ -269,7 +266,7 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="159" max="-2" attributes="0"/>
-                  <Component id="addUserDiaglogMessageLabel" min="-2" max="-2" attributes="0"/>
+                  <Component id="diaglogMessageLabel" min="-2" max="-2" attributes="0"/>
                   <EmptySpace pref="154" max="32767" attributes="0"/>
               </Group>
           </Group>
@@ -278,17 +275,87 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="121" max="-2" attributes="0"/>
-                  <Component id="addUserDiaglogMessageLabel" min="-2" max="-2" attributes="0"/>
+                  <Component id="diaglogMessageLabel" min="-2" max="-2" attributes="0"/>
                   <EmptySpace pref="163" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JLabel" name="addUserDiaglogMessageLabel">
+        <Component class="javax.swing.JLabel" name="diaglogMessageLabel">
           <Properties>
             <Property name="text" type="java.lang.String" value="some message..."/>
           </Properties>
+        </Component>
+      </SubComponents>
+    </Container>
+    <Container class="javax.swing.JDialog" name="deleteUserConfirmDiaglog">
+      <Properties>
+        <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+          <Dimension value="[400, 300]"/>
+        </Property>
+        <Property name="resizable" type="boolean" value="false"/>
+        <Property name="size" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+          <Dimension value="[400, 300]"/>
+        </Property>
+      </Properties>
+
+      <Layout>
+        <DimensionLayout dim="0">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" attributes="0">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="152" max="-2" attributes="0"/>
+                          <Component id="deleteUserConfirmDiaglogLabel" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="78" max="-2" attributes="0"/>
+                          <Component id="confirmDeleteUser" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="58" max="-2" attributes="0"/>
+                          <Component id="cancelDeleteUser" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <EmptySpace pref="120" max="32767" attributes="0"/>
+              </Group>
+          </Group>
+        </DimensionLayout>
+        <DimensionLayout dim="1">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace min="-2" pref="67" max="-2" attributes="0"/>
+                  <Component id="deleteUserConfirmDiaglogLabel" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace pref="108" max="32767" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="confirmDeleteUser" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="cancelDeleteUser" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace min="-2" pref="86" max="-2" attributes="0"/>
+              </Group>
+          </Group>
+        </DimensionLayout>
+      </Layout>
+      <SubComponents>
+        <Component class="javax.swing.JLabel" name="deleteUserConfirmDiaglogLabel">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Content..."/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JButton" name="confirmDeleteUser">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="&#x110;&#x1ed3;ng &#xfd;"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="confirmDeleteUserActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="cancelDeleteUser">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Hu&#x1ef7; b&#x1ecf;"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cancelDeleteUserActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

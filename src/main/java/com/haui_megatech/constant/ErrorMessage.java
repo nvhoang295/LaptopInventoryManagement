@@ -28,6 +28,8 @@ public class ErrorMessage {
         public static final String SAVE = "Lưu người dùng không thành công.";
         public static final String BLANK_INPUT = "Vui lòng nhập đầy đủ tất cả các trường thuộc tính.";
         public static final String MISMATCHED_PASSWORD = "Mật khẩu xác nhận không đúng.";
+        public static final String EMPTY_SELECTED_ROWS = "Vui lòng chọn ít nhất 1 bản ghi.";
+        public static final String NOT_FOUND = "Không tìm thấy người dùng";
 
     }
 }

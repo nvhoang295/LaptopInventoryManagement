@@ -31,4 +31,8 @@ public class UserController {
     public CommonResponseDTO addOne(User user) {
         return userService.addOne(user);
     }
+    
+    public CommonResponseDTO deleteOne(Integer id) {
+        return userService.deleteOne(id);
+    }
 }
