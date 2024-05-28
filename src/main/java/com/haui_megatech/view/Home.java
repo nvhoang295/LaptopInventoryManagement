@@ -207,6 +207,7 @@ public class Home extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
 
         logoutDiaglog.setMinimumSize(new java.awt.Dimension(400, 300));
+        logoutDiaglog.setPreferredSize(new java.awt.Dimension(360, 250));
         logoutDiaglog.setSize(new java.awt.Dimension(360, 250));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
@@ -239,29 +240,31 @@ public class Home extends javax.swing.JFrame {
         jButton1.setBackground(new java.awt.Color(44, 43, 196));
         jButton1.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         jButton1.setText("Huỷ");
+        jButton1.setBorderPainted(false);
         jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 170, 80, 30));
 
         jButton2.setBackground(new java.awt.Color(255, 51, 51));
         jButton2.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         jButton2.setText("Thoát");
+        jButton2.setBorderPainted(false);
         jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 170, 80, 30));
 
         javax.swing.GroupLayout logoutDiaglogLayout = new javax.swing.GroupLayout(logoutDiaglog.getContentPane());
         logoutDiaglog.getContentPane().setLayout(logoutDiaglogLayout);
         logoutDiaglogLayout.setHorizontalGroup(
             logoutDiaglogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 360, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         logoutDiaglogLayout.setVerticalGroup(
             logoutDiaglogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 250, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         addUserDiaglog.setTitle("Thêm người dùng");
         addUserDiaglog.setBackground(new java.awt.Color(255, 255, 255));
-        addUserDiaglog.setMinimumSize(new java.awt.Dimension(430, 450));
-        addUserDiaglog.setPreferredSize(new java.awt.Dimension(430, 450));
-        addUserDiaglog.setSize(new java.awt.Dimension(430, 450));
+        addUserDiaglog.setMinimumSize(new java.awt.Dimension(450, 500));
+        addUserDiaglog.setPreferredSize(new java.awt.Dimension(450, 500));
+        addUserDiaglog.setSize(new java.awt.Dimension(450, 500));
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setMinimumSize(new java.awt.Dimension(430, 450));
@@ -354,26 +357,32 @@ public class Home extends javax.swing.JFrame {
         });
         jPanel2.add(confirmEmailOTPTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 350, 100, 30));
 
+        addUserDiaglogButton.setBackground(new java.awt.Color(0, 122, 249));
         addUserDiaglogButton.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         addUserDiaglogButton.setText("Thêm mới");
+        addUserDiaglogButton.setBorderPainted(false);
         addUserDiaglogButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 addUserDiaglogButtonActionPerformed(evt);
             }
         });
-        jPanel2.add(addUserDiaglogButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 390, -1, -1));
+        jPanel2.add(addUserDiaglogButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 400, -1, -1));
 
+        cancelAddUserDiaglogButton.setBackground(new java.awt.Color(212, 57, 68));
         cancelAddUserDiaglogButton.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         cancelAddUserDiaglogButton.setText("Huỷ bỏ");
+        cancelAddUserDiaglogButton.setBorderPainted(false);
         cancelAddUserDiaglogButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cancelAddUserDiaglogButtonActionPerformed(evt);
             }
         });
-        jPanel2.add(cancelAddUserDiaglogButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 390, -1, -1));
+        jPanel2.add(cancelAddUserDiaglogButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 400, -1, -1));
 
+        sendCodeAddUserDiaglogButton.setBackground(new java.awt.Color(36, 169, 65));
         sendCodeAddUserDiaglogButton.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         sendCodeAddUserDiaglogButton.setText("Gửi mã");
+        sendCodeAddUserDiaglogButton.setBorderPainted(false);
         jPanel2.add(sendCodeAddUserDiaglogButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 350, 90, 30));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -386,11 +395,11 @@ public class Home extends javax.swing.JFrame {
         addUserDiaglog.getContentPane().setLayout(addUserDiaglogLayout);
         addUserDiaglogLayout.setHorizontalGroup(
             addUserDiaglogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 440, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 448, Short.MAX_VALUE)
         );
         addUserDiaglogLayout.setVerticalGroup(
             addUserDiaglogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 470, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 505, Short.MAX_VALUE)
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -1058,6 +1067,7 @@ public class Home extends javax.swing.JFrame {
         searchImportProductRefreshButton.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         searchImportProductRefreshButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/refresh.png"))); // NOI18N
         searchImportProductRefreshButton.setText("Làm Mới");
+        searchImportProductRefreshButton.setBorderPainted(false);
         searchImportProductRefreshButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 searchImportProductRefreshButtonActionPerformed(evt);
@@ -1116,6 +1126,7 @@ public class Home extends javax.swing.JFrame {
         importProductAddButton.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         importProductAddButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/add_circle_icon.png"))); // NOI18N
         importProductAddButton.setText("THÊM");
+        importProductAddButton.setBorderPainted(false);
         importProductAddButton.setMaximumSize(new java.awt.Dimension(64, 22));
         importProductAddButton.setMinimumSize(new java.awt.Dimension(64, 22));
         importProductAddButton.setPreferredSize(new java.awt.Dimension(64, 22));
@@ -1164,6 +1175,7 @@ public class Home extends javax.swing.JFrame {
         importBillItemFromExcelButton.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         importBillItemFromExcelButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/sheet.png"))); // NOI18N
         importBillItemFromExcelButton.setText("Nhập excel");
+        importBillItemFromExcelButton.setBorderPainted(false);
         importBillItemFromExcelButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 importBillItemFromExcelButtonActionPerformed(evt);
@@ -1174,11 +1186,13 @@ public class Home extends javax.swing.JFrame {
         editBillItemButton.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         editBillItemButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/edit_icon.png"))); // NOI18N
         editBillItemButton.setText("Sửa số lượng");
+        editBillItemButton.setBorderPainted(false);
 
         removeBillItemButton.setBackground(new java.awt.Color(212, 57, 68));
         removeBillItemButton.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         removeBillItemButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/remove_icon.png"))); // NOI18N
         removeBillItemButton.setText("Xóa sản phẩm");
+        removeBillItemButton.setBorderPainted(false);
 
         totalValueLabel.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         totalValueLabel.setForeground(new java.awt.Color(204, 0, 51));
@@ -1191,6 +1205,7 @@ public class Home extends javax.swing.JFrame {
         importBillProductButton.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         importBillProductButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/import_icon.png"))); // NOI18N
         importBillProductButton.setText("Nhập hàng");
+        importBillProductButton.setBorderPainted(false);
 
         javax.swing.GroupLayout importProductPanelLayout = new javax.swing.GroupLayout(importProductPanel);
         importProductPanel.setLayout(importProductPanelLayout);
@@ -1407,6 +1422,7 @@ public class Home extends javax.swing.JFrame {
         searchUsersButton.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         searchUsersButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/refresh.png"))); // NOI18N
         searchUsersButton.setText("Làm mới");
+        searchUsersButton.setBorderPainted(false);
 
         javax.swing.GroupLayout searchUsersPanelLayout = new javax.swing.GroupLayout(searchUsersPanel);
         searchUsersPanel.setLayout(searchUsersPanelLayout);
@@ -1442,6 +1458,7 @@ public class Home extends javax.swing.JFrame {
         importUsersFromExcelButton.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         importUsersFromExcelButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/sheet.png"))); // NOI18N
         importUsersFromExcelButton.setText("Nhập Excel");
+        importUsersFromExcelButton.setBorderPainted(false);
         importUsersFromExcelButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 importUsersFromExcelButtonActionPerformed(evt);
@@ -1452,6 +1469,7 @@ public class Home extends javax.swing.JFrame {
         exportUsersToExcelButton.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         exportUsersToExcelButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/sheet.png"))); // NOI18N
         exportUsersToExcelButton.setText("Xuất Excel");
+        exportUsersToExcelButton.setBorderPainted(false);
         exportUsersToExcelButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 exportUsersToExcelButtonActionPerformed(evt);
@@ -1462,6 +1480,7 @@ public class Home extends javax.swing.JFrame {
         editUserButton.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         editUserButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/edit_icon.png"))); // NOI18N
         editUserButton.setText("Sửa");
+        editUserButton.setBorderPainted(false);
         editUserButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 editUserButtonActionPerformed(evt);
@@ -1472,6 +1491,7 @@ public class Home extends javax.swing.JFrame {
         addUserButton.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         addUserButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/add_circle_icon.png"))); // NOI18N
         addUserButton.setText("Thêm");
+        addUserButton.setBorderPainted(false);
         addUserButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 addUserButtonMouseClicked(evt);
@@ -1487,6 +1507,7 @@ public class Home extends javax.swing.JFrame {
         deleteUserButton.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         deleteUserButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/remove_icon.png"))); // NOI18N
         deleteUserButton.setText("Xoá");
+        deleteUserButton.setBorderPainted(false);
         deleteUserButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 deleteUserButtonActionPerformed(evt);
