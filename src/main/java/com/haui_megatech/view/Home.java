@@ -117,13 +117,18 @@ public class Home extends javax.swing.JFrame {
         addUserDiaglogButton = new javax.swing.JButton();
         cancelAddUserDiaglogButton = new javax.swing.JButton();
         sendCodeAddUserDiaglogButton = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
         diaglogMessage = new javax.swing.JDialog();
+        jPanel4 = new javax.swing.JPanel();
         diaglogMessageLabel = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        jButton3 = new javax.swing.JButton();
         deleteUserConfirmDiaglog = new javax.swing.JDialog();
+        jPanel3 = new javax.swing.JPanel();
         deleteUserConfirmDiaglogLabel = new javax.swing.JLabel();
         confirmDeleteUser = new javax.swing.JButton();
         cancelDeleteUser = new javax.swing.JButton();
-        jLabel3 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
         sidebarPanel = new javax.swing.JPanel();
         loginedUsername = new javax.swing.JLabel();
         productTab = new javax.swing.JPanel();
@@ -268,9 +273,6 @@ public class Home extends javax.swing.JFrame {
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        addUserDiaglog.setMinimumSize(new java.awt.Dimension(400, 455));
-        addUserDiaglog.setSize(new java.awt.Dimension(400, 455));
-        addUserDiaglog.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         addUserDiaglog.setTitle("Thêm người dùng");
         addUserDiaglog.setBackground(new java.awt.Color(255, 255, 255));
         addUserDiaglog.setMinimumSize(new java.awt.Dimension(450, 500));
@@ -412,74 +414,101 @@ public class Home extends javax.swing.JFrame {
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 505, Short.MAX_VALUE)
         );
 
-        diaglogMessage.setMinimumSize(new java.awt.Dimension(400, 300));
-        diaglogMessage.setSize(new java.awt.Dimension(400, 300));
+        diaglogMessage.setTitle("Thông báo");
+        diaglogMessage.setMinimumSize(new java.awt.Dimension(400, 250));
+        diaglogMessage.setSize(new java.awt.Dimension(400, 250));
 
-        diaglogMessageLabel.setText("some message...");
+        jPanel4.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel4.setMinimumSize(new java.awt.Dimension(400, 250));
+        jPanel4.setPreferredSize(new java.awt.Dimension(400, 250));
+        jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        diaglogMessageLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        diaglogMessageLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        diaglogMessageLabel.setText("Thêm mới người dùng thành công!");
+        jPanel4.add(diaglogMessageLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 65, 380, 65));
+
+        jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(212, 57, 68));
+        jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel10.setText("THÔNG BÁO");
+        jPanel4.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 34, 388, -1));
+
+        jButton3.setBackground(new java.awt.Color(44, 43, 196));
+        jButton3.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        jButton3.setForeground(new java.awt.Color(255, 255, 255));
+        jButton3.setText("OK");
+        jButton3.setBorderPainted(false);
+        jButton3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jPanel4.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 160, 82, 30));
 
         javax.swing.GroupLayout diaglogMessageLayout = new javax.swing.GroupLayout(diaglogMessage.getContentPane());
         diaglogMessage.getContentPane().setLayout(diaglogMessageLayout);
         diaglogMessageLayout.setHorizontalGroup(
             diaglogMessageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(diaglogMessageLayout.createSequentialGroup()
-                .addGap(159, 159, 159)
-                .addComponent(diaglogMessageLabel)
-                .addContainerGap(154, Short.MAX_VALUE))
+            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         diaglogMessageLayout.setVerticalGroup(
             diaglogMessageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(diaglogMessageLayout.createSequentialGroup()
-                .addGap(121, 121, 121)
-                .addComponent(diaglogMessageLabel)
-                .addContainerGap(163, Short.MAX_VALUE))
+            .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
-        deleteUserConfirmDiaglog.setMinimumSize(new java.awt.Dimension(400, 300));
+        deleteUserConfirmDiaglog.setTitle("Xác nhận xoá");
+        deleteUserConfirmDiaglog.setMinimumSize(new java.awt.Dimension(420, 230));
+        deleteUserConfirmDiaglog.setPreferredSize(new java.awt.Dimension(420, 230));
         deleteUserConfirmDiaglog.setResizable(false);
-        deleteUserConfirmDiaglog.setSize(new java.awt.Dimension(400, 300));
+        deleteUserConfirmDiaglog.setSize(new java.awt.Dimension(420, 230));
 
-        deleteUserConfirmDiaglogLabel.setText("Content...");
+        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel3.setMinimumSize(new java.awt.Dimension(420, 230));
+        jPanel3.setPreferredSize(new java.awt.Dimension(420, 230));
+        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        deleteUserConfirmDiaglogLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        deleteUserConfirmDiaglogLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        deleteUserConfirmDiaglogLabel.setText("Bạn chắc chắn muốn xoá người dùng abcdeskskskskksd");
+        deleteUserConfirmDiaglogLabel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jPanel3.add(deleteUserConfirmDiaglogLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(5, 67, 400, 50));
+
+        confirmDeleteUser.setBackground(new java.awt.Color(44, 43, 196));
+        confirmDeleteUser.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        confirmDeleteUser.setForeground(new java.awt.Color(255, 255, 255));
         confirmDeleteUser.setText("Đồng ý");
+        confirmDeleteUser.setBorderPainted(false);
         confirmDeleteUser.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 confirmDeleteUserActionPerformed(evt);
             }
         });
+        jPanel3.add(confirmDeleteUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 140, -1, 30));
 
+        cancelDeleteUser.setBackground(new java.awt.Color(212, 57, 68));
+        cancelDeleteUser.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        cancelDeleteUser.setForeground(new java.awt.Color(255, 255, 255));
         cancelDeleteUser.setText("Huỷ bỏ");
+        cancelDeleteUser.setBorderPainted(false);
         cancelDeleteUser.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cancelDeleteUserActionPerformed(evt);
             }
         });
+        jPanel3.add(cancelDeleteUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 140, -1, 30));
+
+        jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(255, 0, 0));
+        jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel8.setText("XÁC NHẬN XOÁ");
+        jPanel3.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 29, 408, -1));
 
         javax.swing.GroupLayout deleteUserConfirmDiaglogLayout = new javax.swing.GroupLayout(deleteUserConfirmDiaglog.getContentPane());
         deleteUserConfirmDiaglog.getContentPane().setLayout(deleteUserConfirmDiaglogLayout);
         deleteUserConfirmDiaglogLayout.setHorizontalGroup(
             deleteUserConfirmDiaglogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(deleteUserConfirmDiaglogLayout.createSequentialGroup()
-                .addGroup(deleteUserConfirmDiaglogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(deleteUserConfirmDiaglogLayout.createSequentialGroup()
-                        .addGap(152, 152, 152)
-                        .addComponent(deleteUserConfirmDiaglogLabel))
-                    .addGroup(deleteUserConfirmDiaglogLayout.createSequentialGroup()
-                        .addGap(78, 78, 78)
-                        .addComponent(confirmDeleteUser)
-                        .addGap(58, 58, 58)
-                        .addComponent(cancelDeleteUser)))
-                .addContainerGap(120, Short.MAX_VALUE))
+            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         deleteUserConfirmDiaglogLayout.setVerticalGroup(
             deleteUserConfirmDiaglogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(deleteUserConfirmDiaglogLayout.createSequentialGroup()
-                .addGap(67, 67, 67)
-                .addComponent(deleteUserConfirmDiaglogLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 108, Short.MAX_VALUE)
-                .addGroup(deleteUserConfirmDiaglogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(confirmDeleteUser)
-                    .addComponent(cancelDeleteUser))
-                .addGap(86, 86, 86))
+            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -847,7 +876,7 @@ public class Home extends javax.swing.JFrame {
         updateInfoLabel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         updateInfoLabel.setForeground(new java.awt.Color(255, 255, 255));
         updateInfoLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/exchange.png"))); // NOI18N
-        updateInfoLabel.setText("   ĐỔI THÔNG TIN");
+        updateInfoLabel.setText("  ĐỔI THÔNG TIN");
         updateInfoLabel.setPreferredSize(new java.awt.Dimension(256, 50));
         updateInfoLabel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -860,9 +889,9 @@ public class Home extends javax.swing.JFrame {
         updateInfoTabLayout.setHorizontalGroup(
             updateInfoTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(updateInfoTabLayout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addComponent(updateInfoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(39, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(updateInfoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(25, Short.MAX_VALUE))
         );
         updateInfoTabLayout.setVerticalGroup(
             updateInfoTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1601,12 +1630,12 @@ public class Home extends javax.swing.JFrame {
             .addGroup(userFunctionPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(addUserButton, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(editUserButton, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(24, 24, 24)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(deleteUserButton, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.DEFAULT_SIZE, 39, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(importUsersFromExcelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -2326,16 +2355,21 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JPanel inStockTab;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JToolBar.Separator jSeparator1;
     private javax.swing.JToolBar.Separator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
