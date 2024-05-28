@@ -56,9 +56,9 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public CommonResponseDTO save(User user) {
-        boolean result = userRepository.add(user);
-        return result
+    public CommonResponseDTO addOne(User user) {
+        var result = userRepository.save(user);
+        return result.isPresent()
                 ? CommonResponseDTO
                         .builder()
                         .success(true)

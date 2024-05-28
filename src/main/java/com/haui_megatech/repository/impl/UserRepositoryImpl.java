@@ -16,6 +16,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -26,10 +27,27 @@ import java.util.stream.Collectors;
  */
 public class UserRepositoryImpl implements UserRepository {
 
-    private final String ABS_DATA_PATH = ApplicationContext.ABS_USERS_DATA_PATH;
+    private final String ABS_DATA_PATH;
+    
+    public UserRepositoryImpl() {
+        ABS_DATA_PATH = new ApplicationContext().ABS_USERS_DATA_PATH;
+        
+        initCounter();
+    }
+    
+    private void initCounter() {
+        ArrayList<User> users = this.getAll();
+        if (users.isEmpty()) {
+            User.counter = 0;
+        } else {
+            User.counter = users.getLast().getId();
+        }
+    }
     
     private boolean saveToDisk(ArrayList<User> list) {
-        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(ABS_DATA_PATH))) {
+        try (ObjectOutputStream oos = new ObjectOutputStream(
+                new FileOutputStream(ABS_DATA_PATH))
+        ) {
             oos.writeObject(list);
             return true;
         } catch (IOException e) {
@@ -37,32 +55,91 @@ public class UserRepositoryImpl implements UserRepository {
         }
     }
     
-    @Override
-    public boolean add(User user) {
+    private boolean update(User oldInfo, User newInfo) {
+        oldInfo.setUsername(newInfo.getUsername());
+        oldInfo.setPassword(newInfo.getPassword());
+        oldInfo.setFirstName(newInfo.getFirstName());
+        oldInfo.setLastName(newInfo.getLastName());
+        oldInfo.setPhoneNumber(newInfo.getPhoneNumber());
+        oldInfo.setEmail(newInfo.getEmail());
+        oldInfo.setGender(newInfo.getGender());
+        oldInfo.setDateOfBirth(newInfo.getDateOfBirth());
+        oldInfo.setLastUpdated(newInfo.getLastUpdated());
+        oldInfo.setLogined(newInfo.getLogined());
+        oldInfo.setLastLogined(newInfo.getLastLogined());
+        return true;
+    }
+    
+    
+    private int findIndexById(Integer id) {
         ArrayList<User> list = this.getAll();
-        list.add(user);
-
-        return this.saveToDisk(list);
+        for (int i = 0; i < list.size(); ++i) {
+            if (list.get(i).getId().equals(id)) return i;
+        }
+        return -1;
     }
 
+    
     @Override
-    public boolean addAll(ArrayList<User> users) {
+    public Optional<User> findById(Integer id) {
+        return this.getAll()
+                .parallelStream()
+                .filter(item -> item.getId().equals(id))
+                .findFirst();
+    }
+    
+    @Override
+    public Optional<User> save(User user) {
         ArrayList<User> list = this.getAll();
-        list.addAll(users);
+        if (user.getId() != null) {
+            int foundIndex = this.findIndexById(user.getId());
+            User foundUser = list.get(foundIndex);
+            update(foundUser, user);
+            list.set(foundIndex, foundUser);
+            return this.saveToDisk(list) 
+                    ? Optional.of(foundUser) 
+                    : Optional.empty();
+        }
         
-        return this.saveToDisk(list);
+        user.setId(++User.counter);
+        user.setWhenCreated(new Date());
+        list.add(user);
+        
+        return this.saveToDisk(list) 
+                ? Optional.of(user) 
+                : Optional.empty();
+        
     }
 
     @Override
-    public ArrayList<User> getAll() {
+    public ArrayList<User> saveAll(ArrayList<User> users) {
+        ArrayList<User> savedUsers = new ArrayList<>();
+        users.forEach(item -> {
+            Optional<User> saved = this.save(item);
+            if (saved.isPresent()) savedUsers.add(saved.get());
+        });
+        return savedUsers;
+    }
+
+    @Override
+    public ArrayList<User> getAll() {        
         ArrayList<User> users;
-        try (ObjectInputStream ois = new ObjectInputStream((new FileInputStream(ABS_DATA_PATH)))) {
+        try (ObjectInputStream ois = new ObjectInputStream(
+                (new FileInputStream(ABS_DATA_PATH))
+        )) {
             users = (ArrayList<User>) ois.readObject();
             if (users == null) users = new ArrayList<>();
         } catch (IOException | ClassNotFoundException e) {
-            throw new RuntimeException(e);
+            return new ArrayList();
         }
         return users;
+    }
+
+    @Override
+    public void deleteById(int id) {
+        ArrayList<User> list = this.getAll();
+        list.removeIf(item -> item.getId().equals(id));
+        this.saveToDisk(list);
     }
 
 }
