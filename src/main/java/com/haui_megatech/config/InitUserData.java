@@ -17,10 +17,8 @@ import java.util.*;
 public class InitUserData {
 
     public static void main(String[] args) {
-        ApplicationContext.initAbsUsersDataPath();
-        User.setCounter(0);
         UserRepository userRepository = new UserRepositoryImpl();
-        userRepository.addAll(new ArrayList<>(List.of(
+        userRepository.saveAll(new ArrayList<>(List.of(
                 User.builder()
                         .username("viethoang")
                         .password("123")

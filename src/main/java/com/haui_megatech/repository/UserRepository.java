@@ -15,10 +15,14 @@ import java.util.Optional;
  * @author vieth
  */
 public interface UserRepository {
+    
+    Optional<User> findById(Integer id);
+    
+    Optional<User> save(User user);
 
-    boolean add(User user);
-
-    boolean addAll(ArrayList<User> users);
+    ArrayList<User> saveAll(ArrayList<User> users);
+    
+    void deleteById(int index);
 
     ArrayList<User> getAll();
 }

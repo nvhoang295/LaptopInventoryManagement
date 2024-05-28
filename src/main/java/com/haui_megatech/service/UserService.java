@@ -16,6 +16,6 @@ import com.haui_megatech.dto.*;
 public interface UserService {
     ListItemsResponseDTO<User> getList();
     ListItemsResponseDTO<User> searchList(String keyword);
-    CommonResponseDTO save(User user);
+    CommonResponseDTO addOne(User user);
     
 }
