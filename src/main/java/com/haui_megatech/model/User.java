@@ -18,7 +18,7 @@ public class User implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;
 
-    private static Integer counter;
+    public static Integer counter;
 
     private Integer id;
     private String username;
@@ -49,7 +49,7 @@ public class User implements Serializable {
             Integer logined,
             Date lastLogined
     ) {
-        this.id = ++counter;
+        this.id = id;
         this.username = username;
         this.password = password;
         this.firstName = firstName;
@@ -62,14 +62,6 @@ public class User implements Serializable {
         this.lastUpdated = lastUpdated;
         this.logined = logined;
         this.lastLogined = lastLogined;
-    }
-
-    public static void setCounter(Integer value) {
-        counter = value;
-    }
-    
-    public static Integer getCounter() {
-        return counter;
     }
 
     public Integer getId() {

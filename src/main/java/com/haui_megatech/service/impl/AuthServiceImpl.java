@@ -30,7 +30,11 @@ public class AuthServiceImpl implements AuthService {
         if (request.username().trim().isEmpty() || request.password().trim().isEmpty())
             return new CommonResponseDTO(false, ErrorMessage.Auth.BLANK_INPUT);
         
-        Optional<User> found = userRepository.findByUsername(request.username());
+        Optional<User> found = userRepository
+                .getAll()
+                .parallelStream()
+                .filter(item -> item.getUsername().equals(request.username()))
+                .findFirst();
         
         if (found.isEmpty()) 
             return new CommonResponseDTO(false, ErrorMessage.Auth.NOT_FOUND);

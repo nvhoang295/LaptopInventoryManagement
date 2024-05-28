@@ -16,11 +16,12 @@ import java.util.*;
  * @author vieth
  */
 public class Main {
-
+    
     public static void main(String[] args) {
-        ApplicationContext.initAll();
+        final ApplicationContext context = new ApplicationContext();
+        context.initCounter();
+        
         Login.main(new String[]{});
-        System.out.println("");
 
     }
 
