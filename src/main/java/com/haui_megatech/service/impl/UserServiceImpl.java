@@ -57,6 +57,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public CommonResponseDTO addOne(User user) {
+        user.setWhenCreated(new Date());
         var result = userRepository.save(user);
         return result.isPresent()
                 ? CommonResponseDTO

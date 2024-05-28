@@ -10,4 +10,7 @@ package com.haui_megatech.constant;
  */
 public class SuccessMessage {
     
+    public static final class User {
+        public static final String ADDED = "Thêm mới người dùng thành công.";
+    }
 }

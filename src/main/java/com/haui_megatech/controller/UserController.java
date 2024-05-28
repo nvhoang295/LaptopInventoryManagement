@@ -27,4 +27,8 @@ public class UserController {
     public ListItemsResponseDTO<User> searchList(String keyword) {
         return userService.searchList(keyword);
     }
+    
+    public CommonResponseDTO addOne(User user) {
+        return userService.addOne(user);
+    }
 }

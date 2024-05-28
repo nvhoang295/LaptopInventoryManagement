@@ -26,6 +26,8 @@ public class ErrorMessage {
     public static final class User {
 
         public static final String SAVE = "Lưu người dùng không thành công.";
+        public static final String BLANK_INPUT = "Vui lòng nhập đầy đủ tất cả các trường thuộc tính.";
+        public static final String MISMATCHED_PASSWORD = "Mật khẩu xác nhận không đúng.";
 
     }
 }

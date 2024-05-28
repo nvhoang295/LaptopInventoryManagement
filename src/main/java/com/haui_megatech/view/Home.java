@@ -5,7 +5,10 @@
 package com.haui_megatech.view;
 
 import com.haui_megatech.ApplicationContext;
+import com.haui_megatech.constant.ErrorMessage;
+import com.haui_megatech.constant.SuccessMessage;
 import com.haui_megatech.controller.UserController;
+import com.haui_megatech.dto.CommonResponseDTO;
 import com.haui_megatech.model.User;
 import com.haui_megatech.repository.impl.UserRepositoryImpl;
 import com.haui_megatech.service.impl.UserServiceImpl;
@@ -109,6 +112,8 @@ public class Home extends javax.swing.JFrame {
         addUserDiaglogButton = new javax.swing.JButton();
         cancelAddUserDiaglogButton = new javax.swing.JButton();
         sendCodeAddUserDiaglogButton = new javax.swing.JButton();
+        addUserDiaglogMessage = new javax.swing.JDialog();
+        addUserDiaglogMessageLabel = new javax.swing.JLabel();
         sidebarPanel = new javax.swing.JPanel();
         loginedUsername = new javax.swing.JLabel();
         productTab = new javax.swing.JPanel();
@@ -224,9 +229,9 @@ public class Home extends javax.swing.JFrame {
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        addUserDiaglog.setMinimumSize(new java.awt.Dimension(400, 405));
-        addUserDiaglog.setPreferredSize(new java.awt.Dimension(400, 405));
-        addUserDiaglog.setSize(new java.awt.Dimension(340, 340));
+        addUserDiaglog.setMinimumSize(new java.awt.Dimension(400, 455));
+        addUserDiaglog.setPreferredSize(new java.awt.Dimension(400, 455));
+        addUserDiaglog.setSize(new java.awt.Dimension(400, 455));
         addUserDiaglog.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         usernameLabel.setText("Tên đăng nhập");
@@ -315,6 +320,28 @@ public class Home extends javax.swing.JFrame {
 
         sendCodeAddUserDiaglogButton.setText("Gửi mã");
         addUserDiaglog.getContentPane().add(sendCodeAddUserDiaglogButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 310, 90, 30));
+
+        addUserDiaglogMessage.setMinimumSize(new java.awt.Dimension(400, 300));
+        addUserDiaglogMessage.setSize(new java.awt.Dimension(400, 300));
+
+        addUserDiaglogMessageLabel.setText("some message...");
+
+        javax.swing.GroupLayout addUserDiaglogMessageLayout = new javax.swing.GroupLayout(addUserDiaglogMessage.getContentPane());
+        addUserDiaglogMessage.getContentPane().setLayout(addUserDiaglogMessageLayout);
+        addUserDiaglogMessageLayout.setHorizontalGroup(
+            addUserDiaglogMessageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(addUserDiaglogMessageLayout.createSequentialGroup()
+                .addGap(159, 159, 159)
+                .addComponent(addUserDiaglogMessageLabel)
+                .addContainerGap(154, Short.MAX_VALUE))
+        );
+        addUserDiaglogMessageLayout.setVerticalGroup(
+            addUserDiaglogMessageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(addUserDiaglogMessageLayout.createSequentialGroup()
+                .addGap(121, 121, 121)
+                .addComponent(addUserDiaglogMessageLabel)
+                .addContainerGap(163, Short.MAX_VALUE))
+        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1400, 830));
@@ -1926,7 +1953,6 @@ public class Home extends javax.swing.JFrame {
     }//GEN-LAST:event_productLabelMouseClicked
 
     private void addUserDiaglogButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addUserDiaglogButtonActionPerformed
-        // TODO add your handling code here:
         String username = usernameTextField.getText();
         String firstName = firstNameTextField.getText();
         String lastName = lastNameTextField.getText();
@@ -1935,21 +1961,41 @@ public class Home extends javax.swing.JFrame {
         String otp = confirmEmailOTPTextField.getText();
         String password = String.valueOf(passwordField.getPassword());
         String confirmPassword = String.valueOf(confirmPasswordField.getPassword());
-        productLabel.setText("" + Math.random());
         if (InputValidator.anyBlankInput(
                 username, firstName, lastName, phoneNumber, email, 
                 otp, password, confirmPassword)
         ) {
-            
+            showAddUserDiaglogMessage(ErrorMessage.User.BLANK_INPUT);
             return;
         }    
         
         if (!password.equals(confirmPassword)) {
-            
+            showAddUserDiaglogMessage(ErrorMessage.User.MISMATCHED_PASSWORD);
             return;
-        }    
+        }
+        
+        CommonResponseDTO result = userController.addOne(User
+                .builder()
+                .username(username)
+                .password(password)
+                .firstName(firstName)
+                .lastName(lastName)
+                .phoneNumber(phoneNumber)
+                .email(email)
+                .build());
+        if (result.success()) {
+            addUserDiaglog.setVisible(false);
+            showAddUserDiaglogMessage(SuccessMessage.User.ADDED);            
+            loadDataToTableUsers(null);
+        }
     }//GEN-LAST:event_addUserDiaglogButtonActionPerformed
-
+    
+    private void showAddUserDiaglogMessage(String message) {
+        addUserDiaglogMessage.setVisible(true);
+        addUserDiaglogMessage.setLocationRelativeTo(this);
+        addUserDiaglogMessageLabel.setText(message);
+    }
+    
     private void cancelAddUserDiaglogButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelAddUserDiaglogButtonActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cancelAddUserDiaglogButtonActionPerformed
@@ -1977,6 +2023,8 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JButton addUserButton1;
     private javax.swing.JDialog addUserDiaglog;
     private javax.swing.JButton addUserDiaglogButton;
+    private javax.swing.JDialog addUserDiaglogMessage;
+    private javax.swing.JLabel addUserDiaglogMessageLabel;
     private javax.swing.JButton cancelAddUserDiaglogButton;
     private javax.swing.JLabel confirmEmailOTPLabel;
     private javax.swing.JTextField confirmEmailOTPTextField;
