@@ -9,6 +9,7 @@ import com.haui_megatech.controller.UserController;
 import com.haui_megatech.model.User;
 import com.haui_megatech.repository.impl.UserRepositoryImpl;
 import com.haui_megatech.service.impl.UserServiceImpl;
+import com.haui_megatech.util.InputValidator;
 import java.awt.Color;
 import java.util.List;
 import javax.swing.UIManager;
@@ -105,6 +106,9 @@ public class Home extends javax.swing.JFrame {
         emailTextField = new javax.swing.JTextField();
         confirmEmailOTPLabel = new javax.swing.JLabel();
         confirmEmailOTPTextField = new javax.swing.JTextField();
+        addUserDiaglogButton = new javax.swing.JButton();
+        cancelAddUserDiaglogButton = new javax.swing.JButton();
+        sendCodeAddUserDiaglogButton = new javax.swing.JButton();
         sidebarPanel = new javax.swing.JPanel();
         loginedUsername = new javax.swing.JLabel();
         productTab = new javax.swing.JPanel();
@@ -220,6 +224,9 @@ public class Home extends javax.swing.JFrame {
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
+        addUserDiaglog.setMinimumSize(new java.awt.Dimension(400, 405));
+        addUserDiaglog.setPreferredSize(new java.awt.Dimension(400, 405));
+        addUserDiaglog.setSize(new java.awt.Dimension(340, 340));
         addUserDiaglog.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         usernameLabel.setText("Tên đăng nhập");
@@ -234,14 +241,10 @@ public class Home extends javax.swing.JFrame {
 
         passwordLabel.setText("Mật khẩu");
         addUserDiaglog.getContentPane().add(passwordLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, -1, -1));
-
-        passwordField.setText("jPasswordField1");
         addUserDiaglog.getContentPane().add(passwordField, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 70, 200, 30));
 
         confirmPasswordLabel.setText("Xác nhận mật khẩu");
         addUserDiaglog.getContentPane().add(confirmPasswordLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 120, -1, -1));
-
-        confirmPasswordField.setText("jPasswordField1");
         addUserDiaglog.getContentPane().add(confirmPasswordField, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 110, 200, 30));
 
         firstNameLabel.setText("Tên");
@@ -284,7 +287,7 @@ public class Home extends javax.swing.JFrame {
         });
         addUserDiaglog.getContentPane().add(emailTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 270, 200, 30));
 
-        confirmEmailOTPLabel.setText("Mã xác nhận");
+        confirmEmailOTPLabel.setText("Mã xác nhận email");
         addUserDiaglog.getContentPane().add(confirmEmailOTPLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 320, -1, -1));
 
         confirmEmailOTPTextField.addActionListener(new java.awt.event.ActionListener() {
@@ -292,7 +295,26 @@ public class Home extends javax.swing.JFrame {
                 confirmEmailOTPTextFieldActionPerformed(evt);
             }
         });
-        addUserDiaglog.getContentPane().add(confirmEmailOTPTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 310, 200, 30));
+        addUserDiaglog.getContentPane().add(confirmEmailOTPTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 310, 100, 30));
+
+        addUserDiaglogButton.setText("Thêm mới");
+        addUserDiaglogButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addUserDiaglogButtonActionPerformed(evt);
+            }
+        });
+        addUserDiaglog.getContentPane().add(addUserDiaglogButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 360, -1, -1));
+
+        cancelAddUserDiaglogButton.setText("Huỷ bỏ");
+        cancelAddUserDiaglogButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelAddUserDiaglogButtonActionPerformed(evt);
+            }
+        });
+        addUserDiaglog.getContentPane().add(cancelAddUserDiaglogButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 360, -1, -1));
+
+        sendCodeAddUserDiaglogButton.setText("Gửi mã");
+        addUserDiaglog.getContentPane().add(sendCodeAddUserDiaglogButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 310, 90, 30));
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1400, 830));
@@ -302,7 +324,6 @@ public class Home extends javax.swing.JFrame {
         sidebarPanel.setPreferredSize(new java.awt.Dimension(256, 800));
 
         loginedUsername.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        loginedUsername.setIcon(new javax.swing.ImageIcon("D:\\BTL_Java\\LaptopInventoryManagement\\src\\main\\resources\\icon\\profile.png")); // NOI18N
         loginedUsername.setText("Admin");
 
         productTab.setBackground(new java.awt.Color(255, 255, 255));
@@ -471,7 +492,7 @@ public class Home extends javax.swing.JFrame {
             .addGroup(exportProductTabLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(exportProductLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(9, Short.MAX_VALUE))
+                .addContainerGap(39, Short.MAX_VALUE))
         );
 
         exportBillTab.setBackground(new java.awt.Color(255, 255, 255));
@@ -648,7 +669,6 @@ public class Home extends javax.swing.JFrame {
         });
 
         logoutLabel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        logoutLabel.setIcon(new javax.swing.ImageIcon("D:\\BTL_Java\\LaptopInventoryManagement\\src\\main\\resources\\icon\\logout.png")); // NOI18N
         logoutLabel.setText(" ĐĂNG XUẤT");
         logoutLabel.setPreferredSize(new java.awt.Dimension(240, 40));
         logoutLabel.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -709,7 +729,7 @@ public class Home extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(importBillTab, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(exportProductTab, javax.swing.GroupLayout.DEFAULT_SIZE, 43, Short.MAX_VALUE)
+                .addComponent(exportProductTab, javax.swing.GroupLayout.DEFAULT_SIZE, 73, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(exportBillTab, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -722,7 +742,7 @@ public class Home extends javax.swing.JFrame {
                 .addComponent(updateInfoTab, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(logoutTab, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(124, Short.MAX_VALUE))
+                .addContainerGap(133, Short.MAX_VALUE))
         );
 
         getContentPane().add(sidebarPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 840));
@@ -1905,6 +1925,35 @@ public class Home extends javax.swing.JFrame {
         this.setDisplayedPanel("product");
     }//GEN-LAST:event_productLabelMouseClicked
 
+    private void addUserDiaglogButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addUserDiaglogButtonActionPerformed
+        // TODO add your handling code here:
+        String username = usernameTextField.getText();
+        String firstName = firstNameTextField.getText();
+        String lastName = lastNameTextField.getText();
+        String phoneNumber = phoneNumberTextField.getText();
+        String email = emailTextField.getText();
+        String otp = confirmEmailOTPTextField.getText();
+        String password = String.valueOf(passwordField.getPassword());
+        String confirmPassword = String.valueOf(confirmPasswordField.getPassword());
+        productLabel.setText("" + Math.random());
+        if (InputValidator.anyBlankInput(
+                username, firstName, lastName, phoneNumber, email, 
+                otp, password, confirmPassword)
+        ) {
+            
+            return;
+        }    
+        
+        if (!password.equals(confirmPassword)) {
+            
+            return;
+        }    
+    }//GEN-LAST:event_addUserDiaglogButtonActionPerformed
+
+    private void cancelAddUserDiaglogButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelAddUserDiaglogButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cancelAddUserDiaglogButtonActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1927,6 +1976,8 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JButton addUserButton;
     private javax.swing.JButton addUserButton1;
     private javax.swing.JDialog addUserDiaglog;
+    private javax.swing.JButton addUserDiaglogButton;
+    private javax.swing.JButton cancelAddUserDiaglogButton;
     private javax.swing.JLabel confirmEmailOTPLabel;
     private javax.swing.JTextField confirmEmailOTPTextField;
     private javax.swing.JPasswordField confirmPasswordField;
@@ -2010,6 +2061,7 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JPanel searchUsersPanel;
     private javax.swing.JPanel searchUsersPanel1;
     private javax.swing.JTextField searchUsersTextField;
+    private javax.swing.JButton sendCodeAddUserDiaglogButton;
     private javax.swing.JPanel sidebarPanel;
     private javax.swing.JLabel statisticsLabel;
     private javax.swing.JPanel statisticsPanel;
