@@ -94,6 +94,7 @@ public class Home extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         addUserDiaglog = new javax.swing.JDialog();
+        jPanel2 = new javax.swing.JPanel();
         usernameLabel = new javax.swing.JLabel();
         usernameTextField = new javax.swing.JTextField();
         passwordLabel = new javax.swing.JLabel();
@@ -113,6 +114,7 @@ public class Home extends javax.swing.JFrame {
         addUserDiaglogButton = new javax.swing.JButton();
         cancelAddUserDiaglogButton = new javax.swing.JButton();
         sendCodeAddUserDiaglogButton = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
         sidebarPanel = new javax.swing.JPanel();
         loginedUsername = new javax.swing.JLabel();
         productTab = new javax.swing.JPanel();
@@ -205,7 +207,6 @@ public class Home extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
 
         logoutDiaglog.setMinimumSize(new java.awt.Dimension(400, 300));
-        logoutDiaglog.setPreferredSize(new java.awt.Dimension(360, 250));
         logoutDiaglog.setSize(new java.awt.Dimension(360, 250));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
@@ -256,96 +257,141 @@ public class Home extends javax.swing.JFrame {
             .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 250, Short.MAX_VALUE)
         );
 
-        addUserDiaglog.setMinimumSize(new java.awt.Dimension(400, 405));
-        addUserDiaglog.setSize(new java.awt.Dimension(340, 340));
-        addUserDiaglog.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        addUserDiaglog.setTitle("Thêm người dùng");
+        addUserDiaglog.setBackground(new java.awt.Color(255, 255, 255));
+        addUserDiaglog.setMinimumSize(new java.awt.Dimension(430, 450));
+        addUserDiaglog.setPreferredSize(new java.awt.Dimension(430, 450));
+        addUserDiaglog.setSize(new java.awt.Dimension(430, 450));
 
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel2.setMinimumSize(new java.awt.Dimension(430, 450));
+        jPanel2.setPreferredSize(new java.awt.Dimension(430, 450));
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        usernameLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         usernameLabel.setText("Tên đăng nhập");
-        addUserDiaglog.getContentPane().add(usernameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 40, -1, -1));
+        jPanel2.add(usernameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, -1, -1));
 
+        usernameTextField.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         usernameTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 usernameTextFieldActionPerformed(evt);
             }
         });
-        addUserDiaglog.getContentPane().add(usernameTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 30, 200, 30));
+        jPanel2.add(usernameTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 70, 200, 30));
 
+        passwordLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         passwordLabel.setText("Mật khẩu");
-        addUserDiaglog.getContentPane().add(passwordLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, -1, -1));
-        addUserDiaglog.getContentPane().add(passwordField, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 70, 200, 30));
+        jPanel2.add(passwordLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, -1, -1));
 
+        passwordField.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        jPanel2.add(passwordField, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 110, 200, 30));
+
+        confirmPasswordLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         confirmPasswordLabel.setText("Xác nhận mật khẩu");
-        addUserDiaglog.getContentPane().add(confirmPasswordLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 120, -1, -1));
-        addUserDiaglog.getContentPane().add(confirmPasswordField, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 110, 200, 30));
+        jPanel2.add(confirmPasswordLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 150, -1, -1));
 
+        confirmPasswordField.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        jPanel2.add(confirmPasswordField, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 150, 200, 30));
+
+        firstNameLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         firstNameLabel.setText("Tên");
-        addUserDiaglog.getContentPane().add(firstNameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 160, -1, -1));
+        jPanel2.add(firstNameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 190, -1, -1));
 
+        firstNameTextField.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         firstNameTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 firstNameTextFieldActionPerformed(evt);
             }
         });
-        addUserDiaglog.getContentPane().add(firstNameTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 150, 200, 30));
+        jPanel2.add(firstNameTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 190, 200, 30));
 
+        lastNameLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         lastNameLabel.setText("Họ đệm");
-        addUserDiaglog.getContentPane().add(lastNameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 200, -1, -1));
+        jPanel2.add(lastNameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 230, -1, -1));
 
+        lastNameTextField.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         lastNameTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 lastNameTextFieldActionPerformed(evt);
             }
         });
-        addUserDiaglog.getContentPane().add(lastNameTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 190, 200, 30));
+        jPanel2.add(lastNameTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 230, 200, 30));
 
+        phoneNumberLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         phoneNumberLabel.setText("Số điện thoại");
-        addUserDiaglog.getContentPane().add(phoneNumberLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 240, -1, -1));
+        jPanel2.add(phoneNumberLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 270, -1, -1));
 
+        phoneNumberTextField.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         phoneNumberTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 phoneNumberTextFieldActionPerformed(evt);
             }
         });
-        addUserDiaglog.getContentPane().add(phoneNumberTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 230, 200, 30));
+        jPanel2.add(phoneNumberTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 270, 200, 30));
 
+        emailLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         emailLabel.setText("Địa chỉ email");
-        addUserDiaglog.getContentPane().add(emailLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 280, -1, -1));
+        jPanel2.add(emailLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 310, -1, -1));
 
+        emailTextField.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         emailTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 emailTextFieldActionPerformed(evt);
             }
         });
-        addUserDiaglog.getContentPane().add(emailTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 270, 200, 30));
+        jPanel2.add(emailTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 310, 200, 30));
 
+        confirmEmailOTPLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         confirmEmailOTPLabel.setText("Mã xác nhận email");
-        addUserDiaglog.getContentPane().add(confirmEmailOTPLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 320, -1, -1));
+        jPanel2.add(confirmEmailOTPLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 350, -1, -1));
 
+        confirmEmailOTPTextField.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         confirmEmailOTPTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 confirmEmailOTPTextFieldActionPerformed(evt);
             }
         });
-        addUserDiaglog.getContentPane().add(confirmEmailOTPTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 310, 100, 30));
+        jPanel2.add(confirmEmailOTPTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 350, 100, 30));
 
+        addUserDiaglogButton.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         addUserDiaglogButton.setText("Thêm mới");
         addUserDiaglogButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 addUserDiaglogButtonActionPerformed(evt);
             }
         });
-        addUserDiaglog.getContentPane().add(addUserDiaglogButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 360, -1, -1));
+        jPanel2.add(addUserDiaglogButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 390, -1, -1));
 
+        cancelAddUserDiaglogButton.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         cancelAddUserDiaglogButton.setText("Huỷ bỏ");
         cancelAddUserDiaglogButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cancelAddUserDiaglogButtonActionPerformed(evt);
             }
         });
-        addUserDiaglog.getContentPane().add(cancelAddUserDiaglogButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 360, -1, -1));
+        jPanel2.add(cancelAddUserDiaglogButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 390, -1, -1));
 
+        sendCodeAddUserDiaglogButton.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         sendCodeAddUserDiaglogButton.setText("Gửi mã");
-        addUserDiaglog.getContentPane().add(sendCodeAddUserDiaglogButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 310, 90, 30));
+        jPanel2.add(sendCodeAddUserDiaglogButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 350, 90, 30));
+
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(44, 43, 196));
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel3.setText("THÊM NGƯỜI DÙNG");
+        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 20, 440, -1));
+
+        javax.swing.GroupLayout addUserDiaglogLayout = new javax.swing.GroupLayout(addUserDiaglog.getContentPane());
+        addUserDiaglog.getContentPane().setLayout(addUserDiaglogLayout);
+        addUserDiaglogLayout.setHorizontalGroup(
+            addUserDiaglogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 440, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+        addUserDiaglogLayout.setVerticalGroup(
+            addUserDiaglogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 470, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1400, 830));
@@ -813,6 +859,7 @@ public class Home extends javax.swing.JFrame {
         searchProductsButton1.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         searchProductsButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/refresh.png"))); // NOI18N
         searchProductsButton1.setText("Làm mới");
+        searchProductsButton1.setBorderPainted(false);
         searchProductsButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         javax.swing.GroupLayout searchUsersPanel1Layout = new javax.swing.GroupLayout(searchUsersPanel1);
@@ -849,6 +896,7 @@ public class Home extends javax.swing.JFrame {
         importUsersFromExcelButton1.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         importUsersFromExcelButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/sheet.png"))); // NOI18N
         importUsersFromExcelButton1.setText("Nhập Excel");
+        importUsersFromExcelButton1.setBorderPainted(false);
         importUsersFromExcelButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         importUsersFromExcelButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -860,6 +908,7 @@ public class Home extends javax.swing.JFrame {
         exportUsersToExcelButton1.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         exportUsersToExcelButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/sheet.png"))); // NOI18N
         exportUsersToExcelButton1.setText("Xuất Excel");
+        exportUsersToExcelButton1.setBorderPainted(false);
         exportUsersToExcelButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         exportUsersToExcelButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -871,6 +920,7 @@ public class Home extends javax.swing.JFrame {
         editUserButton1.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         editUserButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/edit_icon.png"))); // NOI18N
         editUserButton1.setText("Sửa");
+        editUserButton1.setBorderPainted(false);
         editUserButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         editUserButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -882,6 +932,7 @@ public class Home extends javax.swing.JFrame {
         addUserButton1.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         addUserButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/add_circle_icon.png"))); // NOI18N
         addUserButton1.setText("Thêm");
+        addUserButton1.setBorderPainted(false);
         addUserButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         addUserButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -893,6 +944,7 @@ public class Home extends javax.swing.JFrame {
         deleteUserButton1.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         deleteUserButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/remove_icon.png"))); // NOI18N
         deleteUserButton1.setText("Xoá");
+        deleteUserButton1.setBorderPainted(false);
         deleteUserButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         deleteUserButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -2108,12 +2160,14 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JToolBar.Separator jSeparator1;
     private javax.swing.JToolBar.Separator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
