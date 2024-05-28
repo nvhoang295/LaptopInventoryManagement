@@ -2490,7 +2490,7 @@
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="260" y="0" width="1140" height="830"/>
+          <AbsoluteConstraints x="260" y="0" width="1170" height="830"/>
         </Constraint>
       </Constraints>
 
@@ -2504,8 +2504,7 @@
                       <Group type="102" attributes="0">
                           <Component id="userFunctionPanel" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="searchUsersPanel" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="31" max="32767" attributes="0"/>
+                          <Component id="searchUsersPanel" max="32767" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -2574,7 +2573,7 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="userRolesComboBox" min="-2" pref="115" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="searchUsersTextField" pref="161" max="32767" attributes="0"/>
+                      <Component id="searchUsersTextField" pref="192" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="searchUsersButton" min="-2" pref="120" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
