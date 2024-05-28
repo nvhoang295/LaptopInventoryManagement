@@ -318,9 +318,6 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="18" style="1"/>
             </Property>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="D:\BTL_Java\LaptopInventoryManagement\src\main\resources\icon\profile.png"/>
-            </Property>
             <Property name="text" type="java.lang.String" value="Admin"/>
           </Properties>
         </Component>
@@ -870,9 +867,6 @@
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Segoe UI" size="18" style="1"/>
-                </Property>
-                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="2" name="D:\BTL_Java\LaptopInventoryManagement\src\main\resources\icon\logout.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value=" &#x110;&#x102;NG XU&#x1ea4;T"/>
                 <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
