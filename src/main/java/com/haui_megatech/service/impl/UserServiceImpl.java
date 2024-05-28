@@ -4,7 +4,7 @@
  */
 package com.haui_megatech.service.impl;
 
-import com.haui_megatech.constant.ErrorMessageConstant;
+import com.haui_megatech.constant.ErrorMessage;
 import com.haui_megatech.dto.CommonResponseDTO;
 import com.haui_megatech.dto.ListItemsResponseDTO;
 import com.haui_megatech.model.User;
@@ -66,7 +66,7 @@ public class UserServiceImpl implements UserService {
                 : CommonResponseDTO
                         .builder()
                         .success(false)
-                        .message(ErrorMessageConstant.User.SAVE)
+                        .message(ErrorMessage.User.SAVE)
                         .build();
     }
 

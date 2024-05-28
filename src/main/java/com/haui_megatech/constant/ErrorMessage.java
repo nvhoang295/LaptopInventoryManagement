@@ -8,7 +8,7 @@ package com.haui_megatech.constant;
  *
  * @author vieth
  */
-public class ErrorMessageConstant {
+public class ErrorMessage {
 
     public static final class Auth {
 
