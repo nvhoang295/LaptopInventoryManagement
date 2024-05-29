@@ -72,6 +72,16 @@ public class UserServiceImpl implements UserService {
                         .message(ErrorMessage.User.SAVE)
                         .build();
     }
+    
+    @Override
+    public CommonResponseDTO addList(ArrayList<User> users) {
+        ArrayList<User> savedUsers = userRepository.saveAll(users);
+        return CommonResponseDTO
+                .builder()
+                .success(Boolean.TRUE)
+                .message("Lưu thành công " + savedUsers.size() + " người dùng.")
+                .build();
+    }
 
     @Override
     public CommonResponseDTO deleteOne(Integer id) {

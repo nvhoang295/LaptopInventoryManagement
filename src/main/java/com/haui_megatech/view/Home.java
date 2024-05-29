@@ -13,10 +13,12 @@ import com.haui_megatech.dto.UserDTO;
 import com.haui_megatech.model.User;
 import com.haui_megatech.repository.impl.UserRepositoryImpl;
 import com.haui_megatech.service.impl.UserServiceImpl;
+import com.haui_megatech.util.ExcelUtil;
 import com.haui_megatech.util.InputValidator;
 import java.awt.Color;
 import java.io.File;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import javax.swing.JFileChooser;
@@ -73,7 +75,6 @@ public class Home extends javax.swing.JFrame {
                 return false;
             }
         };
-        System.out.println(keyword);
         List<User> users = keyword != null && !keyword.isEmpty()
                 ? userController.searchList(keyword).items()
                 : userController.getList().items();
@@ -1875,6 +1876,11 @@ public class Home extends javax.swing.JFrame {
         searchUsersButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/refresh.png"))); // NOI18N
         searchUsersButton.setText("Làm mới");
         searchUsersButton.setBorderPainted(false);
+        searchUsersButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchUsersButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout searchUsersPanelLayout = new javax.swing.GroupLayout(searchUsersPanel);
         searchUsersPanel.setLayout(searchUsersPanelLayout);
@@ -2347,8 +2353,10 @@ public class Home extends javax.swing.JFrame {
         int result = fileChooser.showDialog(this, "Chọn file");
         if (result == JFileChooser.APPROVE_OPTION) {
             File uploadedFile = fileChooser.getSelectedFile();
-            System.out.println(uploadedFile.getName());
-            System.out.println("OKKK");
+            ArrayList<User> users = ExcelUtil.excelToUsers(uploadedFile);
+            CommonResponseDTO response = userController.addList(users);
+            showUserDiaglogMessage(response.message());
+            loadDataToTableUsers(null);
         }
         
     }//GEN-LAST:event_importUsersFromExcelButtonActionPerformed
@@ -2679,7 +2687,6 @@ public class Home extends javax.swing.JFrame {
     private void confirmDeleteUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmDeleteUserActionPerformed
         deleteUserConfirmDiaglog.dispose();
         int[] rows = usersTable.getSelectedRows();
-        final int ID_COL_INDEX = 0;
         for (int row : rows) {
             userController.deleteOne(Integer.valueOf(usersTable.getValueAt(row, ID_COL_INDEX).toString()));
         }
@@ -2796,6 +2803,11 @@ public class Home extends javax.swing.JFrame {
     private void viewUserFirstNameTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewUserFirstNameTextFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_viewUserFirstNameTextFieldActionPerformed
+
+    private void searchUsersButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchUsersButtonActionPerformed
+        searchUsersTextField.setText("");
+        loadDataToTableUsers(null);
+    }//GEN-LAST:event_searchUsersButtonActionPerformed
 
     /**
      * @param args the command line arguments

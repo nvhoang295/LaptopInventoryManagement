@@ -3257,6 +3257,9 @@
                 <Property name="text" type="java.lang.String" value="L&#xe0;m m&#x1edb;i"/>
                 <Property name="borderPainted" type="boolean" value="false"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="searchUsersButtonActionPerformed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>

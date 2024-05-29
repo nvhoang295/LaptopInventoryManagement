@@ -7,6 +7,8 @@ package com.haui_megatech.controller;
 import com.haui_megatech.model.User;
 import com.haui_megatech.service.UserService;
 import com.haui_megatech.dto.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 
@@ -31,6 +33,10 @@ public class UserController {
     
     public CommonResponseDTO addOne(User user) {
         return userService.addOne(user);
+    }
+    
+    public CommonResponseDTO addList(ArrayList<User> users) {
+        return userService.addList(users);
     }
     
     public CommonResponseDTO deleteOne(Integer id) {
