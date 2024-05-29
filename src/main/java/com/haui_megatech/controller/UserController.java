@@ -7,6 +7,7 @@ package com.haui_megatech.controller;
 import com.haui_megatech.model.User;
 import com.haui_megatech.service.UserService;
 import com.haui_megatech.dto.*;
+import java.util.Optional;
 
 
 /**
@@ -34,5 +35,17 @@ public class UserController {
     
     public CommonResponseDTO deleteOne(Integer id) {
         return userService.deleteOne(id);
+    }
+    
+    public Optional<User> findByUsername(String username) {
+        return userService.findByUsername(username);
+    }
+    
+    public Optional<User> findById(Integer id) {
+        return userService.findById(id);
+    }
+    
+    public CommonResponseDTO updateOne(Integer id, UserDTO user) {
+        return userService.updateOne(id, user);
     }
 }

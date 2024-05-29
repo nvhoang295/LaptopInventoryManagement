@@ -62,11 +62,9 @@ public class UserRepositoryImpl implements UserRepository {
         oldInfo.setLastName(newInfo.getLastName());
         oldInfo.setPhoneNumber(newInfo.getPhoneNumber());
         oldInfo.setEmail(newInfo.getEmail());
-        oldInfo.setGender(newInfo.getGender());
-        oldInfo.setDateOfBirth(newInfo.getDateOfBirth());
         oldInfo.setLastUpdated(newInfo.getLastUpdated());
-        oldInfo.setLogined(newInfo.getLogined());
-        oldInfo.setLastLogined(newInfo.getLastLogined());
+        oldInfo.setLoggedIn(newInfo.getLoggedIn());
+        oldInfo.setLastLoggedIn(newInfo.getLastLoggedIn());
         return true;
     }
     
@@ -85,6 +83,14 @@ public class UserRepositoryImpl implements UserRepository {
         return this.getAll()
                 .parallelStream()
                 .filter(item -> item.getId().equals(id))
+                .findFirst();
+    }
+    
+    @Override
+    public Optional<User> findByUsername(String username) {
+        return this.getAll()
+                .parallelStream()
+                .filter(item -> item.getUsername().equals(username))
                 .findFirst();
     }
     

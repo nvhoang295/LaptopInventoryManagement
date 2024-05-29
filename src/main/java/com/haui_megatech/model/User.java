@@ -8,11 +8,19 @@ import com.haui_megatech.repository.UserRepository;
 import java.io.Serial;
 import java.io.Serializable;
 import java.util.Date;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
 /**
  *
  * @author vieth
  */
+@Getter
+@Setter
+@ToString
+@AllArgsConstructor
 public class User implements Serializable {
 
     @Serial
@@ -27,151 +35,129 @@ public class User implements Serializable {
     private String lastName;
     private String phoneNumber;
     private String email;
-    private Gender gender;
-    private Date dateOfBirth;
     private Date whenCreated;
     private Date lastUpdated;
-    private Integer logined;
-    private Date lastLogined;
+    private Integer loggedIn;
+    private Date lastLoggedIn;
 
-    public User(
-            Integer id,
-            String username,
-            String password,
-            String firstName,
-            String lastName,
-            String phoneNumber,
-            String email,
-            Gender gender,
-            Date dateOfBirth,
-            Date whenCreated,
-            Date lastUpdated,
-            Integer logined,
-            Date lastLogined
-    ) {
-        this.id = id;
-        this.username = username;
-        this.password = password;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.phoneNumber = phoneNumber;
-        this.email = email;
-        this.gender = gender;
-        this.dateOfBirth = dateOfBirth;
-        this.whenCreated = whenCreated;
-        this.lastUpdated = lastUpdated;
-        this.logined = logined;
-        this.lastLogined = lastLogined;
-    }
+//    public User(
+//            Integer id,
+//            String username,
+//            String password,
+//            String firstName,
+//            String lastName,
+//            String phoneNumber,
+//            String email,
+//            Date whenCreated,
+//            Date lastUpdated,
+//            Integer logined,
+//            Date lastLogined
+//    ) {
+//        this.id = id;
+//        this.username = username;
+//        this.password = password;
+//        this.firstName = firstName;
+//        this.lastName = lastName;
+//        this.phoneNumber = phoneNumber;
+//        this.email = email;
+//        this.whenCreated = whenCreated;
+//        this.lastUpdated = lastUpdated;
+//        this.logined = logined;
+//        this.lastLogined = lastLogined;
+//    }
 
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public Gender getGender() {
-        return gender;
-    }
-
-    public void setGender(Gender gender) {
-        this.gender = gender;
-    }
-
-    public Date getDateOfBirth() {
-        return dateOfBirth;
-    }
-
-    public void setDateOfBirth(Date dateOfBirth) {
-        this.dateOfBirth = dateOfBirth;
-    }
-
-    public Date getWhenCreated() {
-        return whenCreated;
-    }
-
-    public void setWhenCreated(Date whenCreated) {
-        this.whenCreated = whenCreated;
-    }
-
-    public Date getLastUpdated() {
-        return lastUpdated;
-    }
-
-    public void setLastUpdated(Date lastUpdated) {
-        this.lastUpdated = lastUpdated;
-    }
-
-    public Integer getLogined() {
-        return logined;
-    }
-
-    public void setLogined(Integer logined) {
-        this.logined = logined;
-    }
-
-    public Date getLastLogined() {
-        return lastLogined;
-    }
-
-    public void setLastLogined(Date lastLogined) {
-        this.lastLogined = lastLogined;
-    }
-
-    @Override
-    public String toString() {
-        return "User{" + "id=" + id + ", username=" + username + ", password=" + password + ", firstName=" + firstName + ", lastName=" + lastName + ", phoneNumber=" + phoneNumber + ", email=" + email + ", gender=" + gender + ", dateOfBirth=" + dateOfBirth + ", whenCreated=" + whenCreated + ", lastUpdated=" + lastUpdated + ", logined=" + logined + '}';
-    }
+//    public Integer getId() {
+//        return id;
+//    }
+//
+//    public void setId(Integer id) {
+//        this.id = id;
+//    }
+//
+//    public String getUsername() {
+//        return username;
+//    }
+//
+//    public void setUsername(String username) {
+//        this.username = username;
+//    }
+//
+//    public String getPassword() {
+//        return password;
+//    }
+//
+//    public void setPassword(String password) {
+//        this.password = password;
+//    }
+//
+//    public String getFirstName() {
+//        return firstName;
+//    }
+//
+//    public void setFirstName(String firstName) {
+//        this.firstName = firstName;
+//    }
+//
+//    public String getLastName() {
+//        return lastName;
+//    }
+//
+//    public void setLastName(String lastName) {
+//        this.lastName = lastName;
+//    }
+//
+//    public String getPhoneNumber() {
+//        return phoneNumber;
+//    }
+//
+//    public void setPhoneNumber(String phoneNumber) {
+//        this.phoneNumber = phoneNumber;
+//    }
+//
+//    public String getEmail() {
+//        return email;
+//    }
+//
+//    public void setEmail(String email) {
+//        this.email = email;
+//    }
+//
+//    public Date getWhenCreated() {
+//        return whenCreated;
+//    }
+//
+//    public void setWhenCreated(Date whenCreated) {
+//        this.whenCreated = whenCreated;
+//    }
+//
+//    public Date getLastUpdated() {
+//        return lastUpdated;
+//    }
+//
+//    public void setLastUpdated(Date lastUpdated) {
+//        this.lastUpdated = lastUpdated;
+//    }
+//
+//    public Integer getLogined() {
+//        return logined;
+//    }
+//
+//    public void setLogined(Integer logined) {
+//        this.logined = logined;
+//    }
+//
+//    public Date getLastLogined() {
+//        return lastLogined;
+//    }
+//
+//    public void setLastLogined(Date lastLogined) {
+//        this.lastLogined = lastLogined;
+//    }
+//
+//    @Override
+//    public String toString() {
+//        return "User{" + "id=" + id + ", username=" + username + ", password=" + password + ", firstName=" + firstName + ", phoneNumber=" + phoneNumber + ", email=" + email + ", whenCreated=" + whenCreated + ", lastUpdated=" + lastUpdated + ", logined=" + logined + '}';
+//    }
 
     public static UserBuilder builder() {
         return new UserBuilder();
@@ -186,8 +172,6 @@ public class User implements Serializable {
         private String lastName;
         private String phoneNumber;
         private String email;
-        private Gender gender;
-        private Date dateOfBirth;
         private Date whenCreated;
         private Date lastUpdated;
         private Integer logined;
@@ -228,16 +212,6 @@ public class User implements Serializable {
             return this;
         }
 
-        public UserBuilder gender(Gender gender) {
-            this.gender = gender;
-            return this;
-        }
-
-        public UserBuilder dateOfBirth(Date dateOfBirth) {
-            this.dateOfBirth = dateOfBirth;
-            return this;
-        }
-
         public UserBuilder whenCreated(Date whenCreated) {
             this.whenCreated = whenCreated;
             return this;
@@ -267,8 +241,6 @@ public class User implements Serializable {
                     this.lastName,
                     this.phoneNumber,
                     this.email,
-                    this.gender,
-                    this.dateOfBirth,
                     this.whenCreated,
                     this.lastUpdated,
                     this.logined,

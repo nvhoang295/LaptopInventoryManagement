@@ -18,6 +18,8 @@ public interface UserRepository {
     
     Optional<User> findById(Integer id);
     
+    Optional<User> findByUsername(String username);
+    
     Optional<User> save(User user);
 
     ArrayList<User> saveAll(ArrayList<User> users);

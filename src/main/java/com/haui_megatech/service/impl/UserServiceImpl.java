@@ -5,8 +5,10 @@
 package com.haui_megatech.service.impl;
 
 import com.haui_megatech.constant.ErrorMessage;
+import com.haui_megatech.constant.SuccessMessage;
 import com.haui_megatech.dto.CommonResponseDTO;
 import com.haui_megatech.dto.ListItemsResponseDTO;
+import com.haui_megatech.dto.UserDTO;
 import com.haui_megatech.model.User;
 import com.haui_megatech.service.*;
 import com.haui_megatech.repository.*;
@@ -86,8 +88,44 @@ public class UserServiceImpl implements UserService {
 
         return CommonResponseDTO
                 .builder()
+                .message(SuccessMessage.User.DELETED)
                 .success(Boolean.TRUE)
                 .build();
     }
-
+    
+    @Override
+    public Optional<User> findByUsername(String username) {
+        return userRepository.findByUsername(username);
+    }
+    
+    @Override
+    public Optional<User> findById(Integer id) {
+        return userRepository.findById(id);
+    }
+    
+    @Override
+    public CommonResponseDTO updateOne(Integer id, UserDTO user) {
+        Optional<User> found = this.findById(id);
+        if (found.isEmpty()) 
+            return CommonResponseDTO
+                    .builder()
+                    .success(Boolean.FALSE)
+                    .message(ErrorMessage.User.NOT_FOUND)
+                    .build();
+        
+        User foundUser = found.get();
+        foundUser.setFirstName(user.firstName());
+        foundUser.setLastName(user.lastName());
+        foundUser.setPhoneNumber(user.phoneNumber());
+        foundUser.setEmail(user.email());
+        foundUser.setLastUpdated(new Date());
+        
+        Optional<User> updatedUser = userRepository.save(foundUser);
+        return CommonResponseDTO
+                .builder()
+                .message(SuccessMessage.User.UPDATED)
+                .success(Boolean.TRUE)
+                .build();
+    }
+    
 }

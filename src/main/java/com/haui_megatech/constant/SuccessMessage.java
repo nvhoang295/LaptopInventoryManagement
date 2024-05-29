@@ -12,5 +12,7 @@ public class SuccessMessage {
     
     public static final class User {
         public static final String ADDED = "Thêm mới người dùng thành công.";
+        public static final String DELETED = "Xoá người dùng thành công.";
+        public static final String UPDATED = "Cập nhật người dùng thành công.";
     }
 }
