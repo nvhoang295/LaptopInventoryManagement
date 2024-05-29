@@ -7,7 +7,6 @@ package com.haui_megatech.service.impl;
 import com.haui_megatech.constant.ErrorMessage;
 import com.haui_megatech.constant.SuccessMessage;
 import com.haui_megatech.dto.CommonResponseDTO;
-import com.haui_megatech.dto.ListItemsResponseDTO;
 import com.haui_megatech.dto.UserDTO;
 import com.haui_megatech.model.User;
 import com.haui_megatech.service.*;
@@ -28,18 +27,18 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public ListItemsResponseDTO<User> getList() {
-        return ListItemsResponseDTO
-                .<User>builder()
-                .items(userRepository.getAll())
+    public CommonResponseDTO<List<User>> getList() {
+        return CommonResponseDTO
+                .<List<User>>builder()
+                .data(userRepository.getAll())
                 .build();
     }
 
     @Override
-    public ListItemsResponseDTO<User> searchList(String keyword) {
-        return ListItemsResponseDTO
-                .<User>builder()
-                .items(userRepository
+    public CommonResponseDTO<List<User>> searchList(String keyword) {
+        return CommonResponseDTO
+                .<List<User>>builder()
+                .data(userRepository
                         .getAll()
                         .parallelStream()
                         .filter(item -> {

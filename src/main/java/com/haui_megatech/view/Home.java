@@ -76,8 +76,8 @@ public class Home extends javax.swing.JFrame {
             }
         };
         List<User> users = keyword != null && !keyword.isEmpty()
-                ? userController.searchList(keyword).items()
-                : userController.getList().items();
+                ? userController.searchList(keyword).data()
+                : userController.getList().data();
 
         users.forEach(item -> {
             tableModel.addRow(
@@ -2347,7 +2347,7 @@ public class Home extends javax.swing.JFrame {
 
     private void importUsersFromExcelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_importUsersFromExcelButtonActionPerformed
         JFileChooser fileChooser = new JFileChooser();
-        FileNameExtensionFilter filter = new FileNameExtensionFilter("excel", "xlsx");
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("Excel Workbook (*.xlsx)", "xlsx");
         fileChooser.setFileFilter(filter);
         fileChooser.setMultiSelectionEnabled(false);
         int result = fileChooser.showDialog(this, "Chọn file");
@@ -2362,7 +2362,20 @@ public class Home extends javax.swing.JFrame {
     }//GEN-LAST:event_importUsersFromExcelButtonActionPerformed
 
     private void exportUsersToExcelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exportUsersToExcelButtonActionPerformed
-        // TODO add your handling code here:
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setDialogTitle("Lựa chọn vị trí lưu file");
+        fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("Excel Workbook (*.xlsx)", "xlsx");
+        fileChooser.setFileFilter(filter);
+        int userSelection = fileChooser.showSaveDialog(fileChooser);
+        if (userSelection == JFileChooser.APPROVE_OPTION) {
+            File directoryToSave = fileChooser.getSelectedFile();
+            CommonResponseDTO response = ExcelUtil.usersToExcel(
+                    userController.getList().data(), 
+                    directoryToSave.getAbsolutePath()
+            );
+            showUserDiaglogMessage(response.message());
+        }
     }//GEN-LAST:event_exportUsersToExcelButtonActionPerformed
 
     private void editUserButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editUserButtonActionPerformed
