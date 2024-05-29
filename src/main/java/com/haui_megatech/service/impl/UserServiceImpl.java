@@ -4,9 +4,11 @@
  */
 package com.haui_megatech.service.impl;
 
-import com.haui_megatech.constant.ErrorMessageConstant;
+import com.haui_megatech.constant.ErrorMessage;
+import com.haui_megatech.constant.SuccessMessage;
 import com.haui_megatech.dto.CommonResponseDTO;
 import com.haui_megatech.dto.ListItemsResponseDTO;
+import com.haui_megatech.dto.UserDTO;
 import com.haui_megatech.model.User;
 import com.haui_megatech.service.*;
 import com.haui_megatech.repository.*;
@@ -57,6 +59,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public CommonResponseDTO addOne(User user) {
+        user.setWhenCreated(new Date());
         var result = userRepository.save(user);
         return result.isPresent()
                 ? CommonResponseDTO
@@ -66,8 +69,73 @@ public class UserServiceImpl implements UserService {
                 : CommonResponseDTO
                         .builder()
                         .success(false)
-                        .message(ErrorMessageConstant.User.SAVE)
+                        .message(ErrorMessage.User.SAVE)
                         .build();
     }
+    
+    @Override
+    public CommonResponseDTO addList(ArrayList<User> users) {
+        ArrayList<User> savedUsers = userRepository.saveAll(users);
+        return CommonResponseDTO
+                .builder()
+                .success(Boolean.TRUE)
+                .message("Lưu thành công " + savedUsers.size() + " người dùng.")
+                .build();
+    }
 
+    @Override
+    public CommonResponseDTO deleteOne(Integer id) {
+        Optional<User> found = userRepository.findById(id);
+        if (found.isEmpty()) {
+            return CommonResponseDTO
+                    .builder()
+                    .success(Boolean.FALSE)
+                    .message(ErrorMessage.User.NOT_FOUND)
+                    .build();
+        }
+
+        userRepository.deleteById(id);
+
+        return CommonResponseDTO
+                .builder()
+                .message(SuccessMessage.User.DELETED)
+                .success(Boolean.TRUE)
+                .build();
+    }
+    
+    @Override
+    public Optional<User> findByUsername(String username) {
+        return userRepository.findByUsername(username);
+    }
+    
+    @Override
+    public Optional<User> findById(Integer id) {
+        return userRepository.findById(id);
+    }
+    
+    @Override
+    public CommonResponseDTO updateOne(Integer id, UserDTO user) {
+        Optional<User> found = this.findById(id);
+        if (found.isEmpty()) 
+            return CommonResponseDTO
+                    .builder()
+                    .success(Boolean.FALSE)
+                    .message(ErrorMessage.User.NOT_FOUND)
+                    .build();
+        
+        User foundUser = found.get();
+        foundUser.setFirstName(user.firstName());
+        foundUser.setLastName(user.lastName());
+        foundUser.setPhoneNumber(user.phoneNumber());
+        foundUser.setEmail(user.email());
+        foundUser.setLastUpdated(new Date());
+        
+        Optional<User> updatedUser = userRepository.save(foundUser);
+        return CommonResponseDTO
+                .builder()
+                .message(SuccessMessage.User.UPDATED)
+                .success(Boolean.TRUE)
+                .build();
+    }
+    
 }

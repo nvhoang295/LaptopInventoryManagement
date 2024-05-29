@@ -26,9 +26,6 @@ public class InitUserData {
                         .lastName("Nguyễn Việt")
                         .phoneNumber("0336118268")
                         .email("hoangnv.swe@gmail.com")
-                        .gender(Gender.MALE)
-                        .dateOfBirth(new Date())
-                        .whenCreated(new Date())
                         .build(),
                 User.builder()
                         .username("thanhquynh")
@@ -37,9 +34,6 @@ public class InitUserData {
                         .lastName("Cao Thị Thanh")
                         .phoneNumber("0336118269")
                         .email("thanhquynh@gmail.com")
-                        .gender(Gender.FEMALE)
-                        .dateOfBirth(new Date())
-                        .whenCreated(new Date())
                         .build(),
                 User.builder()
                         .username("linhngan")
@@ -48,9 +42,6 @@ public class InitUserData {
                         .lastName("Nguyễn Thị Linh")
                         .phoneNumber("0336118270")
                         .email("linhngan@gmail.com")
-                        .gender(Gender.FEMALE)
-                        .dateOfBirth(new Date())
-                        .whenCreated(new Date())
                         .build(),
                 User.builder()
                         .username("minhnghia")
@@ -59,20 +50,14 @@ public class InitUserData {
                         .lastName("Hoàng Minh")
                         .phoneNumber("0336118271")
                         .email("minhnghia@gmail.com")
-                        .gender(Gender.MALE)
-                        .dateOfBirth(new Date())
-                        .whenCreated(new Date())
                         .build(),
                 User.builder()
                         .username("hoangphuc")
                         .password("123")
                         .firstName("Phúc")
-                        .lastName("Phạm Hoàng Phúc")
+                        .lastName("Phạm Hoàng")
                         .phoneNumber("0336118272")
                         .email("hoangphuc@gmail.com")
-                        .gender(Gender.MALE)
-                        .dateOfBirth(new Date())
-                        .whenCreated(new Date())
                         .build()
         )));
 

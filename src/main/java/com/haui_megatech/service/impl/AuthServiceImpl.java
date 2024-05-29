@@ -5,7 +5,7 @@
 package com.haui_megatech.service.impl;
 
 import com.haui_megatech.ApplicationContext;
-import com.haui_megatech.constant.ErrorMessageConstant;
+import com.haui_megatech.constant.ErrorMessage;
 import com.haui_megatech.dto.AuthRequestDTO;
 import com.haui_megatech.dto.CommonResponseDTO;
 import com.haui_megatech.model.User;
@@ -28,7 +28,11 @@ public class AuthServiceImpl implements AuthService {
     @Override
     public CommonResponseDTO authenticate(AuthRequestDTO request) {
         if (request.username().trim().isEmpty() || request.password().trim().isEmpty())
-            return new CommonResponseDTO(false, ErrorMessageConstant.Auth.BLANK_INPUT);
+            return CommonResponseDTO
+                    .builder()
+                    .success(false)
+                    .message(ErrorMessage.Auth.BLANK_INPUT)
+                    .build();
         
         Optional<User> found = userRepository
                 .getAll()
@@ -37,13 +41,29 @@ public class AuthServiceImpl implements AuthService {
                 .findFirst();
         
         if (found.isEmpty()) 
-            return new CommonResponseDTO(false, ErrorMessageConstant.Auth.NOT_FOUND);
+            return CommonResponseDTO
+                    .builder()
+                    .success(false)
+                    .message(ErrorMessage.Auth.NOT_FOUND)
+                    .build();
         
         if (!found.get().getPassword().equals(request.password()))
-            return new CommonResponseDTO(false, ErrorMessageConstant.Auth.PASSWORD_NOT_CORRECT);
+            return CommonResponseDTO
+                    .builder()
+                    .success(false)
+                    .message(ErrorMessage.Auth.PASSWORD_NOT_CORRECT)
+                    .build();
 
         ApplicationContext.setLoginedUser(found.get());
-        return new CommonResponseDTO(true, null);
+        found.get().setLastLoggedIn(new Date());
+        Integer loggedIn = found.get().getLoggedIn();
+        found.get().setLoggedIn(loggedIn == null ? 1 : loggedIn + 1);
+        userRepository.save(found.get());
+        
+        return CommonResponseDTO
+                .builder()
+                .success(true)
+                .build();
     }
     
 }

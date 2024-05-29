@@ -76,10 +76,13 @@ public class Login extends javax.swing.JFrame {
         uPass = new javax.swing.JPasswordField();
         loginBtn = new javax.swing.JButton();
         forget = new javax.swing.JLabel();
+        uNameError = new javax.swing.JLabel();
+        uPassError = new javax.swing.JLabel();
 
         recoveryPasswordDiaglog.setTitle("Khôi phục mật khẩu");
         recoveryPasswordDiaglog.setBackground(new java.awt.Color(255, 255, 255));
         recoveryPasswordDiaglog.setMinimumSize(new java.awt.Dimension(700, 500));
+        recoveryPasswordDiaglog.setPreferredSize(new java.awt.Dimension(700, 500));
         recoveryPasswordDiaglog.setSize(new java.awt.Dimension(700, 500));
         recoveryPasswordDiaglog.getContentPane().setLayout(null);
 
@@ -140,8 +143,11 @@ public class Login extends javax.swing.JFrame {
         sendResetEmailPanel.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 200, 580, 44));
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/back.png"))); // NOI18N
         jLabel2.setText("Quay về trang đăng nhập");
         jLabel2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel2.setDoubleBuffered(true);
+        jLabel2.setFocusCycleRoot(true);
         sendResetEmailPanel.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 330, 370, 40));
 
         recoveryPasswordDiaglog.getContentPane().add(sendResetEmailPanel);
@@ -256,6 +262,7 @@ public class Login extends javax.swing.JFrame {
 
         errorLoginDiaglog.setTitle("Lỗi đăng nhập");
         errorLoginDiaglog.setMinimumSize(new java.awt.Dimension(520, 300));
+        errorLoginDiaglog.setPreferredSize(new java.awt.Dimension(520, 300));
         errorLoginDiaglog.setSize(new java.awt.Dimension(520, 300));
         errorLoginDiaglog.getContentPane().setLayout(null);
 
@@ -267,8 +274,9 @@ public class Login extends javax.swing.JFrame {
 
         errorLoginMessage.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         errorLoginMessage.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        errorLoginMessage.setText("tên đăng nhập hoặc mật khẩu không được để trôngsldjfdlfjdlfjdfdjflfjljfldjsffljflfj");
-        errorLoginMessage.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        errorLoginMessage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/error.24.png"))); // NOI18N
+        errorLoginMessage.setText("tên đăng nhập hoặc mật khẩu không được để trôngsldjfdlfj dlfjdfdjflfjljfldjsffljflfj");
+        errorLoginMessage.setDoubleBuffered(true);
         errorLoginMessage.setMaximumSize(new java.awt.Dimension(520, 70));
         errorLoginMessage.setMinimumSize(new java.awt.Dimension(400, 70));
         errorLoginMessage.setPreferredSize(new java.awt.Dimension(400, 70));
@@ -360,6 +368,12 @@ public class Login extends javax.swing.JFrame {
             }
         });
 
+        uNameError.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        uNameError.setForeground(new java.awt.Color(255, 0, 0));
+
+        uPassError.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        uPassError.setForeground(new java.awt.Color(255, 0, 0));
+
         javax.swing.GroupLayout rightLayout = new javax.swing.GroupLayout(right);
         right.setLayout(rightLayout);
         rightLayout.setHorizontalGroup(
@@ -367,15 +381,20 @@ public class Login extends javax.swing.JFrame {
             .addGroup(rightLayout.createSequentialGroup()
                 .addComponent(dangNhapTittle, javax.swing.GroupLayout.PREFERRED_SIZE, 692, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(rightLayout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, rightLayout.createSequentialGroup()
                 .addGap(57, 57, 57)
-                .addGroup(rightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(forget, javax.swing.GroupLayout.PREFERRED_SIZE, 581, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tendnlabel)
-                    .addComponent(passlabel)
-                    .addComponent(uName)
-                    .addComponent(uPass)
-                    .addComponent(loginBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(rightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(uPassError, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(uNameError, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(forget, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(uName, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(uPass, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(loginBtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, rightLayout.createSequentialGroup()
+                        .addGroup(rightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(tendnlabel, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(passlabel, javax.swing.GroupLayout.Alignment.LEADING))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addGap(54, 54, 54))
         );
         rightLayout.setVerticalGroup(
@@ -387,15 +406,19 @@ public class Login extends javax.swing.JFrame {
                 .addComponent(tendnlabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(uName, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(42, 42, 42)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(uNameError, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(passlabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(uPass, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(uPassError, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(loginBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(38, 38, 38)
                 .addComponent(forget, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(215, 215, 215))
+                .addGap(195, 195, 195))
         );
 
         getContentPane().add(right, new org.netbeans.lib.awtextra.AbsoluteConstraints(692, 0, 692, 750));
@@ -511,7 +534,9 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JButton sendRestEmailButton;
     private javax.swing.JLabel tendnlabel;
     private javax.swing.JTextField uName;
+    private javax.swing.JLabel uNameError;
     private javax.swing.JPasswordField uPass;
+    private javax.swing.JLabel uPassError;
     private javax.swing.JButton updateNewPasswordButton;
     private javax.swing.JLabel updateNewPasswordLabel;
     private javax.swing.JPanel updateNewPasswordPanel;

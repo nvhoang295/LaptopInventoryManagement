@@ -5,15 +5,26 @@
 package com.haui_megatech.view;
 
 import com.haui_megatech.ApplicationContext;
+import com.haui_megatech.constant.ErrorMessage;
+import com.haui_megatech.constant.SuccessMessage;
 import com.haui_megatech.controller.UserController;
+import com.haui_megatech.dto.CommonResponseDTO;
+import com.haui_megatech.dto.UserDTO;
 import com.haui_megatech.model.User;
 import com.haui_megatech.repository.impl.UserRepositoryImpl;
 import com.haui_megatech.service.impl.UserServiceImpl;
+import com.haui_megatech.util.ExcelUtil;
 import com.haui_megatech.util.InputValidator;
 import java.awt.Color;
+import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+import javax.swing.JFileChooser;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -21,7 +32,16 @@ import javax.swing.table.DefaultTableModel;
  * @author vieth
  */
 public class Home extends javax.swing.JFrame {
-
+    
+    private final SimpleDateFormat formatter = new SimpleDateFormat("HH:mm:ss dd/MM/yyyy");
+    
+    private final int ID_COL_INDEX = 0;
+    private final int USERNAME_COL_INDEX = 1;
+    private final int FIRSTNAME_COL_INDEX = 2;
+    private final int LASTNAME_COL_INDEX = 3;
+    private final int PHONENUMBER_COL_INDEX = 4;
+    private final int EMAIL_COL_INDEX = 5;
+    
     private final UserController userController = new UserController(
             new UserServiceImpl(
                     new UserRepositoryImpl()
@@ -46,9 +66,8 @@ public class Home extends javax.swing.JFrame {
             "Tên đăng nhập",
             "Tên",
             "Họ đệm",
-            "Giới tính",
             "Số điện thoại",
-            "Email"
+            "Email",
         };
         DefaultTableModel tableModel = new DefaultTableModel(null, tableHeader) {
             @Override
@@ -56,7 +75,6 @@ public class Home extends javax.swing.JFrame {
                 return false;
             }
         };
-        System.out.println(keyword);
         List<User> users = keyword != null && !keyword.isEmpty()
                 ? userController.searchList(keyword).items()
                 : userController.getList().items();
@@ -68,13 +86,12 @@ public class Home extends javax.swing.JFrame {
                         item.getUsername() != null ? item.getUsername() : "",
                         item.getFirstName() != null ? item.getFirstName() : "",
                         item.getLastName() != null ? item.getLastName() : "",
-                        item.getGender() != null ? item.getGender().getName() : "",
                         item.getPhoneNumber() != null ? item.getPhoneNumber() : "",
-                        item.getEmail() != null ? item.getEmail() : ""
+                        item.getEmail() != null ? item.getEmail() : "",
                     }
             );
         });
-
+        
         usersTable.setModel(tableModel);
     }
 
@@ -89,7 +106,12 @@ public class Home extends javax.swing.JFrame {
 
         logoutDiaglog = new javax.swing.JDialog();
         jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jTextField1 = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
         addUserDiaglog = new javax.swing.JDialog();
+        addUserDiaglogPanel = new javax.swing.JPanel();
         usernameLabel = new javax.swing.JLabel();
         usernameTextField = new javax.swing.JTextField();
         passwordLabel = new javax.swing.JLabel();
@@ -109,6 +131,58 @@ public class Home extends javax.swing.JFrame {
         addUserDiaglogButton = new javax.swing.JButton();
         cancelAddUserDiaglogButton = new javax.swing.JButton();
         sendCodeAddUserDiaglogButton = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        diaglogMessage = new javax.swing.JDialog();
+        diaglogMessagePanel = new javax.swing.JPanel();
+        diaglogMessageLabel = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        diaglogMessageOkButton = new javax.swing.JButton();
+        deleteUserConfirmDiaglog = new javax.swing.JDialog();
+        deleteUserConfirmDiaglogPanel = new javax.swing.JPanel();
+        deleteUserConfirmDiaglogLabel = new javax.swing.JLabel();
+        confirmDeleteUser = new javax.swing.JButton();
+        cancelDeleteUser = new javax.swing.JButton();
+        jLabel8 = new javax.swing.JLabel();
+        editUserDiaglog = new javax.swing.JDialog();
+        editUserDiaglogPanel = new javax.swing.JPanel();
+        editUsernameLabel = new javax.swing.JLabel();
+        editUsernameTextField = new javax.swing.JTextField();
+        editFirstNameLabel = new javax.swing.JLabel();
+        editFirstNameTextField = new javax.swing.JTextField();
+        editLastNameLabel = new javax.swing.JLabel();
+        editLastNameTextField = new javax.swing.JTextField();
+        editPhoneNumberLabel = new javax.swing.JLabel();
+        editPhoneNumberTextField = new javax.swing.JTextField();
+        editEmailLabel = new javax.swing.JLabel();
+        editEmailTextField = new javax.swing.JTextField();
+        editUserDiaglogButton = new javax.swing.JButton();
+        cancelEditUserDiaglogButton = new javax.swing.JButton();
+        editUserDiaglogLabel = new javax.swing.JLabel();
+        editUserIdLabel = new javax.swing.JLabel();
+        editUserIdTextField = new javax.swing.JTextField();
+        viewUserDiaglog = new javax.swing.JDialog();
+        viewUserDiaglogPanel = new javax.swing.JPanel();
+        viewUsernameLabel = new javax.swing.JLabel();
+        viewUserLastNameTextField = new javax.swing.JTextField();
+        viewUserFirstNameLabel = new javax.swing.JLabel();
+        viewUserLastNameLabel = new javax.swing.JLabel();
+        viewUserPhoneNumberLabel = new javax.swing.JLabel();
+        viewUserPhoneNumberTextField = new javax.swing.JTextField();
+        viewUserEmailLabel = new javax.swing.JLabel();
+        viewUserEmailTextField = new javax.swing.JTextField();
+        viewUserWhenCreatedLabel = new javax.swing.JLabel();
+        viewUserWhenCreatedTextField = new javax.swing.JTextField();
+        viewUserLastUpdatedLabel = new javax.swing.JLabel();
+        viewUserLastUpdatedTextField = new javax.swing.JTextField();
+        cancelAddUserDiaglogButton1 = new javax.swing.JButton();
+        jLabel11 = new javax.swing.JLabel();
+        editUserDiaglogButton1 = new javax.swing.JButton();
+        viewUserLastLoggedInLabel = new javax.swing.JLabel();
+        viewUserLastLoggedInTextField = new javax.swing.JTextField();
+        viewUserLoggedInLabel = new javax.swing.JLabel();
+        viewUserLoggedInTextField = new javax.swing.JTextField();
+        viewUsernameTextField = new javax.swing.JTextField();
+        viewUserFirstNameTextField = new javax.swing.JTextField();
         sidebarPanel = new javax.swing.JPanel();
         loginedUsername = new javax.swing.JLabel();
         productTab = new javax.swing.JPanel();
@@ -133,6 +207,9 @@ public class Home extends javax.swing.JFrame {
         updateInfoLabel = new javax.swing.JLabel();
         logoutTab = new javax.swing.JPanel();
         logoutLabel = new javax.swing.JLabel();
+        jSeparator4 = new javax.swing.JSeparator();
+        jSeparator3 = new javax.swing.JSeparator();
+        jSeparator5 = new javax.swing.JSeparator();
         productPanel = new javax.swing.JPanel();
         usersScrollPanel1 = new javax.swing.JScrollPane();
         usersTable1 = new javax.swing.JTable();
@@ -184,7 +261,6 @@ public class Home extends javax.swing.JFrame {
         usersScrollPanel = new javax.swing.JScrollPane();
         usersTable = new javax.swing.JTable();
         searchUsersPanel = new javax.swing.JPanel();
-        userRolesComboBox = new javax.swing.JComboBox<>();
         searchUsersTextField = new javax.swing.JTextField();
         searchUsersButton = new javax.swing.JButton();
         userFunctionPanel = new javax.swing.JPanel();
@@ -192,26 +268,53 @@ public class Home extends javax.swing.JFrame {
         importUsersFromExcelButton = new javax.swing.JButton();
         exportUsersToExcelButton = new javax.swing.JButton();
         editUserButton = new javax.swing.JButton();
-        addUserButton = new javax.swing.JButton();
+        viewUserButton = new javax.swing.JButton();
         deleteUserButton = new javax.swing.JButton();
+        addUserButton = new javax.swing.JButton();
         statisticsPanel = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
 
         logoutDiaglog.setMinimumSize(new java.awt.Dimension(400, 300));
+        logoutDiaglog.setSize(new java.awt.Dimension(360, 250));
 
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setMinimumSize(new java.awt.Dimension(400, 300));
         jPanel1.setName(""); // NOI18N
+        jPanel1.setPreferredSize(new java.awt.Dimension(360, 250));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
-        );
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 0, 0));
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("THOÁT");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 27, 354, -1));
+
+        jTextField1.setEditable(false);
+        jTextField1.setBackground(new java.awt.Color(255, 255, 255));
+        jTextField1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jTextField1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField1.setText("Bạn có chắc chắn muốn thoát ứng dụng?");
+        jTextField1.setActionCommand("<Not Set>");
+        jTextField1.setAutoscrolls(false);
+        jTextField1.setBorder(null);
+        jTextField1.setDisabledTextColor(new java.awt.Color(0, 0, 0));
+        jTextField1.setEnabled(false);
+        jTextField1.setFocusable(false);
+        jTextField1.setScrollOffset(250);
+        jTextField1.setVerifyInputWhenFocusTarget(false);
+        jPanel1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(25, 60, 340, 100));
+
+        jButton1.setBackground(new java.awt.Color(44, 43, 196));
+        jButton1.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        jButton1.setText("Huỷ");
+        jButton1.setBorderPainted(false);
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 170, 80, 30));
+
+        jButton2.setBackground(new java.awt.Color(255, 51, 51));
+        jButton2.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        jButton2.setText("Thoát");
+        jButton2.setBorderPainted(false);
+        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 170, 80, 30));
 
         javax.swing.GroupLayout logoutDiaglogLayout = new javax.swing.GroupLayout(logoutDiaglog.getContentPane());
         logoutDiaglog.getContentPane().setLayout(logoutDiaglogLayout);
@@ -224,118 +327,562 @@ public class Home extends javax.swing.JFrame {
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        addUserDiaglog.setMinimumSize(new java.awt.Dimension(400, 405));
-        addUserDiaglog.setPreferredSize(new java.awt.Dimension(400, 405));
-        addUserDiaglog.setSize(new java.awt.Dimension(340, 340));
-        addUserDiaglog.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        addUserDiaglog.setTitle("Thêm người dùng");
+        addUserDiaglog.setBackground(new java.awt.Color(255, 255, 255));
+        addUserDiaglog.setMinimumSize(new java.awt.Dimension(450, 500));
+        addUserDiaglog.setSize(new java.awt.Dimension(450, 500));
 
+        addUserDiaglogPanel.setBackground(new java.awt.Color(255, 255, 255));
+        addUserDiaglogPanel.setMinimumSize(new java.awt.Dimension(430, 450));
+        addUserDiaglogPanel.setPreferredSize(new java.awt.Dimension(430, 450));
+        addUserDiaglogPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        usernameLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         usernameLabel.setText("Tên đăng nhập");
-        addUserDiaglog.getContentPane().add(usernameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 40, -1, -1));
+        addUserDiaglogPanel.add(usernameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, -1, -1));
 
+        usernameTextField.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         usernameTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 usernameTextFieldActionPerformed(evt);
             }
         });
-        addUserDiaglog.getContentPane().add(usernameTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 30, 200, 30));
+        addUserDiaglogPanel.add(usernameTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 70, 200, 30));
 
+        passwordLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         passwordLabel.setText("Mật khẩu");
-        addUserDiaglog.getContentPane().add(passwordLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, -1, -1));
-        addUserDiaglog.getContentPane().add(passwordField, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 70, 200, 30));
+        addUserDiaglogPanel.add(passwordLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, -1, -1));
 
+        passwordField.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        addUserDiaglogPanel.add(passwordField, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 110, 200, 30));
+
+        confirmPasswordLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         confirmPasswordLabel.setText("Xác nhận mật khẩu");
-        addUserDiaglog.getContentPane().add(confirmPasswordLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 120, -1, -1));
-        addUserDiaglog.getContentPane().add(confirmPasswordField, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 110, 200, 30));
+        addUserDiaglogPanel.add(confirmPasswordLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 150, -1, -1));
 
+        confirmPasswordField.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        addUserDiaglogPanel.add(confirmPasswordField, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 150, 200, 30));
+
+        firstNameLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         firstNameLabel.setText("Tên");
-        addUserDiaglog.getContentPane().add(firstNameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 160, -1, -1));
+        addUserDiaglogPanel.add(firstNameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 190, -1, -1));
 
+        firstNameTextField.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         firstNameTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 firstNameTextFieldActionPerformed(evt);
             }
         });
-        addUserDiaglog.getContentPane().add(firstNameTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 150, 200, 30));
+        addUserDiaglogPanel.add(firstNameTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 190, 200, 30));
 
+        lastNameLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         lastNameLabel.setText("Họ đệm");
-        addUserDiaglog.getContentPane().add(lastNameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 200, -1, -1));
+        addUserDiaglogPanel.add(lastNameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 230, -1, -1));
 
+        lastNameTextField.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         lastNameTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 lastNameTextFieldActionPerformed(evt);
             }
         });
-        addUserDiaglog.getContentPane().add(lastNameTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 190, 200, 30));
+        addUserDiaglogPanel.add(lastNameTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 230, 200, 30));
 
+        phoneNumberLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         phoneNumberLabel.setText("Số điện thoại");
-        addUserDiaglog.getContentPane().add(phoneNumberLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 240, -1, -1));
+        addUserDiaglogPanel.add(phoneNumberLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 270, -1, -1));
 
+        phoneNumberTextField.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         phoneNumberTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 phoneNumberTextFieldActionPerformed(evt);
             }
         });
-        addUserDiaglog.getContentPane().add(phoneNumberTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 230, 200, 30));
+        addUserDiaglogPanel.add(phoneNumberTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 270, 200, 30));
 
+        emailLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         emailLabel.setText("Địa chỉ email");
-        addUserDiaglog.getContentPane().add(emailLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 280, -1, -1));
+        addUserDiaglogPanel.add(emailLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 310, -1, -1));
 
+        emailTextField.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         emailTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 emailTextFieldActionPerformed(evt);
             }
         });
-        addUserDiaglog.getContentPane().add(emailTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 270, 200, 30));
+        addUserDiaglogPanel.add(emailTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 310, 200, 30));
 
+        confirmEmailOTPLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         confirmEmailOTPLabel.setText("Mã xác nhận email");
-        addUserDiaglog.getContentPane().add(confirmEmailOTPLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 320, -1, -1));
+        addUserDiaglogPanel.add(confirmEmailOTPLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 350, -1, -1));
 
+        confirmEmailOTPTextField.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         confirmEmailOTPTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 confirmEmailOTPTextFieldActionPerformed(evt);
             }
         });
-        addUserDiaglog.getContentPane().add(confirmEmailOTPTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 310, 100, 30));
+        addUserDiaglogPanel.add(confirmEmailOTPTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 350, 100, 30));
 
+        addUserDiaglogButton.setBackground(new java.awt.Color(0, 122, 249));
+        addUserDiaglogButton.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         addUserDiaglogButton.setText("Thêm mới");
+        addUserDiaglogButton.setBorderPainted(false);
         addUserDiaglogButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 addUserDiaglogButtonActionPerformed(evt);
             }
         });
-        addUserDiaglog.getContentPane().add(addUserDiaglogButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 360, -1, -1));
+        addUserDiaglogPanel.add(addUserDiaglogButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 400, -1, -1));
 
+        cancelAddUserDiaglogButton.setBackground(new java.awt.Color(212, 57, 68));
+        cancelAddUserDiaglogButton.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         cancelAddUserDiaglogButton.setText("Huỷ bỏ");
+        cancelAddUserDiaglogButton.setBorderPainted(false);
         cancelAddUserDiaglogButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cancelAddUserDiaglogButtonActionPerformed(evt);
             }
         });
-        addUserDiaglog.getContentPane().add(cancelAddUserDiaglogButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 360, -1, -1));
+        addUserDiaglogPanel.add(cancelAddUserDiaglogButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 400, -1, -1));
 
+        sendCodeAddUserDiaglogButton.setBackground(new java.awt.Color(36, 169, 65));
+        sendCodeAddUserDiaglogButton.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         sendCodeAddUserDiaglogButton.setText("Gửi mã");
-        addUserDiaglog.getContentPane().add(sendCodeAddUserDiaglogButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 310, 90, 30));
+        sendCodeAddUserDiaglogButton.setBorderPainted(false);
+        addUserDiaglogPanel.add(sendCodeAddUserDiaglogButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 350, 90, 30));
+
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(44, 43, 196));
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel3.setText("THÊM NGƯỜI DÙNG");
+        addUserDiaglogPanel.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 20, 440, -1));
+
+        javax.swing.GroupLayout addUserDiaglogLayout = new javax.swing.GroupLayout(addUserDiaglog.getContentPane());
+        addUserDiaglog.getContentPane().setLayout(addUserDiaglogLayout);
+        addUserDiaglogLayout.setHorizontalGroup(
+            addUserDiaglogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(addUserDiaglogPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 448, Short.MAX_VALUE)
+        );
+        addUserDiaglogLayout.setVerticalGroup(
+            addUserDiaglogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(addUserDiaglogPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 505, Short.MAX_VALUE)
+        );
+
+        diaglogMessage.setTitle("Thông báo");
+        diaglogMessage.setMinimumSize(new java.awt.Dimension(400, 250));
+        diaglogMessage.setSize(new java.awt.Dimension(400, 250));
+
+        diaglogMessagePanel.setBackground(new java.awt.Color(255, 255, 255));
+        diaglogMessagePanel.setMinimumSize(new java.awt.Dimension(400, 250));
+        diaglogMessagePanel.setPreferredSize(new java.awt.Dimension(400, 250));
+        diaglogMessagePanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        diaglogMessageLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        diaglogMessageLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        diaglogMessageLabel.setText("Thêm mới người dùng thành công!");
+        diaglogMessagePanel.add(diaglogMessageLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 65, 380, 65));
+
+        jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(212, 57, 68));
+        jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel10.setText("THÔNG BÁO");
+        diaglogMessagePanel.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 34, 388, -1));
+
+        diaglogMessageOkButton.setBackground(new java.awt.Color(44, 43, 196));
+        diaglogMessageOkButton.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        diaglogMessageOkButton.setForeground(new java.awt.Color(255, 255, 255));
+        diaglogMessageOkButton.setText("OK");
+        diaglogMessageOkButton.setBorderPainted(false);
+        diaglogMessageOkButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        diaglogMessageOkButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                diaglogMessageOkButtonActionPerformed(evt);
+            }
+        });
+        diaglogMessagePanel.add(diaglogMessageOkButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 160, 82, 30));
+
+        javax.swing.GroupLayout diaglogMessageLayout = new javax.swing.GroupLayout(diaglogMessage.getContentPane());
+        diaglogMessage.getContentPane().setLayout(diaglogMessageLayout);
+        diaglogMessageLayout.setHorizontalGroup(
+            diaglogMessageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(diaglogMessagePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        diaglogMessageLayout.setVerticalGroup(
+            diaglogMessageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(diaglogMessagePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+
+        deleteUserConfirmDiaglog.setTitle("Xác nhận xoá");
+        deleteUserConfirmDiaglog.setMinimumSize(new java.awt.Dimension(420, 230));
+        deleteUserConfirmDiaglog.setResizable(false);
+        deleteUserConfirmDiaglog.setSize(new java.awt.Dimension(420, 230));
+
+        deleteUserConfirmDiaglogPanel.setBackground(new java.awt.Color(255, 255, 255));
+        deleteUserConfirmDiaglogPanel.setMinimumSize(new java.awt.Dimension(420, 230));
+        deleteUserConfirmDiaglogPanel.setPreferredSize(new java.awt.Dimension(420, 230));
+        deleteUserConfirmDiaglogPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        deleteUserConfirmDiaglogLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        deleteUserConfirmDiaglogLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        deleteUserConfirmDiaglogLabel.setText("Bạn chắc chắn muốn xoá người dùng abcdeskskskskksd");
+        deleteUserConfirmDiaglogLabel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        deleteUserConfirmDiaglogPanel.add(deleteUserConfirmDiaglogLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(5, 67, 400, 50));
+
+        confirmDeleteUser.setBackground(new java.awt.Color(44, 43, 196));
+        confirmDeleteUser.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        confirmDeleteUser.setForeground(new java.awt.Color(255, 255, 255));
+        confirmDeleteUser.setText("Đồng ý");
+        confirmDeleteUser.setBorderPainted(false);
+        confirmDeleteUser.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                confirmDeleteUserActionPerformed(evt);
+            }
+        });
+        deleteUserConfirmDiaglogPanel.add(confirmDeleteUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 140, -1, 30));
+
+        cancelDeleteUser.setBackground(new java.awt.Color(212, 57, 68));
+        cancelDeleteUser.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        cancelDeleteUser.setForeground(new java.awt.Color(255, 255, 255));
+        cancelDeleteUser.setText("Huỷ bỏ");
+        cancelDeleteUser.setBorderPainted(false);
+        cancelDeleteUser.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelDeleteUserActionPerformed(evt);
+            }
+        });
+        deleteUserConfirmDiaglogPanel.add(cancelDeleteUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 140, -1, 30));
+
+        jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(255, 0, 0));
+        jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel8.setText("XÁC NHẬN XOÁ");
+        deleteUserConfirmDiaglogPanel.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 29, 408, -1));
+
+        javax.swing.GroupLayout deleteUserConfirmDiaglogLayout = new javax.swing.GroupLayout(deleteUserConfirmDiaglog.getContentPane());
+        deleteUserConfirmDiaglog.getContentPane().setLayout(deleteUserConfirmDiaglogLayout);
+        deleteUserConfirmDiaglogLayout.setHorizontalGroup(
+            deleteUserConfirmDiaglogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(deleteUserConfirmDiaglogPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        deleteUserConfirmDiaglogLayout.setVerticalGroup(
+            deleteUserConfirmDiaglogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(deleteUserConfirmDiaglogPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
+        editUserDiaglog.setTitle("Thêm người dùng");
+        editUserDiaglog.setBackground(new java.awt.Color(255, 255, 255));
+        editUserDiaglog.setMinimumSize(new java.awt.Dimension(450, 500));
+        editUserDiaglog.setSize(new java.awt.Dimension(450, 500));
+
+        editUserDiaglogPanel.setBackground(new java.awt.Color(255, 255, 255));
+        editUserDiaglogPanel.setMinimumSize(new java.awt.Dimension(430, 450));
+        editUserDiaglogPanel.setPreferredSize(new java.awt.Dimension(430, 450));
+        editUserDiaglogPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        editUsernameLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        editUsernameLabel.setText("Tên đăng nhập");
+        editUserDiaglogPanel.add(editUsernameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, -1, -1));
+
+        editUsernameTextField.setEditable(false);
+        editUsernameTextField.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        editUsernameTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editUsernameTextFieldActionPerformed(evt);
+            }
+        });
+        editUserDiaglogPanel.add(editUsernameTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 110, 200, 30));
+
+        editFirstNameLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        editFirstNameLabel.setText("Tên");
+        editUserDiaglogPanel.add(editFirstNameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 190, -1, -1));
+
+        editFirstNameTextField.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        editFirstNameTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editFirstNameTextFieldActionPerformed(evt);
+            }
+        });
+        editUserDiaglogPanel.add(editFirstNameTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 190, 200, 30));
+
+        editLastNameLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        editLastNameLabel.setText("Họ đệm");
+        editUserDiaglogPanel.add(editLastNameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 230, -1, -1));
+
+        editLastNameTextField.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        editLastNameTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editLastNameTextFieldActionPerformed(evt);
+            }
+        });
+        editUserDiaglogPanel.add(editLastNameTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 230, 200, 30));
+
+        editPhoneNumberLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        editPhoneNumberLabel.setText("Số điện thoại");
+        editUserDiaglogPanel.add(editPhoneNumberLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 270, -1, -1));
+
+        editPhoneNumberTextField.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        editPhoneNumberTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editPhoneNumberTextFieldActionPerformed(evt);
+            }
+        });
+        editUserDiaglogPanel.add(editPhoneNumberTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 270, 200, 30));
+
+        editEmailLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        editEmailLabel.setText("Địa chỉ email");
+        editUserDiaglogPanel.add(editEmailLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 310, -1, -1));
+
+        editEmailTextField.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        editEmailTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editEmailTextFieldActionPerformed(evt);
+            }
+        });
+        editUserDiaglogPanel.add(editEmailTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 310, 200, 30));
+
+        editUserDiaglogButton.setBackground(new java.awt.Color(0, 122, 249));
+        editUserDiaglogButton.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        editUserDiaglogButton.setText("Cập nhật");
+        editUserDiaglogButton.setBorderPainted(false);
+        editUserDiaglogButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editUserDiaglogButtonActionPerformed(evt);
+            }
+        });
+        editUserDiaglogPanel.add(editUserDiaglogButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 400, -1, -1));
+
+        cancelEditUserDiaglogButton.setBackground(new java.awt.Color(212, 57, 68));
+        cancelEditUserDiaglogButton.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        cancelEditUserDiaglogButton.setText("Huỷ bỏ");
+        cancelEditUserDiaglogButton.setBorderPainted(false);
+        cancelEditUserDiaglogButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelEditUserDiaglogButtonActionPerformed(evt);
+            }
+        });
+        editUserDiaglogPanel.add(cancelEditUserDiaglogButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 400, -1, -1));
+
+        editUserDiaglogLabel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        editUserDiaglogLabel.setForeground(new java.awt.Color(44, 43, 196));
+        editUserDiaglogLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        editUserDiaglogLabel.setText("CẬP NHẬT NGƯỜI DÙNG");
+        editUserDiaglogPanel.add(editUserDiaglogLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 20, 440, -1));
+
+        editUserIdLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        editUserIdLabel.setText("Mã người dùng");
+        editUserDiaglogPanel.add(editUserIdLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, -1, -1));
+
+        editUserIdTextField.setEditable(false);
+        editUserIdTextField.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        editUserIdTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editUserIdTextFieldActionPerformed(evt);
+            }
+        });
+        editUserDiaglogPanel.add(editUserIdTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 60, 200, 30));
+
+        javax.swing.GroupLayout editUserDiaglogLayout = new javax.swing.GroupLayout(editUserDiaglog.getContentPane());
+        editUserDiaglog.getContentPane().setLayout(editUserDiaglogLayout);
+        editUserDiaglogLayout.setHorizontalGroup(
+            editUserDiaglogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(editUserDiaglogPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 448, Short.MAX_VALUE)
+        );
+        editUserDiaglogLayout.setVerticalGroup(
+            editUserDiaglogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(editUserDiaglogPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 505, Short.MAX_VALUE)
+        );
+
+        viewUserDiaglog.setTitle("Thêm người dùng");
+        viewUserDiaglog.setBackground(new java.awt.Color(255, 255, 255));
+        viewUserDiaglog.setMinimumSize(new java.awt.Dimension(450, 500));
+        viewUserDiaglog.setSize(new java.awt.Dimension(450, 500));
+
+        viewUserDiaglogPanel.setBackground(new java.awt.Color(255, 255, 255));
+        viewUserDiaglogPanel.setMinimumSize(new java.awt.Dimension(430, 450));
+        viewUserDiaglogPanel.setPreferredSize(new java.awt.Dimension(430, 450));
+        viewUserDiaglogPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        viewUsernameLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        viewUsernameLabel.setText("Tên đăng nhập");
+        viewUserDiaglogPanel.add(viewUsernameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, -1, -1));
+
+        viewUserLastNameTextField.setEditable(false);
+        viewUserLastNameTextField.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        viewUserLastNameTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                viewUserLastNameTextFieldActionPerformed(evt);
+            }
+        });
+        viewUserDiaglogPanel.add(viewUserLastNameTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 150, 200, 30));
+
+        viewUserFirstNameLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        viewUserFirstNameLabel.setText("Tên");
+        viewUserDiaglogPanel.add(viewUserFirstNameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, -1, -1));
+
+        viewUserLastNameLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        viewUserLastNameLabel.setText("Họ đệm");
+        viewUserDiaglogPanel.add(viewUserLastNameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 150, -1, -1));
+
+        viewUserPhoneNumberLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        viewUserPhoneNumberLabel.setText("Số điện thoại");
+        viewUserDiaglogPanel.add(viewUserPhoneNumberLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 190, -1, -1));
+
+        viewUserPhoneNumberTextField.setEditable(false);
+        viewUserPhoneNumberTextField.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        viewUserPhoneNumberTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                viewUserPhoneNumberTextFieldActionPerformed(evt);
+            }
+        });
+        viewUserDiaglogPanel.add(viewUserPhoneNumberTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 190, 200, 30));
+
+        viewUserEmailLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        viewUserEmailLabel.setText("Địa chỉ email");
+        viewUserDiaglogPanel.add(viewUserEmailLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 230, -1, -1));
+
+        viewUserEmailTextField.setEditable(false);
+        viewUserEmailTextField.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        viewUserEmailTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                viewUserEmailTextFieldActionPerformed(evt);
+            }
+        });
+        viewUserDiaglogPanel.add(viewUserEmailTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 230, 200, 30));
+
+        viewUserWhenCreatedLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        viewUserWhenCreatedLabel.setText("Ngày tạo");
+        viewUserDiaglogPanel.add(viewUserWhenCreatedLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 270, -1, -1));
+
+        viewUserWhenCreatedTextField.setEditable(false);
+        viewUserWhenCreatedTextField.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        viewUserWhenCreatedTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                viewUserWhenCreatedTextFieldActionPerformed(evt);
+            }
+        });
+        viewUserDiaglogPanel.add(viewUserWhenCreatedTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 270, 200, 30));
+
+        viewUserLastUpdatedLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        viewUserLastUpdatedLabel.setText("Cập nhật lần cuối");
+        viewUserDiaglogPanel.add(viewUserLastUpdatedLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 310, -1, -1));
+
+        viewUserLastUpdatedTextField.setEditable(false);
+        viewUserLastUpdatedTextField.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        viewUserLastUpdatedTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                viewUserLastUpdatedTextFieldActionPerformed(evt);
+            }
+        });
+        viewUserDiaglogPanel.add(viewUserLastUpdatedTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 310, 200, 30));
+
+        cancelAddUserDiaglogButton1.setBackground(new java.awt.Color(212, 57, 68));
+        cancelAddUserDiaglogButton1.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        cancelAddUserDiaglogButton1.setText("Đóng");
+        cancelAddUserDiaglogButton1.setBorderPainted(false);
+        cancelAddUserDiaglogButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelAddUserDiaglogButton1ActionPerformed(evt);
+            }
+        });
+        viewUserDiaglogPanel.add(cancelAddUserDiaglogButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 450, -1, -1));
+
+        jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(44, 43, 196));
+        jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel11.setText("THÔNG TIN NGƯỜI DÙNG");
+        viewUserDiaglogPanel.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 20, 440, -1));
+
+        editUserDiaglogButton1.setBackground(new java.awt.Color(0, 122, 249));
+        editUserDiaglogButton1.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        editUserDiaglogButton1.setText("Cập nhật");
+        editUserDiaglogButton1.setBorderPainted(false);
+        editUserDiaglogButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editUserDiaglogButton1ActionPerformed(evt);
+            }
+        });
+        viewUserDiaglogPanel.add(editUserDiaglogButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 450, -1, -1));
+
+        viewUserLastLoggedInLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        viewUserLastLoggedInLabel.setText("Đăng nhập lần cuối");
+        viewUserDiaglogPanel.add(viewUserLastLoggedInLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 350, -1, -1));
+
+        viewUserLastLoggedInTextField.setEditable(false);
+        viewUserLastLoggedInTextField.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        viewUserLastLoggedInTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                viewUserLastLoggedInTextFieldActionPerformed(evt);
+            }
+        });
+        viewUserDiaglogPanel.add(viewUserLastLoggedInTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 350, 200, 30));
+
+        viewUserLoggedInLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        viewUserLoggedInLabel.setText("Số lần đăng nhập");
+        viewUserDiaglogPanel.add(viewUserLoggedInLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 390, -1, -1));
+
+        viewUserLoggedInTextField.setEditable(false);
+        viewUserLoggedInTextField.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        viewUserLoggedInTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                viewUserLoggedInTextFieldActionPerformed(evt);
+            }
+        });
+        viewUserDiaglogPanel.add(viewUserLoggedInTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 390, 200, 30));
+
+        viewUsernameTextField.setEditable(false);
+        viewUsernameTextField.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        viewUsernameTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                viewUsernameTextFieldActionPerformed(evt);
+            }
+        });
+        viewUserDiaglogPanel.add(viewUsernameTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 70, 200, 30));
+
+        viewUserFirstNameTextField.setEditable(false);
+        viewUserFirstNameTextField.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        viewUserFirstNameTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                viewUserFirstNameTextFieldActionPerformed(evt);
+            }
+        });
+        viewUserDiaglogPanel.add(viewUserFirstNameTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 110, 200, 30));
+
+        javax.swing.GroupLayout viewUserDiaglogLayout = new javax.swing.GroupLayout(viewUserDiaglog.getContentPane());
+        viewUserDiaglog.getContentPane().setLayout(viewUserDiaglogLayout);
+        viewUserDiaglogLayout.setHorizontalGroup(
+            viewUserDiaglogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(viewUserDiaglogPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 448, Short.MAX_VALUE)
+        );
+        viewUserDiaglogLayout.setVerticalGroup(
+            viewUserDiaglogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(viewUserDiaglogPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 505, Short.MAX_VALUE)
+        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1400, 830));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        sidebarPanel.setBackground(new java.awt.Color(255, 255, 255));
+        sidebarPanel.setBackground(new java.awt.Color(44, 43, 196));
         sidebarPanel.setPreferredSize(new java.awt.Dimension(256, 800));
+        sidebarPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        loginedUsername.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        loginedUsername.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        loginedUsername.setForeground(new java.awt.Color(255, 255, 255));
         loginedUsername.setText("Admin");
+        sidebarPanel.add(loginedUsername, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 0, 211, 100));
 
-        productTab.setBackground(new java.awt.Color(255, 255, 255));
-        productTab.setPreferredSize(new java.awt.Dimension(240, 40));
+        productTab.setBackground(new java.awt.Color(44, 43, 196));
+        productTab.setForeground(new java.awt.Color(255, 255, 255));
+        productTab.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        productTab.setPreferredSize(new java.awt.Dimension(256, 50));
         productTab.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 productTabMouseClicked(evt);
             }
         });
 
-        productLabel.setBackground(new java.awt.Color(255, 255, 255));
         productLabel.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        productLabel.setForeground(new java.awt.Color(255, 255, 255));
         productLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/product.png"))); // NOI18N
         productLabel.setText("  SẢN PHẨM");
         productLabel.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -351,18 +898,22 @@ public class Home extends javax.swing.JFrame {
             .addGroup(productTabLayout.createSequentialGroup()
                 .addGap(24, 24, 24)
                 .addComponent(productLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(47, Short.MAX_VALUE))
         );
         productTabLayout.setVerticalGroup(
             productTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(productTabLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(productLabel)
-                .addContainerGap(8, Short.MAX_VALUE))
+                .addComponent(productLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
-        providerTab.setBackground(new java.awt.Color(255, 255, 255));
-        providerTab.setPreferredSize(new java.awt.Dimension(240, 40));
+        sidebarPanel.add(productTab, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 256, 50));
+
+        providerTab.setBackground(new java.awt.Color(44, 43, 196));
+        providerTab.setForeground(new java.awt.Color(255, 255, 255));
+        providerTab.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        providerTab.setPreferredSize(new java.awt.Dimension(256, 50));
         providerTab.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 providerTabMouseClicked(evt);
@@ -370,9 +921,11 @@ public class Home extends javax.swing.JFrame {
         });
 
         providerLabel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        providerLabel.setForeground(new java.awt.Color(255, 255, 255));
         providerLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/teamwork.png"))); // NOI18N
         providerLabel.setText("  NHÀ CUNG CẤP");
-        providerLabel.setPreferredSize(new java.awt.Dimension(240, 40));
+        providerLabel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        providerLabel.setPreferredSize(new java.awt.Dimension(256, 50));
         providerLabel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 providerLabelMouseClicked(evt);
@@ -386,15 +939,18 @@ public class Home extends javax.swing.JFrame {
             .addGroup(providerTabLayout.createSequentialGroup()
                 .addGap(23, 23, 23)
                 .addComponent(providerLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(48, Short.MAX_VALUE))
         );
         providerTabLayout.setVerticalGroup(
             providerTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(providerLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(providerLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        importProductTab.setBackground(new java.awt.Color(255, 255, 255));
-        importProductTab.setPreferredSize(new java.awt.Dimension(240, 40));
+        sidebarPanel.add(providerTab, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 150, 256, 50));
+
+        importProductTab.setBackground(new java.awt.Color(44, 43, 196));
+        importProductTab.setForeground(new java.awt.Color(255, 255, 255));
+        importProductTab.setPreferredSize(new java.awt.Dimension(256, 50));
         importProductTab.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 importProductTabMouseClicked(evt);
@@ -402,9 +958,10 @@ public class Home extends javax.swing.JFrame {
         });
 
         importProductLabel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        importProductLabel.setForeground(new java.awt.Color(255, 255, 255));
         importProductLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/import.png"))); // NOI18N
         importProductLabel.setText("  NHẬP HÀNG");
-        importProductLabel.setPreferredSize(new java.awt.Dimension(240, 40));
+        importProductLabel.setPreferredSize(new java.awt.Dimension(256, 50));
         importProductLabel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 importProductLabelMouseClicked(evt);
@@ -418,18 +975,20 @@ public class Home extends javax.swing.JFrame {
             .addGroup(importProductTabLayout.createSequentialGroup()
                 .addGap(24, 24, 24)
                 .addComponent(importProductLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(46, Short.MAX_VALUE))
         );
         importProductTabLayout.setVerticalGroup(
             importProductTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(importProductTabLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(importProductLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(importProductLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        importBillTab.setBackground(new java.awt.Color(255, 255, 255));
-        importBillTab.setPreferredSize(new java.awt.Dimension(240, 40));
+        sidebarPanel.add(importProductTab, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 240, 256, 50));
+
+        importBillTab.setBackground(new java.awt.Color(44, 43, 196));
+        importBillTab.setForeground(new java.awt.Color(255, 255, 255));
+        importBillTab.setPreferredSize(new java.awt.Dimension(256, 50));
         importBillTab.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 importBillTabMouseClicked(evt);
@@ -437,9 +996,10 @@ public class Home extends javax.swing.JFrame {
         });
 
         importBillLabel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        importBillLabel.setForeground(new java.awt.Color(255, 255, 255));
         importBillLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/contract.png"))); // NOI18N
         importBillLabel.setText("  PHIẾU NHẬP");
-        importBillLabel.setPreferredSize(new java.awt.Dimension(240, 40));
+        importBillLabel.setPreferredSize(new java.awt.Dimension(256, 50));
         importBillLabel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 importBillLabelMouseClicked(evt);
@@ -453,15 +1013,18 @@ public class Home extends javax.swing.JFrame {
             .addGroup(importBillTabLayout.createSequentialGroup()
                 .addGap(24, 24, 24)
                 .addComponent(importBillLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(72, Short.MAX_VALUE))
         );
         importBillTabLayout.setVerticalGroup(
             importBillTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(importBillLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        exportProductTab.setBackground(new java.awt.Color(255, 255, 255));
-        exportProductTab.setPreferredSize(new java.awt.Dimension(240, 40));
+        sidebarPanel.add(importBillTab, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 290, 256, 50));
+
+        exportProductTab.setBackground(new java.awt.Color(44, 43, 196));
+        exportProductTab.setForeground(new java.awt.Color(255, 255, 255));
+        exportProductTab.setPreferredSize(new java.awt.Dimension(256, 50));
         exportProductTab.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 exportProductTabMouseClicked(evt);
@@ -469,9 +1032,10 @@ public class Home extends javax.swing.JFrame {
         });
 
         exportProductLabel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        exportProductLabel.setForeground(new java.awt.Color(255, 255, 255));
         exportProductLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/export.png"))); // NOI18N
         exportProductLabel.setText("  XUẤT HÀNG");
-        exportProductLabel.setPreferredSize(new java.awt.Dimension(240, 40));
+        exportProductLabel.setPreferredSize(new java.awt.Dimension(256, 50));
         exportProductLabel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 exportProductLabelMouseClicked(evt);
@@ -491,12 +1055,15 @@ public class Home extends javax.swing.JFrame {
             exportProductTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(exportProductTabLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(exportProductLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(39, Short.MAX_VALUE))
+                .addComponent(exportProductLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
-        exportBillTab.setBackground(new java.awt.Color(255, 255, 255));
-        exportBillTab.setPreferredSize(new java.awt.Dimension(240, 40));
+        sidebarPanel.add(exportProductTab, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 340, 256, 50));
+
+        exportBillTab.setBackground(new java.awt.Color(44, 43, 196));
+        exportBillTab.setForeground(new java.awt.Color(255, 255, 255));
+        exportBillTab.setPreferredSize(new java.awt.Dimension(256, 50));
         exportBillTab.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 exportBillTabMouseClicked(evt);
@@ -504,9 +1071,10 @@ public class Home extends javax.swing.JFrame {
         });
 
         exportBillLabel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        exportBillLabel.setForeground(new java.awt.Color(255, 255, 255));
         exportBillLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/checklist.png"))); // NOI18N
         exportBillLabel.setText("  PHIẾU XUẤT");
-        exportBillLabel.setPreferredSize(new java.awt.Dimension(240, 40));
+        exportBillLabel.setPreferredSize(new java.awt.Dimension(256, 50));
         exportBillLabel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 exportBillLabelMouseClicked(evt);
@@ -520,17 +1088,21 @@ public class Home extends javax.swing.JFrame {
             .addGroup(exportBillTabLayout.createSequentialGroup()
                 .addGap(24, 24, 24)
                 .addComponent(exportBillLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(47, Short.MAX_VALUE))
         );
         exportBillTabLayout.setVerticalGroup(
             exportBillTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, exportBillTabLayout.createSequentialGroup()
-                .addComponent(exportBillLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap()
+                .addComponent(exportBillLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
-        inStockTab.setBackground(new java.awt.Color(255, 255, 255));
-        inStockTab.setPreferredSize(new java.awt.Dimension(240, 40));
+        sidebarPanel.add(exportBillTab, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 390, 256, 50));
+
+        inStockTab.setBackground(new java.awt.Color(44, 43, 196));
+        inStockTab.setForeground(new java.awt.Color(255, 255, 255));
+        inStockTab.setPreferredSize(new java.awt.Dimension(256, 50));
         inStockTab.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 inStockTabMouseClicked(evt);
@@ -538,9 +1110,10 @@ public class Home extends javax.swing.JFrame {
         });
 
         inStockLabel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        inStockLabel.setForeground(new java.awt.Color(255, 255, 255));
         inStockLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/inventory.png"))); // NOI18N
         inStockLabel.setText("  TỒN KHO");
-        inStockLabel.setPreferredSize(new java.awt.Dimension(240, 40));
+        inStockLabel.setPreferredSize(new java.awt.Dimension(256, 50));
         inStockLabel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 inStockLabelMouseClicked(evt);
@@ -554,15 +1127,18 @@ public class Home extends javax.swing.JFrame {
             .addGroup(inStockTabLayout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addComponent(inStockLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(41, Short.MAX_VALUE))
         );
         inStockTabLayout.setVerticalGroup(
             inStockTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(inStockLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 48, Short.MAX_VALUE)
+            .addComponent(inStockLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        userTab.setBackground(new java.awt.Color(255, 255, 255));
-        userTab.setPreferredSize(new java.awt.Dimension(240, 40));
+        sidebarPanel.add(inStockTab, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 480, 256, 50));
+
+        userTab.setBackground(new java.awt.Color(44, 43, 196));
+        userTab.setForeground(new java.awt.Color(255, 255, 255));
+        userTab.setPreferredSize(new java.awt.Dimension(256, 50));
         userTab.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 userTabMouseClicked(evt);
@@ -570,9 +1146,10 @@ public class Home extends javax.swing.JFrame {
         });
 
         userLabel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        userLabel.setForeground(new java.awt.Color(255, 255, 255));
         userLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/account.png"))); // NOI18N
         userLabel.setText("  TÀI KHOẢN");
-        userLabel.setPreferredSize(new java.awt.Dimension(240, 40));
+        userLabel.setPreferredSize(new java.awt.Dimension(256, 50));
         userLabel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 userLabelMouseClicked(evt);
@@ -586,18 +1163,21 @@ public class Home extends javax.swing.JFrame {
             .addGroup(userTabLayout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addComponent(userLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(35, Short.MAX_VALUE))
         );
         userTabLayout.setVerticalGroup(
             userTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(userTabLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(userLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(12, Short.MAX_VALUE))
+                .addComponent(userLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
-        statisticsTab.setBackground(new java.awt.Color(255, 255, 255));
-        statisticsTab.setPreferredSize(new java.awt.Dimension(240, 40));
+        sidebarPanel.add(userTab, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 620, 256, 50));
+
+        statisticsTab.setBackground(new java.awt.Color(44, 43, 196));
+        statisticsTab.setForeground(new java.awt.Color(255, 255, 255));
+        statisticsTab.setPreferredSize(new java.awt.Dimension(256, 50));
         statisticsTab.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 statisticsTabMouseClicked(evt);
@@ -605,9 +1185,10 @@ public class Home extends javax.swing.JFrame {
         });
 
         statisticsLabel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        statisticsLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/description.png"))); // NOI18N
+        statisticsLabel.setForeground(new java.awt.Color(255, 255, 255));
+        statisticsLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/trend.png"))); // NOI18N
         statisticsLabel.setText("  THỐNG KÊ");
-        statisticsLabel.setPreferredSize(new java.awt.Dimension(240, 40));
+        statisticsLabel.setPreferredSize(new java.awt.Dimension(256, 50));
         statisticsLabel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 statisticsLabelMouseClicked(evt);
@@ -619,17 +1200,20 @@ public class Home extends javax.swing.JFrame {
         statisticsTabLayout.setHorizontalGroup(
             statisticsTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(statisticsTabLayout.createSequentialGroup()
-                .addGap(27, 27, 27)
-                .addComponent(statisticsLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(20, 20, 20)
+                .addComponent(statisticsLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(44, Short.MAX_VALUE))
         );
         statisticsTabLayout.setVerticalGroup(
             statisticsTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(statisticsLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 46, Short.MAX_VALUE)
+            .addComponent(statisticsLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        updateInfoTab.setBackground(new java.awt.Color(255, 255, 255));
-        updateInfoTab.setPreferredSize(new java.awt.Dimension(240, 40));
+        sidebarPanel.add(statisticsTab, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 530, 256, 50));
+
+        updateInfoTab.setBackground(new java.awt.Color(44, 43, 196));
+        updateInfoTab.setForeground(new java.awt.Color(255, 255, 255));
+        updateInfoTab.setPreferredSize(new java.awt.Dimension(256, 50));
         updateInfoTab.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 updateInfoTabMouseClicked(evt);
@@ -637,9 +1221,10 @@ public class Home extends javax.swing.JFrame {
         });
 
         updateInfoLabel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        updateInfoLabel.setForeground(new java.awt.Color(255, 255, 255));
         updateInfoLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/exchange.png"))); // NOI18N
-        updateInfoLabel.setText("   ĐỔI THÔNG TIN");
-        updateInfoLabel.setPreferredSize(new java.awt.Dimension(240, 40));
+        updateInfoLabel.setText("  ĐỔI THÔNG TIN");
+        updateInfoLabel.setPreferredSize(new java.awt.Dimension(256, 50));
         updateInfoLabel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 updateInfoLabelMouseClicked(evt);
@@ -651,16 +1236,19 @@ public class Home extends javax.swing.JFrame {
         updateInfoTabLayout.setHorizontalGroup(
             updateInfoTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(updateInfoTabLayout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addComponent(updateInfoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(updateInfoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(25, Short.MAX_VALUE))
         );
         updateInfoTabLayout.setVerticalGroup(
             updateInfoTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(updateInfoLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        logoutTab.setBackground(new java.awt.Color(255, 255, 255));
+        sidebarPanel.add(updateInfoTab, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 670, 256, 50));
+
+        logoutTab.setBackground(new java.awt.Color(44, 43, 196));
+        logoutTab.setForeground(new java.awt.Color(255, 255, 255));
         logoutTab.setPreferredSize(new java.awt.Dimension(240, 40));
         logoutTab.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -669,6 +1257,8 @@ public class Home extends javax.swing.JFrame {
         });
 
         logoutLabel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        logoutLabel.setForeground(new java.awt.Color(255, 255, 255));
+        logoutLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/logout.png"))); // NOI18N
         logoutLabel.setText(" ĐĂNG XUẤT");
         logoutLabel.setPreferredSize(new java.awt.Dimension(240, 40));
         logoutLabel.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -684,66 +1274,26 @@ public class Home extends javax.swing.JFrame {
             .addGroup(logoutTabLayout.createSequentialGroup()
                 .addGap(26, 26, 26)
                 .addComponent(logoutLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(70, Short.MAX_VALUE))
         );
         logoutTabLayout.setVerticalGroup(
             logoutTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, logoutTabLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(logoutLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(logoutLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(5, 5, 5))
         );
 
-        javax.swing.GroupLayout sidebarPanelLayout = new javax.swing.GroupLayout(sidebarPanel);
-        sidebarPanel.setLayout(sidebarPanelLayout);
-        sidebarPanelLayout.setHorizontalGroup(
-            sidebarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(providerTab, javax.swing.GroupLayout.DEFAULT_SIZE, 256, Short.MAX_VALUE)
-            .addComponent(importBillTab, javax.swing.GroupLayout.DEFAULT_SIZE, 256, Short.MAX_VALUE)
-            .addGroup(sidebarPanelLayout.createSequentialGroup()
-                .addComponent(exportProductTab, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addComponent(updateInfoTab, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 256, Short.MAX_VALUE)
-            .addComponent(logoutTab, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 256, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, sidebarPanelLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(loginedUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(14, 14, 14))
-            .addComponent(statisticsTab, javax.swing.GroupLayout.DEFAULT_SIZE, 256, Short.MAX_VALUE)
-            .addComponent(userTab, javax.swing.GroupLayout.DEFAULT_SIZE, 256, Short.MAX_VALUE)
-            .addComponent(inStockTab, javax.swing.GroupLayout.DEFAULT_SIZE, 256, Short.MAX_VALUE)
-            .addComponent(exportBillTab, javax.swing.GroupLayout.DEFAULT_SIZE, 256, Short.MAX_VALUE)
-            .addComponent(productTab, javax.swing.GroupLayout.DEFAULT_SIZE, 256, Short.MAX_VALUE)
-            .addComponent(importProductTab, javax.swing.GroupLayout.DEFAULT_SIZE, 256, Short.MAX_VALUE)
-        );
-        sidebarPanelLayout.setVerticalGroup(
-            sidebarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(sidebarPanelLayout.createSequentialGroup()
-                .addGap(44, 44, 44)
-                .addComponent(loginedUsername)
-                .addGap(37, 37, 37)
-                .addComponent(productTab, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(providerTab, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(importProductTab, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(importBillTab, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(exportProductTab, javax.swing.GroupLayout.DEFAULT_SIZE, 73, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(exportBillTab, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(inStockTab, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(userTab, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(statisticsTab, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(updateInfoTab, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(logoutTab, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(133, Short.MAX_VALUE))
-        );
+        sidebarPanel.add(logoutTab, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 720, 256, 50));
+
+        jSeparator4.setForeground(new java.awt.Color(255, 255, 255));
+        sidebarPanel.add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 220, 260, -1));
+
+        jSeparator3.setForeground(new java.awt.Color(255, 255, 255));
+        sidebarPanel.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 460, 260, -1));
+
+        jSeparator5.setForeground(new java.awt.Color(255, 255, 255));
+        sidebarPanel.add(jSeparator5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 600, 256, -1));
 
         getContentPane().add(sidebarPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 840));
 
@@ -764,14 +1314,18 @@ public class Home extends javax.swing.JFrame {
         searchUsersPanel1.setBackground(new java.awt.Color(255, 255, 255));
         searchUsersPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Tìm kiếm", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 14))); // NOI18N
 
-        productBrandsComboBox.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        productBrandsComboBox.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         productBrandsComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        productBrandsComboBox.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
-        searchProductsTextField1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        searchProductsTextField1.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
 
-        searchProductsButton1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        searchProductsButton1.setBackground(new java.awt.Color(65, 120, 190));
+        searchProductsButton1.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         searchProductsButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/refresh.png"))); // NOI18N
         searchProductsButton1.setText("Làm mới");
+        searchProductsButton1.setBorderPainted(false);
+        searchProductsButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         javax.swing.GroupLayout searchUsersPanel1Layout = new javax.swing.GroupLayout(searchUsersPanel1);
         searchUsersPanel1.setLayout(searchUsersPanel1Layout);
@@ -779,11 +1333,11 @@ public class Home extends javax.swing.JFrame {
             searchUsersPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(searchUsersPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(productBrandsComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(productBrandsComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(searchProductsTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 226, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(searchProductsButton1)
+                .addComponent(searchProductsButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         searchUsersPanel1Layout.setVerticalGroup(
@@ -803,45 +1357,60 @@ public class Home extends javax.swing.JFrame {
 
         jSeparator2.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
-        importUsersFromExcelButton1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        importUsersFromExcelButton1.setBackground(new java.awt.Color(1, 169, 84));
+        importUsersFromExcelButton1.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         importUsersFromExcelButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/sheet.png"))); // NOI18N
         importUsersFromExcelButton1.setText("Nhập Excel");
+        importUsersFromExcelButton1.setBorderPainted(false);
+        importUsersFromExcelButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         importUsersFromExcelButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 importUsersFromExcelButton1ActionPerformed(evt);
             }
         });
 
-        exportUsersToExcelButton1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        exportUsersToExcelButton1.setBackground(new java.awt.Color(0, 155, 110));
+        exportUsersToExcelButton1.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         exportUsersToExcelButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/sheet.png"))); // NOI18N
         exportUsersToExcelButton1.setText("Xuất Excel");
+        exportUsersToExcelButton1.setBorderPainted(false);
+        exportUsersToExcelButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         exportUsersToExcelButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 exportUsersToExcelButton1ActionPerformed(evt);
             }
         });
 
-        editUserButton1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        editUserButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/exchange.png"))); // NOI18N
+        editUserButton1.setBackground(new java.awt.Color(36, 169, 65));
+        editUserButton1.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        editUserButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/edit_icon.png"))); // NOI18N
         editUserButton1.setText("Sửa");
+        editUserButton1.setBorderPainted(false);
+        editUserButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         editUserButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 editUserButton1ActionPerformed(evt);
             }
         });
 
-        addUserButton1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        addUserButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/plus.png"))); // NOI18N
+        addUserButton1.setBackground(new java.awt.Color(0, 122, 249));
+        addUserButton1.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        addUserButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/add_circle_icon.png"))); // NOI18N
         addUserButton1.setText("Thêm");
+        addUserButton1.setBorderPainted(false);
+        addUserButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         addUserButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 addUserButton1ActionPerformed(evt);
             }
         });
 
-        deleteUserButton1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        deleteUserButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/delete.png"))); // NOI18N
+        deleteUserButton1.setBackground(new java.awt.Color(212, 57, 68));
+        deleteUserButton1.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        deleteUserButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/remove_icon.png"))); // NOI18N
         deleteUserButton1.setText("Xoá");
+        deleteUserButton1.setBorderPainted(false);
+        deleteUserButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         deleteUserButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 deleteUserButton1ActionPerformed(evt);
@@ -854,18 +1423,18 @@ public class Home extends javax.swing.JFrame {
             userFunctionPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(userFunctionPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(addUserButton1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(editUserButton1)
-                .addGap(24, 24, 24)
-                .addComponent(deleteUserButton1)
+                .addComponent(addUserButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(editUserButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(deleteUserButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(importUsersFromExcelButton1)
+                .addComponent(importUsersFromExcelButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(exportUsersToExcelButton1)
-                .addGap(6, 6, 6))
+                .addComponent(exportUsersToExcelButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         userFunctionPanel1Layout.setVerticalGroup(
             userFunctionPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -889,13 +1458,13 @@ public class Home extends javax.swing.JFrame {
             productPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(productPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(userFunctionPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(searchUsersPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(31, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, productPanelLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(usersScrollPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(productPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(productPanelLayout.createSequentialGroup()
+                        .addComponent(userFunctionPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(searchUsersPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(usersScrollPanel1, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addContainerGap())
         );
         productPanelLayout.setVerticalGroup(
@@ -910,7 +1479,7 @@ public class Home extends javax.swing.JFrame {
                 .addGap(26, 26, 26))
         );
 
-        getContentPane().add(productPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 0, 1140, 830));
+        getContentPane().add(productPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 0, 1170, 830));
 
         providerPanel.setBackground(new java.awt.Color(204, 204, 255));
         providerPanel.setPreferredSize(new java.awt.Dimension(1140, 830));
@@ -943,15 +1512,18 @@ public class Home extends javax.swing.JFrame {
         searchImportProductPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Tìm kiếm", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 14))); // NOI18N
         searchImportProductPanel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
-        searchImportProductTextField.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        searchImportProductTextField.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         searchImportProductTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 searchImportProductTextFieldActionPerformed(evt);
             }
         });
 
-        searchImportProductRefreshButton.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        searchImportProductRefreshButton.setBackground(new java.awt.Color(65, 120, 190));
+        searchImportProductRefreshButton.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        searchImportProductRefreshButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/refresh.png"))); // NOI18N
         searchImportProductRefreshButton.setText("Làm Mới");
+        searchImportProductRefreshButton.setBorderPainted(false);
         searchImportProductRefreshButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 searchImportProductRefreshButtonActionPerformed(evt);
@@ -995,10 +1567,10 @@ public class Home extends javax.swing.JFrame {
         ));
         importProductScrollPanel.setViewportView(importProductTable);
 
-        importProductQuantityLabel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        importProductQuantityLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         importProductQuantityLabel.setText("Số Lượng: ");
 
-        importProductQuantityTextField.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        importProductQuantityTextField.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         importProductQuantityTextField.setText("10");
         importProductQuantityTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1006,8 +1578,11 @@ public class Home extends javax.swing.JFrame {
             }
         });
 
-        importProductAddButton.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        importProductAddButton.setBackground(new java.awt.Color(0, 122, 249));
+        importProductAddButton.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        importProductAddButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/add_circle_icon.png"))); // NOI18N
         importProductAddButton.setText("THÊM");
+        importProductAddButton.setBorderPainted(false);
         importProductAddButton.setMaximumSize(new java.awt.Dimension(64, 22));
         importProductAddButton.setMinimumSize(new java.awt.Dimension(64, 22));
         importProductAddButton.setPreferredSize(new java.awt.Dimension(64, 22));
@@ -1017,25 +1592,25 @@ public class Home extends javax.swing.JFrame {
             }
         });
 
-        importBillIdLabel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        importBillIdLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         importBillIdLabel.setText("Mã phiếu nhập:");
 
-        importBillIdTextField.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        importBillIdTextField.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
 
-        providerNameLabel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        providerNameLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         providerNameLabel.setText("Nhà cung cấp:");
 
-        providerNameComboBox.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        providerNameComboBox.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         providerNameComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Công Ty TNHH Minh Nghĩa", "Công ty TNHH Hoàng Việt", "Công ty TNHH Hoàng Phúc" }));
 
-        importProductBillCreatorLabel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        importProductBillCreatorLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         importProductBillCreatorLabel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 importProductBillCreatorLabelActionPerformed(evt);
             }
         });
 
-        importProductBillCreatorTextField.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        importProductBillCreatorTextField.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         importProductBillCreatorTextField.setText("Người tạo phiếu:");
 
         importProductBillTable.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -1052,29 +1627,41 @@ public class Home extends javax.swing.JFrame {
         ));
         importProductBillScrollPane.setViewportView(importProductBillTable);
 
-        importBillItemFromExcelButton.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        importBillItemFromExcelButton.setBackground(new java.awt.Color(1, 169, 84));
+        importBillItemFromExcelButton.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        importBillItemFromExcelButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/sheet.png"))); // NOI18N
         importBillItemFromExcelButton.setText("Nhập excel");
+        importBillItemFromExcelButton.setBorderPainted(false);
         importBillItemFromExcelButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 importBillItemFromExcelButtonActionPerformed(evt);
             }
         });
 
-        editBillItemButton.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        editBillItemButton.setBackground(new java.awt.Color(36, 169, 65));
+        editBillItemButton.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        editBillItemButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/edit_icon.png"))); // NOI18N
         editBillItemButton.setText("Sửa số lượng");
+        editBillItemButton.setBorderPainted(false);
 
-        removeBillItemButton.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        removeBillItemButton.setBackground(new java.awt.Color(212, 57, 68));
+        removeBillItemButton.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        removeBillItemButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/remove_icon.png"))); // NOI18N
         removeBillItemButton.setText("Xóa sản phẩm");
+        removeBillItemButton.setBorderPainted(false);
 
-        totalValueLabel.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        totalValueLabel.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         totalValueLabel.setForeground(new java.awt.Color(204, 0, 51));
         totalValueLabel.setText("50,670,000đ");
 
-        totalImportBillLabel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        totalImportBillLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         totalImportBillLabel.setText("Tổng tiền:");
 
-        importBillProductButton.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        importBillProductButton.setBackground(new java.awt.Color(0, 155, 110));
+        importBillProductButton.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        importBillProductButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/import_icon.png"))); // NOI18N
         importBillProductButton.setText("Nhập hàng");
+        importBillProductButton.setBorderPainted(false);
 
         javax.swing.GroupLayout importProductPanelLayout = new javax.swing.GroupLayout(importProductPanel);
         importProductPanel.setLayout(importProductPanelLayout);
@@ -1094,18 +1681,6 @@ public class Home extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(importProductPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(importProductPanelLayout.createSequentialGroup()
-                        .addComponent(totalImportBillLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(31, 31, 31)
-                        .addComponent(totalValueLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(importBillProductButton, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, importProductPanelLayout.createSequentialGroup()
-                        .addComponent(importBillItemFromExcelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(editBillItemButton, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(75, 75, 75)
-                        .addComponent(removeBillItemButton, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(importProductPanelLayout.createSequentialGroup()
                         .addGroup(importProductPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(importBillIdLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(providerNameLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -1115,7 +1690,22 @@ public class Home extends javax.swing.JFrame {
                             .addComponent(importBillIdTextField)
                             .addComponent(providerNameComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(importProductBillCreatorLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(importProductBillScrollPane))
+                    .addComponent(importProductBillScrollPane)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, importProductPanelLayout.createSequentialGroup()
+                        .addGroup(importProductPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(importProductPanelLayout.createSequentialGroup()
+                                .addComponent(totalImportBillLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(31, 31, 31)
+                                .addComponent(totalValueLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(60, 60, 60))
+                            .addGroup(importProductPanelLayout.createSequentialGroup()
+                                .addComponent(importBillItemFromExcelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(editBillItemButton, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(48, 48, 48)))
+                        .addGroup(importProductPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(removeBillItemButton, javax.swing.GroupLayout.PREFERRED_SIZE, 155, Short.MAX_VALUE)
+                            .addComponent(importBillProductButton, javax.swing.GroupLayout.DEFAULT_SIZE, 155, Short.MAX_VALUE))))
                 .addGap(35, 35, 35))
         );
         importProductPanelLayout.setVerticalGroup(
@@ -1128,24 +1718,24 @@ public class Home extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(importProductPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(importProductAddButton, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(importProductQuantityTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(importProductQuantityLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(totalImportBillLabel)
-                    .addComponent(totalValueLabel))
+                    .addComponent(importProductQuantityTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(importProductQuantityLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(totalImportBillLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(totalValueLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, importProductPanelLayout.createSequentialGroup()
                 .addGap(16, 16, 16)
                 .addGroup(importProductPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(importBillIdLabel)
-                    .addComponent(importBillIdTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(importBillIdTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(23, 23, 23)
                 .addGroup(importProductPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(providerNameLabel)
-                    .addComponent(providerNameComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(providerNameComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(23, 23, 23)
                 .addGroup(importProductPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(importProductBillCreatorTextField)
-                    .addComponent(importProductBillCreatorLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(importProductBillCreatorLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(importProductBillScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 498, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(20, 20, 20)
@@ -1172,7 +1762,7 @@ public class Home extends javax.swing.JFrame {
             .addGroup(importBillPanelLayout.createSequentialGroup()
                 .addGap(452, 452, 452)
                 .addComponent(jLabel4)
-                .addContainerGap(633, Short.MAX_VALUE))
+                .addContainerGap(632, Short.MAX_VALUE))
         );
         importBillPanelLayout.setVerticalGroup(
             importBillPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1196,7 +1786,7 @@ public class Home extends javax.swing.JFrame {
             .addGroup(exportProductPanelLayout.createSequentialGroup()
                 .addGap(452, 452, 452)
                 .addComponent(jLabel5)
-                .addContainerGap(609, Short.MAX_VALUE))
+                .addContainerGap(610, Short.MAX_VALUE))
         );
         exportProductPanelLayout.setVerticalGroup(
             exportProductPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1220,7 +1810,7 @@ public class Home extends javax.swing.JFrame {
             .addGroup(exportBillPanelLayout.createSequentialGroup()
                 .addGap(452, 452, 452)
                 .addComponent(jLabel6)
-                .addContainerGap(635, Short.MAX_VALUE))
+                .addContainerGap(634, Short.MAX_VALUE))
         );
         exportBillPanelLayout.setVerticalGroup(
             exportBillPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1274,18 +1864,23 @@ public class Home extends javax.swing.JFrame {
         searchUsersPanel.setBackground(new java.awt.Color(255, 255, 255));
         searchUsersPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Tìm kiếm", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 14))); // NOI18N
 
-        userRolesComboBox.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        userRolesComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        searchUsersTextField.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        searchUsersTextField.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         searchUsersTextField.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 searchUsersTextFieldKeyReleased(evt);
             }
         });
 
-        searchUsersButton.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        searchUsersButton.setBackground(new java.awt.Color(65, 120, 190));
+        searchUsersButton.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        searchUsersButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/refresh.png"))); // NOI18N
         searchUsersButton.setText("Làm mới");
+        searchUsersButton.setBorderPainted(false);
+        searchUsersButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchUsersButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout searchUsersPanelLayout = new javax.swing.GroupLayout(searchUsersPanel);
         searchUsersPanel.setLayout(searchUsersPanelLayout);
@@ -1293,11 +1888,9 @@ public class Home extends javax.swing.JFrame {
             searchUsersPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(searchUsersPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(userRolesComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(searchUsersTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 253, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(searchUsersTextField)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(searchUsersButton)
+                .addComponent(searchUsersButton, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         searchUsersPanelLayout.setVerticalGroup(
@@ -1305,7 +1898,6 @@ public class Home extends javax.swing.JFrame {
             .addGroup(searchUsersPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(searchUsersPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(userRolesComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(searchUsersTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(searchUsersButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(13, Short.MAX_VALUE))
@@ -1317,48 +1909,69 @@ public class Home extends javax.swing.JFrame {
 
         jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
-        importUsersFromExcelButton.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        importUsersFromExcelButton.setBackground(new java.awt.Color(1, 169, 84));
+        importUsersFromExcelButton.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        importUsersFromExcelButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/sheet.png"))); // NOI18N
         importUsersFromExcelButton.setText("Nhập Excel");
+        importUsersFromExcelButton.setBorderPainted(false);
         importUsersFromExcelButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 importUsersFromExcelButtonActionPerformed(evt);
             }
         });
 
-        exportUsersToExcelButton.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        exportUsersToExcelButton.setBackground(new java.awt.Color(0, 155, 110));
+        exportUsersToExcelButton.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        exportUsersToExcelButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/sheet.png"))); // NOI18N
         exportUsersToExcelButton.setText("Xuất Excel");
+        exportUsersToExcelButton.setBorderPainted(false);
         exportUsersToExcelButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 exportUsersToExcelButtonActionPerformed(evt);
             }
         });
 
-        editUserButton.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        editUserButton.setBackground(new java.awt.Color(36, 169, 65));
+        editUserButton.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        editUserButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/edit_icon.png"))); // NOI18N
         editUserButton.setText("Sửa");
+        editUserButton.setBorderPainted(false);
         editUserButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 editUserButtonActionPerformed(evt);
             }
         });
 
-        addUserButton.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        addUserButton.setText("Thêm");
-        addUserButton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                addUserButtonMouseClicked(evt);
-            }
-        });
-        addUserButton.addActionListener(new java.awt.event.ActionListener() {
+        viewUserButton.setBackground(new java.awt.Color(0, 122, 249));
+        viewUserButton.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        viewUserButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/add_circle_icon.png"))); // NOI18N
+        viewUserButton.setText("Xem");
+        viewUserButton.setBorderPainted(false);
+        viewUserButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addUserButtonActionPerformed(evt);
+                viewUserButtonActionPerformed(evt);
             }
         });
 
-        deleteUserButton.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        deleteUserButton.setBackground(new java.awt.Color(212, 57, 68));
+        deleteUserButton.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        deleteUserButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/remove_icon.png"))); // NOI18N
         deleteUserButton.setText("Xoá");
+        deleteUserButton.setBorderPainted(false);
         deleteUserButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 deleteUserButtonActionPerformed(evt);
+            }
+        });
+
+        addUserButton.setBackground(new java.awt.Color(0, 122, 249));
+        addUserButton.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        addUserButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/add_circle_icon.png"))); // NOI18N
+        addUserButton.setText("Thêm");
+        addUserButton.setBorderPainted(false);
+        addUserButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addUserButtonActionPerformed(evt);
             }
         });
 
@@ -1368,17 +1981,19 @@ public class Home extends javax.swing.JFrame {
             userFunctionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(userFunctionPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(addUserButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
-                .addComponent(editUserButton)
-                .addGap(24, 24, 24)
-                .addComponent(deleteUserButton)
+                .addComponent(viewUserButton, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(addUserButton, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(editUserButton, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(deleteUserButton, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(importUsersFromExcelButton)
+                .addComponent(importUsersFromExcelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(exportUsersToExcelButton)
+                .addComponent(exportUsersToExcelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(6, 6, 6))
         );
         userFunctionPanelLayout.setVerticalGroup(
@@ -1386,15 +2001,16 @@ public class Home extends javax.swing.JFrame {
             .addGroup(userFunctionPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(userFunctionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jSeparator1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jSeparator1, javax.swing.GroupLayout.DEFAULT_SIZE, 47, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, userFunctionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(importUsersFromExcelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(exportUsersToExcelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, userFunctionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(addUserButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(viewUserButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(editUserButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(deleteUserButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(0, 0, Short.MAX_VALUE))
+                        .addComponent(deleteUserButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(addUserButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(0, 7, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout userPanelLayout = new javax.swing.GroupLayout(userPanel);
@@ -1403,13 +2019,12 @@ public class Home extends javax.swing.JFrame {
             userPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(userPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(userPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(usersScrollPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 1103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(userPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(usersScrollPanel)
                     .addGroup(userPanelLayout.createSequentialGroup()
-                        .addComponent(userFunctionPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(userFunctionPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(searchUsersPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap(31, Short.MAX_VALUE))
+                        .addComponent(searchUsersPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
         );
         userPanelLayout.setVerticalGroup(
             userPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1423,7 +2038,7 @@ public class Home extends javax.swing.JFrame {
                 .addContainerGap(59, Short.MAX_VALUE))
         );
 
-        getContentPane().add(userPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 0, 1140, 830));
+        getContentPane().add(userPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 0, 1170, 830));
 
         statisticsPanel.setBackground(new java.awt.Color(204, 255, 255));
         statisticsPanel.setPreferredSize(new java.awt.Dimension(1140, 830));
@@ -1437,7 +2052,7 @@ public class Home extends javax.swing.JFrame {
             .addGroup(statisticsPanelLayout.createSequentialGroup()
                 .addGap(452, 452, 452)
                 .addComponent(jLabel9)
-                .addContainerGap(647, Short.MAX_VALUE))
+                .addContainerGap(646, Short.MAX_VALUE))
         );
         statisticsPanelLayout.setVerticalGroup(
             statisticsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1453,126 +2068,128 @@ public class Home extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void setActiveTab(String tabName) {
+        Color defaultColor = new Color(44, 43, 196);
+        Color activeColor = new Color(126, 142, 241);
         switch (tabName) {
             case "product" -> {
-                this.productTab.setBackground(new Color(179, 229, 252));
-                this.providerTab.setBackground(Color.WHITE);
-                this.importProductTab.setBackground(Color.WHITE);
-                this.importBillTab.setBackground(Color.WHITE);
-                this.exportProductTab.setBackground(Color.WHITE);
-                this.exportBillTab.setBackground(Color.WHITE);
-                this.inStockTab.setBackground(Color.WHITE);
-                this.userTab.setBackground(Color.WHITE);
-                this.statisticsTab.setBackground(Color.WHITE);
+                this.productTab.setBackground(activeColor);
+                this.providerTab.setBackground(defaultColor);
+                this.importProductTab.setBackground(defaultColor);
+                this.importBillTab.setBackground(defaultColor);
+                this.exportProductTab.setBackground(defaultColor);
+                this.exportBillTab.setBackground(defaultColor);
+                this.inStockTab.setBackground(defaultColor);
+                this.userTab.setBackground(defaultColor);
+                this.statisticsTab.setBackground(defaultColor);
                 break;
             }
             case "provider" -> {
-                this.productTab.setBackground(Color.WHITE);
-                this.providerTab.setBackground(new Color(179, 229, 252));
-                this.importProductTab.setBackground(Color.WHITE);
-                this.importBillTab.setBackground(Color.WHITE);
-                this.exportProductTab.setBackground(Color.WHITE);
-                this.exportBillTab.setBackground(Color.WHITE);
-                this.inStockTab.setBackground(Color.WHITE);
-                this.userTab.setBackground(Color.WHITE);
-                this.statisticsTab.setBackground(Color.WHITE);
+                this.productTab.setBackground(defaultColor);
+                this.providerTab.setBackground(activeColor);
+                this.importProductTab.setBackground(defaultColor);
+                this.importBillTab.setBackground(defaultColor);
+                this.exportProductTab.setBackground(defaultColor);
+                this.exportBillTab.setBackground(defaultColor);
+                this.inStockTab.setBackground(defaultColor);
+                this.userTab.setBackground(defaultColor);
+                this.statisticsTab.setBackground(defaultColor);
                 break;
             }
             case "import-product" -> {
-                this.productTab.setBackground(Color.WHITE);
-                this.providerTab.setBackground(Color.WHITE);
-                this.importProductTab.setBackground(new Color(179, 229, 252));
-                this.importBillTab.setBackground(Color.WHITE);
-                this.exportProductTab.setBackground(Color.WHITE);
-                this.exportBillTab.setBackground(Color.WHITE);
-                this.inStockTab.setBackground(Color.WHITE);
-                this.userTab.setBackground(Color.WHITE);
-                this.statisticsTab.setBackground(Color.WHITE);
+                this.productTab.setBackground(defaultColor);
+                this.providerTab.setBackground(defaultColor);
+                this.importProductTab.setBackground(activeColor);
+                this.importBillTab.setBackground(defaultColor);
+                this.exportProductTab.setBackground(defaultColor);
+                this.exportBillTab.setBackground(defaultColor);
+                this.inStockTab.setBackground(defaultColor);
+                this.userTab.setBackground(defaultColor);
+                this.statisticsTab.setBackground(defaultColor);
                 break;
             }
             case "import-bill" -> {
-                this.productTab.setBackground(Color.WHITE);
-                this.providerTab.setBackground(Color.WHITE);
-                this.importProductTab.setBackground(Color.WHITE);
-                this.importBillTab.setBackground(new Color(179, 229, 252));
-                this.exportProductTab.setBackground(Color.WHITE);
-                this.exportBillTab.setBackground(Color.WHITE);
-                this.inStockTab.setBackground(Color.WHITE);
-                this.userTab.setBackground(Color.WHITE);
-                this.statisticsTab.setBackground(Color.WHITE);
+                this.productTab.setBackground(defaultColor);
+                this.providerTab.setBackground(defaultColor);
+                this.importProductTab.setBackground(defaultColor);
+                this.importBillTab.setBackground(activeColor);
+                this.exportProductTab.setBackground(defaultColor);
+                this.exportBillTab.setBackground(defaultColor);
+                this.inStockTab.setBackground(defaultColor);
+                this.userTab.setBackground(defaultColor);
+                this.statisticsTab.setBackground(defaultColor);
                 break;
             }
             case "export-product" -> {
-                this.productTab.setBackground(Color.WHITE);
-                this.providerTab.setBackground(Color.WHITE);
-                this.importProductTab.setBackground(Color.WHITE);
-                this.importBillTab.setBackground(Color.WHITE);
-                this.exportProductTab.setBackground(new Color(179, 229, 252));
-                this.exportBillTab.setBackground(Color.WHITE);
-                this.inStockTab.setBackground(Color.WHITE);
-                this.userTab.setBackground(Color.WHITE);
-                this.statisticsTab.setBackground(Color.WHITE);
+                this.productTab.setBackground(defaultColor);
+                this.providerTab.setBackground(defaultColor);
+                this.importProductTab.setBackground(defaultColor);
+                this.importBillTab.setBackground(defaultColor);
+                this.exportProductTab.setBackground(activeColor);
+                this.exportBillTab.setBackground(defaultColor);
+                this.inStockTab.setBackground(defaultColor);
+                this.userTab.setBackground(defaultColor);
+                this.statisticsTab.setBackground(defaultColor);
                 break;
             }
             case "export-bill" -> {
-                this.productTab.setBackground(Color.WHITE);
-                this.providerTab.setBackground(Color.WHITE);
-                this.importProductTab.setBackground(Color.WHITE);
-                this.importBillTab.setBackground(Color.WHITE);
-                this.exportProductTab.setBackground(Color.WHITE);
-                this.exportBillTab.setBackground(new Color(179, 229, 252));
-                this.inStockTab.setBackground(Color.WHITE);
-                this.userTab.setBackground(Color.WHITE);
-                this.statisticsTab.setBackground(Color.WHITE);
+                this.productTab.setBackground(defaultColor);
+                this.providerTab.setBackground(defaultColor);
+                this.importProductTab.setBackground(defaultColor);
+                this.importBillTab.setBackground(defaultColor);
+                this.exportProductTab.setBackground(defaultColor);
+                this.exportBillTab.setBackground(activeColor);
+                this.inStockTab.setBackground(defaultColor);
+                this.userTab.setBackground(defaultColor);
+                this.statisticsTab.setBackground(defaultColor);
                 break;
             }
             case "in-stock" -> {
-                this.productTab.setBackground(Color.WHITE);
-                this.providerTab.setBackground(Color.WHITE);
-                this.importProductTab.setBackground(Color.WHITE);
-                this.importBillTab.setBackground(Color.WHITE);
-                this.exportProductTab.setBackground(Color.WHITE);
-                this.exportBillTab.setBackground(Color.WHITE);
-                this.inStockTab.setBackground(new Color(179, 229, 252));
-                this.userTab.setBackground(Color.WHITE);
-                this.statisticsTab.setBackground(Color.WHITE);
+                this.productTab.setBackground(defaultColor);
+                this.providerTab.setBackground(defaultColor);
+                this.importProductTab.setBackground(defaultColor);
+                this.importBillTab.setBackground(defaultColor);
+                this.exportProductTab.setBackground(defaultColor);
+                this.exportBillTab.setBackground(defaultColor);
+                this.inStockTab.setBackground(activeColor);
+                this.userTab.setBackground(defaultColor);
+                this.statisticsTab.setBackground(defaultColor);
                 break;
             }
             case "user" -> {
-                this.productTab.setBackground(Color.WHITE);
-                this.providerTab.setBackground(Color.WHITE);
-                this.importProductTab.setBackground(Color.WHITE);
-                this.importBillTab.setBackground(Color.WHITE);
-                this.exportProductTab.setBackground(Color.WHITE);
-                this.exportBillTab.setBackground(Color.WHITE);
-                this.inStockTab.setBackground(Color.WHITE);
-                this.userTab.setBackground(new Color(179, 229, 252));
-                this.statisticsTab.setBackground(Color.WHITE);
+                this.productTab.setBackground(defaultColor);
+                this.providerTab.setBackground(defaultColor);
+                this.importProductTab.setBackground(defaultColor);
+                this.importBillTab.setBackground(defaultColor);
+                this.exportProductTab.setBackground(defaultColor);
+                this.exportBillTab.setBackground(defaultColor);
+                this.inStockTab.setBackground(defaultColor);
+                this.userTab.setBackground(activeColor);
+                this.statisticsTab.setBackground(defaultColor);
                 break;
             }
             case "statistics" -> {
-                this.productTab.setBackground(Color.WHITE);
-                this.providerTab.setBackground(Color.WHITE);
-                this.importProductTab.setBackground(Color.WHITE);
-                this.importBillTab.setBackground(Color.WHITE);
-                this.exportProductTab.setBackground(Color.WHITE);
-                this.exportBillTab.setBackground(Color.WHITE);
-                this.inStockTab.setBackground(Color.WHITE);
-                this.userTab.setBackground(Color.WHITE);
-                this.statisticsTab.setBackground(new Color(179, 229, 252));
+                this.productTab.setBackground(defaultColor);
+                this.providerTab.setBackground(defaultColor);
+                this.importProductTab.setBackground(defaultColor);
+                this.importBillTab.setBackground(defaultColor);
+                this.exportProductTab.setBackground(defaultColor);
+                this.exportBillTab.setBackground(defaultColor);
+                this.inStockTab.setBackground(defaultColor);
+                this.userTab.setBackground(defaultColor);
+                this.statisticsTab.setBackground(activeColor);
                 break;
             }
 
             default -> {
-                this.productTab.setBackground(Color.WHITE);
-                this.providerTab.setBackground(Color.WHITE);
-                this.importProductTab.setBackground(Color.WHITE);
-                this.importBillTab.setBackground(Color.WHITE);
-                this.exportProductTab.setBackground(Color.WHITE);
-                this.exportBillTab.setBackground(Color.WHITE);
-                this.inStockTab.setBackground(Color.WHITE);
-                this.userTab.setBackground(Color.WHITE);
-                this.statisticsTab.setBackground(Color.WHITE);
+                this.productTab.setBackground(defaultColor);
+                this.providerTab.setBackground(defaultColor);
+                this.importProductTab.setBackground(defaultColor);
+                this.importBillTab.setBackground(defaultColor);
+                this.exportProductTab.setBackground(defaultColor);
+                this.exportBillTab.setBackground(defaultColor);
+                this.inStockTab.setBackground(defaultColor);
+                this.userTab.setBackground(defaultColor);
+                this.statisticsTab.setBackground(defaultColor);
                 break;
             }
         }
@@ -1729,7 +2346,19 @@ public class Home extends javax.swing.JFrame {
     }//GEN-LAST:event_importBillItemFromExcelButtonActionPerformed
 
     private void importUsersFromExcelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_importUsersFromExcelButtonActionPerformed
-        // TODO add your handling code here:
+        JFileChooser fileChooser = new JFileChooser();
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("excel", "xlsx");
+        fileChooser.setFileFilter(filter);
+        fileChooser.setMultiSelectionEnabled(false);
+        int result = fileChooser.showDialog(this, "Chọn file");
+        if (result == JFileChooser.APPROVE_OPTION) {
+            File uploadedFile = fileChooser.getSelectedFile();
+            ArrayList<User> users = ExcelUtil.excelToUsers(uploadedFile);
+            CommonResponseDTO response = userController.addList(users);
+            showUserDiaglogMessage(response.message());
+            loadDataToTableUsers(null);
+        }
+        
     }//GEN-LAST:event_importUsersFromExcelButtonActionPerformed
 
     private void exportUsersToExcelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exportUsersToExcelButtonActionPerformed
@@ -1737,17 +2366,91 @@ public class Home extends javax.swing.JFrame {
     }//GEN-LAST:event_exportUsersToExcelButtonActionPerformed
 
     private void editUserButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editUserButtonActionPerformed
-        // TODO add your handling code here:
+        int[] rows = usersTable.getSelectedRows();
+        if (rows.length == 0) {
+            showUserDiaglogMessage(ErrorMessage.User.EMPTY_SELECTED_ROWS);
+            return;
+        }
+        if (rows.length > 1) {
+            showUserDiaglogMessage(ErrorMessage.User.EXCEED_SELECTED_ROWS);
+            return;
+        }
+        
+        showEditUserDiaglog(rows[0]);
     }//GEN-LAST:event_editUserButtonActionPerformed
-
-    private void addUserButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addUserButtonActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_addUserButtonActionPerformed
-
+    
+    private void showEditUserDiaglog(int selectedRow) {        
+        Integer id = Integer.valueOf(usersTable.getValueAt(selectedRow, ID_COL_INDEX).toString());
+        String username = usersTable.getValueAt(selectedRow, USERNAME_COL_INDEX).toString();
+        String firstName = usersTable.getValueAt(selectedRow, FIRSTNAME_COL_INDEX).toString();
+        String lastName = usersTable.getValueAt(selectedRow, LASTNAME_COL_INDEX).toString();
+        String phoneNumber = usersTable.getValueAt(selectedRow, PHONENUMBER_COL_INDEX).toString();
+        String email = usersTable.getValueAt(selectedRow, EMAIL_COL_INDEX).toString();
+        
+        editUserIdTextField.setText(id.toString());
+        editUsernameTextField.setText(username);
+        editFirstNameTextField.setText(firstName);
+        editLastNameTextField.setText(lastName);
+        editPhoneNumberTextField.setText(phoneNumber);
+        editEmailTextField.setText(email);
+        
+        editUserDiaglog.setVisible(true);
+        editUserDiaglog.setLocationRelativeTo(this);
+    }
+    
+    private void viewUserButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewUserButtonActionPerformed
+        int[] rows = usersTable.getSelectedRows();
+        if (rows.length == 0) {
+            showUserDiaglogMessage(ErrorMessage.User.EMPTY_SELECTED_ROWS);
+            return;
+        }
+        if (rows.length > 1) {
+            showUserDiaglogMessage(ErrorMessage.User.EXCEED_SELECTED_ROWS);
+            return;
+        }
+        
+        showViewUserDiaglog(rows[0]);
+    }//GEN-LAST:event_viewUserButtonActionPerformed
+    
+    private void showViewUserDiaglog(int selectedRow) {
+        Integer id = Integer.valueOf(usersTable.getValueAt(selectedRow, ID_COL_INDEX).toString());
+        Optional<User> found = userController.findById(id);
+        if (found.isEmpty()) {
+            showUserDiaglogMessage(ErrorMessage.User.NOT_FOUND);
+            return;
+        }
+        
+        User foundUser = found.get();
+        viewUsernameTextField.setText(foundUser.getUsername());
+        viewUserFirstNameTextField.setText(foundUser.getFirstName());
+        viewUserLastNameTextField.setText(foundUser.getLastName());
+        viewUserPhoneNumberTextField.setText(foundUser.getPhoneNumber());
+        viewUserEmailTextField.setText(foundUser.getEmail());
+        if (foundUser.getWhenCreated() != null) viewUserWhenCreatedTextField.setText(formatter.format(foundUser.getWhenCreated()));
+        if (foundUser.getLastUpdated() != null) viewUserLastUpdatedTextField.setText(formatter.format(foundUser.getLastUpdated()));
+        if (foundUser.getLastLoggedIn() != null) viewUserLastLoggedInTextField.setText(formatter.format(foundUser.getLastLoggedIn()));
+        if (foundUser.getLoggedIn() != null) viewUserLoggedInTextField.setText(foundUser.getLoggedIn().toString());
+        
+        viewUserDiaglog.setVisible(true);
+        viewUserDiaglog.setLocationRelativeTo(this);
+    }
+    
     private void deleteUserButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteUserButtonActionPerformed
-        // TODO add your handling code here:
+        int[] rows = usersTable.getSelectedRows();
+        if (rows.length == 0) {
+            showUserDiaglogMessage(ErrorMessage.User.EMPTY_SELECTED_ROWS);
+            return;
+        }
+        showDeleteUserConfirmDiaglog(String.format("Bạn có chắc chắn xoá %d bản ghi này?", rows.length));
+        
     }//GEN-LAST:event_deleteUserButtonActionPerformed
-
+    
+    private void showDeleteUserConfirmDiaglog(String content) {
+        deleteUserConfirmDiaglog.setVisible(true);
+        deleteUserConfirmDiaglog.setLocationRelativeTo(this);
+        deleteUserConfirmDiaglogLabel.setText(content);
+    }
+    
     private void importUsersFromExcelButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_importUsersFromExcelButton1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_importUsersFromExcelButton1ActionPerformed
@@ -1772,12 +2475,6 @@ public class Home extends javax.swing.JFrame {
         String keyword = searchUsersTextField.getText();
         loadDataToTableUsers(keyword);
     }//GEN-LAST:event_searchUsersTextFieldKeyReleased
-
-    private void addUserButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addUserButtonMouseClicked
-        addUserDiaglog.setLocationRelativeTo(this);
-        addUserDiaglog.setVisible(true);
-        
-    }//GEN-LAST:event_addUserButtonMouseClicked
 
     private void usernameTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usernameTextFieldActionPerformed
         // TODO add your handling code here:
@@ -1926,7 +2623,6 @@ public class Home extends javax.swing.JFrame {
     }//GEN-LAST:event_productLabelMouseClicked
 
     private void addUserDiaglogButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addUserDiaglogButtonActionPerformed
-        // TODO add your handling code here:
         String username = usernameTextField.getText();
         String firstName = firstNameTextField.getText();
         String lastName = lastNameTextField.getText();
@@ -1935,24 +2631,183 @@ public class Home extends javax.swing.JFrame {
         String otp = confirmEmailOTPTextField.getText();
         String password = String.valueOf(passwordField.getPassword());
         String confirmPassword = String.valueOf(confirmPasswordField.getPassword());
-        productLabel.setText("" + Math.random());
         if (InputValidator.anyBlankInput(
                 username, firstName, lastName, phoneNumber, email, 
                 otp, password, confirmPassword)
         ) {
-            
+            showUserDiaglogMessage(ErrorMessage.User.BLANK_INPUT);
             return;
         }    
         
         if (!password.equals(confirmPassword)) {
-            
+            showUserDiaglogMessage(ErrorMessage.User.MISMATCHED_PASSWORD);
             return;
-        }    
+        }
+        
+        if (userController.findByUsername(username).isPresent()) {
+            showUserDiaglogMessage(ErrorMessage.User.DUPLICATED_USERNAME);
+            return;
+        }
+        
+        CommonResponseDTO result = userController.addOne(User
+                .builder()
+                .username(username)
+                .password(password)
+                .firstName(firstName)
+                .lastName(lastName)
+                .phoneNumber(phoneNumber)
+                .email(email)
+                .build());
+        if (result.success()) {
+            addUserDiaglog.setVisible(false);
+            showUserDiaglogMessage(SuccessMessage.User.ADDED);            
+            loadDataToTableUsers(null);
+        }
     }//GEN-LAST:event_addUserDiaglogButtonActionPerformed
-
+    
+    private void showUserDiaglogMessage(String message) {
+        diaglogMessage.setVisible(true);
+        diaglogMessage.setLocationRelativeTo(this);
+        diaglogMessageLabel.setText(message);
+    }
+    
     private void cancelAddUserDiaglogButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelAddUserDiaglogButtonActionPerformed
-        // TODO add your handling code here:
+        usernameTextField.setText("");
+        firstNameTextField.setText("");
+        lastNameTextField.setText("");
+        phoneNumberTextField.setText("");
+        emailTextField.setText("");
+        confirmEmailOTPTextField.setText("");
+        passwordField.setText("");
+        confirmPasswordField.setText("");
+        
+        addUserDiaglog.dispose();
     }//GEN-LAST:event_cancelAddUserDiaglogButtonActionPerformed
+
+    private void confirmDeleteUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmDeleteUserActionPerformed
+        deleteUserConfirmDiaglog.dispose();
+        int[] rows = usersTable.getSelectedRows();
+        for (int row : rows) {
+            userController.deleteOne(Integer.valueOf(usersTable.getValueAt(row, ID_COL_INDEX).toString()));
+        }
+        loadDataToTableUsers(null);
+        showUserDiaglogMessage(String.format("Xoá thành công %d bản ghi.", rows.length));
+        
+    }//GEN-LAST:event_confirmDeleteUserActionPerformed
+
+    private void cancelDeleteUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelDeleteUserActionPerformed
+        deleteUserConfirmDiaglog.dispose();
+    }//GEN-LAST:event_cancelDeleteUserActionPerformed
+
+    private void diaglogMessageOkButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_diaglogMessageOkButtonActionPerformed
+        diaglogMessage.dispose();
+    }//GEN-LAST:event_diaglogMessageOkButtonActionPerformed
+
+    private void editUsernameTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editUsernameTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_editUsernameTextFieldActionPerformed
+
+    private void editFirstNameTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editFirstNameTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_editFirstNameTextFieldActionPerformed
+
+    private void editLastNameTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editLastNameTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_editLastNameTextFieldActionPerformed
+
+    private void editPhoneNumberTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editPhoneNumberTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_editPhoneNumberTextFieldActionPerformed
+
+    private void editEmailTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editEmailTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_editEmailTextFieldActionPerformed
+
+    private void editUserDiaglogButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editUserDiaglogButtonActionPerformed
+        Integer id = Integer.valueOf(editUserIdTextField.getText());
+        String firstName = editFirstNameTextField.getText();
+        String lastName = editLastNameTextField.getText();
+        String email = editEmailTextField.getText();
+        String phoneNumber = editPhoneNumberTextField.getText();
+        
+        CommonResponseDTO response = userController.updateOne(id, new UserDTO(firstName, lastName, phoneNumber, email));
+        showUserDiaglogMessage(response.message());
+        loadDataToTableUsers(null);
+    }//GEN-LAST:event_editUserDiaglogButtonActionPerformed
+
+    private void cancelEditUserDiaglogButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelEditUserDiaglogButtonActionPerformed
+        // TODO add your handling code here:
+        editUserDiaglog.dispose();
+    }//GEN-LAST:event_cancelEditUserDiaglogButtonActionPerformed
+
+    private void editUserIdTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editUserIdTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_editUserIdTextFieldActionPerformed
+
+    private void addUserButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addUserButtonActionPerformed
+        addUserDiaglog.setLocationRelativeTo(this);
+        addUserDiaglog.setVisible(true);
+    }//GEN-LAST:event_addUserButtonActionPerformed
+
+    private void viewUserLastNameTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewUserLastNameTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_viewUserLastNameTextFieldActionPerformed
+
+    private void viewUserPhoneNumberTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewUserPhoneNumberTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_viewUserPhoneNumberTextFieldActionPerformed
+
+    private void viewUserEmailTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewUserEmailTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_viewUserEmailTextFieldActionPerformed
+
+    private void viewUserWhenCreatedTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewUserWhenCreatedTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_viewUserWhenCreatedTextFieldActionPerformed
+
+    private void viewUserLastUpdatedTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewUserLastUpdatedTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_viewUserLastUpdatedTextFieldActionPerformed
+
+    private void cancelAddUserDiaglogButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelAddUserDiaglogButton1ActionPerformed
+        viewUserDiaglog.dispose();
+    }//GEN-LAST:event_cancelAddUserDiaglogButton1ActionPerformed
+
+    private void editUserDiaglogButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editUserDiaglogButton1ActionPerformed
+        // TODO add your handling code here:
+        int[] rows = usersTable.getSelectedRows();
+        if (rows.length == 0) {
+            showUserDiaglogMessage(ErrorMessage.User.EMPTY_SELECTED_ROWS);
+            return;
+        }
+        if (rows.length > 1) {
+            showUserDiaglogMessage(ErrorMessage.User.EXCEED_SELECTED_ROWS);
+            return;
+        }
+        viewUserDiaglog.dispose();
+        showEditUserDiaglog(rows[0]);
+    }//GEN-LAST:event_editUserDiaglogButton1ActionPerformed
+
+    private void viewUserLastLoggedInTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewUserLastLoggedInTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_viewUserLastLoggedInTextFieldActionPerformed
+
+    private void viewUserLoggedInTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewUserLoggedInTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_viewUserLoggedInTextFieldActionPerformed
+
+    private void viewUsernameTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewUsernameTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_viewUsernameTextFieldActionPerformed
+
+    private void viewUserFirstNameTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewUserFirstNameTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_viewUserFirstNameTextFieldActionPerformed
+
+    private void searchUsersButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchUsersButtonActionPerformed
+        searchUsersTextField.setText("");
+        loadDataToTableUsers(null);
+    }//GEN-LAST:event_searchUsersButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1977,16 +2832,45 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JButton addUserButton1;
     private javax.swing.JDialog addUserDiaglog;
     private javax.swing.JButton addUserDiaglogButton;
+    private javax.swing.JPanel addUserDiaglogPanel;
     private javax.swing.JButton cancelAddUserDiaglogButton;
+    private javax.swing.JButton cancelAddUserDiaglogButton1;
+    private javax.swing.JButton cancelDeleteUser;
+    private javax.swing.JButton cancelEditUserDiaglogButton;
+    private javax.swing.JButton confirmDeleteUser;
     private javax.swing.JLabel confirmEmailOTPLabel;
     private javax.swing.JTextField confirmEmailOTPTextField;
     private javax.swing.JPasswordField confirmPasswordField;
     private javax.swing.JLabel confirmPasswordLabel;
     private javax.swing.JButton deleteUserButton;
     private javax.swing.JButton deleteUserButton1;
+    private javax.swing.JDialog deleteUserConfirmDiaglog;
+    private javax.swing.JLabel deleteUserConfirmDiaglogLabel;
+    private javax.swing.JPanel deleteUserConfirmDiaglogPanel;
+    private javax.swing.JDialog diaglogMessage;
+    private javax.swing.JLabel diaglogMessageLabel;
+    private javax.swing.JButton diaglogMessageOkButton;
+    private javax.swing.JPanel diaglogMessagePanel;
     private javax.swing.JButton editBillItemButton;
+    private javax.swing.JLabel editEmailLabel;
+    private javax.swing.JTextField editEmailTextField;
+    private javax.swing.JLabel editFirstNameLabel;
+    private javax.swing.JTextField editFirstNameTextField;
+    private javax.swing.JLabel editLastNameLabel;
+    private javax.swing.JTextField editLastNameTextField;
+    private javax.swing.JLabel editPhoneNumberLabel;
+    private javax.swing.JTextField editPhoneNumberTextField;
     private javax.swing.JButton editUserButton;
     private javax.swing.JButton editUserButton1;
+    private javax.swing.JDialog editUserDiaglog;
+    private javax.swing.JButton editUserDiaglogButton;
+    private javax.swing.JButton editUserDiaglogButton1;
+    private javax.swing.JLabel editUserDiaglogLabel;
+    private javax.swing.JPanel editUserDiaglogPanel;
+    private javax.swing.JLabel editUserIdLabel;
+    private javax.swing.JTextField editUserIdTextField;
+    private javax.swing.JLabel editUsernameLabel;
+    private javax.swing.JTextField editUsernameTextField;
     private javax.swing.JLabel emailLabel;
     private javax.swing.JTextField emailTextField;
     private javax.swing.JLabel exportBillLabel;
@@ -2023,15 +2907,26 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JLabel inStockLabel;
     private javax.swing.JPanel inStockPanel;
     private javax.swing.JPanel inStockTab;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JToolBar.Separator jSeparator1;
     private javax.swing.JToolBar.Separator jSeparator2;
+    private javax.swing.JSeparator jSeparator3;
+    private javax.swing.JSeparator jSeparator4;
+    private javax.swing.JSeparator jSeparator5;
+    private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel lastNameLabel;
     private javax.swing.JTextField lastNameTextField;
     private javax.swing.JLabel loginedUsername;
@@ -2074,7 +2969,6 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JPanel userFunctionPanel1;
     private javax.swing.JLabel userLabel;
     private javax.swing.JPanel userPanel;
-    private javax.swing.JComboBox<String> userRolesComboBox;
     private javax.swing.JPanel userTab;
     private javax.swing.JLabel usernameLabel;
     private javax.swing.JTextField usernameTextField;
@@ -2082,5 +2976,26 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JScrollPane usersScrollPanel1;
     private javax.swing.JTable usersTable;
     private javax.swing.JTable usersTable1;
+    private javax.swing.JButton viewUserButton;
+    private javax.swing.JDialog viewUserDiaglog;
+    private javax.swing.JPanel viewUserDiaglogPanel;
+    private javax.swing.JLabel viewUserEmailLabel;
+    private javax.swing.JTextField viewUserEmailTextField;
+    private javax.swing.JLabel viewUserFirstNameLabel;
+    private javax.swing.JTextField viewUserFirstNameTextField;
+    private javax.swing.JLabel viewUserLastLoggedInLabel;
+    private javax.swing.JTextField viewUserLastLoggedInTextField;
+    private javax.swing.JLabel viewUserLastNameLabel;
+    private javax.swing.JTextField viewUserLastNameTextField;
+    private javax.swing.JLabel viewUserLastUpdatedLabel;
+    private javax.swing.JTextField viewUserLastUpdatedTextField;
+    private javax.swing.JLabel viewUserLoggedInLabel;
+    private javax.swing.JTextField viewUserLoggedInTextField;
+    private javax.swing.JLabel viewUserPhoneNumberLabel;
+    private javax.swing.JTextField viewUserPhoneNumberTextField;
+    private javax.swing.JLabel viewUserWhenCreatedLabel;
+    private javax.swing.JTextField viewUserWhenCreatedTextField;
+    private javax.swing.JLabel viewUsernameLabel;
+    private javax.swing.JTextField viewUsernameTextField;
     // End of variables declaration//GEN-END:variables
 }

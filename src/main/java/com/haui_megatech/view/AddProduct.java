@@ -61,31 +61,44 @@ public class AddProduct extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         jLabel1.setText("Mã sản phẩm");
 
         jTextField1.setEditable(false);
+        jTextField1.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         jTextField1.setText("SP001");
 
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         jLabel2.setText("Tên sản phẩm");
 
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         jLabel3.setText("Đơn giá");
 
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         jLabel4.setText("Xuất xứ");
 
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         jLabel5.setText("CPU");
 
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         jLabel6.setText("RAM");
 
+        jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         jLabel7.setText("Dung lượng lưu trữ");
 
+        jLabel8.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         jLabel8.setText("Card đồ họa");
 
+        jLabel9.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         jLabel9.setText("Loại sản phẩm");
 
+        jLabel10.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         jLabel10.setText("Kích thước màn");
 
+        jLabel11.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         jLabel11.setText("Dung lượng pin");
 
+        cbxLoaiSP.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         cbxLoaiSP.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Laptop", "PC" }));
         cbxLoaiSP.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
@@ -113,10 +126,11 @@ public class AddProduct extends javax.swing.JFrame {
         });
 
         btnAddProduct.setBackground(new java.awt.Color(51, 102, 255));
+        btnAddProduct.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         btnAddProduct.setForeground(new java.awt.Color(255, 255, 255));
         btnAddProduct.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/plus.png"))); // NOI18N
-        btnAddProduct.setText("Thêm sản phẩm");
-        btnAddProduct.setBorder(null);
+        btnAddProduct.setText("Thêm mới");
+        btnAddProduct.setBorderPainted(false);
         btnAddProduct.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnAddProduct.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -125,10 +139,11 @@ public class AddProduct extends javax.swing.JFrame {
         });
 
         btnCancel.setBackground(new java.awt.Color(255, 0, 0));
+        btnCancel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         btnCancel.setForeground(new java.awt.Color(255, 255, 255));
         btnCancel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/multiply.png"))); // NOI18N
         btnCancel.setText("Hủy bỏ");
-        btnCancel.setBorder(null);
+        btnCancel.setBorderPainted(false);
         btnCancel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnCancel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -136,7 +151,25 @@ public class AddProduct extends javax.swing.JFrame {
             }
         });
 
-        jPanel2.setBackground(new java.awt.Color(51, 102, 255));
+        jTextField4.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+
+        jTextField6.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+
+        jTextField7.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+
+        jTextField8.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+
+        jTextField9.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+
+        jTextField10.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+
+        jTextField11.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+
+        jTextField12.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+
+        jTextField13.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+
+        jPanel2.setBackground(new java.awt.Color(44, 43, 196));
 
         jLabel12.setBackground(new java.awt.Color(51, 102, 255));
         jLabel12.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
@@ -208,9 +241,9 @@ public class AddProduct extends javax.swing.JFrame {
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(228, 228, 228)
-                .addComponent(btnAddProduct, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnAddProduct, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(62, 62, 62)
-                .addComponent(btnCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -264,8 +297,8 @@ public class AddProduct extends javax.swing.JFrame {
                     .addComponent(jTextField11, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(48, 48, 48)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnAddProduct, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnAddProduct, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(50, 50, 50))
         );
 
