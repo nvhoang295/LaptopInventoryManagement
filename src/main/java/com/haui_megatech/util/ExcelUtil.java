@@ -1,6 +1,7 @@
 package com.haui_megatech.util;
 
 import com.haui_megatech.dto.CommonResponseDTO;
+import com.haui_megatech.model.Product;
 import com.haui_megatech.model.User;
 import java.io.File;
 import java.io.FileInputStream;
@@ -161,4 +162,82 @@ public class ExcelUtil {
                 .message(String.format("Xuất thành công %d người dùng.", users.size()))
                 .build();
     }
+    
+    public static ArrayList<Product> excelToProducts(File file)  {
+        
+        InputStream is = null;
+        try {
+            is = new FileInputStream(file);
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(ExcelUtil.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        try {
+            Workbook workbook = new XSSFWorkbook(is);
+            Sheet sheet = workbook.getSheet(SELECTED_SHEET_NAME);
+            Iterator<Row> rows = sheet.iterator();
+            
+            ArrayList<Product> products = new ArrayList<>();
+            
+            int rowNumber = 0;
+            for (Row row : sheet) {
+                if (rowNumber == 0) {
+                    ++rowNumber;
+                    continue;
+                }
+                Product product = new Product();
+                
+                short firstCellNum = row.getFirstCellNum();
+                short lastCellNum = row.getLastCellNum();
+                
+                for (int cellIndex = firstCellNum; cellIndex < lastCellNum; ++cellIndex) {
+                    Cell currentCell = row.getCell(cellIndex, Row.MissingCellPolicy.CREATE_NULL_AS_BLANK);
+                    
+                    switch (cellIndex) {
+                        case 0 -> {
+                            product.setName(currentCell.getStringCellValue());
+                            break;
+                        }
+                        case 1 -> {
+                            product.setProcessor(currentCell.getStringCellValue());
+                            break;
+                        }
+                        case 2 -> {
+                            product.setMemory(currentCell.getStringCellValue());
+                            break;
+                        }
+                        case 3 -> {
+                            product.setStorage(currentCell.getStringCellValue());
+                            break;
+                        }
+                        case 4 -> {
+                            product.setDisplay(currentCell.getStringCellValue());
+                            break;
+                        }
+                        case 5 -> {
+                            product.setBattery(currentCell.getStringCellValue());
+                            break;
+                        }
+                        case 6 -> {
+                            product.setCard(currentCell.getStringCellValue());
+                            break;
+                        }
+                        case 7 -> {
+                            product.setWeight(currentCell.getStringCellValue());
+                            break;
+                        }
+                        default -> {
+                            break;
+                        }
+                    }
+                }
+                products.add(product);
+            }
+            workbook.close();
+            return products;
+        } catch (IOException e) {
+            throw new RuntimeException("Fail to parse Excel file: " + e.getMessage());
+        }
+    }
+    
 }

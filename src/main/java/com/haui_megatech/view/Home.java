@@ -3265,11 +3265,26 @@ public class Home extends javax.swing.JFrame {
     }
     
     private void importProductsFromExcelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_importProductsFromExcelButtonActionPerformed
-        // TODO add your handling code here:
+        JFileChooser fileChooser = new JFileChooser();
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("Excel Workbook (*.xlsx)", "xlsx");
+        fileChooser.setFileFilter(filter);
+        fileChooser.setMultiSelectionEnabled(false);
+        int result = fileChooser.showDialog(this, "Chọn file");
+        if (result == JFileChooser.APPROVE_OPTION) {
+            File uploadedFile = fileChooser.getSelectedFile();
+            ArrayList<Product> products = ExcelUtil.excelToProducts(uploadedFile);
+            CommonResponseDTO response = productController.addList(products);
+            showDiaglogMessage(response.message());
+            loadDataToTableProducts(null);
+        }
     }//GEN-LAST:event_importProductsFromExcelButtonActionPerformed
 
     private void exportProductsToExcelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exportProductsToExcelButtonActionPerformed
         // TODO add your handling code here:
+        
+        
+        
+        
     }//GEN-LAST:event_exportProductsToExcelButtonActionPerformed
 
     private void editProductButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editProductButtonActionPerformed
