@@ -240,4 +240,66 @@ public class ExcelUtil {
         }
     }
     
+     public static CommonResponseDTO productsToExcel(List<Product> products, String savedPath) {
+        String savedFilePath = "";
+        try {
+            XSSFWorkbook workbook = new XSSFWorkbook();
+            XSSFSheet spreadsheet = workbook.createSheet("Sheet1");
+
+            XSSFRow row = null;
+            Cell cell = null;
+
+            row = spreadsheet.createRow((short) 0);
+            row.setHeight((short) 500);
+            cell = row.createCell(0, CellType.STRING);
+            cell.setCellValue("id");
+            cell = row.createCell(1, CellType.STRING);
+            cell.setCellValue("name");
+            cell = row.createCell(2, CellType.STRING);
+            cell.setCellValue("memory");
+            cell = row.createCell(3, CellType.STRING);
+            cell.setCellValue("storage");
+            cell = row.createCell(4, CellType.STRING);
+            cell.setCellValue("display");
+            cell = row.createCell(5, CellType.STRING);
+            cell.setCellValue("battery");
+            cell = row.createCell(6, CellType.STRING);
+            cell.setCellValue("graphic_card");
+            cell = row.createCell(7, CellType.STRING);
+            cell.setCellValue("weight");
+
+            for (int i = 0; i < products.size(); i++) {
+                Product product = products.get(i);
+                row = spreadsheet.createRow(i + 1);
+                row.setHeight((short) 400);
+                row.createCell(0).setCellValue(product.getId());
+                row.createCell(1).setCellValue(product.getName());
+                row.createCell(2).setCellValue(product.getMemory());
+                row.createCell(3).setCellValue(product.getStorage());
+                row.createCell(4).setCellValue(product.getDisplay());
+                row.createCell(5).setCellValue(product.getBattery());
+                row.createCell(6).setCellValue(product.getCard());
+                row.createCell(7).setCellValue(product.getWeight());
+            }
+            System.out.println(savedFilePath);
+            try (FileOutputStream out = new FileOutputStream(new File(
+                            savedPath.replace("\\", "/") + EXCEL_FILENAME_EXTENSION
+            ))) {
+                workbook.write(out);
+            }
+        } catch (IOException e) {
+            return CommonResponseDTO
+                .builder()
+                .success(false)
+                .message("Có lỗi trong quá trình ghi file.")
+                .build();
+        }
+        
+        return CommonResponseDTO
+                .builder()
+                .success(true)
+                .message(String.format("Xuất thành công %d sản phẩm.", products.size()))
+                .build();
+    }
+    
 }

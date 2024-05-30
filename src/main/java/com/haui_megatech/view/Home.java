@@ -3280,11 +3280,20 @@ public class Home extends javax.swing.JFrame {
     }//GEN-LAST:event_importProductsFromExcelButtonActionPerformed
 
     private void exportProductsToExcelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exportProductsToExcelButtonActionPerformed
-        // TODO add your handling code here:
-        
-        
-        
-        
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setDialogTitle("Lựa chọn vị trí lưu file");
+        fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("Excel Workbook (*.xlsx)", "xlsx");
+        fileChooser.setFileFilter(filter);
+        int userSelection = fileChooser.showSaveDialog(fileChooser);
+        if (userSelection == JFileChooser.APPROVE_OPTION) {
+            File directoryToSave = fileChooser.getSelectedFile();
+            CommonResponseDTO response = ExcelUtil.productsToExcel(
+                    productController.getList().data(), 
+                    directoryToSave.getAbsolutePath()
+            );
+            showDiaglogMessage(response.message());
+        }
     }//GEN-LAST:event_exportProductsToExcelButtonActionPerformed
 
     private void editProductButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editProductButtonActionPerformed
