@@ -4681,8 +4681,6 @@ public class Home extends javax.swing.JFrame {
         this.viewProductDiaglog.dispose();
         
         this.showEditProductDiaglog(rows[0]);
-        
-        
     }//GEN-LAST:event_updateProductDiaglogButtonActionPerformed
 
     private void cancelViewProductDiaglogButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelViewProductDiaglogButtonActionPerformed
@@ -4722,9 +4720,39 @@ public class Home extends javax.swing.JFrame {
     }//GEN-LAST:event_exportProvidersToExcelButtonActionPerformed
 
     private void editProviderButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editProviderButtonActionPerformed
-        // TODO add your handling code here:
+        int[] rows = providersTable.getSelectedRows();
+        if (rows.length == 0) {
+            showDiaglogMessage(ErrorMessage.EMPTY_SELECTED_ROWS);
+            return;
+        }
+        if (rows.length > 1) {
+            showDiaglogMessage(ErrorMessage.EXCEED_SELECTED_ROWS);
+            return;
+        }
+        
+        this.showEditProviderDiaglog(rows[0]);
     }//GEN-LAST:event_editProviderButtonActionPerformed
-
+    
+    private void showEditProviderDiaglog(int selectedRow) {
+        editProviderDiaglog.setVisible(true);
+        editProviderDiaglog.setLocationRelativeTo(this);
+        
+        Integer id = Integer.valueOf(providersTable.getValueAt(selectedRow, ID_COL_INDEX).toString());
+        Optional<Provider> found = providerController.findById(id);
+        if (found.isEmpty()) {
+            showDiaglogMessage(ErrorMessage.Provider.NOT_FOUND);
+            return;
+        }
+        
+        Provider foundProvider = found.get();
+        
+        editProviderIdTextField.setText(foundProvider.getId().toString());
+        editProviderNameTextField.setText(foundProvider.getName());
+        editProviderPhoneNumberTextField.setText(foundProvider.getPhoneNumber());
+        editProviderEmailTextField.setText(foundProvider.getEmail());
+        editProviderAddressTextField.setText(foundProvider.getAddress());
+    }
+    
     private void addProviderButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addProviderButtonActionPerformed
         showAddProviderDiaglog();
     }//GEN-LAST:event_addProviderButtonActionPerformed
@@ -4739,9 +4767,39 @@ public class Home extends javax.swing.JFrame {
     }//GEN-LAST:event_deleteProviderButtonActionPerformed
 
     private void viewProviderButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewProviderButtonActionPerformed
-        // TODO add your handling code here:
+        int[] rows = providersTable.getSelectedRows();
+        if (rows.length == 0) {
+            showDiaglogMessage(ErrorMessage.EMPTY_SELECTED_ROWS);
+            return;
+        }
+        if (rows.length > 1) {
+            showDiaglogMessage(ErrorMessage.EXCEED_SELECTED_ROWS);
+            return;
+        }
+        this.showViewProviderDiaglog(rows[0]);
     }//GEN-LAST:event_viewProviderButtonActionPerformed
-
+    
+    private void showViewProviderDiaglog(int selectedRow) {
+        viewProviderDiaglog.setVisible(true);
+        viewProviderDiaglog.setLocationRelativeTo(this);
+        
+        Integer id = Integer.valueOf(providersTable.getValueAt(selectedRow, ID_COL_INDEX).toString());
+        Optional<Provider> found = providerController.findById(id);
+        if (found.isEmpty()) {
+            showDiaglogMessage(ErrorMessage.Provider.NOT_FOUND);
+            return;
+        }
+        
+        Provider foundProvider = found.get();
+        viewProviderIdTextField.setText(foundProvider.getId().toString());
+        viewProviderNameTextField.setText(foundProvider.getName());
+        viewProviderPhoneNumberTextField.setText(foundProvider.getPhoneNumber());
+        viewProviderEmailTextField.setText(foundProvider.getEmail());
+        viewProviderAddressTextField.setText(foundProvider.getAddress());
+        viewProviderWhenCreatedTextField.setText(formatter.format(foundProvider.getWhenCreated()));
+        if (foundProvider.getLastUpdated() != null) viewProviderLastUpdatedTextField.setText(formatter.format(foundProvider.getLastUpdated()));
+    }
+    
     private void searchProvidersTextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchProvidersTextFieldKeyReleased
         // TODO add your handling code here:
     }//GEN-LAST:event_searchProvidersTextFieldKeyReleased
@@ -4815,11 +4873,15 @@ public class Home extends javax.swing.JFrame {
     }//GEN-LAST:event_viewProviderAddressTextFieldActionPerformed
 
     private void updateProviderDiaglogButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateProviderDiaglogButtonActionPerformed
-        // TODO add your handling code here:
+        int[] rows = providersTable.getSelectedRows();
+        
+        this.viewProviderDiaglog.dispose();
+        
+        this.showEditProviderDiaglog(rows[0]);
     }//GEN-LAST:event_updateProviderDiaglogButtonActionPerformed
 
     private void cancelViewProviderDiaglogButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelViewProviderDiaglogButtonActionPerformed
-        // TODO add your handling code here:
+        viewProviderDiaglog.dispose();
     }//GEN-LAST:event_cancelViewProviderDiaglogButtonActionPerformed
 
     private void viewProviderEmailTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewProviderEmailTextFieldActionPerformed
@@ -4843,11 +4905,29 @@ public class Home extends javax.swing.JFrame {
     }//GEN-LAST:event_editProviderAddressTextFieldActionPerformed
 
     private void editProviderDiaglogButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editProviderDiaglogButtonActionPerformed
-        // TODO add your handling code here:
+        Integer id = Integer.valueOf(editProviderIdTextField.getText());
+        String name = editProviderNameTextField.getText();
+        String phoneNumber = editProviderPhoneNumberTextField.getText();
+        String email = editProviderEmailTextField.getText();
+        String address = editProviderAddressTextField.getText();
+        
+        CommonResponseDTO response = providerController.updateOne(
+                id, 
+                Provider.builder()
+                        .name(name)
+                        .phoneNumber(phoneNumber)
+                        .email(email)
+                        .address(address)
+                        .build()
+        );
+        
+        this.loadDataToTableProviders(null);
+        this.editProviderDiaglog.dispose();
+        this.showDiaglogMessage(response.message());
     }//GEN-LAST:event_editProviderDiaglogButtonActionPerformed
 
     private void cancelEditProviderDiaglogButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelEditProviderDiaglogButtonActionPerformed
-        // TODO add your handling code here:
+        editProviderDiaglog.dispose();
     }//GEN-LAST:event_cancelEditProviderDiaglogButtonActionPerformed
 
     private void editProviderEmailTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editProviderEmailTextFieldActionPerformed
