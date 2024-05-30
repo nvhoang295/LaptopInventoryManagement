@@ -5,20 +5,15 @@
 package com.haui_megatech.view;
 
 import com.haui_megatech.ApplicationContext;
-import com.haui_megatech.constant.ErrorMessage;
-import com.haui_megatech.constant.SuccessMessage;
-import com.haui_megatech.controller.ProductController;
-import com.haui_megatech.controller.UserController;
-import com.haui_megatech.dto.CommonResponseDTO;
-import com.haui_megatech.dto.UserDTO;
-import com.haui_megatech.model.Product;
-import com.haui_megatech.model.User;
-import com.haui_megatech.repository.impl.ProductRepositoryImpl;
-import com.haui_megatech.repository.impl.UserRepositoryImpl;
-import com.haui_megatech.service.impl.ProductServiceImpl;
-import com.haui_megatech.service.impl.UserServiceImpl;
-import com.haui_megatech.util.ExcelUtil;
-import com.haui_megatech.util.InputValidator;
+
+import com.haui_megatech.constant.*;
+import com.haui_megatech.controller.*;
+import com.haui_megatech.dto.*;
+import com.haui_megatech.model.*;
+import com.haui_megatech.repository.impl.*;
+import com.haui_megatech.service.impl.*;
+import com.haui_megatech.util.*;
+
 import java.awt.Color;
 import java.awt.Font;
 import java.io.File;
@@ -67,6 +62,12 @@ public class Home extends javax.swing.JFrame {
     private final ProductController productController = new ProductController(
             new ProductServiceImpl(
                     new ProductRepositoryImpl()
+            )
+    );
+    
+    private final ProviderController providerController = new ProviderController(
+            new ProviderServiceImpl(
+                    new ProviderRepositoryImpl()
             )
     );
 
@@ -158,6 +159,40 @@ public class Home extends javax.swing.JFrame {
             );
         });
         productsTable.setModel(tableModel);
+    }
+    
+    private void loadDataToTableProviders(String keyword) {
+        String[] tableHeader  = {
+            "ID",
+            "Tên nhà cung cấp",
+            "Số điện thoại",
+            "Email",
+            "Địa chỉ"
+        };
+        
+        DefaultTableModel tableModel = new DefaultTableModel(null, tableHeader) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
+        
+        List<Provider> providers = keyword != null && !keyword.isEmpty() && !keyword.isBlank()
+                ? providerController.searchList(keyword).data()
+                : providerController.getList().data();
+        
+        providers.forEach(item -> {
+            tableModel.addRow(
+                    new Object[] {
+                        item.getId() != null ? item.getId() : "",
+                        item.getName() != null ? item.getName() : "",
+                        item.getPhoneNumber() != null ? item.getPhoneNumber() : "",
+                        item.getEmail() != null ? item.getEmail() : "",
+                        item.getAddress() != null ? item.getAddress() : ""
+                    }
+            );
+        });
+        providersTable.setModel(tableModel);
     }
 
     /**
@@ -325,6 +360,61 @@ public class Home extends javax.swing.JFrame {
         productWeightTextField = new javax.swing.JTextField();
         productMemoryTextField = new javax.swing.JTextField();
         productNameTextField = new javax.swing.JTextField();
+        addProviderDiaglog = new javax.swing.JDialog();
+        addProductDiaglogPanel1 = new javax.swing.JPanel();
+        addProviderNameLabel = new javax.swing.JLabel();
+        addProviderPhoneNumberTextField = new javax.swing.JTextField();
+        addProviderPhoneNumberLabel = new javax.swing.JLabel();
+        addProviderEmailLabel = new javax.swing.JLabel();
+        addProviderAddressLabel = new javax.swing.JLabel();
+        addProviderAddressTextField = new javax.swing.JTextField();
+        addProviderDiaglogButton = new javax.swing.JButton();
+        cancelAddProviderDiaglogButton = new javax.swing.JButton();
+        jLabel18 = new javax.swing.JLabel();
+        addProviderEmailTextField = new javax.swing.JTextField();
+        addProviderNameTextField = new javax.swing.JTextField();
+        viewProviderDiaglog = new javax.swing.JDialog();
+        viewProviderDiaglogPanel = new javax.swing.JPanel();
+        viewProviderNameLabel = new javax.swing.JLabel();
+        viewProviderPhoneNumberTextField = new javax.swing.JTextField();
+        viewProviderPhoneNumberLabel = new javax.swing.JLabel();
+        viewProviderEmailLabel = new javax.swing.JLabel();
+        viewProviderAddressLabel = new javax.swing.JLabel();
+        viewProviderAddressTextField = new javax.swing.JTextField();
+        updateProviderDiaglogButton = new javax.swing.JButton();
+        cancelViewProviderDiaglogButton = new javax.swing.JButton();
+        jLabel19 = new javax.swing.JLabel();
+        viewProviderEmailTextField = new javax.swing.JTextField();
+        viewProviderNameTextField = new javax.swing.JTextField();
+        viewProviderIdLabel = new javax.swing.JLabel();
+        viewProviderIdTextField = new javax.swing.JTextField();
+        viewProductStorageLabel2 = new javax.swing.JLabel();
+        viewProductStorageTextField2 = new javax.swing.JTextField();
+        viewProviderWhenCreatedTextField = new javax.swing.JTextField();
+        viewProviderWhenCreatedLabel = new javax.swing.JLabel();
+        viewProviderLastUpdatedTextField = new javax.swing.JTextField();
+        viewProviderLastUpdatedLabel = new javax.swing.JLabel();
+        editProviderDiaglog = new javax.swing.JDialog();
+        editProviderDiaglogPanel = new javax.swing.JPanel();
+        editProviderNameLabel = new javax.swing.JLabel();
+        editProviderPhoneNumberTextField = new javax.swing.JTextField();
+        editProviderPhoneNumberLabel = new javax.swing.JLabel();
+        editProviderEmailLabel = new javax.swing.JLabel();
+        editProviderAddressLabel = new javax.swing.JLabel();
+        editProviderAddressTextField = new javax.swing.JTextField();
+        editProviderDiaglogButton = new javax.swing.JButton();
+        cancelEditProviderDiaglogButton = new javax.swing.JButton();
+        jLabel20 = new javax.swing.JLabel();
+        editProviderEmailTextField = new javax.swing.JTextField();
+        editProviderNameTextField = new javax.swing.JTextField();
+        editProviderIdLabel = new javax.swing.JLabel();
+        editProviderIdTextField = new javax.swing.JTextField();
+        deleteProviderConfirmDiaglog = new javax.swing.JDialog();
+        deleteProviderConfirmDiaglogPanel = new javax.swing.JPanel();
+        deleteProviderConfirmDiaglogLabel = new javax.swing.JLabel();
+        confirmDeleteProvider = new javax.swing.JButton();
+        cancelDeleteProvider = new javax.swing.JButton();
+        jLabel13 = new javax.swing.JLabel();
         sidebarPanel = new javax.swing.JPanel();
         loginedUsername = new javax.swing.JLabel();
         productTab = new javax.swing.JPanel();
@@ -356,7 +446,6 @@ public class Home extends javax.swing.JFrame {
         productsScrollPanel = new javax.swing.JScrollPane();
         productsTable = new javax.swing.JTable();
         searchProductsPanel = new javax.swing.JPanel();
-        productBrandsComboBox = new javax.swing.JComboBox<>();
         searchProductsTextField = new javax.swing.JTextField();
         searchProductsButton = new javax.swing.JButton();
         productFunctionPanel = new javax.swing.JPanel();
@@ -368,7 +457,19 @@ public class Home extends javax.swing.JFrame {
         deleteProductButton = new javax.swing.JButton();
         viewProductButton = new javax.swing.JButton();
         providerPanel = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
+        providerFunctionPanel = new javax.swing.JPanel();
+        jSeparator6 = new javax.swing.JToolBar.Separator();
+        importProvidersFromExcelButton = new javax.swing.JButton();
+        exportProvidersToExcelButton = new javax.swing.JButton();
+        editProviderButton = new javax.swing.JButton();
+        addProviderButton = new javax.swing.JButton();
+        deleteProviderButton = new javax.swing.JButton();
+        viewProviderButton = new javax.swing.JButton();
+        searchProvidersPanel = new javax.swing.JPanel();
+        searchProvidersTextField = new javax.swing.JTextField();
+        resetSearchProvidersButton = new javax.swing.JButton();
+        providersScrollPanel = new javax.swing.JScrollPane();
+        providersTable = new javax.swing.JTable();
         importProductPanel = new javax.swing.JPanel();
         searchImportProductPanel = new javax.swing.JPanel();
         searchImportProductTextField = new javax.swing.JTextField();
@@ -1610,6 +1711,450 @@ public class Home extends javax.swing.JFrame {
             .addComponent(addProductDiaglogPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 500, Short.MAX_VALUE)
         );
 
+        addProviderDiaglog.setTitle("Thêm người dùng");
+        addProviderDiaglog.setBackground(new java.awt.Color(255, 255, 255));
+        addProviderDiaglog.setMinimumSize(new java.awt.Dimension(450, 500));
+        addProviderDiaglog.setSize(new java.awt.Dimension(450, 500));
+
+        addProductDiaglogPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        addProductDiaglogPanel1.setMinimumSize(new java.awt.Dimension(430, 450));
+        addProductDiaglogPanel1.setPreferredSize(new java.awt.Dimension(430, 450));
+        addProductDiaglogPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        addProviderNameLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        addProviderNameLabel.setText("Tên nhà cung cấp");
+        addProductDiaglogPanel1.add(addProviderNameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, -1, -1));
+
+        addProviderPhoneNumberTextField.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        addProviderPhoneNumberTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addProviderPhoneNumberTextFieldActionPerformed(evt);
+            }
+        });
+        addProductDiaglogPanel1.add(addProviderPhoneNumberTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 110, 200, 30));
+
+        addProviderPhoneNumberLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        addProviderPhoneNumberLabel.setText("Số điện thoại");
+        addProductDiaglogPanel1.add(addProviderPhoneNumberLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, -1, -1));
+
+        addProviderEmailLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        addProviderEmailLabel.setText("Email");
+        addProductDiaglogPanel1.add(addProviderEmailLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 150, -1, -1));
+
+        addProviderAddressLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        addProviderAddressLabel.setText("Địa chỉ");
+        addProductDiaglogPanel1.add(addProviderAddressLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 190, -1, -1));
+
+        addProviderAddressTextField.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        addProviderAddressTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addProviderAddressTextFieldActionPerformed(evt);
+            }
+        });
+        addProductDiaglogPanel1.add(addProviderAddressTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 190, 200, 30));
+
+        addProviderDiaglogButton.setBackground(new java.awt.Color(0, 122, 249));
+        addProviderDiaglogButton.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        addProviderDiaglogButton.setText("Thêm mới");
+        addProviderDiaglogButton.setBorderPainted(false);
+        addProviderDiaglogButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addProviderDiaglogButtonActionPerformed(evt);
+            }
+        });
+        addProductDiaglogPanel1.add(addProviderDiaglogButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 440, -1, -1));
+
+        cancelAddProviderDiaglogButton.setBackground(new java.awt.Color(212, 57, 68));
+        cancelAddProviderDiaglogButton.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        cancelAddProviderDiaglogButton.setText("Huỷ bỏ");
+        cancelAddProviderDiaglogButton.setBorderPainted(false);
+        cancelAddProviderDiaglogButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelAddProviderDiaglogButtonActionPerformed(evt);
+            }
+        });
+        addProductDiaglogPanel1.add(cancelAddProviderDiaglogButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 440, -1, -1));
+
+        jLabel18.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel18.setForeground(new java.awt.Color(44, 43, 196));
+        jLabel18.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel18.setText("THÊM MỚI NHÀ CUNG CẤP");
+        addProductDiaglogPanel1.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 20, 440, -1));
+
+        addProviderEmailTextField.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        addProviderEmailTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addProviderEmailTextFieldActionPerformed(evt);
+            }
+        });
+        addProductDiaglogPanel1.add(addProviderEmailTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 150, 200, 30));
+
+        addProviderNameTextField.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        addProviderNameTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addProviderNameTextFieldActionPerformed(evt);
+            }
+        });
+        addProductDiaglogPanel1.add(addProviderNameTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 70, 200, 30));
+
+        javax.swing.GroupLayout addProviderDiaglogLayout = new javax.swing.GroupLayout(addProviderDiaglog.getContentPane());
+        addProviderDiaglog.getContentPane().setLayout(addProviderDiaglogLayout);
+        addProviderDiaglogLayout.setHorizontalGroup(
+            addProviderDiaglogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(addProductDiaglogPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 450, Short.MAX_VALUE)
+        );
+        addProviderDiaglogLayout.setVerticalGroup(
+            addProviderDiaglogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(addProductDiaglogPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 500, Short.MAX_VALUE)
+        );
+
+        viewProviderDiaglog.setTitle("Thêm người dùng");
+        viewProviderDiaglog.setBackground(new java.awt.Color(255, 255, 255));
+        viewProviderDiaglog.setMinimumSize(new java.awt.Dimension(450, 500));
+        viewProviderDiaglog.setSize(new java.awt.Dimension(450, 500));
+
+        viewProviderDiaglogPanel.setBackground(new java.awt.Color(255, 255, 255));
+        viewProviderDiaglogPanel.setMinimumSize(new java.awt.Dimension(430, 450));
+        viewProviderDiaglogPanel.setPreferredSize(new java.awt.Dimension(430, 450));
+        viewProviderDiaglogPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        viewProviderNameLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        viewProviderNameLabel.setText("Tên nhà cung cấp");
+        viewProviderDiaglogPanel.add(viewProviderNameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, -1, -1));
+
+        viewProviderPhoneNumberTextField.setEditable(false);
+        viewProviderPhoneNumberTextField.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        viewProviderPhoneNumberTextField.setEnabled(false);
+        viewProviderPhoneNumberTextField.setFocusable(false);
+        viewProviderPhoneNumberTextField.setRequestFocusEnabled(false);
+        viewProviderPhoneNumberTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                viewProviderPhoneNumberTextFieldActionPerformed(evt);
+            }
+        });
+        viewProviderDiaglogPanel.add(viewProviderPhoneNumberTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 140, 200, 30));
+
+        viewProviderPhoneNumberLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        viewProviderPhoneNumberLabel.setText("Số điện thoại");
+        viewProviderDiaglogPanel.add(viewProviderPhoneNumberLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, -1, -1));
+
+        viewProviderEmailLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        viewProviderEmailLabel.setText("Email");
+        viewProviderDiaglogPanel.add(viewProviderEmailLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 180, -1, -1));
+
+        viewProviderAddressLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        viewProviderAddressLabel.setText("Địa chỉ");
+        viewProviderDiaglogPanel.add(viewProviderAddressLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 220, -1, -1));
+
+        viewProviderAddressTextField.setEditable(false);
+        viewProviderAddressTextField.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        viewProviderAddressTextField.setEnabled(false);
+        viewProviderAddressTextField.setFocusable(false);
+        viewProviderAddressTextField.setRequestFocusEnabled(false);
+        viewProviderAddressTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                viewProviderAddressTextFieldActionPerformed(evt);
+            }
+        });
+        viewProviderDiaglogPanel.add(viewProviderAddressTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 220, 200, 30));
+
+        updateProviderDiaglogButton.setBackground(new java.awt.Color(0, 122, 249));
+        updateProviderDiaglogButton.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        updateProviderDiaglogButton.setText("Cập nhật");
+        updateProviderDiaglogButton.setBorderPainted(false);
+        updateProviderDiaglogButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                updateProviderDiaglogButtonActionPerformed(evt);
+            }
+        });
+        viewProviderDiaglogPanel.add(updateProviderDiaglogButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 520, -1, -1));
+
+        cancelViewProviderDiaglogButton.setBackground(new java.awt.Color(212, 57, 68));
+        cancelViewProviderDiaglogButton.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        cancelViewProviderDiaglogButton.setText("Đóng");
+        cancelViewProviderDiaglogButton.setBorderPainted(false);
+        cancelViewProviderDiaglogButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelViewProviderDiaglogButtonActionPerformed(evt);
+            }
+        });
+        viewProviderDiaglogPanel.add(cancelViewProviderDiaglogButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 520, -1, -1));
+
+        jLabel19.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel19.setForeground(new java.awt.Color(44, 43, 196));
+        jLabel19.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel19.setText("THÔNG TIN NHÀ CUNG CẤP");
+        viewProviderDiaglogPanel.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 20, 440, -1));
+
+        viewProviderEmailTextField.setEditable(false);
+        viewProviderEmailTextField.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        viewProviderEmailTextField.setEnabled(false);
+        viewProviderEmailTextField.setFocusable(false);
+        viewProviderEmailTextField.setRequestFocusEnabled(false);
+        viewProviderEmailTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                viewProviderEmailTextFieldActionPerformed(evt);
+            }
+        });
+        viewProviderDiaglogPanel.add(viewProviderEmailTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 180, 200, 30));
+
+        viewProviderNameTextField.setEditable(false);
+        viewProviderNameTextField.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        viewProviderNameTextField.setEnabled(false);
+        viewProviderNameTextField.setFocusable(false);
+        viewProviderNameTextField.setRequestFocusEnabled(false);
+        viewProviderNameTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                viewProviderNameTextFieldActionPerformed(evt);
+            }
+        });
+        viewProviderDiaglogPanel.add(viewProviderNameTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 100, 200, 30));
+
+        viewProviderIdLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        viewProviderIdLabel.setText("Mã nhà cung cấp");
+        viewProviderDiaglogPanel.add(viewProviderIdLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, -1, -1));
+
+        viewProviderIdTextField.setEditable(false);
+        viewProviderIdTextField.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        viewProviderIdTextField.setEnabled(false);
+        viewProviderIdTextField.setFocusable(false);
+        viewProviderIdTextField.setRequestFocusEnabled(false);
+        viewProviderIdTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                viewProviderIdTextFieldActionPerformed(evt);
+            }
+        });
+        viewProviderDiaglogPanel.add(viewProviderIdTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 60, 200, 30));
+
+        viewProductStorageLabel2.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        viewProductStorageLabel2.setText("Địa chỉ");
+        viewProviderDiaglogPanel.add(viewProductStorageLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 220, -1, -1));
+
+        viewProductStorageTextField2.setEditable(false);
+        viewProductStorageTextField2.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        viewProductStorageTextField2.setEnabled(false);
+        viewProductStorageTextField2.setFocusable(false);
+        viewProductStorageTextField2.setRequestFocusEnabled(false);
+        viewProductStorageTextField2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                viewProductStorageTextField2ActionPerformed(evt);
+            }
+        });
+        viewProviderDiaglogPanel.add(viewProductStorageTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 220, 200, 30));
+
+        viewProviderWhenCreatedTextField.setEditable(false);
+        viewProviderWhenCreatedTextField.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        viewProviderWhenCreatedTextField.setEnabled(false);
+        viewProviderWhenCreatedTextField.setFocusable(false);
+        viewProviderWhenCreatedTextField.setRequestFocusEnabled(false);
+        viewProviderWhenCreatedTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                viewProviderWhenCreatedTextFieldActionPerformed(evt);
+            }
+        });
+        viewProviderDiaglogPanel.add(viewProviderWhenCreatedTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 260, 200, 30));
+
+        viewProviderWhenCreatedLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        viewProviderWhenCreatedLabel.setText("Ngày tạo");
+        viewProviderDiaglogPanel.add(viewProviderWhenCreatedLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 260, -1, -1));
+
+        viewProviderLastUpdatedTextField.setEditable(false);
+        viewProviderLastUpdatedTextField.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        viewProviderLastUpdatedTextField.setEnabled(false);
+        viewProviderLastUpdatedTextField.setFocusable(false);
+        viewProviderLastUpdatedTextField.setRequestFocusEnabled(false);
+        viewProviderLastUpdatedTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                viewProviderLastUpdatedTextFieldActionPerformed(evt);
+            }
+        });
+        viewProviderDiaglogPanel.add(viewProviderLastUpdatedTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 300, 200, 30));
+
+        viewProviderLastUpdatedLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        viewProviderLastUpdatedLabel.setText("Sửa đổi lần cuối");
+        viewProviderDiaglogPanel.add(viewProviderLastUpdatedLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 300, -1, -1));
+
+        javax.swing.GroupLayout viewProviderDiaglogLayout = new javax.swing.GroupLayout(viewProviderDiaglog.getContentPane());
+        viewProviderDiaglog.getContentPane().setLayout(viewProviderDiaglogLayout);
+        viewProviderDiaglogLayout.setHorizontalGroup(
+            viewProviderDiaglogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(viewProviderDiaglogPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 450, Short.MAX_VALUE)
+        );
+        viewProviderDiaglogLayout.setVerticalGroup(
+            viewProviderDiaglogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(viewProviderDiaglogPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 573, Short.MAX_VALUE)
+        );
+
+        editProviderDiaglog.setTitle("Thêm người dùng");
+        editProviderDiaglog.setBackground(new java.awt.Color(255, 255, 255));
+        editProviderDiaglog.setMinimumSize(new java.awt.Dimension(450, 500));
+        editProviderDiaglog.setSize(new java.awt.Dimension(450, 500));
+
+        editProviderDiaglogPanel.setBackground(new java.awt.Color(255, 255, 255));
+        editProviderDiaglogPanel.setMinimumSize(new java.awt.Dimension(430, 450));
+        editProviderDiaglogPanel.setPreferredSize(new java.awt.Dimension(430, 450));
+        editProviderDiaglogPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        editProviderNameLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        editProviderNameLabel.setText("Tên nhà cung cấp");
+        editProviderDiaglogPanel.add(editProviderNameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, -1, -1));
+
+        editProviderPhoneNumberTextField.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        editProviderPhoneNumberTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editProviderPhoneNumberTextFieldActionPerformed(evt);
+            }
+        });
+        editProviderDiaglogPanel.add(editProviderPhoneNumberTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 140, 200, 30));
+
+        editProviderPhoneNumberLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        editProviderPhoneNumberLabel.setText("Số điện thoại");
+        editProviderDiaglogPanel.add(editProviderPhoneNumberLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, -1, -1));
+
+        editProviderEmailLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        editProviderEmailLabel.setText("Email");
+        editProviderDiaglogPanel.add(editProviderEmailLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 180, -1, -1));
+
+        editProviderAddressLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        editProviderAddressLabel.setText("Địa chỉ");
+        editProviderDiaglogPanel.add(editProviderAddressLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 220, -1, -1));
+
+        editProviderAddressTextField.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        editProviderAddressTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editProviderAddressTextFieldActionPerformed(evt);
+            }
+        });
+        editProviderDiaglogPanel.add(editProviderAddressTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 220, 200, 30));
+
+        editProviderDiaglogButton.setBackground(new java.awt.Color(0, 122, 249));
+        editProviderDiaglogButton.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        editProviderDiaglogButton.setText("Cập nhật");
+        editProviderDiaglogButton.setBorderPainted(false);
+        editProviderDiaglogButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editProviderDiaglogButtonActionPerformed(evt);
+            }
+        });
+        editProviderDiaglogPanel.add(editProviderDiaglogButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 440, -1, -1));
+
+        cancelEditProviderDiaglogButton.setBackground(new java.awt.Color(212, 57, 68));
+        cancelEditProviderDiaglogButton.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        cancelEditProviderDiaglogButton.setText("Huỷ bỏ");
+        cancelEditProviderDiaglogButton.setBorderPainted(false);
+        cancelEditProviderDiaglogButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelEditProviderDiaglogButtonActionPerformed(evt);
+            }
+        });
+        editProviderDiaglogPanel.add(cancelEditProviderDiaglogButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 440, -1, -1));
+
+        jLabel20.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel20.setForeground(new java.awt.Color(44, 43, 196));
+        jLabel20.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel20.setText("CẬP NHẬT NHÀ CUNG CẤP");
+        editProviderDiaglogPanel.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 20, 440, -1));
+
+        editProviderEmailTextField.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        editProviderEmailTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editProviderEmailTextFieldActionPerformed(evt);
+            }
+        });
+        editProviderDiaglogPanel.add(editProviderEmailTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 180, 200, 30));
+
+        editProviderNameTextField.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        editProviderNameTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editProviderNameTextFieldActionPerformed(evt);
+            }
+        });
+        editProviderDiaglogPanel.add(editProviderNameTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 100, 200, 30));
+
+        editProviderIdLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        editProviderIdLabel.setText("Mã nhà cung cấp");
+        editProviderDiaglogPanel.add(editProviderIdLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, -1, -1));
+
+        editProviderIdTextField.setEditable(false);
+        editProviderIdTextField.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        editProviderIdTextField.setEnabled(false);
+        editProviderIdTextField.setFocusable(false);
+        editProviderIdTextField.setRequestFocusEnabled(false);
+        editProviderIdTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editProviderIdTextFieldActionPerformed(evt);
+            }
+        });
+        editProviderDiaglogPanel.add(editProviderIdTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 60, 200, 30));
+
+        javax.swing.GroupLayout editProviderDiaglogLayout = new javax.swing.GroupLayout(editProviderDiaglog.getContentPane());
+        editProviderDiaglog.getContentPane().setLayout(editProviderDiaglogLayout);
+        editProviderDiaglogLayout.setHorizontalGroup(
+            editProviderDiaglogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(editProviderDiaglogPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 450, Short.MAX_VALUE)
+        );
+        editProviderDiaglogLayout.setVerticalGroup(
+            editProviderDiaglogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(editProviderDiaglogPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 500, Short.MAX_VALUE)
+        );
+
+        deleteProviderConfirmDiaglog.setTitle("Xác nhận xoá");
+        deleteProviderConfirmDiaglog.setMinimumSize(new java.awt.Dimension(420, 230));
+        deleteProviderConfirmDiaglog.setResizable(false);
+        deleteProviderConfirmDiaglog.setSize(new java.awt.Dimension(420, 230));
+
+        deleteProviderConfirmDiaglogPanel.setBackground(new java.awt.Color(255, 255, 255));
+        deleteProviderConfirmDiaglogPanel.setMinimumSize(new java.awt.Dimension(420, 230));
+        deleteProviderConfirmDiaglogPanel.setPreferredSize(new java.awt.Dimension(420, 230));
+        deleteProviderConfirmDiaglogPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        deleteProviderConfirmDiaglogLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        deleteProviderConfirmDiaglogLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        deleteProviderConfirmDiaglogLabel.setText("Bạn chắc chắn muốn xoá người dùng abcdeskskskskksd");
+        deleteProviderConfirmDiaglogLabel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        deleteProviderConfirmDiaglogPanel.add(deleteProviderConfirmDiaglogLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(5, 67, 400, 50));
+
+        confirmDeleteProvider.setBackground(new java.awt.Color(44, 43, 196));
+        confirmDeleteProvider.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        confirmDeleteProvider.setForeground(new java.awt.Color(255, 255, 255));
+        confirmDeleteProvider.setText("Đồng ý");
+        confirmDeleteProvider.setBorderPainted(false);
+        confirmDeleteProvider.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                confirmDeleteProviderActionPerformed(evt);
+            }
+        });
+        deleteProviderConfirmDiaglogPanel.add(confirmDeleteProvider, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 140, -1, 30));
+
+        cancelDeleteProvider.setBackground(new java.awt.Color(212, 57, 68));
+        cancelDeleteProvider.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        cancelDeleteProvider.setForeground(new java.awt.Color(255, 255, 255));
+        cancelDeleteProvider.setText("Huỷ bỏ");
+        cancelDeleteProvider.setBorderPainted(false);
+        cancelDeleteProvider.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelDeleteProviderActionPerformed(evt);
+            }
+        });
+        deleteProviderConfirmDiaglogPanel.add(cancelDeleteProvider, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 140, -1, 30));
+
+        jLabel13.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel13.setForeground(new java.awt.Color(255, 0, 0));
+        jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel13.setText("XÁC NHẬN XOÁ");
+        deleteProviderConfirmDiaglogPanel.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 29, 408, -1));
+
+        javax.swing.GroupLayout deleteProviderConfirmDiaglogLayout = new javax.swing.GroupLayout(deleteProviderConfirmDiaglog.getContentPane());
+        deleteProviderConfirmDiaglog.getContentPane().setLayout(deleteProviderConfirmDiaglogLayout);
+        deleteProviderConfirmDiaglogLayout.setHorizontalGroup(
+            deleteProviderConfirmDiaglogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(deleteProviderConfirmDiaglogPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        deleteProviderConfirmDiaglogLayout.setVerticalGroup(
+            deleteProviderConfirmDiaglogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(deleteProviderConfirmDiaglogPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1400, 830));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -2066,10 +2611,6 @@ public class Home extends javax.swing.JFrame {
         searchProductsPanel.setBackground(new java.awt.Color(255, 255, 255));
         searchProductsPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Tìm kiếm", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 14))); // NOI18N
 
-        productBrandsComboBox.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        productBrandsComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        productBrandsComboBox.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-
         searchProductsTextField.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         searchProductsTextField.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
@@ -2095,9 +2636,8 @@ public class Home extends javax.swing.JFrame {
         searchProductsPanelLayout.setHorizontalGroup(
             searchProductsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(searchProductsPanelLayout.createSequentialGroup()
-                .addComponent(productBrandsComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(searchProductsTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap()
+                .addComponent(searchProductsTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(searchProductsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -2106,7 +2646,6 @@ public class Home extends javax.swing.JFrame {
             .addGroup(searchProductsPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(searchProductsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(productBrandsComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(searchProductsTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(searchProductsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(13, Short.MAX_VALUE))
@@ -2261,26 +2800,208 @@ public class Home extends javax.swing.JFrame {
 
         getContentPane().add(productPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 0, 1170, 830));
 
-        providerPanel.setBackground(new java.awt.Color(204, 204, 255));
+        providerPanel.setBackground(new java.awt.Color(255, 255, 255));
         providerPanel.setPreferredSize(new java.awt.Dimension(1170, 830));
 
-        jLabel2.setText("Provider");
+        providerFunctionPanel.setBackground(new java.awt.Color(255, 255, 255));
+        providerFunctionPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Chức năng", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 14))); // NOI18N
+        providerFunctionPanel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+
+        jSeparator6.setOrientation(javax.swing.SwingConstants.VERTICAL);
+
+        importProvidersFromExcelButton.setBackground(new java.awt.Color(1, 169, 84));
+        importProvidersFromExcelButton.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        importProvidersFromExcelButton.setForeground(new java.awt.Color(255, 255, 255));
+        importProvidersFromExcelButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/sheet.png"))); // NOI18N
+        importProvidersFromExcelButton.setText("Nhập Excel");
+        importProvidersFromExcelButton.setBorderPainted(false);
+        importProvidersFromExcelButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        importProvidersFromExcelButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                importProvidersFromExcelButtonActionPerformed(evt);
+            }
+        });
+
+        exportProvidersToExcelButton.setBackground(new java.awt.Color(0, 155, 110));
+        exportProvidersToExcelButton.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        exportProvidersToExcelButton.setForeground(new java.awt.Color(255, 255, 255));
+        exportProvidersToExcelButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/sheet.png"))); // NOI18N
+        exportProvidersToExcelButton.setText("Xuất Excel");
+        exportProvidersToExcelButton.setBorderPainted(false);
+        exportProvidersToExcelButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        exportProvidersToExcelButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                exportProvidersToExcelButtonActionPerformed(evt);
+            }
+        });
+
+        editProviderButton.setBackground(new java.awt.Color(255, 193, 7));
+        editProviderButton.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        editProviderButton.setForeground(new java.awt.Color(255, 255, 255));
+        editProviderButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/edit_icon.png"))); // NOI18N
+        editProviderButton.setText("Sửa");
+        editProviderButton.setBorderPainted(false);
+        editProviderButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        editProviderButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editProviderButtonActionPerformed(evt);
+            }
+        });
+
+        addProviderButton.setBackground(new java.awt.Color(36, 169, 65));
+        addProviderButton.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        addProviderButton.setForeground(new java.awt.Color(255, 255, 255));
+        addProviderButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/add_circle_icon.png"))); // NOI18N
+        addProviderButton.setText("Thêm");
+        addProviderButton.setBorderPainted(false);
+        addProviderButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        addProviderButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addProviderButtonActionPerformed(evt);
+            }
+        });
+
+        deleteProviderButton.setBackground(new java.awt.Color(212, 57, 68));
+        deleteProviderButton.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        deleteProviderButton.setForeground(new java.awt.Color(255, 255, 255));
+        deleteProviderButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/remove_icon.png"))); // NOI18N
+        deleteProviderButton.setText("Xoá");
+        deleteProviderButton.setBorderPainted(false);
+        deleteProviderButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        deleteProviderButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteProviderButtonActionPerformed(evt);
+            }
+        });
+
+        viewProviderButton.setBackground(new java.awt.Color(13, 110, 253));
+        viewProviderButton.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        viewProviderButton.setForeground(new java.awt.Color(255, 255, 255));
+        viewProviderButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/show.png"))); // NOI18N
+        viewProviderButton.setText("Xem");
+        viewProviderButton.setBorderPainted(false);
+        viewProviderButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                viewProviderButtonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout providerFunctionPanelLayout = new javax.swing.GroupLayout(providerFunctionPanel);
+        providerFunctionPanel.setLayout(providerFunctionPanelLayout);
+        providerFunctionPanelLayout.setHorizontalGroup(
+            providerFunctionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(providerFunctionPanelLayout.createSequentialGroup()
+                .addGap(2, 2, 2)
+                .addComponent(viewProviderButton, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(addProviderButton, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(editProviderButton, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(deleteProviderButton, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(importProvidersFromExcelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(exportProvidersToExcelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        providerFunctionPanelLayout.setVerticalGroup(
+            providerFunctionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(providerFunctionPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(providerFunctionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jSeparator6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, providerFunctionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(importProvidersFromExcelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(exportProvidersToExcelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, providerFunctionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(addProviderButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(editProviderButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(viewProviderButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(deleteProviderButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+
+        searchProvidersPanel.setBackground(new java.awt.Color(255, 255, 255));
+        searchProvidersPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Tìm kiếm", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 14))); // NOI18N
+
+        searchProvidersTextField.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        searchProvidersTextField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                searchProvidersTextFieldKeyReleased(evt);
+            }
+        });
+
+        resetSearchProvidersButton.setBackground(new java.awt.Color(65, 120, 190));
+        resetSearchProvidersButton.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        resetSearchProvidersButton.setForeground(new java.awt.Color(255, 255, 255));
+        resetSearchProvidersButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/refresh.png"))); // NOI18N
+        resetSearchProvidersButton.setText("Làm mới");
+        resetSearchProvidersButton.setBorderPainted(false);
+        resetSearchProvidersButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        resetSearchProvidersButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                resetSearchProvidersButtonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout searchProvidersPanelLayout = new javax.swing.GroupLayout(searchProvidersPanel);
+        searchProvidersPanel.setLayout(searchProvidersPanelLayout);
+        searchProvidersPanelLayout.setHorizontalGroup(
+            searchProvidersPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(searchProvidersPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(searchProvidersTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(resetSearchProvidersButton, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        searchProvidersPanelLayout.setVerticalGroup(
+            searchProvidersPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(searchProvidersPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(searchProvidersPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(searchProvidersTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(resetSearchProvidersButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(13, Short.MAX_VALUE))
+        );
+
+        providersTable.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        providersTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+
+            }
+        ));
+        providersScrollPanel.setViewportView(providersTable);
 
         javax.swing.GroupLayout providerPanelLayout = new javax.swing.GroupLayout(providerPanel);
         providerPanel.setLayout(providerPanelLayout);
         providerPanelLayout.setHorizontalGroup(
             providerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(providerPanelLayout.createSequentialGroup()
-                .addGap(452, 452, 452)
-                .addComponent(jLabel2)
-                .addContainerGap(644, Short.MAX_VALUE))
+                .addContainerGap()
+                .addGroup(providerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(providerPanelLayout.createSequentialGroup()
+                        .addComponent(providerFunctionPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                        .addComponent(searchProvidersPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(providersScrollPanel))
+                .addContainerGap())
         );
         providerPanelLayout.setVerticalGroup(
             providerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(providerPanelLayout.createSequentialGroup()
-                .addGap(284, 284, 284)
-                .addComponent(jLabel2)
-                .addContainerGap(530, Short.MAX_VALUE))
+                .addGap(14, 14, 14)
+                .addGroup(providerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(providerFunctionPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(searchProvidersPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(providersScrollPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 658, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(59, Short.MAX_VALUE))
         );
 
         getContentPane().add(providerPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 0, 1170, 830));
@@ -3493,14 +4214,13 @@ public class Home extends javax.swing.JFrame {
     }//GEN-LAST:event_importProductLabelMouseClicked
 
     private void providerTabMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_providerTabMouseClicked
-        // TODO add your handling code here:
         this.providerLabelMouseClicked(evt);
     }//GEN-LAST:event_providerTabMouseClicked
 
     private void providerLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_providerLabelMouseClicked
-        // TODO add your handling code here:
         this.setActiveTab("provider");
         this.setDisplayedPanel("provider");
+        loadDataToTableProviders(null);
     }//GEN-LAST:event_providerLabelMouseClicked
 
     private void productTabMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_productTabMouseClicked
@@ -3512,6 +4232,7 @@ public class Home extends javax.swing.JFrame {
         // TODO add your handling code here:
         this.setActiveTab("product");
         this.setDisplayedPanel("product");
+        loadDataToTableProducts(null);
     }//GEN-LAST:event_productLabelMouseClicked
 
     private void addUserDiaglogButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addUserDiaglogButtonActionPerformed
@@ -3551,7 +4272,7 @@ public class Home extends javax.swing.JFrame {
                 .email(email)
                 .build());
         if (result.success()) {
-            addUserDiaglog.setVisible(false);
+            this.closeAddProductDiaglog();
             showDiaglogMessage(SuccessMessage.User.ADDED);            
             loadDataToTableUsers(null);
         }
@@ -3564,6 +4285,15 @@ public class Home extends javax.swing.JFrame {
     }
     
     private void cancelAddUserDiaglogButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelAddUserDiaglogButtonActionPerformed
+        this.closeAddUserDiaglog();
+    }//GEN-LAST:event_cancelAddUserDiaglogButtonActionPerformed
+    
+    private void closeAddUserDiaglog() {
+        this.clearAddUserDiaglogFields();
+        addUserDiaglog.dispose();
+    }
+    
+    private void clearAddUserDiaglogFields() {
         usernameTextField.setText("");
         firstNameTextField.setText("");
         lastNameTextField.setText("");
@@ -3572,10 +4302,8 @@ public class Home extends javax.swing.JFrame {
         confirmEmailOTPTextField.setText("");
         passwordField.setText("");
         confirmPasswordField.setText("");
-        
-        addUserDiaglog.dispose();
-    }//GEN-LAST:event_cancelAddUserDiaglogButtonActionPerformed
-
+    }
+    
     private void confirmDeleteUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmDeleteUserActionPerformed
         deleteUserConfirmDiaglog.dispose();
         int[] rows = usersTable.getSelectedRows();
@@ -3809,13 +4537,21 @@ public class Home extends javax.swing.JFrame {
                         .build()
         );
         
-        this.addProductDiaglog.dispose();
+        this.closeAddProductDiaglog();
         showDiaglogMessage(response.message());
         loadDataToTableProducts(null);
     }//GEN-LAST:event_addProductDiaglogButtonActionPerformed
 
     private void cancelAddProductDiaglogButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelAddProductDiaglogButtonActionPerformed
+        this.closeAddProductDiaglog();
+    }//GEN-LAST:event_cancelAddProductDiaglogButtonActionPerformed
+    
+    private void closeAddProductDiaglog() {
         this.addProductDiaglog.dispose();
+        clearAddProductDiaglogFields();
+    }
+    
+    private void clearAddProductDiaglogFields() {
         productNameTextField.setText("");
         productProcessorTextField.setText("");
         productMemoryTextField.setText("");
@@ -3824,8 +4560,8 @@ public class Home extends javax.swing.JFrame {
         productBatteryTextField.setText("");
         productCardTextField.setText("");
         productWeightTextField.setText("");
-    }//GEN-LAST:event_cancelAddProductDiaglogButtonActionPerformed
-
+    }
+    
     private void productWeightTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_productWeightTextFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_productWeightTextFieldActionPerformed
@@ -3977,6 +4713,175 @@ public class Home extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_viewProductLastUpdatedTextFieldActionPerformed
 
+    private void importProvidersFromExcelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_importProvidersFromExcelButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_importProvidersFromExcelButtonActionPerformed
+
+    private void exportProvidersToExcelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exportProvidersToExcelButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_exportProvidersToExcelButtonActionPerformed
+
+    private void editProviderButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editProviderButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_editProviderButtonActionPerformed
+
+    private void addProviderButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addProviderButtonActionPerformed
+        showAddProviderDiaglog();
+    }//GEN-LAST:event_addProviderButtonActionPerformed
+    
+    private void showAddProviderDiaglog() {
+        addProviderDiaglog.setVisible(true);
+        addProviderDiaglog.setLocationRelativeTo(this);
+    }
+    
+    private void deleteProviderButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteProviderButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_deleteProviderButtonActionPerformed
+
+    private void viewProviderButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewProviderButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_viewProviderButtonActionPerformed
+
+    private void searchProvidersTextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchProvidersTextFieldKeyReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_searchProvidersTextFieldKeyReleased
+
+    private void resetSearchProvidersButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetSearchProvidersButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_resetSearchProvidersButtonActionPerformed
+
+    private void addProviderPhoneNumberTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addProviderPhoneNumberTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_addProviderPhoneNumberTextFieldActionPerformed
+
+    private void addProviderAddressTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addProviderAddressTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_addProviderAddressTextFieldActionPerformed
+
+    private void addProviderDiaglogButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addProviderDiaglogButtonActionPerformed
+        String name = addProviderNameTextField.getText();
+        String phoneNumber = addProviderPhoneNumberTextField.getText();
+        String email = addProviderEmailTextField.getText();
+        String address = addProviderAddressTextField.getText();
+        
+        if (InputValidator.anyBlankInput(name, phoneNumber, email, address)) {
+            showDiaglogMessage(ErrorMessage.Provider.BLANK_INPUT);
+            return;
+        }
+        
+        CommonResponseDTO response = providerController.addOne(
+                Provider.builder()
+                        .name(name)
+                        .phoneNumber(phoneNumber)
+                        .email(email)
+                        .address(address)
+                        .build()
+        );
+        closeAddProviderDiaglog();
+        loadDataToTableProviders(null);
+        showDiaglogMessage(response.message());
+    }//GEN-LAST:event_addProviderDiaglogButtonActionPerformed
+
+    private void cancelAddProviderDiaglogButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelAddProviderDiaglogButtonActionPerformed
+        closeAddProviderDiaglog();
+    }//GEN-LAST:event_cancelAddProviderDiaglogButtonActionPerformed
+    
+    private void closeAddProviderDiaglog() {
+        addProviderDiaglog.dispose();
+        clearAddProviderDiaglogFields();
+    }
+    
+    private void clearAddProviderDiaglogFields() {
+        addProviderNameTextField.setText("");
+        addProviderPhoneNumberTextField.setText("");
+        addProviderEmailTextField.setText("");
+        addProviderAddressTextField.setText("");
+    }
+    
+    private void addProviderEmailTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addProviderEmailTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_addProviderEmailTextFieldActionPerformed
+
+    private void addProviderNameTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addProviderNameTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_addProviderNameTextFieldActionPerformed
+
+    private void viewProviderPhoneNumberTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewProviderPhoneNumberTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_viewProviderPhoneNumberTextFieldActionPerformed
+
+    private void viewProviderAddressTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewProviderAddressTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_viewProviderAddressTextFieldActionPerformed
+
+    private void updateProviderDiaglogButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateProviderDiaglogButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_updateProviderDiaglogButtonActionPerformed
+
+    private void cancelViewProviderDiaglogButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelViewProviderDiaglogButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cancelViewProviderDiaglogButtonActionPerformed
+
+    private void viewProviderEmailTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewProviderEmailTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_viewProviderEmailTextFieldActionPerformed
+
+    private void viewProviderNameTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewProviderNameTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_viewProviderNameTextFieldActionPerformed
+
+    private void viewProviderIdTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewProviderIdTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_viewProviderIdTextFieldActionPerformed
+
+    private void editProviderPhoneNumberTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editProviderPhoneNumberTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_editProviderPhoneNumberTextFieldActionPerformed
+
+    private void editProviderAddressTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editProviderAddressTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_editProviderAddressTextFieldActionPerformed
+
+    private void editProviderDiaglogButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editProviderDiaglogButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_editProviderDiaglogButtonActionPerformed
+
+    private void cancelEditProviderDiaglogButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelEditProviderDiaglogButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cancelEditProviderDiaglogButtonActionPerformed
+
+    private void editProviderEmailTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editProviderEmailTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_editProviderEmailTextFieldActionPerformed
+
+    private void editProviderNameTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editProviderNameTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_editProviderNameTextFieldActionPerformed
+
+    private void editProviderIdTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editProviderIdTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_editProviderIdTextFieldActionPerformed
+
+    private void confirmDeleteProviderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmDeleteProviderActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_confirmDeleteProviderActionPerformed
+
+    private void cancelDeleteProviderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelDeleteProviderActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cancelDeleteProviderActionPerformed
+
+    private void viewProductStorageTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewProductStorageTextField2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_viewProductStorageTextField2ActionPerformed
+
+    private void viewProviderWhenCreatedTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewProviderWhenCreatedTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_viewProviderWhenCreatedTextFieldActionPerformed
+
+    private void viewProviderLastUpdatedTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewProviderLastUpdatedTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_viewProviderLastUpdatedTextFieldActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -4000,19 +4905,36 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JDialog addProductDiaglog;
     private javax.swing.JButton addProductDiaglogButton;
     private javax.swing.JPanel addProductDiaglogPanel;
+    private javax.swing.JPanel addProductDiaglogPanel1;
+    private javax.swing.JLabel addProviderAddressLabel;
+    private javax.swing.JTextField addProviderAddressTextField;
+    private javax.swing.JButton addProviderButton;
+    private javax.swing.JDialog addProviderDiaglog;
+    private javax.swing.JButton addProviderDiaglogButton;
+    private javax.swing.JLabel addProviderEmailLabel;
+    private javax.swing.JTextField addProviderEmailTextField;
+    private javax.swing.JLabel addProviderNameLabel;
+    private javax.swing.JTextField addProviderNameTextField;
+    private javax.swing.JLabel addProviderPhoneNumberLabel;
+    private javax.swing.JTextField addProviderPhoneNumberTextField;
     private javax.swing.JButton addUserButton;
     private javax.swing.JDialog addUserDiaglog;
     private javax.swing.JButton addUserDiaglogButton;
     private javax.swing.JPanel addUserDiaglogPanel;
     private javax.swing.JButton cancelAddProductDiaglogButton;
+    private javax.swing.JButton cancelAddProviderDiaglogButton;
     private javax.swing.JButton cancelAddUserDiaglogButton;
     private javax.swing.JButton cancelAddUserDiaglogButton1;
     private javax.swing.JButton cancelDeleteProduct;
+    private javax.swing.JButton cancelDeleteProvider;
     private javax.swing.JButton cancelDeleteUser;
     private javax.swing.JButton cancelEditProductDiaglogButton;
+    private javax.swing.JButton cancelEditProviderDiaglogButton;
     private javax.swing.JButton cancelEditUserDiaglogButton;
     private javax.swing.JButton cancelViewProductDiaglogButton;
+    private javax.swing.JButton cancelViewProviderDiaglogButton;
     private javax.swing.JButton confirmDeleteProduct;
+    private javax.swing.JButton confirmDeleteProvider;
     private javax.swing.JButton confirmDeleteUser;
     private javax.swing.JLabel confirmEmailOTPLabel;
     private javax.swing.JTextField confirmEmailOTPTextField;
@@ -4022,6 +4944,10 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JDialog deleteProductConfirmDiaglog;
     private javax.swing.JLabel deleteProductConfirmDiaglogLabel;
     private javax.swing.JPanel deleteProductConfirmDiaglogPanel;
+    private javax.swing.JButton deleteProviderButton;
+    private javax.swing.JDialog deleteProviderConfirmDiaglog;
+    private javax.swing.JLabel deleteProviderConfirmDiaglogLabel;
+    private javax.swing.JPanel deleteProviderConfirmDiaglogPanel;
     private javax.swing.JButton deleteUserButton;
     private javax.swing.JDialog deleteUserConfirmDiaglog;
     private javax.swing.JLabel deleteUserConfirmDiaglogLabel;
@@ -4061,6 +4987,20 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JTextField editProductStorageTextField;
     private javax.swing.JLabel editProductWeightLabel;
     private javax.swing.JTextField editProductWeightTextField;
+    private javax.swing.JLabel editProviderAddressLabel;
+    private javax.swing.JTextField editProviderAddressTextField;
+    private javax.swing.JButton editProviderButton;
+    private javax.swing.JDialog editProviderDiaglog;
+    private javax.swing.JButton editProviderDiaglogButton;
+    private javax.swing.JPanel editProviderDiaglogPanel;
+    private javax.swing.JLabel editProviderEmailLabel;
+    private javax.swing.JTextField editProviderEmailTextField;
+    private javax.swing.JLabel editProviderIdLabel;
+    private javax.swing.JTextField editProviderIdTextField;
+    private javax.swing.JLabel editProviderNameLabel;
+    private javax.swing.JTextField editProviderNameTextField;
+    private javax.swing.JLabel editProviderPhoneNumberLabel;
+    private javax.swing.JTextField editProviderPhoneNumberTextField;
     private javax.swing.JButton editUserButton;
     private javax.swing.JDialog editUserDiaglog;
     private javax.swing.JButton editUserDiaglogButton;
@@ -4080,6 +5020,7 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JPanel exportProductPanel;
     private javax.swing.JPanel exportProductTab;
     private javax.swing.JButton exportProductsToExcelButton;
+    private javax.swing.JButton exportProvidersToExcelButton;
     private javax.swing.JButton exportUsersToExcelButton;
     private javax.swing.JLabel firstNameLabel;
     private javax.swing.JTextField firstNameTextField;
@@ -4103,6 +5044,7 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JPanel importProductTab;
     private javax.swing.JTable importProductTable;
     private javax.swing.JButton importProductsFromExcelButton;
+    private javax.swing.JButton importProvidersFromExcelButton;
     private javax.swing.JButton importUsersFromExcelButton;
     private javax.swing.JLabel inStockLabel;
     private javax.swing.JPanel inStockPanel;
@@ -4113,10 +5055,13 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
+    private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -4130,6 +5075,7 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
     private javax.swing.JSeparator jSeparator5;
+    private javax.swing.JToolBar.Separator jSeparator6;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel lastNameLabel;
     private javax.swing.JTextField lastNameTextField;
@@ -4143,7 +5089,6 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JTextField phoneNumberTextField;
     private javax.swing.JLabel productBatteryLabel;
     private javax.swing.JTextField productBatteryTextField;
-    private javax.swing.JComboBox<String> productBrandsComboBox;
     private javax.swing.JLabel productCardLabel;
     private javax.swing.JTextField productCardTextField;
     private javax.swing.JLabel productDisplayLabel;
@@ -4164,18 +5109,24 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JTextField productWeightTextField;
     private javax.swing.JScrollPane productsScrollPanel;
     private javax.swing.JTable productsTable;
+    private javax.swing.JPanel providerFunctionPanel;
     private javax.swing.JLabel providerLabel;
     private javax.swing.JComboBox<String> providerNameComboBox;
     private javax.swing.JLabel providerNameLabel;
     private javax.swing.JPanel providerPanel;
     private javax.swing.JPanel providerTab;
+    private javax.swing.JScrollPane providersScrollPanel;
+    private javax.swing.JTable providersTable;
     private javax.swing.JButton removeBillItemButton;
+    private javax.swing.JButton resetSearchProvidersButton;
     private javax.swing.JPanel searchImportProductPanel;
     private javax.swing.JButton searchImportProductRefreshButton;
     private javax.swing.JTextField searchImportProductTextField;
     private javax.swing.JButton searchProductsButton;
     private javax.swing.JPanel searchProductsPanel;
     private javax.swing.JTextField searchProductsTextField;
+    private javax.swing.JPanel searchProvidersPanel;
+    private javax.swing.JTextField searchProvidersTextField;
     private javax.swing.JButton searchUsersButton;
     private javax.swing.JPanel searchUsersPanel;
     private javax.swing.JTextField searchUsersTextField;
@@ -4189,6 +5140,7 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JLabel updateInfoLabel;
     private javax.swing.JPanel updateInfoTab;
     private javax.swing.JButton updateProductDiaglogButton;
+    private javax.swing.JButton updateProviderDiaglogButton;
     private javax.swing.JPanel userFunctionPanel;
     private javax.swing.JLabel userLabel;
     private javax.swing.JPanel userPanel;
@@ -4217,11 +5169,30 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JLabel viewProductProcessorLabel;
     private javax.swing.JTextField viewProductProcessorTextField;
     private javax.swing.JLabel viewProductStorageLabel;
+    private javax.swing.JLabel viewProductStorageLabel2;
     private javax.swing.JTextField viewProductStorageTextField;
+    private javax.swing.JTextField viewProductStorageTextField2;
     private javax.swing.JLabel viewProductWeightLabel;
     private javax.swing.JTextField viewProductWeightTextField;
     private javax.swing.JLabel viewProductWhenCreatedLabel;
     private javax.swing.JTextField viewProductWhenCreatedTextField;
+    private javax.swing.JLabel viewProviderAddressLabel;
+    private javax.swing.JTextField viewProviderAddressTextField;
+    private javax.swing.JButton viewProviderButton;
+    private javax.swing.JDialog viewProviderDiaglog;
+    private javax.swing.JPanel viewProviderDiaglogPanel;
+    private javax.swing.JLabel viewProviderEmailLabel;
+    private javax.swing.JTextField viewProviderEmailTextField;
+    private javax.swing.JLabel viewProviderIdLabel;
+    private javax.swing.JTextField viewProviderIdTextField;
+    private javax.swing.JLabel viewProviderLastUpdatedLabel;
+    private javax.swing.JTextField viewProviderLastUpdatedTextField;
+    private javax.swing.JLabel viewProviderNameLabel;
+    private javax.swing.JTextField viewProviderNameTextField;
+    private javax.swing.JLabel viewProviderPhoneNumberLabel;
+    private javax.swing.JTextField viewProviderPhoneNumberTextField;
+    private javax.swing.JLabel viewProviderWhenCreatedLabel;
+    private javax.swing.JTextField viewProviderWhenCreatedTextField;
     private javax.swing.JButton viewUserButton;
     private javax.swing.JDialog viewUserDiaglog;
     private javax.swing.JPanel viewUserDiaglogPanel;

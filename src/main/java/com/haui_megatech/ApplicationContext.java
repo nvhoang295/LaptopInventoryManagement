@@ -5,6 +5,7 @@
 package com.haui_megatech;
 
 import com.haui_megatech.model.Product;
+import com.haui_megatech.model.Provider;
 import com.haui_megatech.model.User;
 import com.haui_megatech.repository.*;
 import com.haui_megatech.repository.impl.*;
@@ -21,6 +22,7 @@ public class ApplicationContext {
     // MEDIUM PRIORITY
     private static final UserRepository userRepository = new UserRepositoryImpl();
     private static final ProductRepository productRepository = new ProductRepositoryImpl();
+    private static final ProviderRepository providerRepository = new ProviderRepositoryImpl();
     
     private static final Map<String, Object> beans = new HashMap<>();
     private static User loginedUser;
@@ -87,6 +89,9 @@ public class ApplicationContext {
         
         ArrayList<Product> products = new ArrayList<>(productRepository.getAll());
         Product.counter = products.isEmpty() ? 0 : products.getLast().getId();
+        
+        ArrayList<Provider> providers = new ArrayList<>(providerRepository.getAll());
+        Provider.counter = providers.isEmpty() ? 0 : providers.getLast().getId();
     }
 
     private static String removeRedundantPathPrefix(String s) {
