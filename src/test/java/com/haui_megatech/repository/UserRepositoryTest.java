@@ -62,8 +62,6 @@ public class UserRepositoryTest {
                 .lastName("Nguyễn Việt")
                 .phoneNumber("0336118268")
                 .email("hoangnv.swe@gmail.com")
-                .gender(Gender.MALE)
-                .dateOfBirth(new Date())
                 .build();
         Optional<User> savedInstance = underTest.save(user);
         System.out.println(savedInstance);

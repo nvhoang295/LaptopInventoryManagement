@@ -5,8 +5,9 @@
 package com.haui_megatech.service.impl;
 
 import com.haui_megatech.constant.ErrorMessage;
+import com.haui_megatech.constant.SuccessMessage;
 import com.haui_megatech.dto.CommonResponseDTO;
-import com.haui_megatech.dto.ListItemsResponseDTO;
+import com.haui_megatech.dto.UserDTO;
 import com.haui_megatech.model.User;
 import com.haui_megatech.service.*;
 import com.haui_megatech.repository.*;
@@ -26,18 +27,18 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public ListItemsResponseDTO<User> getList() {
-        return ListItemsResponseDTO
-                .<User>builder()
-                .items(userRepository.getAll())
+    public CommonResponseDTO<List<User>> getList() {
+        return CommonResponseDTO
+                .<List<User>>builder()
+                .data(userRepository.getAll())
                 .build();
     }
 
     @Override
-    public ListItemsResponseDTO<User> searchList(String keyword) {
-        return ListItemsResponseDTO
-                .<User>builder()
-                .items(userRepository
+    public CommonResponseDTO<List<User>> searchList(String keyword) {
+        return CommonResponseDTO
+                .<List<User>>builder()
+                .data(userRepository
                         .getAll()
                         .parallelStream()
                         .filter(item -> {
@@ -70,6 +71,16 @@ public class UserServiceImpl implements UserService {
                         .message(ErrorMessage.User.SAVE)
                         .build();
     }
+    
+    @Override
+    public CommonResponseDTO addList(ArrayList<User> users) {
+        ArrayList<User> savedUsers = userRepository.saveAll(users);
+        return CommonResponseDTO
+                .builder()
+                .success(Boolean.TRUE)
+                .message("Lưu thành công " + savedUsers.size() + " người dùng.")
+                .build();
+    }
 
     @Override
     public CommonResponseDTO deleteOne(Integer id) {
@@ -86,8 +97,44 @@ public class UserServiceImpl implements UserService {
 
         return CommonResponseDTO
                 .builder()
+                .message(SuccessMessage.User.DELETED)
                 .success(Boolean.TRUE)
                 .build();
     }
-
+    
+    @Override
+    public Optional<User> findByUsername(String username) {
+        return userRepository.findByUsername(username);
+    }
+    
+    @Override
+    public Optional<User> findById(Integer id) {
+        return userRepository.findById(id);
+    }
+    
+    @Override
+    public CommonResponseDTO updateOne(Integer id, UserDTO user) {
+        Optional<User> found = this.findById(id);
+        if (found.isEmpty()) 
+            return CommonResponseDTO
+                    .builder()
+                    .success(Boolean.FALSE)
+                    .message(ErrorMessage.User.NOT_FOUND)
+                    .build();
+        
+        User foundUser = found.get();
+        foundUser.setFirstName(user.firstName());
+        foundUser.setLastName(user.lastName());
+        foundUser.setPhoneNumber(user.phoneNumber());
+        foundUser.setEmail(user.email());
+        foundUser.setLastUpdated(new Date());
+        
+        Optional<User> updatedUser = userRepository.save(foundUser);
+        return CommonResponseDTO
+                .builder()
+                .message(SuccessMessage.User.UPDATED)
+                .success(Boolean.TRUE)
+                .build();
+    }
+    
 }

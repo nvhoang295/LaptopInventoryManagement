@@ -9,14 +9,22 @@ import com.haui_megatech.constant.ErrorMessage;
 import com.haui_megatech.constant.SuccessMessage;
 import com.haui_megatech.controller.UserController;
 import com.haui_megatech.dto.CommonResponseDTO;
+import com.haui_megatech.dto.UserDTO;
 import com.haui_megatech.model.User;
 import com.haui_megatech.repository.impl.UserRepositoryImpl;
 import com.haui_megatech.service.impl.UserServiceImpl;
+import com.haui_megatech.util.ExcelUtil;
 import com.haui_megatech.util.InputValidator;
 import java.awt.Color;
+import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+import javax.swing.JFileChooser;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -24,7 +32,16 @@ import javax.swing.table.DefaultTableModel;
  * @author vieth
  */
 public class Home extends javax.swing.JFrame {
-
+    
+    private final SimpleDateFormat formatter = new SimpleDateFormat("HH:mm:ss dd/MM/yyyy");
+    
+    private final int ID_COL_INDEX = 0;
+    private final int USERNAME_COL_INDEX = 1;
+    private final int FIRSTNAME_COL_INDEX = 2;
+    private final int LASTNAME_COL_INDEX = 3;
+    private final int PHONENUMBER_COL_INDEX = 4;
+    private final int EMAIL_COL_INDEX = 5;
+    
     private final UserController userController = new UserController(
             new UserServiceImpl(
                     new UserRepositoryImpl()
@@ -49,9 +66,8 @@ public class Home extends javax.swing.JFrame {
             "Tên đăng nhập",
             "Tên",
             "Họ đệm",
-            "Giới tính",
             "Số điện thoại",
-            "Email"
+            "Email",
         };
         DefaultTableModel tableModel = new DefaultTableModel(null, tableHeader) {
             @Override
@@ -59,10 +75,9 @@ public class Home extends javax.swing.JFrame {
                 return false;
             }
         };
-        System.out.println(keyword);
         List<User> users = keyword != null && !keyword.isEmpty()
-                ? userController.searchList(keyword).items()
-                : userController.getList().items();
+                ? userController.searchList(keyword).data()
+                : userController.getList().data();
 
         users.forEach(item -> {
             tableModel.addRow(
@@ -71,9 +86,8 @@ public class Home extends javax.swing.JFrame {
                         item.getUsername() != null ? item.getUsername() : "",
                         item.getFirstName() != null ? item.getFirstName() : "",
                         item.getLastName() != null ? item.getLastName() : "",
-                        item.getGender() != null ? item.getGender().getName() : "",
                         item.getPhoneNumber() != null ? item.getPhoneNumber() : "",
-                        item.getEmail() != null ? item.getEmail() : ""
+                        item.getEmail() != null ? item.getEmail() : "",
                     }
             );
         });
@@ -97,7 +111,7 @@ public class Home extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         addUserDiaglog = new javax.swing.JDialog();
-        jPanel2 = new javax.swing.JPanel();
+        addUserDiaglogPanel = new javax.swing.JPanel();
         usernameLabel = new javax.swing.JLabel();
         usernameTextField = new javax.swing.JTextField();
         passwordLabel = new javax.swing.JLabel();
@@ -119,16 +133,56 @@ public class Home extends javax.swing.JFrame {
         sendCodeAddUserDiaglogButton = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         diaglogMessage = new javax.swing.JDialog();
-        jPanel4 = new javax.swing.JPanel();
+        diaglogMessagePanel = new javax.swing.JPanel();
         diaglogMessageLabel = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        jButton3 = new javax.swing.JButton();
+        diaglogMessageOkButton = new javax.swing.JButton();
         deleteUserConfirmDiaglog = new javax.swing.JDialog();
-        jPanel3 = new javax.swing.JPanel();
+        deleteUserConfirmDiaglogPanel = new javax.swing.JPanel();
         deleteUserConfirmDiaglogLabel = new javax.swing.JLabel();
         confirmDeleteUser = new javax.swing.JButton();
         cancelDeleteUser = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
+        editUserDiaglog = new javax.swing.JDialog();
+        editUserDiaglogPanel = new javax.swing.JPanel();
+        editUsernameLabel = new javax.swing.JLabel();
+        editUsernameTextField = new javax.swing.JTextField();
+        editFirstNameLabel = new javax.swing.JLabel();
+        editFirstNameTextField = new javax.swing.JTextField();
+        editLastNameLabel = new javax.swing.JLabel();
+        editLastNameTextField = new javax.swing.JTextField();
+        editPhoneNumberLabel = new javax.swing.JLabel();
+        editPhoneNumberTextField = new javax.swing.JTextField();
+        editEmailLabel = new javax.swing.JLabel();
+        editEmailTextField = new javax.swing.JTextField();
+        editUserDiaglogButton = new javax.swing.JButton();
+        cancelEditUserDiaglogButton = new javax.swing.JButton();
+        editUserDiaglogLabel = new javax.swing.JLabel();
+        editUserIdLabel = new javax.swing.JLabel();
+        editUserIdTextField = new javax.swing.JTextField();
+        viewUserDiaglog = new javax.swing.JDialog();
+        viewUserDiaglogPanel = new javax.swing.JPanel();
+        viewUsernameLabel = new javax.swing.JLabel();
+        viewUserLastNameTextField = new javax.swing.JTextField();
+        viewUserFirstNameLabel = new javax.swing.JLabel();
+        viewUserLastNameLabel = new javax.swing.JLabel();
+        viewUserPhoneNumberLabel = new javax.swing.JLabel();
+        viewUserPhoneNumberTextField = new javax.swing.JTextField();
+        viewUserEmailLabel = new javax.swing.JLabel();
+        viewUserEmailTextField = new javax.swing.JTextField();
+        viewUserWhenCreatedLabel = new javax.swing.JLabel();
+        viewUserWhenCreatedTextField = new javax.swing.JTextField();
+        viewUserLastUpdatedLabel = new javax.swing.JLabel();
+        viewUserLastUpdatedTextField = new javax.swing.JTextField();
+        cancelAddUserDiaglogButton1 = new javax.swing.JButton();
+        jLabel11 = new javax.swing.JLabel();
+        editUserDiaglogButton1 = new javax.swing.JButton();
+        viewUserLastLoggedInLabel = new javax.swing.JLabel();
+        viewUserLastLoggedInTextField = new javax.swing.JTextField();
+        viewUserLoggedInLabel = new javax.swing.JLabel();
+        viewUserLoggedInTextField = new javax.swing.JTextField();
+        viewUsernameTextField = new javax.swing.JTextField();
+        viewUserFirstNameTextField = new javax.swing.JTextField();
         sidebarPanel = new javax.swing.JPanel();
         loginedUsername = new javax.swing.JLabel();
         productTab = new javax.swing.JPanel();
@@ -207,7 +261,6 @@ public class Home extends javax.swing.JFrame {
         usersScrollPanel = new javax.swing.JScrollPane();
         usersTable = new javax.swing.JTable();
         searchUsersPanel = new javax.swing.JPanel();
-        userRolesComboBox = new javax.swing.JComboBox<>();
         searchUsersTextField = new javax.swing.JTextField();
         searchUsersButton = new javax.swing.JButton();
         userFunctionPanel = new javax.swing.JPanel();
@@ -215,8 +268,9 @@ public class Home extends javax.swing.JFrame {
         importUsersFromExcelButton = new javax.swing.JButton();
         exportUsersToExcelButton = new javax.swing.JButton();
         editUserButton = new javax.swing.JButton();
-        addUserButton = new javax.swing.JButton();
+        viewUserButton = new javax.swing.JButton();
         deleteUserButton = new javax.swing.JButton();
+        addUserButton = new javax.swing.JButton();
         statisticsPanel = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
 
@@ -278,14 +332,14 @@ public class Home extends javax.swing.JFrame {
         addUserDiaglog.setMinimumSize(new java.awt.Dimension(450, 500));
         addUserDiaglog.setSize(new java.awt.Dimension(450, 500));
 
-        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel2.setMinimumSize(new java.awt.Dimension(430, 450));
-        jPanel2.setPreferredSize(new java.awt.Dimension(430, 450));
-        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        addUserDiaglogPanel.setBackground(new java.awt.Color(255, 255, 255));
+        addUserDiaglogPanel.setMinimumSize(new java.awt.Dimension(430, 450));
+        addUserDiaglogPanel.setPreferredSize(new java.awt.Dimension(430, 450));
+        addUserDiaglogPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         usernameLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         usernameLabel.setText("Tên đăng nhập");
-        jPanel2.add(usernameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, -1, -1));
+        addUserDiaglogPanel.add(usernameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, -1, -1));
 
         usernameTextField.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         usernameTextField.addActionListener(new java.awt.event.ActionListener() {
@@ -293,25 +347,25 @@ public class Home extends javax.swing.JFrame {
                 usernameTextFieldActionPerformed(evt);
             }
         });
-        jPanel2.add(usernameTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 70, 200, 30));
+        addUserDiaglogPanel.add(usernameTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 70, 200, 30));
 
         passwordLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         passwordLabel.setText("Mật khẩu");
-        jPanel2.add(passwordLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, -1, -1));
+        addUserDiaglogPanel.add(passwordLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, -1, -1));
 
         passwordField.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        jPanel2.add(passwordField, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 110, 200, 30));
+        addUserDiaglogPanel.add(passwordField, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 110, 200, 30));
 
         confirmPasswordLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         confirmPasswordLabel.setText("Xác nhận mật khẩu");
-        jPanel2.add(confirmPasswordLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 150, -1, -1));
+        addUserDiaglogPanel.add(confirmPasswordLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 150, -1, -1));
 
         confirmPasswordField.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        jPanel2.add(confirmPasswordField, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 150, 200, 30));
+        addUserDiaglogPanel.add(confirmPasswordField, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 150, 200, 30));
 
         firstNameLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         firstNameLabel.setText("Tên");
-        jPanel2.add(firstNameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 190, -1, -1));
+        addUserDiaglogPanel.add(firstNameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 190, -1, -1));
 
         firstNameTextField.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         firstNameTextField.addActionListener(new java.awt.event.ActionListener() {
@@ -319,11 +373,11 @@ public class Home extends javax.swing.JFrame {
                 firstNameTextFieldActionPerformed(evt);
             }
         });
-        jPanel2.add(firstNameTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 190, 200, 30));
+        addUserDiaglogPanel.add(firstNameTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 190, 200, 30));
 
         lastNameLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         lastNameLabel.setText("Họ đệm");
-        jPanel2.add(lastNameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 230, -1, -1));
+        addUserDiaglogPanel.add(lastNameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 230, -1, -1));
 
         lastNameTextField.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         lastNameTextField.addActionListener(new java.awt.event.ActionListener() {
@@ -331,11 +385,11 @@ public class Home extends javax.swing.JFrame {
                 lastNameTextFieldActionPerformed(evt);
             }
         });
-        jPanel2.add(lastNameTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 230, 200, 30));
+        addUserDiaglogPanel.add(lastNameTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 230, 200, 30));
 
         phoneNumberLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         phoneNumberLabel.setText("Số điện thoại");
-        jPanel2.add(phoneNumberLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 270, -1, -1));
+        addUserDiaglogPanel.add(phoneNumberLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 270, -1, -1));
 
         phoneNumberTextField.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         phoneNumberTextField.addActionListener(new java.awt.event.ActionListener() {
@@ -343,11 +397,11 @@ public class Home extends javax.swing.JFrame {
                 phoneNumberTextFieldActionPerformed(evt);
             }
         });
-        jPanel2.add(phoneNumberTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 270, 200, 30));
+        addUserDiaglogPanel.add(phoneNumberTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 270, 200, 30));
 
         emailLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         emailLabel.setText("Địa chỉ email");
-        jPanel2.add(emailLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 310, -1, -1));
+        addUserDiaglogPanel.add(emailLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 310, -1, -1));
 
         emailTextField.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         emailTextField.addActionListener(new java.awt.event.ActionListener() {
@@ -355,11 +409,11 @@ public class Home extends javax.swing.JFrame {
                 emailTextFieldActionPerformed(evt);
             }
         });
-        jPanel2.add(emailTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 310, 200, 30));
+        addUserDiaglogPanel.add(emailTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 310, 200, 30));
 
         confirmEmailOTPLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         confirmEmailOTPLabel.setText("Mã xác nhận email");
-        jPanel2.add(confirmEmailOTPLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 350, -1, -1));
+        addUserDiaglogPanel.add(confirmEmailOTPLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 350, -1, -1));
 
         confirmEmailOTPTextField.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         confirmEmailOTPTextField.addActionListener(new java.awt.event.ActionListener() {
@@ -367,7 +421,7 @@ public class Home extends javax.swing.JFrame {
                 confirmEmailOTPTextFieldActionPerformed(evt);
             }
         });
-        jPanel2.add(confirmEmailOTPTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 350, 100, 30));
+        addUserDiaglogPanel.add(confirmEmailOTPTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 350, 100, 30));
 
         addUserDiaglogButton.setBackground(new java.awt.Color(0, 122, 249));
         addUserDiaglogButton.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
@@ -378,7 +432,7 @@ public class Home extends javax.swing.JFrame {
                 addUserDiaglogButtonActionPerformed(evt);
             }
         });
-        jPanel2.add(addUserDiaglogButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 400, -1, -1));
+        addUserDiaglogPanel.add(addUserDiaglogButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 400, -1, -1));
 
         cancelAddUserDiaglogButton.setBackground(new java.awt.Color(212, 57, 68));
         cancelAddUserDiaglogButton.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
@@ -389,86 +443,90 @@ public class Home extends javax.swing.JFrame {
                 cancelAddUserDiaglogButtonActionPerformed(evt);
             }
         });
-        jPanel2.add(cancelAddUserDiaglogButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 400, -1, -1));
+        addUserDiaglogPanel.add(cancelAddUserDiaglogButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 400, -1, -1));
 
         sendCodeAddUserDiaglogButton.setBackground(new java.awt.Color(36, 169, 65));
         sendCodeAddUserDiaglogButton.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         sendCodeAddUserDiaglogButton.setText("Gửi mã");
         sendCodeAddUserDiaglogButton.setBorderPainted(false);
-        jPanel2.add(sendCodeAddUserDiaglogButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 350, 90, 30));
+        addUserDiaglogPanel.add(sendCodeAddUserDiaglogButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 350, 90, 30));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(44, 43, 196));
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("THÊM NGƯỜI DÙNG");
-        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 20, 440, -1));
+        addUserDiaglogPanel.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 20, 440, -1));
 
         javax.swing.GroupLayout addUserDiaglogLayout = new javax.swing.GroupLayout(addUserDiaglog.getContentPane());
         addUserDiaglog.getContentPane().setLayout(addUserDiaglogLayout);
         addUserDiaglogLayout.setHorizontalGroup(
             addUserDiaglogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 448, Short.MAX_VALUE)
+            .addComponent(addUserDiaglogPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 448, Short.MAX_VALUE)
         );
         addUserDiaglogLayout.setVerticalGroup(
             addUserDiaglogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 505, Short.MAX_VALUE)
+            .addComponent(addUserDiaglogPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 505, Short.MAX_VALUE)
         );
 
         diaglogMessage.setTitle("Thông báo");
         diaglogMessage.setMinimumSize(new java.awt.Dimension(400, 250));
         diaglogMessage.setSize(new java.awt.Dimension(400, 250));
 
-        jPanel4.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel4.setMinimumSize(new java.awt.Dimension(400, 250));
-        jPanel4.setPreferredSize(new java.awt.Dimension(400, 250));
-        jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        diaglogMessagePanel.setBackground(new java.awt.Color(255, 255, 255));
+        diaglogMessagePanel.setMinimumSize(new java.awt.Dimension(400, 250));
+        diaglogMessagePanel.setPreferredSize(new java.awt.Dimension(400, 250));
+        diaglogMessagePanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         diaglogMessageLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         diaglogMessageLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         diaglogMessageLabel.setText("Thêm mới người dùng thành công!");
-        jPanel4.add(diaglogMessageLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 65, 380, 65));
+        diaglogMessagePanel.add(diaglogMessageLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 65, 380, 65));
 
         jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(212, 57, 68));
         jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel10.setText("THÔNG BÁO");
-        jPanel4.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 34, 388, -1));
+        diaglogMessagePanel.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 34, 388, -1));
 
-        jButton3.setBackground(new java.awt.Color(44, 43, 196));
-        jButton3.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        jButton3.setForeground(new java.awt.Color(255, 255, 255));
-        jButton3.setText("OK");
-        jButton3.setBorderPainted(false);
-        jButton3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jPanel4.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 160, 82, 30));
+        diaglogMessageOkButton.setBackground(new java.awt.Color(44, 43, 196));
+        diaglogMessageOkButton.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        diaglogMessageOkButton.setForeground(new java.awt.Color(255, 255, 255));
+        diaglogMessageOkButton.setText("OK");
+        diaglogMessageOkButton.setBorderPainted(false);
+        diaglogMessageOkButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        diaglogMessageOkButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                diaglogMessageOkButtonActionPerformed(evt);
+            }
+        });
+        diaglogMessagePanel.add(diaglogMessageOkButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 160, 82, 30));
 
         javax.swing.GroupLayout diaglogMessageLayout = new javax.swing.GroupLayout(diaglogMessage.getContentPane());
         diaglogMessage.getContentPane().setLayout(diaglogMessageLayout);
         diaglogMessageLayout.setHorizontalGroup(
             diaglogMessageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(diaglogMessagePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         diaglogMessageLayout.setVerticalGroup(
             diaglogMessageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(diaglogMessagePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         deleteUserConfirmDiaglog.setTitle("Xác nhận xoá");
         deleteUserConfirmDiaglog.setMinimumSize(new java.awt.Dimension(420, 230));
-        deleteUserConfirmDiaglog.setPreferredSize(new java.awt.Dimension(420, 230));
         deleteUserConfirmDiaglog.setResizable(false);
         deleteUserConfirmDiaglog.setSize(new java.awt.Dimension(420, 230));
 
-        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel3.setMinimumSize(new java.awt.Dimension(420, 230));
-        jPanel3.setPreferredSize(new java.awt.Dimension(420, 230));
-        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        deleteUserConfirmDiaglogPanel.setBackground(new java.awt.Color(255, 255, 255));
+        deleteUserConfirmDiaglogPanel.setMinimumSize(new java.awt.Dimension(420, 230));
+        deleteUserConfirmDiaglogPanel.setPreferredSize(new java.awt.Dimension(420, 230));
+        deleteUserConfirmDiaglogPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         deleteUserConfirmDiaglogLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         deleteUserConfirmDiaglogLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         deleteUserConfirmDiaglogLabel.setText("Bạn chắc chắn muốn xoá người dùng abcdeskskskskksd");
         deleteUserConfirmDiaglogLabel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jPanel3.add(deleteUserConfirmDiaglogLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(5, 67, 400, 50));
+        deleteUserConfirmDiaglogPanel.add(deleteUserConfirmDiaglogLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(5, 67, 400, 50));
 
         confirmDeleteUser.setBackground(new java.awt.Color(44, 43, 196));
         confirmDeleteUser.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
@@ -480,7 +538,7 @@ public class Home extends javax.swing.JFrame {
                 confirmDeleteUserActionPerformed(evt);
             }
         });
-        jPanel3.add(confirmDeleteUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 140, -1, 30));
+        deleteUserConfirmDiaglogPanel.add(confirmDeleteUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 140, -1, 30));
 
         cancelDeleteUser.setBackground(new java.awt.Color(212, 57, 68));
         cancelDeleteUser.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
@@ -492,23 +550,312 @@ public class Home extends javax.swing.JFrame {
                 cancelDeleteUserActionPerformed(evt);
             }
         });
-        jPanel3.add(cancelDeleteUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 140, -1, 30));
+        deleteUserConfirmDiaglogPanel.add(cancelDeleteUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 140, -1, 30));
 
         jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 0, 0));
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel8.setText("XÁC NHẬN XOÁ");
-        jPanel3.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 29, 408, -1));
+        deleteUserConfirmDiaglogPanel.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 29, 408, -1));
 
         javax.swing.GroupLayout deleteUserConfirmDiaglogLayout = new javax.swing.GroupLayout(deleteUserConfirmDiaglog.getContentPane());
         deleteUserConfirmDiaglog.getContentPane().setLayout(deleteUserConfirmDiaglogLayout);
         deleteUserConfirmDiaglogLayout.setHorizontalGroup(
             deleteUserConfirmDiaglogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(deleteUserConfirmDiaglogPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         deleteUserConfirmDiaglogLayout.setVerticalGroup(
             deleteUserConfirmDiaglogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(deleteUserConfirmDiaglogPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
+        editUserDiaglog.setTitle("Thêm người dùng");
+        editUserDiaglog.setBackground(new java.awt.Color(255, 255, 255));
+        editUserDiaglog.setMinimumSize(new java.awt.Dimension(450, 500));
+        editUserDiaglog.setSize(new java.awt.Dimension(450, 500));
+
+        editUserDiaglogPanel.setBackground(new java.awt.Color(255, 255, 255));
+        editUserDiaglogPanel.setMinimumSize(new java.awt.Dimension(430, 450));
+        editUserDiaglogPanel.setPreferredSize(new java.awt.Dimension(430, 450));
+        editUserDiaglogPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        editUsernameLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        editUsernameLabel.setText("Tên đăng nhập");
+        editUserDiaglogPanel.add(editUsernameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, -1, -1));
+
+        editUsernameTextField.setEditable(false);
+        editUsernameTextField.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        editUsernameTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editUsernameTextFieldActionPerformed(evt);
+            }
+        });
+        editUserDiaglogPanel.add(editUsernameTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 110, 200, 30));
+
+        editFirstNameLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        editFirstNameLabel.setText("Tên");
+        editUserDiaglogPanel.add(editFirstNameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 190, -1, -1));
+
+        editFirstNameTextField.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        editFirstNameTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editFirstNameTextFieldActionPerformed(evt);
+            }
+        });
+        editUserDiaglogPanel.add(editFirstNameTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 190, 200, 30));
+
+        editLastNameLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        editLastNameLabel.setText("Họ đệm");
+        editUserDiaglogPanel.add(editLastNameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 230, -1, -1));
+
+        editLastNameTextField.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        editLastNameTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editLastNameTextFieldActionPerformed(evt);
+            }
+        });
+        editUserDiaglogPanel.add(editLastNameTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 230, 200, 30));
+
+        editPhoneNumberLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        editPhoneNumberLabel.setText("Số điện thoại");
+        editUserDiaglogPanel.add(editPhoneNumberLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 270, -1, -1));
+
+        editPhoneNumberTextField.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        editPhoneNumberTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editPhoneNumberTextFieldActionPerformed(evt);
+            }
+        });
+        editUserDiaglogPanel.add(editPhoneNumberTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 270, 200, 30));
+
+        editEmailLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        editEmailLabel.setText("Địa chỉ email");
+        editUserDiaglogPanel.add(editEmailLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 310, -1, -1));
+
+        editEmailTextField.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        editEmailTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editEmailTextFieldActionPerformed(evt);
+            }
+        });
+        editUserDiaglogPanel.add(editEmailTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 310, 200, 30));
+
+        editUserDiaglogButton.setBackground(new java.awt.Color(0, 122, 249));
+        editUserDiaglogButton.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        editUserDiaglogButton.setText("Cập nhật");
+        editUserDiaglogButton.setBorderPainted(false);
+        editUserDiaglogButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editUserDiaglogButtonActionPerformed(evt);
+            }
+        });
+        editUserDiaglogPanel.add(editUserDiaglogButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 400, -1, -1));
+
+        cancelEditUserDiaglogButton.setBackground(new java.awt.Color(212, 57, 68));
+        cancelEditUserDiaglogButton.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        cancelEditUserDiaglogButton.setText("Huỷ bỏ");
+        cancelEditUserDiaglogButton.setBorderPainted(false);
+        cancelEditUserDiaglogButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelEditUserDiaglogButtonActionPerformed(evt);
+            }
+        });
+        editUserDiaglogPanel.add(cancelEditUserDiaglogButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 400, -1, -1));
+
+        editUserDiaglogLabel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        editUserDiaglogLabel.setForeground(new java.awt.Color(44, 43, 196));
+        editUserDiaglogLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        editUserDiaglogLabel.setText("CẬP NHẬT NGƯỜI DÙNG");
+        editUserDiaglogPanel.add(editUserDiaglogLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 20, 440, -1));
+
+        editUserIdLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        editUserIdLabel.setText("Mã người dùng");
+        editUserDiaglogPanel.add(editUserIdLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, -1, -1));
+
+        editUserIdTextField.setEditable(false);
+        editUserIdTextField.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        editUserIdTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editUserIdTextFieldActionPerformed(evt);
+            }
+        });
+        editUserDiaglogPanel.add(editUserIdTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 60, 200, 30));
+
+        javax.swing.GroupLayout editUserDiaglogLayout = new javax.swing.GroupLayout(editUserDiaglog.getContentPane());
+        editUserDiaglog.getContentPane().setLayout(editUserDiaglogLayout);
+        editUserDiaglogLayout.setHorizontalGroup(
+            editUserDiaglogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(editUserDiaglogPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 448, Short.MAX_VALUE)
+        );
+        editUserDiaglogLayout.setVerticalGroup(
+            editUserDiaglogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(editUserDiaglogPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 505, Short.MAX_VALUE)
+        );
+
+        viewUserDiaglog.setTitle("Thêm người dùng");
+        viewUserDiaglog.setBackground(new java.awt.Color(255, 255, 255));
+        viewUserDiaglog.setMinimumSize(new java.awt.Dimension(450, 500));
+        viewUserDiaglog.setSize(new java.awt.Dimension(450, 500));
+
+        viewUserDiaglogPanel.setBackground(new java.awt.Color(255, 255, 255));
+        viewUserDiaglogPanel.setMinimumSize(new java.awt.Dimension(430, 450));
+        viewUserDiaglogPanel.setPreferredSize(new java.awt.Dimension(430, 450));
+        viewUserDiaglogPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        viewUsernameLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        viewUsernameLabel.setText("Tên đăng nhập");
+        viewUserDiaglogPanel.add(viewUsernameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, -1, -1));
+
+        viewUserLastNameTextField.setEditable(false);
+        viewUserLastNameTextField.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        viewUserLastNameTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                viewUserLastNameTextFieldActionPerformed(evt);
+            }
+        });
+        viewUserDiaglogPanel.add(viewUserLastNameTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 150, 200, 30));
+
+        viewUserFirstNameLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        viewUserFirstNameLabel.setText("Tên");
+        viewUserDiaglogPanel.add(viewUserFirstNameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, -1, -1));
+
+        viewUserLastNameLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        viewUserLastNameLabel.setText("Họ đệm");
+        viewUserDiaglogPanel.add(viewUserLastNameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 150, -1, -1));
+
+        viewUserPhoneNumberLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        viewUserPhoneNumberLabel.setText("Số điện thoại");
+        viewUserDiaglogPanel.add(viewUserPhoneNumberLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 190, -1, -1));
+
+        viewUserPhoneNumberTextField.setEditable(false);
+        viewUserPhoneNumberTextField.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        viewUserPhoneNumberTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                viewUserPhoneNumberTextFieldActionPerformed(evt);
+            }
+        });
+        viewUserDiaglogPanel.add(viewUserPhoneNumberTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 190, 200, 30));
+
+        viewUserEmailLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        viewUserEmailLabel.setText("Địa chỉ email");
+        viewUserDiaglogPanel.add(viewUserEmailLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 230, -1, -1));
+
+        viewUserEmailTextField.setEditable(false);
+        viewUserEmailTextField.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        viewUserEmailTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                viewUserEmailTextFieldActionPerformed(evt);
+            }
+        });
+        viewUserDiaglogPanel.add(viewUserEmailTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 230, 200, 30));
+
+        viewUserWhenCreatedLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        viewUserWhenCreatedLabel.setText("Ngày tạo");
+        viewUserDiaglogPanel.add(viewUserWhenCreatedLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 270, -1, -1));
+
+        viewUserWhenCreatedTextField.setEditable(false);
+        viewUserWhenCreatedTextField.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        viewUserWhenCreatedTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                viewUserWhenCreatedTextFieldActionPerformed(evt);
+            }
+        });
+        viewUserDiaglogPanel.add(viewUserWhenCreatedTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 270, 200, 30));
+
+        viewUserLastUpdatedLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        viewUserLastUpdatedLabel.setText("Cập nhật lần cuối");
+        viewUserDiaglogPanel.add(viewUserLastUpdatedLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 310, -1, -1));
+
+        viewUserLastUpdatedTextField.setEditable(false);
+        viewUserLastUpdatedTextField.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        viewUserLastUpdatedTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                viewUserLastUpdatedTextFieldActionPerformed(evt);
+            }
+        });
+        viewUserDiaglogPanel.add(viewUserLastUpdatedTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 310, 200, 30));
+
+        cancelAddUserDiaglogButton1.setBackground(new java.awt.Color(212, 57, 68));
+        cancelAddUserDiaglogButton1.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        cancelAddUserDiaglogButton1.setText("Đóng");
+        cancelAddUserDiaglogButton1.setBorderPainted(false);
+        cancelAddUserDiaglogButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelAddUserDiaglogButton1ActionPerformed(evt);
+            }
+        });
+        viewUserDiaglogPanel.add(cancelAddUserDiaglogButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 450, -1, -1));
+
+        jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(44, 43, 196));
+        jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel11.setText("THÔNG TIN NGƯỜI DÙNG");
+        viewUserDiaglogPanel.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 20, 440, -1));
+
+        editUserDiaglogButton1.setBackground(new java.awt.Color(0, 122, 249));
+        editUserDiaglogButton1.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        editUserDiaglogButton1.setText("Cập nhật");
+        editUserDiaglogButton1.setBorderPainted(false);
+        editUserDiaglogButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editUserDiaglogButton1ActionPerformed(evt);
+            }
+        });
+        viewUserDiaglogPanel.add(editUserDiaglogButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 450, -1, -1));
+
+        viewUserLastLoggedInLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        viewUserLastLoggedInLabel.setText("Đăng nhập lần cuối");
+        viewUserDiaglogPanel.add(viewUserLastLoggedInLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 350, -1, -1));
+
+        viewUserLastLoggedInTextField.setEditable(false);
+        viewUserLastLoggedInTextField.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        viewUserLastLoggedInTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                viewUserLastLoggedInTextFieldActionPerformed(evt);
+            }
+        });
+        viewUserDiaglogPanel.add(viewUserLastLoggedInTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 350, 200, 30));
+
+        viewUserLoggedInLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        viewUserLoggedInLabel.setText("Số lần đăng nhập");
+        viewUserDiaglogPanel.add(viewUserLoggedInLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 390, -1, -1));
+
+        viewUserLoggedInTextField.setEditable(false);
+        viewUserLoggedInTextField.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        viewUserLoggedInTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                viewUserLoggedInTextFieldActionPerformed(evt);
+            }
+        });
+        viewUserDiaglogPanel.add(viewUserLoggedInTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 390, 200, 30));
+
+        viewUsernameTextField.setEditable(false);
+        viewUsernameTextField.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        viewUsernameTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                viewUsernameTextFieldActionPerformed(evt);
+            }
+        });
+        viewUserDiaglogPanel.add(viewUsernameTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 70, 200, 30));
+
+        viewUserFirstNameTextField.setEditable(false);
+        viewUserFirstNameTextField.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        viewUserFirstNameTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                viewUserFirstNameTextFieldActionPerformed(evt);
+            }
+        });
+        viewUserDiaglogPanel.add(viewUserFirstNameTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 110, 200, 30));
+
+        javax.swing.GroupLayout viewUserDiaglogLayout = new javax.swing.GroupLayout(viewUserDiaglog.getContentPane());
+        viewUserDiaglog.getContentPane().setLayout(viewUserDiaglogLayout);
+        viewUserDiaglogLayout.setHorizontalGroup(
+            viewUserDiaglogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(viewUserDiaglogPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 448, Short.MAX_VALUE)
+        );
+        viewUserDiaglogLayout.setVerticalGroup(
+            viewUserDiaglogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(viewUserDiaglogPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 505, Short.MAX_VALUE)
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -1357,7 +1704,7 @@ public class Home extends javax.swing.JFrame {
                                 .addComponent(editBillItemButton, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(48, 48, 48)))
                         .addGroup(importProductPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(removeBillItemButton, javax.swing.GroupLayout.DEFAULT_SIZE, 155, Short.MAX_VALUE)
+                            .addComponent(removeBillItemButton, javax.swing.GroupLayout.PREFERRED_SIZE, 155, Short.MAX_VALUE)
                             .addComponent(importBillProductButton, javax.swing.GroupLayout.DEFAULT_SIZE, 155, Short.MAX_VALUE))))
                 .addGap(35, 35, 35))
         );
@@ -1517,9 +1864,6 @@ public class Home extends javax.swing.JFrame {
         searchUsersPanel.setBackground(new java.awt.Color(255, 255, 255));
         searchUsersPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Tìm kiếm", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 14))); // NOI18N
 
-        userRolesComboBox.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        userRolesComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
         searchUsersTextField.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         searchUsersTextField.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
@@ -1532,6 +1876,11 @@ public class Home extends javax.swing.JFrame {
         searchUsersButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/refresh.png"))); // NOI18N
         searchUsersButton.setText("Làm mới");
         searchUsersButton.setBorderPainted(false);
+        searchUsersButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchUsersButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout searchUsersPanelLayout = new javax.swing.GroupLayout(searchUsersPanel);
         searchUsersPanel.setLayout(searchUsersPanelLayout);
@@ -1539,9 +1888,7 @@ public class Home extends javax.swing.JFrame {
             searchUsersPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(searchUsersPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(userRolesComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(searchUsersTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 192, Short.MAX_VALUE)
+                .addComponent(searchUsersTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 253, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(searchUsersButton, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -1551,7 +1898,6 @@ public class Home extends javax.swing.JFrame {
             .addGroup(searchUsersPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(searchUsersPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(userRolesComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(searchUsersTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(searchUsersButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(13, Short.MAX_VALUE))
@@ -1596,19 +1942,14 @@ public class Home extends javax.swing.JFrame {
             }
         });
 
-        addUserButton.setBackground(new java.awt.Color(0, 122, 249));
-        addUserButton.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        addUserButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/add_circle_icon.png"))); // NOI18N
-        addUserButton.setText("Thêm");
-        addUserButton.setBorderPainted(false);
-        addUserButton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                addUserButtonMouseClicked(evt);
-            }
-        });
-        addUserButton.addActionListener(new java.awt.event.ActionListener() {
+        viewUserButton.setBackground(new java.awt.Color(0, 122, 249));
+        viewUserButton.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        viewUserButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/add_circle_icon.png"))); // NOI18N
+        viewUserButton.setText("Xem");
+        viewUserButton.setBorderPainted(false);
+        viewUserButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addUserButtonActionPerformed(evt);
+                viewUserButtonActionPerformed(evt);
             }
         });
 
@@ -1623,19 +1964,32 @@ public class Home extends javax.swing.JFrame {
             }
         });
 
+        addUserButton.setBackground(new java.awt.Color(0, 122, 249));
+        addUserButton.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        addUserButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/add_circle_icon.png"))); // NOI18N
+        addUserButton.setText("Thêm");
+        addUserButton.setBorderPainted(false);
+        addUserButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addUserButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout userFunctionPanelLayout = new javax.swing.GroupLayout(userFunctionPanel);
         userFunctionPanel.setLayout(userFunctionPanelLayout);
         userFunctionPanelLayout.setHorizontalGroup(
             userFunctionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(userFunctionPanelLayout.createSequentialGroup()
                 .addContainerGap()
+                .addComponent(viewUserButton, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(addUserButton, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(editUserButton, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(deleteUserButton, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.DEFAULT_SIZE, 39, Short.MAX_VALUE)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(importUsersFromExcelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -1647,15 +2001,16 @@ public class Home extends javax.swing.JFrame {
             .addGroup(userFunctionPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(userFunctionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jSeparator1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jSeparator1, javax.swing.GroupLayout.DEFAULT_SIZE, 47, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, userFunctionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(importUsersFromExcelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(exportUsersToExcelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, userFunctionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(addUserButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(viewUserButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(editUserButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(deleteUserButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(0, 0, Short.MAX_VALUE))
+                        .addComponent(deleteUserButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(addUserButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(0, 7, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout userPanelLayout = new javax.swing.GroupLayout(userPanel);
@@ -1667,9 +2022,9 @@ public class Home extends javax.swing.JFrame {
                 .addGroup(userPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(usersScrollPanel)
                     .addGroup(userPanelLayout.createSequentialGroup()
-                        .addComponent(userFunctionPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(userFunctionPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(searchUsersPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addComponent(searchUsersPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
         );
         userPanelLayout.setVerticalGroup(
             userPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1991,26 +2346,108 @@ public class Home extends javax.swing.JFrame {
     }//GEN-LAST:event_importBillItemFromExcelButtonActionPerformed
 
     private void importUsersFromExcelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_importUsersFromExcelButtonActionPerformed
-        // TODO add your handling code here:
+        JFileChooser fileChooser = new JFileChooser();
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("Excel Workbook (*.xlsx)", "xlsx");
+        fileChooser.setFileFilter(filter);
+        fileChooser.setMultiSelectionEnabled(false);
+        int result = fileChooser.showDialog(this, "Chọn file");
+        if (result == JFileChooser.APPROVE_OPTION) {
+            File uploadedFile = fileChooser.getSelectedFile();
+            ArrayList<User> users = ExcelUtil.excelToUsers(uploadedFile);
+            CommonResponseDTO response = userController.addList(users);
+            showUserDiaglogMessage(response.message());
+            loadDataToTableUsers(null);
+        }
+        
     }//GEN-LAST:event_importUsersFromExcelButtonActionPerformed
 
     private void exportUsersToExcelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exportUsersToExcelButtonActionPerformed
-        // TODO add your handling code here:
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setDialogTitle("Lựa chọn vị trí lưu file");
+        fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("Excel Workbook (*.xlsx)", "xlsx");
+        fileChooser.setFileFilter(filter);
+        int userSelection = fileChooser.showSaveDialog(fileChooser);
+        if (userSelection == JFileChooser.APPROVE_OPTION) {
+            File directoryToSave = fileChooser.getSelectedFile();
+            CommonResponseDTO response = ExcelUtil.usersToExcel(
+                    userController.getList().data(), 
+                    directoryToSave.getAbsolutePath()
+            );
+            showUserDiaglogMessage(response.message());
+        }
     }//GEN-LAST:event_exportUsersToExcelButtonActionPerformed
 
     private void editUserButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editUserButtonActionPerformed
-        int[] cols = usersTable.getSelectedRows();
-        if (cols.length == 0) {
+        int[] rows = usersTable.getSelectedRows();
+        if (rows.length == 0) {
             showUserDiaglogMessage(ErrorMessage.User.EMPTY_SELECTED_ROWS);
             return;
         }
+        if (rows.length > 1) {
+            showUserDiaglogMessage(ErrorMessage.User.EXCEED_SELECTED_ROWS);
+            return;
+        }
         
+        showEditUserDiaglog(rows[0]);
     }//GEN-LAST:event_editUserButtonActionPerformed
-
-    private void addUserButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addUserButtonActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_addUserButtonActionPerformed
-
+    
+    private void showEditUserDiaglog(int selectedRow) {        
+        Integer id = Integer.valueOf(usersTable.getValueAt(selectedRow, ID_COL_INDEX).toString());
+        String username = usersTable.getValueAt(selectedRow, USERNAME_COL_INDEX).toString();
+        String firstName = usersTable.getValueAt(selectedRow, FIRSTNAME_COL_INDEX).toString();
+        String lastName = usersTable.getValueAt(selectedRow, LASTNAME_COL_INDEX).toString();
+        String phoneNumber = usersTable.getValueAt(selectedRow, PHONENUMBER_COL_INDEX).toString();
+        String email = usersTable.getValueAt(selectedRow, EMAIL_COL_INDEX).toString();
+        
+        editUserIdTextField.setText(id.toString());
+        editUsernameTextField.setText(username);
+        editFirstNameTextField.setText(firstName);
+        editLastNameTextField.setText(lastName);
+        editPhoneNumberTextField.setText(phoneNumber);
+        editEmailTextField.setText(email);
+        
+        editUserDiaglog.setVisible(true);
+        editUserDiaglog.setLocationRelativeTo(this);
+    }
+    
+    private void viewUserButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewUserButtonActionPerformed
+        int[] rows = usersTable.getSelectedRows();
+        if (rows.length == 0) {
+            showUserDiaglogMessage(ErrorMessage.User.EMPTY_SELECTED_ROWS);
+            return;
+        }
+        if (rows.length > 1) {
+            showUserDiaglogMessage(ErrorMessage.User.EXCEED_SELECTED_ROWS);
+            return;
+        }
+        
+        showViewUserDiaglog(rows[0]);
+    }//GEN-LAST:event_viewUserButtonActionPerformed
+    
+    private void showViewUserDiaglog(int selectedRow) {
+        Integer id = Integer.valueOf(usersTable.getValueAt(selectedRow, ID_COL_INDEX).toString());
+        Optional<User> found = userController.findById(id);
+        if (found.isEmpty()) {
+            showUserDiaglogMessage(ErrorMessage.User.NOT_FOUND);
+            return;
+        }
+        
+        User foundUser = found.get();
+        viewUsernameTextField.setText(foundUser.getUsername());
+        viewUserFirstNameTextField.setText(foundUser.getFirstName());
+        viewUserLastNameTextField.setText(foundUser.getLastName());
+        viewUserPhoneNumberTextField.setText(foundUser.getPhoneNumber());
+        viewUserEmailTextField.setText(foundUser.getEmail());
+        if (foundUser.getWhenCreated() != null) viewUserWhenCreatedTextField.setText(formatter.format(foundUser.getWhenCreated()));
+        if (foundUser.getLastUpdated() != null) viewUserLastUpdatedTextField.setText(formatter.format(foundUser.getLastUpdated()));
+        if (foundUser.getLastLoggedIn() != null) viewUserLastLoggedInTextField.setText(formatter.format(foundUser.getLastLoggedIn()));
+        if (foundUser.getLoggedIn() != null) viewUserLoggedInTextField.setText(foundUser.getLoggedIn().toString());
+        
+        viewUserDiaglog.setVisible(true);
+        viewUserDiaglog.setLocationRelativeTo(this);
+    }
+    
     private void deleteUserButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteUserButtonActionPerformed
         int[] rows = usersTable.getSelectedRows();
         if (rows.length == 0) {
@@ -2051,12 +2488,6 @@ public class Home extends javax.swing.JFrame {
         String keyword = searchUsersTextField.getText();
         loadDataToTableUsers(keyword);
     }//GEN-LAST:event_searchUsersTextFieldKeyReleased
-
-    private void addUserButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addUserButtonMouseClicked
-        addUserDiaglog.setLocationRelativeTo(this);
-        addUserDiaglog.setVisible(true);
-        
-    }//GEN-LAST:event_addUserButtonMouseClicked
 
     private void usernameTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usernameTextFieldActionPerformed
         // TODO add your handling code here:
@@ -2226,6 +2657,11 @@ public class Home extends javax.swing.JFrame {
             return;
         }
         
+        if (userController.findByUsername(username).isPresent()) {
+            showUserDiaglogMessage(ErrorMessage.User.DUPLICATED_USERNAME);
+            return;
+        }
+        
         CommonResponseDTO result = userController.addOne(User
                 .builder()
                 .username(username)
@@ -2264,7 +2700,6 @@ public class Home extends javax.swing.JFrame {
     private void confirmDeleteUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmDeleteUserActionPerformed
         deleteUserConfirmDiaglog.dispose();
         int[] rows = usersTable.getSelectedRows();
-        final int ID_COL_INDEX = 0;
         for (int row : rows) {
             userController.deleteOne(Integer.valueOf(usersTable.getValueAt(row, ID_COL_INDEX).toString()));
         }
@@ -2276,6 +2711,116 @@ public class Home extends javax.swing.JFrame {
     private void cancelDeleteUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelDeleteUserActionPerformed
         deleteUserConfirmDiaglog.dispose();
     }//GEN-LAST:event_cancelDeleteUserActionPerformed
+
+    private void diaglogMessageOkButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_diaglogMessageOkButtonActionPerformed
+        diaglogMessage.dispose();
+    }//GEN-LAST:event_diaglogMessageOkButtonActionPerformed
+
+    private void editUsernameTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editUsernameTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_editUsernameTextFieldActionPerformed
+
+    private void editFirstNameTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editFirstNameTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_editFirstNameTextFieldActionPerformed
+
+    private void editLastNameTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editLastNameTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_editLastNameTextFieldActionPerformed
+
+    private void editPhoneNumberTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editPhoneNumberTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_editPhoneNumberTextFieldActionPerformed
+
+    private void editEmailTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editEmailTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_editEmailTextFieldActionPerformed
+
+    private void editUserDiaglogButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editUserDiaglogButtonActionPerformed
+        Integer id = Integer.valueOf(editUserIdTextField.getText());
+        String firstName = editFirstNameTextField.getText();
+        String lastName = editLastNameTextField.getText();
+        String email = editEmailTextField.getText();
+        String phoneNumber = editPhoneNumberTextField.getText();
+        
+        CommonResponseDTO response = userController.updateOne(id, new UserDTO(firstName, lastName, phoneNumber, email));
+        showUserDiaglogMessage(response.message());
+        loadDataToTableUsers(null);
+    }//GEN-LAST:event_editUserDiaglogButtonActionPerformed
+
+    private void cancelEditUserDiaglogButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelEditUserDiaglogButtonActionPerformed
+        // TODO add your handling code here:
+        editUserDiaglog.dispose();
+    }//GEN-LAST:event_cancelEditUserDiaglogButtonActionPerformed
+
+    private void editUserIdTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editUserIdTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_editUserIdTextFieldActionPerformed
+
+    private void addUserButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addUserButtonActionPerformed
+        addUserDiaglog.setLocationRelativeTo(this);
+        addUserDiaglog.setVisible(true);
+    }//GEN-LAST:event_addUserButtonActionPerformed
+
+    private void viewUserLastNameTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewUserLastNameTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_viewUserLastNameTextFieldActionPerformed
+
+    private void viewUserPhoneNumberTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewUserPhoneNumberTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_viewUserPhoneNumberTextFieldActionPerformed
+
+    private void viewUserEmailTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewUserEmailTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_viewUserEmailTextFieldActionPerformed
+
+    private void viewUserWhenCreatedTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewUserWhenCreatedTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_viewUserWhenCreatedTextFieldActionPerformed
+
+    private void viewUserLastUpdatedTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewUserLastUpdatedTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_viewUserLastUpdatedTextFieldActionPerformed
+
+    private void cancelAddUserDiaglogButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelAddUserDiaglogButton1ActionPerformed
+        viewUserDiaglog.dispose();
+    }//GEN-LAST:event_cancelAddUserDiaglogButton1ActionPerformed
+
+    private void editUserDiaglogButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editUserDiaglogButton1ActionPerformed
+        // TODO add your handling code here:
+        int[] rows = usersTable.getSelectedRows();
+        if (rows.length == 0) {
+            showUserDiaglogMessage(ErrorMessage.User.EMPTY_SELECTED_ROWS);
+            return;
+        }
+        if (rows.length > 1) {
+            showUserDiaglogMessage(ErrorMessage.User.EXCEED_SELECTED_ROWS);
+            return;
+        }
+        viewUserDiaglog.dispose();
+        showEditUserDiaglog(rows[0]);
+    }//GEN-LAST:event_editUserDiaglogButton1ActionPerformed
+
+    private void viewUserLastLoggedInTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewUserLastLoggedInTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_viewUserLastLoggedInTextFieldActionPerformed
+
+    private void viewUserLoggedInTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewUserLoggedInTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_viewUserLoggedInTextFieldActionPerformed
+
+    private void viewUsernameTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewUsernameTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_viewUsernameTextFieldActionPerformed
+
+    private void viewUserFirstNameTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewUserFirstNameTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_viewUserFirstNameTextFieldActionPerformed
+
+    private void searchUsersButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchUsersButtonActionPerformed
+        searchUsersTextField.setText("");
+        loadDataToTableUsers(null);
+    }//GEN-LAST:event_searchUsersButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -2300,8 +2845,11 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JButton addUserButton1;
     private javax.swing.JDialog addUserDiaglog;
     private javax.swing.JButton addUserDiaglogButton;
+    private javax.swing.JPanel addUserDiaglogPanel;
     private javax.swing.JButton cancelAddUserDiaglogButton;
+    private javax.swing.JButton cancelAddUserDiaglogButton1;
     private javax.swing.JButton cancelDeleteUser;
+    private javax.swing.JButton cancelEditUserDiaglogButton;
     private javax.swing.JButton confirmDeleteUser;
     private javax.swing.JLabel confirmEmailOTPLabel;
     private javax.swing.JTextField confirmEmailOTPTextField;
@@ -2311,11 +2859,31 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JButton deleteUserButton1;
     private javax.swing.JDialog deleteUserConfirmDiaglog;
     private javax.swing.JLabel deleteUserConfirmDiaglogLabel;
+    private javax.swing.JPanel deleteUserConfirmDiaglogPanel;
     private javax.swing.JDialog diaglogMessage;
     private javax.swing.JLabel diaglogMessageLabel;
+    private javax.swing.JButton diaglogMessageOkButton;
+    private javax.swing.JPanel diaglogMessagePanel;
     private javax.swing.JButton editBillItemButton;
+    private javax.swing.JLabel editEmailLabel;
+    private javax.swing.JTextField editEmailTextField;
+    private javax.swing.JLabel editFirstNameLabel;
+    private javax.swing.JTextField editFirstNameTextField;
+    private javax.swing.JLabel editLastNameLabel;
+    private javax.swing.JTextField editLastNameTextField;
+    private javax.swing.JLabel editPhoneNumberLabel;
+    private javax.swing.JTextField editPhoneNumberTextField;
     private javax.swing.JButton editUserButton;
     private javax.swing.JButton editUserButton1;
+    private javax.swing.JDialog editUserDiaglog;
+    private javax.swing.JButton editUserDiaglogButton;
+    private javax.swing.JButton editUserDiaglogButton1;
+    private javax.swing.JLabel editUserDiaglogLabel;
+    private javax.swing.JPanel editUserDiaglogPanel;
+    private javax.swing.JLabel editUserIdLabel;
+    private javax.swing.JTextField editUserIdTextField;
+    private javax.swing.JLabel editUsernameLabel;
+    private javax.swing.JTextField editUsernameTextField;
     private javax.swing.JLabel emailLabel;
     private javax.swing.JTextField emailTextField;
     private javax.swing.JLabel exportBillLabel;
@@ -2354,9 +2922,9 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JPanel inStockTab;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -2366,9 +2934,6 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
     private javax.swing.JToolBar.Separator jSeparator1;
     private javax.swing.JToolBar.Separator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
@@ -2417,7 +2982,6 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JPanel userFunctionPanel1;
     private javax.swing.JLabel userLabel;
     private javax.swing.JPanel userPanel;
-    private javax.swing.JComboBox<String> userRolesComboBox;
     private javax.swing.JPanel userTab;
     private javax.swing.JLabel usernameLabel;
     private javax.swing.JTextField usernameTextField;
@@ -2425,5 +2989,26 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JScrollPane usersScrollPanel1;
     private javax.swing.JTable usersTable;
     private javax.swing.JTable usersTable1;
+    private javax.swing.JButton viewUserButton;
+    private javax.swing.JDialog viewUserDiaglog;
+    private javax.swing.JPanel viewUserDiaglogPanel;
+    private javax.swing.JLabel viewUserEmailLabel;
+    private javax.swing.JTextField viewUserEmailTextField;
+    private javax.swing.JLabel viewUserFirstNameLabel;
+    private javax.swing.JTextField viewUserFirstNameTextField;
+    private javax.swing.JLabel viewUserLastLoggedInLabel;
+    private javax.swing.JTextField viewUserLastLoggedInTextField;
+    private javax.swing.JLabel viewUserLastNameLabel;
+    private javax.swing.JTextField viewUserLastNameTextField;
+    private javax.swing.JLabel viewUserLastUpdatedLabel;
+    private javax.swing.JTextField viewUserLastUpdatedTextField;
+    private javax.swing.JLabel viewUserLoggedInLabel;
+    private javax.swing.JTextField viewUserLoggedInTextField;
+    private javax.swing.JLabel viewUserPhoneNumberLabel;
+    private javax.swing.JTextField viewUserPhoneNumberTextField;
+    private javax.swing.JLabel viewUserWhenCreatedLabel;
+    private javax.swing.JTextField viewUserWhenCreatedTextField;
+    private javax.swing.JLabel viewUsernameLabel;
+    private javax.swing.JTextField viewUsernameTextField;
     // End of variables declaration//GEN-END:variables
 }

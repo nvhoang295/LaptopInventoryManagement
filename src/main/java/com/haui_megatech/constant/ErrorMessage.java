@@ -29,7 +29,9 @@ public class ErrorMessage {
         public static final String BLANK_INPUT = "Vui lòng nhập đầy đủ tất cả các trường thuộc tính.";
         public static final String MISMATCHED_PASSWORD = "Mật khẩu xác nhận không đúng.";
         public static final String EMPTY_SELECTED_ROWS = "Vui lòng chọn ít nhất 1 bản ghi.";
+        public static final String EXCEED_SELECTED_ROWS = "Vui lòng chỉ chọn một bản ghi để thực hiện chức năng này.";
         public static final String NOT_FOUND = "Không tìm thấy người dùng";
+        public static final String DUPLICATED_USERNAME = "Tên đăng nhập này đã tồn tại.";   
 
     }
 }
