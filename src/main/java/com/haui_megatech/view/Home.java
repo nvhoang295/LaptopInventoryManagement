@@ -250,9 +250,9 @@ public class Home extends javax.swing.JFrame {
         viewUserFirstNameTextField = new javax.swing.JTextField();
         deleteProductConfirmDiaglog = new javax.swing.JDialog();
         deleteProductConfirmDiaglogPanel = new javax.swing.JPanel();
-        deleteUserConfirmDiaglogLabel1 = new javax.swing.JLabel();
-        confirmDeleteUser1 = new javax.swing.JButton();
-        cancelDeleteUser1 = new javax.swing.JButton();
+        deleteProductConfirmDiaglogLabel = new javax.swing.JLabel();
+        confirmDeleteProduct = new javax.swing.JButton();
+        cancelDeleteProduct = new javax.swing.JButton();
         jLabel12 = new javax.swing.JLabel();
         editProductDiaglog = new javax.swing.JDialog();
         editProductDiaglogPanel = new javax.swing.JPanel();
@@ -418,7 +418,6 @@ public class Home extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
 
         logoutDiaglog.setMinimumSize(new java.awt.Dimension(360, 250));
-        logoutDiaglog.setPreferredSize(new java.awt.Dimension(360, 250));
         logoutDiaglog.setSize(new java.awt.Dimension(360, 250));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
@@ -619,7 +618,6 @@ public class Home extends javax.swing.JFrame {
 
         diaglogMessage.setTitle("Thông báo");
         diaglogMessage.setMinimumSize(new java.awt.Dimension(400, 250));
-        diaglogMessage.setPreferredSize(new java.awt.Dimension(400, 250));
         diaglogMessage.setSize(new java.awt.Dimension(400, 250));
 
         diaglogMessagePanel.setBackground(new java.awt.Color(255, 255, 255));
@@ -850,7 +848,6 @@ public class Home extends javax.swing.JFrame {
         viewUserDiaglog.setTitle("Thêm người dùng");
         viewUserDiaglog.setBackground(new java.awt.Color(255, 255, 255));
         viewUserDiaglog.setMinimumSize(new java.awt.Dimension(448, 530));
-        viewUserDiaglog.setPreferredSize(new java.awt.Dimension(448, 530));
         viewUserDiaglog.setSize(new java.awt.Dimension(448, 530));
 
         viewUserDiaglogPanel.setBackground(new java.awt.Color(255, 255, 255));
@@ -1035,35 +1032,35 @@ public class Home extends javax.swing.JFrame {
         deleteProductConfirmDiaglogPanel.setPreferredSize(new java.awt.Dimension(420, 230));
         deleteProductConfirmDiaglogPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        deleteUserConfirmDiaglogLabel1.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        deleteUserConfirmDiaglogLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        deleteUserConfirmDiaglogLabel1.setText("Bạn chắc chắn muốn xoá người dùng abcdeskskskskksd");
-        deleteUserConfirmDiaglogLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        deleteProductConfirmDiaglogPanel.add(deleteUserConfirmDiaglogLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(5, 67, 400, 50));
+        deleteProductConfirmDiaglogLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        deleteProductConfirmDiaglogLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        deleteProductConfirmDiaglogLabel.setText("Bạn chắc chắn muốn xoá người dùng abcdeskskskskksd");
+        deleteProductConfirmDiaglogLabel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        deleteProductConfirmDiaglogPanel.add(deleteProductConfirmDiaglogLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(5, 67, 400, 50));
 
-        confirmDeleteUser1.setBackground(new java.awt.Color(44, 43, 196));
-        confirmDeleteUser1.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        confirmDeleteUser1.setForeground(new java.awt.Color(255, 255, 255));
-        confirmDeleteUser1.setText("Đồng ý");
-        confirmDeleteUser1.setBorderPainted(false);
-        confirmDeleteUser1.addActionListener(new java.awt.event.ActionListener() {
+        confirmDeleteProduct.setBackground(new java.awt.Color(44, 43, 196));
+        confirmDeleteProduct.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        confirmDeleteProduct.setForeground(new java.awt.Color(255, 255, 255));
+        confirmDeleteProduct.setText("Đồng ý");
+        confirmDeleteProduct.setBorderPainted(false);
+        confirmDeleteProduct.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                confirmDeleteUser1ActionPerformed(evt);
+                confirmDeleteProductActionPerformed(evt);
             }
         });
-        deleteProductConfirmDiaglogPanel.add(confirmDeleteUser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 140, -1, 30));
+        deleteProductConfirmDiaglogPanel.add(confirmDeleteProduct, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 140, -1, 30));
 
-        cancelDeleteUser1.setBackground(new java.awt.Color(212, 57, 68));
-        cancelDeleteUser1.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        cancelDeleteUser1.setForeground(new java.awt.Color(255, 255, 255));
-        cancelDeleteUser1.setText("Huỷ bỏ");
-        cancelDeleteUser1.setBorderPainted(false);
-        cancelDeleteUser1.addActionListener(new java.awt.event.ActionListener() {
+        cancelDeleteProduct.setBackground(new java.awt.Color(212, 57, 68));
+        cancelDeleteProduct.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        cancelDeleteProduct.setForeground(new java.awt.Color(255, 255, 255));
+        cancelDeleteProduct.setText("Huỷ bỏ");
+        cancelDeleteProduct.setBorderPainted(false);
+        cancelDeleteProduct.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cancelDeleteUser1ActionPerformed(evt);
+                cancelDeleteProductActionPerformed(evt);
             }
         });
-        deleteProductConfirmDiaglogPanel.add(cancelDeleteUser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 140, -1, 30));
+        deleteProductConfirmDiaglogPanel.add(cancelDeleteProduct, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 140, -1, 30));
 
         jLabel12.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(255, 0, 0));
@@ -1471,7 +1468,6 @@ public class Home extends javax.swing.JFrame {
         addProductDiaglog.setTitle("Thêm người dùng");
         addProductDiaglog.setBackground(new java.awt.Color(255, 255, 255));
         addProductDiaglog.setMinimumSize(new java.awt.Dimension(450, 500));
-        addProductDiaglog.setPreferredSize(new java.awt.Dimension(450, 500));
         addProductDiaglog.setSize(new java.awt.Dimension(450, 500));
 
         addProductDiaglogPanel.setBackground(new java.awt.Color(255, 255, 255));
@@ -3185,11 +3181,11 @@ public class Home extends javax.swing.JFrame {
     private void editUserButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editUserButtonActionPerformed
         int[] rows = usersTable.getSelectedRows();
         if (rows.length == 0) {
-            showDiaglogMessage(ErrorMessage.User.EMPTY_SELECTED_ROWS);
+            showDiaglogMessage(ErrorMessage.EMPTY_SELECTED_ROWS);
             return;
         }
         if (rows.length > 1) {
-            showDiaglogMessage(ErrorMessage.User.EXCEED_SELECTED_ROWS);
+            showDiaglogMessage(ErrorMessage.EXCEED_SELECTED_ROWS);
             return;
         }
         
@@ -3218,11 +3214,11 @@ public class Home extends javax.swing.JFrame {
     private void viewUserButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewUserButtonActionPerformed
         int[] rows = usersTable.getSelectedRows();
         if (rows.length == 0) {
-            showDiaglogMessage(ErrorMessage.User.EMPTY_SELECTED_ROWS);
+            showDiaglogMessage(ErrorMessage.EMPTY_SELECTED_ROWS);
             return;
         }
         if (rows.length > 1) {
-            showDiaglogMessage(ErrorMessage.User.EXCEED_SELECTED_ROWS);
+            showDiaglogMessage(ErrorMessage.EXCEED_SELECTED_ROWS);
             return;
         }
         
@@ -3255,7 +3251,7 @@ public class Home extends javax.swing.JFrame {
     private void deleteUserButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteUserButtonActionPerformed
         int[] rows = usersTable.getSelectedRows();
         if (rows.length == 0) {
-            showDiaglogMessage(ErrorMessage.User.EMPTY_SELECTED_ROWS);
+            showDiaglogMessage(ErrorMessage.EMPTY_SELECTED_ROWS);
             return;
         }
         showDeleteUserConfirmDiaglog(String.format("Bạn có chắc chắn xoá %d bản ghi này?", rows.length));
@@ -3279,11 +3275,11 @@ public class Home extends javax.swing.JFrame {
     private void editProductButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editProductButtonActionPerformed
         int[] rows = productsTable.getSelectedRows();
         if (rows.length == 0) {
-            showDiaglogMessage(ErrorMessage.User.EMPTY_SELECTED_ROWS);
+            showDiaglogMessage(ErrorMessage.EMPTY_SELECTED_ROWS);
             return;
         }
         if (rows.length > 1) {
-            showDiaglogMessage(ErrorMessage.User.EXCEED_SELECTED_ROWS);
+            showDiaglogMessage(ErrorMessage.EXCEED_SELECTED_ROWS);
             return;
         }
         
@@ -3327,9 +3323,22 @@ public class Home extends javax.swing.JFrame {
     }
     
     private void deleteProductButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteProductButtonActionPerformed
-        // TODO add your handling code here:
+        int[] rows = productsTable.getSelectedRows();
+        
+        if (rows.length == 0) {
+            this.showDiaglogMessage(ErrorMessage.EMPTY_SELECTED_ROWS);
+            return;
+        }
+        
+        showDeleteProductConfirmDiaglog(String.format("Bạn có chắc chắn xoá %d bản ghi này?", rows.length));
     }//GEN-LAST:event_deleteProductButtonActionPerformed
-
+    
+    private void showDeleteProductConfirmDiaglog(String message) {
+        this.deleteProductConfirmDiaglog.setVisible(true);
+        this.deleteProductConfirmDiaglog.setLocationRelativeTo(this);
+        this.deleteProductConfirmDiaglogLabel.setText(message);
+    }
+    
     private void searchUsersTextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchUsersTextFieldKeyReleased
         String keyword = searchUsersTextField.getText();
         loadDataToTableUsers(keyword);
@@ -3637,11 +3646,11 @@ public class Home extends javax.swing.JFrame {
         // TODO add your handling code here:
         int[] rows = usersTable.getSelectedRows();
         if (rows.length == 0) {
-            showDiaglogMessage(ErrorMessage.User.EMPTY_SELECTED_ROWS);
+            showDiaglogMessage(ErrorMessage.EMPTY_SELECTED_ROWS);
             return;
         }
         if (rows.length > 1) {
-            showDiaglogMessage(ErrorMessage.User.EXCEED_SELECTED_ROWS);
+            showDiaglogMessage(ErrorMessage.EXCEED_SELECTED_ROWS);
             return;
         }
         viewUserDiaglog.dispose();
@@ -3672,11 +3681,11 @@ public class Home extends javax.swing.JFrame {
     private void viewProductButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewProductButtonActionPerformed
         int[] rows = productsTable.getSelectedRows();
         if (rows.length == 0) {
-            showDiaglogMessage(ErrorMessage.User.EMPTY_SELECTED_ROWS);
+            showDiaglogMessage(ErrorMessage.EMPTY_SELECTED_ROWS);
             return;
         }
         if (rows.length > 1) {
-            showDiaglogMessage(ErrorMessage.User.EXCEED_SELECTED_ROWS);
+            showDiaglogMessage(ErrorMessage.EXCEED_SELECTED_ROWS);
             return;
         }
         this.showViewProductDiaglog(rows[0]);
@@ -3711,13 +3720,22 @@ public class Home extends javax.swing.JFrame {
         
     }
     
-    private void confirmDeleteUser1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmDeleteUser1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_confirmDeleteUser1ActionPerformed
+    private void confirmDeleteProductActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmDeleteProductActionPerformed
+        int[] rows = productsTable.getSelectedRows();
+        
+        for (int row : rows) {
+            Integer id = Integer.valueOf(productsTable.getValueAt(row, ID_COL_INDEX).toString());
+            productController.deleteOne(id);
+        }
+        
+        deleteProductConfirmDiaglog.dispose();
+        loadDataToTableProducts(null);
+        showDiaglogMessage(String.format("Xoá thành công %d sản phẩm.", rows.length));
+    }//GEN-LAST:event_confirmDeleteProductActionPerformed
 
-    private void cancelDeleteUser1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelDeleteUser1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cancelDeleteUser1ActionPerformed
+    private void cancelDeleteProductActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelDeleteProductActionPerformed
+        deleteProductConfirmDiaglog.dispose();
+    }//GEN-LAST:event_cancelDeleteProductActionPerformed
 
     private void productProcessorTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_productProcessorTextFieldActionPerformed
         // TODO add your handling code here:
@@ -3965,24 +3983,24 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JButton cancelAddProductDiaglogButton;
     private javax.swing.JButton cancelAddUserDiaglogButton;
     private javax.swing.JButton cancelAddUserDiaglogButton1;
+    private javax.swing.JButton cancelDeleteProduct;
     private javax.swing.JButton cancelDeleteUser;
-    private javax.swing.JButton cancelDeleteUser1;
     private javax.swing.JButton cancelEditProductDiaglogButton;
     private javax.swing.JButton cancelEditUserDiaglogButton;
     private javax.swing.JButton cancelViewProductDiaglogButton;
+    private javax.swing.JButton confirmDeleteProduct;
     private javax.swing.JButton confirmDeleteUser;
-    private javax.swing.JButton confirmDeleteUser1;
     private javax.swing.JLabel confirmEmailOTPLabel;
     private javax.swing.JTextField confirmEmailOTPTextField;
     private javax.swing.JPasswordField confirmPasswordField;
     private javax.swing.JLabel confirmPasswordLabel;
     private javax.swing.JButton deleteProductButton;
     private javax.swing.JDialog deleteProductConfirmDiaglog;
+    private javax.swing.JLabel deleteProductConfirmDiaglogLabel;
     private javax.swing.JPanel deleteProductConfirmDiaglogPanel;
     private javax.swing.JButton deleteUserButton;
     private javax.swing.JDialog deleteUserConfirmDiaglog;
     private javax.swing.JLabel deleteUserConfirmDiaglogLabel;
-    private javax.swing.JLabel deleteUserConfirmDiaglogLabel1;
     private javax.swing.JPanel deleteUserConfirmDiaglogPanel;
     private javax.swing.JDialog diaglogMessage;
     private javax.swing.JLabel diaglogMessageLabel;
