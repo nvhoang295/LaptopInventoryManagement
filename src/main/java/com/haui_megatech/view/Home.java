@@ -280,11 +280,12 @@ public class Home extends javax.swing.JFrame {
         statisticsPanel = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
 
-        logoutDiaglog.setMinimumSize(new java.awt.Dimension(400, 300));
+        logoutDiaglog.setMinimumSize(new java.awt.Dimension(360, 250));
+        logoutDiaglog.setPreferredSize(new java.awt.Dimension(360, 250));
         logoutDiaglog.setSize(new java.awt.Dimension(360, 250));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel1.setMinimumSize(new java.awt.Dimension(400, 300));
+        jPanel1.setMinimumSize(new java.awt.Dimension(360, 250));
         jPanel1.setName(""); // NOI18N
         jPanel1.setPreferredSize(new java.awt.Dimension(360, 250));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -308,25 +309,27 @@ public class Home extends javax.swing.JFrame {
         jTextField1.setFocusable(false);
         jTextField1.setScrollOffset(250);
         jTextField1.setVerifyInputWhenFocusTarget(false);
-        jPanel1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(25, 60, 340, 100));
+        jPanel1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(5, 60, 340, 90));
 
         jButton1.setBackground(new java.awt.Color(44, 43, 196));
         jButton1.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(255, 255, 255));
         jButton1.setText("Huỷ");
         jButton1.setBorderPainted(false);
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 170, 80, 30));
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 150, 80, 30));
 
         jButton2.setBackground(new java.awt.Color(255, 51, 51));
         jButton2.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        jButton2.setForeground(new java.awt.Color(255, 255, 255));
         jButton2.setText("Thoát");
         jButton2.setBorderPainted(false);
-        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 170, 80, 30));
+        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 150, 80, 30));
 
         javax.swing.GroupLayout logoutDiaglogLayout = new javax.swing.GroupLayout(logoutDiaglog.getContentPane());
         logoutDiaglog.getContentPane().setLayout(logoutDiaglogLayout);
         logoutDiaglogLayout.setHorizontalGroup(
             logoutDiaglogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         logoutDiaglogLayout.setVerticalGroup(
             logoutDiaglogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -431,6 +434,7 @@ public class Home extends javax.swing.JFrame {
 
         addUserDiaglogButton.setBackground(new java.awt.Color(0, 122, 249));
         addUserDiaglogButton.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        addUserDiaglogButton.setForeground(new java.awt.Color(255, 255, 255));
         addUserDiaglogButton.setText("Thêm mới");
         addUserDiaglogButton.setBorderPainted(false);
         addUserDiaglogButton.addActionListener(new java.awt.event.ActionListener() {
@@ -442,6 +446,7 @@ public class Home extends javax.swing.JFrame {
 
         cancelAddUserDiaglogButton.setBackground(new java.awt.Color(212, 57, 68));
         cancelAddUserDiaglogButton.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        cancelAddUserDiaglogButton.setForeground(new java.awt.Color(255, 255, 255));
         cancelAddUserDiaglogButton.setText("Huỷ bỏ");
         cancelAddUserDiaglogButton.setBorderPainted(false);
         cancelAddUserDiaglogButton.addActionListener(new java.awt.event.ActionListener() {
@@ -453,6 +458,7 @@ public class Home extends javax.swing.JFrame {
 
         sendCodeAddUserDiaglogButton.setBackground(new java.awt.Color(36, 169, 65));
         sendCodeAddUserDiaglogButton.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        sendCodeAddUserDiaglogButton.setForeground(new java.awt.Color(255, 255, 255));
         sendCodeAddUserDiaglogButton.setText("Gửi mã");
         sendCodeAddUserDiaglogButton.setBorderPainted(false);
         addUserDiaglogPanel.add(sendCodeAddUserDiaglogButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 350, 90, 30));
@@ -476,6 +482,7 @@ public class Home extends javax.swing.JFrame {
 
         diaglogMessage.setTitle("Thông báo");
         diaglogMessage.setMinimumSize(new java.awt.Dimension(400, 250));
+        diaglogMessage.setPreferredSize(new java.awt.Dimension(400, 250));
         diaglogMessage.setSize(new java.awt.Dimension(400, 250));
 
         diaglogMessagePanel.setBackground(new java.awt.Color(255, 255, 255));
@@ -505,7 +512,7 @@ public class Home extends javax.swing.JFrame {
                 diaglogMessageOkButtonActionPerformed(evt);
             }
         });
-        diaglogMessagePanel.add(diaglogMessageOkButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 160, 82, 30));
+        diaglogMessagePanel.add(diaglogMessageOkButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 150, 82, 30));
 
         javax.swing.GroupLayout diaglogMessageLayout = new javax.swing.GroupLayout(diaglogMessage.getContentPane());
         diaglogMessage.getContentPane().setLayout(diaglogMessageLayout);
@@ -515,7 +522,7 @@ public class Home extends javax.swing.JFrame {
         );
         diaglogMessageLayout.setVerticalGroup(
             diaglogMessageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(diaglogMessagePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(diaglogMessagePanel, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         deleteUserConfirmDiaglog.setTitle("Xác nhận xoá");
@@ -587,10 +594,11 @@ public class Home extends javax.swing.JFrame {
 
         editUsernameLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         editUsernameLabel.setText("Tên đăng nhập");
-        editUserDiaglogPanel.add(editUsernameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, -1, -1));
+        editUserDiaglogPanel.add(editUsernameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, -1, 30));
 
         editUsernameTextField.setEditable(false);
         editUsernameTextField.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        editUsernameTextField.setEnabled(false);
         editUsernameTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 editUsernameTextFieldActionPerformed(evt);
@@ -600,7 +608,7 @@ public class Home extends javax.swing.JFrame {
 
         editFirstNameLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         editFirstNameLabel.setText("Tên");
-        editUserDiaglogPanel.add(editFirstNameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 190, -1, -1));
+        editUserDiaglogPanel.add(editFirstNameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 160, -1, 30));
 
         editFirstNameTextField.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         editFirstNameTextField.addActionListener(new java.awt.event.ActionListener() {
@@ -608,11 +616,11 @@ public class Home extends javax.swing.JFrame {
                 editFirstNameTextFieldActionPerformed(evt);
             }
         });
-        editUserDiaglogPanel.add(editFirstNameTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 190, 200, 30));
+        editUserDiaglogPanel.add(editFirstNameTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 160, 200, 30));
 
         editLastNameLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         editLastNameLabel.setText("Họ đệm");
-        editUserDiaglogPanel.add(editLastNameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 230, -1, -1));
+        editUserDiaglogPanel.add(editLastNameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 210, -1, 30));
 
         editLastNameTextField.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         editLastNameTextField.addActionListener(new java.awt.event.ActionListener() {
@@ -620,11 +628,11 @@ public class Home extends javax.swing.JFrame {
                 editLastNameTextFieldActionPerformed(evt);
             }
         });
-        editUserDiaglogPanel.add(editLastNameTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 230, 200, 30));
+        editUserDiaglogPanel.add(editLastNameTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 210, 200, 30));
 
         editPhoneNumberLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         editPhoneNumberLabel.setText("Số điện thoại");
-        editUserDiaglogPanel.add(editPhoneNumberLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 270, -1, -1));
+        editUserDiaglogPanel.add(editPhoneNumberLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 260, -1, 30));
 
         editPhoneNumberTextField.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         editPhoneNumberTextField.addActionListener(new java.awt.event.ActionListener() {
@@ -632,11 +640,11 @@ public class Home extends javax.swing.JFrame {
                 editPhoneNumberTextFieldActionPerformed(evt);
             }
         });
-        editUserDiaglogPanel.add(editPhoneNumberTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 270, 200, 30));
+        editUserDiaglogPanel.add(editPhoneNumberTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 260, 200, 30));
 
         editEmailLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         editEmailLabel.setText("Địa chỉ email");
-        editUserDiaglogPanel.add(editEmailLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 310, -1, -1));
+        editUserDiaglogPanel.add(editEmailLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 310, -1, 30));
 
         editEmailTextField.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         editEmailTextField.addActionListener(new java.awt.event.ActionListener() {
@@ -648,6 +656,7 @@ public class Home extends javax.swing.JFrame {
 
         editUserDiaglogButton.setBackground(new java.awt.Color(0, 122, 249));
         editUserDiaglogButton.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        editUserDiaglogButton.setForeground(new java.awt.Color(255, 255, 255));
         editUserDiaglogButton.setText("Cập nhật");
         editUserDiaglogButton.setBorderPainted(false);
         editUserDiaglogButton.addActionListener(new java.awt.event.ActionListener() {
@@ -655,10 +664,11 @@ public class Home extends javax.swing.JFrame {
                 editUserDiaglogButtonActionPerformed(evt);
             }
         });
-        editUserDiaglogPanel.add(editUserDiaglogButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 400, -1, -1));
+        editUserDiaglogPanel.add(editUserDiaglogButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 380, -1, 30));
 
         cancelEditUserDiaglogButton.setBackground(new java.awt.Color(212, 57, 68));
         cancelEditUserDiaglogButton.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        cancelEditUserDiaglogButton.setForeground(new java.awt.Color(255, 255, 255));
         cancelEditUserDiaglogButton.setText("Huỷ bỏ");
         cancelEditUserDiaglogButton.setBorderPainted(false);
         cancelEditUserDiaglogButton.addActionListener(new java.awt.event.ActionListener() {
@@ -666,7 +676,7 @@ public class Home extends javax.swing.JFrame {
                 cancelEditUserDiaglogButtonActionPerformed(evt);
             }
         });
-        editUserDiaglogPanel.add(cancelEditUserDiaglogButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 400, -1, -1));
+        editUserDiaglogPanel.add(cancelEditUserDiaglogButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 380, -1, 30));
 
         editUserDiaglogLabel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         editUserDiaglogLabel.setForeground(new java.awt.Color(44, 43, 196));
@@ -676,10 +686,12 @@ public class Home extends javax.swing.JFrame {
 
         editUserIdLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         editUserIdLabel.setText("Mã người dùng");
-        editUserDiaglogPanel.add(editUserIdLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, -1, -1));
+        editUserDiaglogPanel.add(editUserIdLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, -1, 30));
 
         editUserIdTextField.setEditable(false);
         editUserIdTextField.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        editUserIdTextField.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        editUserIdTextField.setEnabled(false);
         editUserIdTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 editUserIdTextFieldActionPerformed(evt);
@@ -700,20 +712,22 @@ public class Home extends javax.swing.JFrame {
 
         viewUserDiaglog.setTitle("Thêm người dùng");
         viewUserDiaglog.setBackground(new java.awt.Color(255, 255, 255));
-        viewUserDiaglog.setMinimumSize(new java.awt.Dimension(450, 500));
-        viewUserDiaglog.setSize(new java.awt.Dimension(450, 500));
+        viewUserDiaglog.setMinimumSize(new java.awt.Dimension(448, 530));
+        viewUserDiaglog.setPreferredSize(new java.awt.Dimension(448, 530));
+        viewUserDiaglog.setSize(new java.awt.Dimension(448, 530));
 
         viewUserDiaglogPanel.setBackground(new java.awt.Color(255, 255, 255));
-        viewUserDiaglogPanel.setMinimumSize(new java.awt.Dimension(430, 450));
-        viewUserDiaglogPanel.setPreferredSize(new java.awt.Dimension(430, 450));
+        viewUserDiaglogPanel.setMinimumSize(new java.awt.Dimension(448, 530));
+        viewUserDiaglogPanel.setPreferredSize(new java.awt.Dimension(448, 530));
         viewUserDiaglogPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         viewUsernameLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         viewUsernameLabel.setText("Tên đăng nhập");
-        viewUserDiaglogPanel.add(viewUsernameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, -1, -1));
+        viewUserDiaglogPanel.add(viewUsernameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, -1, 30));
 
         viewUserLastNameTextField.setEditable(false);
         viewUserLastNameTextField.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        viewUserLastNameTextField.setEnabled(false);
         viewUserLastNameTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 viewUserLastNameTextFieldActionPerformed(evt);
@@ -723,18 +737,19 @@ public class Home extends javax.swing.JFrame {
 
         viewUserFirstNameLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         viewUserFirstNameLabel.setText("Tên");
-        viewUserDiaglogPanel.add(viewUserFirstNameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, -1, -1));
+        viewUserDiaglogPanel.add(viewUserFirstNameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, -1, 30));
 
         viewUserLastNameLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         viewUserLastNameLabel.setText("Họ đệm");
-        viewUserDiaglogPanel.add(viewUserLastNameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 150, -1, -1));
+        viewUserDiaglogPanel.add(viewUserLastNameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 150, -1, 30));
 
         viewUserPhoneNumberLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         viewUserPhoneNumberLabel.setText("Số điện thoại");
-        viewUserDiaglogPanel.add(viewUserPhoneNumberLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 190, -1, -1));
+        viewUserDiaglogPanel.add(viewUserPhoneNumberLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 190, -1, 30));
 
         viewUserPhoneNumberTextField.setEditable(false);
         viewUserPhoneNumberTextField.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        viewUserPhoneNumberTextField.setEnabled(false);
         viewUserPhoneNumberTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 viewUserPhoneNumberTextFieldActionPerformed(evt);
@@ -744,10 +759,11 @@ public class Home extends javax.swing.JFrame {
 
         viewUserEmailLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         viewUserEmailLabel.setText("Địa chỉ email");
-        viewUserDiaglogPanel.add(viewUserEmailLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 230, -1, -1));
+        viewUserDiaglogPanel.add(viewUserEmailLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 230, -1, 30));
 
         viewUserEmailTextField.setEditable(false);
         viewUserEmailTextField.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        viewUserEmailTextField.setEnabled(false);
         viewUserEmailTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 viewUserEmailTextFieldActionPerformed(evt);
@@ -757,10 +773,11 @@ public class Home extends javax.swing.JFrame {
 
         viewUserWhenCreatedLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         viewUserWhenCreatedLabel.setText("Ngày tạo");
-        viewUserDiaglogPanel.add(viewUserWhenCreatedLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 270, -1, -1));
+        viewUserDiaglogPanel.add(viewUserWhenCreatedLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 270, -1, 30));
 
         viewUserWhenCreatedTextField.setEditable(false);
         viewUserWhenCreatedTextField.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        viewUserWhenCreatedTextField.setEnabled(false);
         viewUserWhenCreatedTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 viewUserWhenCreatedTextFieldActionPerformed(evt);
@@ -770,10 +787,11 @@ public class Home extends javax.swing.JFrame {
 
         viewUserLastUpdatedLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         viewUserLastUpdatedLabel.setText("Cập nhật lần cuối");
-        viewUserDiaglogPanel.add(viewUserLastUpdatedLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 310, -1, -1));
+        viewUserDiaglogPanel.add(viewUserLastUpdatedLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 310, -1, 30));
 
         viewUserLastUpdatedTextField.setEditable(false);
         viewUserLastUpdatedTextField.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        viewUserLastUpdatedTextField.setEnabled(false);
         viewUserLastUpdatedTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 viewUserLastUpdatedTextFieldActionPerformed(evt);
@@ -783,6 +801,7 @@ public class Home extends javax.swing.JFrame {
 
         cancelAddUserDiaglogButton1.setBackground(new java.awt.Color(212, 57, 68));
         cancelAddUserDiaglogButton1.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        cancelAddUserDiaglogButton1.setForeground(new java.awt.Color(255, 255, 255));
         cancelAddUserDiaglogButton1.setText("Đóng");
         cancelAddUserDiaglogButton1.setBorderPainted(false);
         cancelAddUserDiaglogButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -790,7 +809,7 @@ public class Home extends javax.swing.JFrame {
                 cancelAddUserDiaglogButton1ActionPerformed(evt);
             }
         });
-        viewUserDiaglogPanel.add(cancelAddUserDiaglogButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 450, -1, -1));
+        viewUserDiaglogPanel.add(cancelAddUserDiaglogButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 440, -1, 30));
 
         jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(44, 43, 196));
@@ -800,6 +819,7 @@ public class Home extends javax.swing.JFrame {
 
         editUserDiaglogButton1.setBackground(new java.awt.Color(0, 122, 249));
         editUserDiaglogButton1.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        editUserDiaglogButton1.setForeground(new java.awt.Color(255, 255, 255));
         editUserDiaglogButton1.setText("Cập nhật");
         editUserDiaglogButton1.setBorderPainted(false);
         editUserDiaglogButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -807,14 +827,15 @@ public class Home extends javax.swing.JFrame {
                 editUserDiaglogButton1ActionPerformed(evt);
             }
         });
-        viewUserDiaglogPanel.add(editUserDiaglogButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 450, -1, -1));
+        viewUserDiaglogPanel.add(editUserDiaglogButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 440, -1, 30));
 
         viewUserLastLoggedInLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         viewUserLastLoggedInLabel.setText("Đăng nhập lần cuối");
-        viewUserDiaglogPanel.add(viewUserLastLoggedInLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 350, -1, -1));
+        viewUserDiaglogPanel.add(viewUserLastLoggedInLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 350, -1, 30));
 
         viewUserLastLoggedInTextField.setEditable(false);
         viewUserLastLoggedInTextField.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        viewUserLastLoggedInTextField.setEnabled(false);
         viewUserLastLoggedInTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 viewUserLastLoggedInTextFieldActionPerformed(evt);
@@ -824,10 +845,11 @@ public class Home extends javax.swing.JFrame {
 
         viewUserLoggedInLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         viewUserLoggedInLabel.setText("Số lần đăng nhập");
-        viewUserDiaglogPanel.add(viewUserLoggedInLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 390, -1, -1));
+        viewUserDiaglogPanel.add(viewUserLoggedInLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 390, -1, 30));
 
         viewUserLoggedInTextField.setEditable(false);
         viewUserLoggedInTextField.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        viewUserLoggedInTextField.setEnabled(false);
         viewUserLoggedInTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 viewUserLoggedInTextFieldActionPerformed(evt);
@@ -837,6 +859,7 @@ public class Home extends javax.swing.JFrame {
 
         viewUsernameTextField.setEditable(false);
         viewUsernameTextField.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        viewUsernameTextField.setEnabled(false);
         viewUsernameTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 viewUsernameTextFieldActionPerformed(evt);
@@ -846,6 +869,7 @@ public class Home extends javax.swing.JFrame {
 
         viewUserFirstNameTextField.setEditable(false);
         viewUserFirstNameTextField.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        viewUserFirstNameTextField.setEnabled(false);
         viewUserFirstNameTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 viewUserFirstNameTextFieldActionPerformed(evt);
@@ -861,7 +885,7 @@ public class Home extends javax.swing.JFrame {
         );
         viewUserDiaglogLayout.setVerticalGroup(
             viewUserDiaglogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(viewUserDiaglogPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 505, Short.MAX_VALUE)
+            .addComponent(viewUserDiaglogPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 530, Short.MAX_VALUE)
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
