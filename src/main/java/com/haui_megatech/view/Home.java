@@ -224,6 +224,7 @@ public class Home extends javax.swing.JFrame {
         editUserButton1 = new javax.swing.JButton();
         addUserButton1 = new javax.swing.JButton();
         deleteUserButton1 = new javax.swing.JButton();
+        viewUserButton1 = new javax.swing.JButton();
         providerPanel = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         importProductPanel = new javax.swing.JPanel();
@@ -1322,6 +1323,7 @@ public class Home extends javax.swing.JFrame {
 
         searchProductsButton1.setBackground(new java.awt.Color(65, 120, 190));
         searchProductsButton1.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        searchProductsButton1.setForeground(new java.awt.Color(255, 255, 255));
         searchProductsButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/refresh.png"))); // NOI18N
         searchProductsButton1.setText("Làm mới");
         searchProductsButton1.setBorderPainted(false);
@@ -1332,13 +1334,11 @@ public class Home extends javax.swing.JFrame {
         searchUsersPanel1Layout.setHorizontalGroup(
             searchUsersPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(searchUsersPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(productBrandsComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(productBrandsComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(searchProductsTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 226, Short.MAX_VALUE)
+                .addComponent(searchProductsTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(searchProductsButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addComponent(searchProductsButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         searchUsersPanel1Layout.setVerticalGroup(
             searchUsersPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1359,6 +1359,7 @@ public class Home extends javax.swing.JFrame {
 
         importUsersFromExcelButton1.setBackground(new java.awt.Color(1, 169, 84));
         importUsersFromExcelButton1.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        importUsersFromExcelButton1.setForeground(new java.awt.Color(255, 255, 255));
         importUsersFromExcelButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/sheet.png"))); // NOI18N
         importUsersFromExcelButton1.setText("Nhập Excel");
         importUsersFromExcelButton1.setBorderPainted(false);
@@ -1371,6 +1372,7 @@ public class Home extends javax.swing.JFrame {
 
         exportUsersToExcelButton1.setBackground(new java.awt.Color(0, 155, 110));
         exportUsersToExcelButton1.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        exportUsersToExcelButton1.setForeground(new java.awt.Color(255, 255, 255));
         exportUsersToExcelButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/sheet.png"))); // NOI18N
         exportUsersToExcelButton1.setText("Xuất Excel");
         exportUsersToExcelButton1.setBorderPainted(false);
@@ -1381,8 +1383,9 @@ public class Home extends javax.swing.JFrame {
             }
         });
 
-        editUserButton1.setBackground(new java.awt.Color(36, 169, 65));
+        editUserButton1.setBackground(new java.awt.Color(255, 193, 7));
         editUserButton1.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        editUserButton1.setForeground(new java.awt.Color(255, 255, 255));
         editUserButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/edit_icon.png"))); // NOI18N
         editUserButton1.setText("Sửa");
         editUserButton1.setBorderPainted(false);
@@ -1393,8 +1396,9 @@ public class Home extends javax.swing.JFrame {
             }
         });
 
-        addUserButton1.setBackground(new java.awt.Color(0, 122, 249));
+        addUserButton1.setBackground(new java.awt.Color(36, 169, 65));
         addUserButton1.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        addUserButton1.setForeground(new java.awt.Color(255, 255, 255));
         addUserButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/add_circle_icon.png"))); // NOI18N
         addUserButton1.setText("Thêm");
         addUserButton1.setBorderPainted(false);
@@ -1407,6 +1411,7 @@ public class Home extends javax.swing.JFrame {
 
         deleteUserButton1.setBackground(new java.awt.Color(212, 57, 68));
         deleteUserButton1.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        deleteUserButton1.setForeground(new java.awt.Color(255, 255, 255));
         deleteUserButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/remove_icon.png"))); // NOI18N
         deleteUserButton1.setText("Xoá");
         deleteUserButton1.setBorderPainted(false);
@@ -1417,19 +1422,33 @@ public class Home extends javax.swing.JFrame {
             }
         });
 
+        viewUserButton1.setBackground(new java.awt.Color(13, 110, 253));
+        viewUserButton1.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        viewUserButton1.setForeground(new java.awt.Color(255, 255, 255));
+        viewUserButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/show.png"))); // NOI18N
+        viewUserButton1.setText("Xem");
+        viewUserButton1.setBorderPainted(false);
+        viewUserButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                viewUserButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout userFunctionPanel1Layout = new javax.swing.GroupLayout(userFunctionPanel1);
         userFunctionPanel1.setLayout(userFunctionPanel1Layout);
         userFunctionPanel1Layout.setHorizontalGroup(
             userFunctionPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(userFunctionPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(addUserButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(2, 2, 2)
+                .addComponent(viewUserButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(addUserButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(editUserButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(deleteUserButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(importUsersFromExcelButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -1441,15 +1460,16 @@ public class Home extends javax.swing.JFrame {
             .addGroup(userFunctionPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(userFunctionPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jSeparator2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jSeparator2, javax.swing.GroupLayout.DEFAULT_SIZE, 47, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, userFunctionPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(importUsersFromExcelButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(exportUsersToExcelButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, userFunctionPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(addUserButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(editUserButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(viewUserButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(deleteUserButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 7, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout productPanelLayout = new javax.swing.GroupLayout(productPanel);
@@ -1458,14 +1478,13 @@ public class Home extends javax.swing.JFrame {
             productPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(productPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(productPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(productPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(usersScrollPanel1)
                     .addGroup(productPanelLayout.createSequentialGroup()
                         .addComponent(userFunctionPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(searchUsersPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(usersScrollPanel1, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addContainerGap())
+                        .addComponent(searchUsersPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
         productPanelLayout.setVerticalGroup(
             productPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1474,9 +1493,9 @@ public class Home extends javax.swing.JFrame {
                 .addGroup(productPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(userFunctionPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(searchUsersPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(usersScrollPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 658, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26))
+                .addContainerGap(59, Short.MAX_VALUE))
         );
 
         getContentPane().add(productPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 0, 1170, 830));
@@ -1690,7 +1709,6 @@ public class Home extends javax.swing.JFrame {
                             .addComponent(importBillIdTextField)
                             .addComponent(providerNameComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(importProductBillCreatorLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(importProductBillScrollPane)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, importProductPanelLayout.createSequentialGroup()
                         .addGroup(importProductPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(importProductPanelLayout.createSequentialGroup()
@@ -1704,8 +1722,9 @@ public class Home extends javax.swing.JFrame {
                                 .addComponent(editBillItemButton, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(48, 48, 48)))
                         .addGroup(importProductPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(removeBillItemButton, javax.swing.GroupLayout.PREFERRED_SIZE, 155, Short.MAX_VALUE)
-                            .addComponent(importBillProductButton, javax.swing.GroupLayout.DEFAULT_SIZE, 155, Short.MAX_VALUE))))
+                            .addComponent(removeBillItemButton, javax.swing.GroupLayout.DEFAULT_SIZE, 155, Short.MAX_VALUE)
+                            .addComponent(importBillProductButton, javax.swing.GroupLayout.DEFAULT_SIZE, 155, Short.MAX_VALUE)))
+                    .addComponent(importProductBillScrollPane))
                 .addGap(35, 35, 35))
         );
         importProductPanelLayout.setVerticalGroup(
@@ -1873,6 +1892,7 @@ public class Home extends javax.swing.JFrame {
 
         searchUsersButton.setBackground(new java.awt.Color(65, 120, 190));
         searchUsersButton.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        searchUsersButton.setForeground(new java.awt.Color(255, 255, 255));
         searchUsersButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/refresh.png"))); // NOI18N
         searchUsersButton.setText("Làm mới");
         searchUsersButton.setBorderPainted(false);
@@ -1888,7 +1908,7 @@ public class Home extends javax.swing.JFrame {
             searchUsersPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(searchUsersPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(searchUsersTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 253, Short.MAX_VALUE)
+                .addComponent(searchUsersTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 255, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(searchUsersButton, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -1911,6 +1931,7 @@ public class Home extends javax.swing.JFrame {
 
         importUsersFromExcelButton.setBackground(new java.awt.Color(1, 169, 84));
         importUsersFromExcelButton.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        importUsersFromExcelButton.setForeground(new java.awt.Color(255, 255, 255));
         importUsersFromExcelButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/sheet.png"))); // NOI18N
         importUsersFromExcelButton.setText("Nhập Excel");
         importUsersFromExcelButton.setBorderPainted(false);
@@ -1922,6 +1943,7 @@ public class Home extends javax.swing.JFrame {
 
         exportUsersToExcelButton.setBackground(new java.awt.Color(0, 155, 110));
         exportUsersToExcelButton.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        exportUsersToExcelButton.setForeground(new java.awt.Color(255, 255, 255));
         exportUsersToExcelButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/sheet.png"))); // NOI18N
         exportUsersToExcelButton.setText("Xuất Excel");
         exportUsersToExcelButton.setBorderPainted(false);
@@ -1931,8 +1953,9 @@ public class Home extends javax.swing.JFrame {
             }
         });
 
-        editUserButton.setBackground(new java.awt.Color(36, 169, 65));
+        editUserButton.setBackground(new java.awt.Color(255, 193, 7));
         editUserButton.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        editUserButton.setForeground(new java.awt.Color(255, 255, 255));
         editUserButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/edit_icon.png"))); // NOI18N
         editUserButton.setText("Sửa");
         editUserButton.setBorderPainted(false);
@@ -1942,9 +1965,10 @@ public class Home extends javax.swing.JFrame {
             }
         });
 
-        viewUserButton.setBackground(new java.awt.Color(0, 122, 249));
+        viewUserButton.setBackground(new java.awt.Color(13, 110, 253));
         viewUserButton.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        viewUserButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/add_circle_icon.png"))); // NOI18N
+        viewUserButton.setForeground(new java.awt.Color(255, 255, 255));
+        viewUserButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/show.png"))); // NOI18N
         viewUserButton.setText("Xem");
         viewUserButton.setBorderPainted(false);
         viewUserButton.addActionListener(new java.awt.event.ActionListener() {
@@ -1955,6 +1979,7 @@ public class Home extends javax.swing.JFrame {
 
         deleteUserButton.setBackground(new java.awt.Color(212, 57, 68));
         deleteUserButton.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        deleteUserButton.setForeground(new java.awt.Color(255, 255, 255));
         deleteUserButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/remove_icon.png"))); // NOI18N
         deleteUserButton.setText("Xoá");
         deleteUserButton.setBorderPainted(false);
@@ -1964,8 +1989,9 @@ public class Home extends javax.swing.JFrame {
             }
         });
 
-        addUserButton.setBackground(new java.awt.Color(0, 122, 249));
+        addUserButton.setBackground(new java.awt.Color(36, 169, 65));
         addUserButton.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        addUserButton.setForeground(new java.awt.Color(255, 255, 255));
         addUserButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/add_circle_icon.png"))); // NOI18N
         addUserButton.setText("Thêm");
         addUserButton.setBorderPainted(false);
@@ -1981,27 +2007,26 @@ public class Home extends javax.swing.JFrame {
             userFunctionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(userFunctionPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(viewUserButton, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(addUserButton, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(viewUserButton, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(addUserButton, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(editUserButton, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(deleteUserButton, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 9, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(importUsersFromExcelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(exportUsersToExcelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(6, 6, 6))
+                .addGap(12, 12, 12))
         );
         userFunctionPanelLayout.setVerticalGroup(
             userFunctionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(userFunctionPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(userFunctionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jSeparator1, javax.swing.GroupLayout.DEFAULT_SIZE, 47, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, userFunctionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(importUsersFromExcelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(exportUsersToExcelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -2010,7 +2035,10 @@ public class Home extends javax.swing.JFrame {
                         .addComponent(editUserButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(deleteUserButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(addUserButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(0, 7, Short.MAX_VALUE))
+                .addContainerGap(14, Short.MAX_VALUE))
+            .addGroup(userFunctionPanelLayout.createSequentialGroup()
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout userPanelLayout = new javax.swing.GroupLayout(userPanel);
@@ -2022,9 +2050,11 @@ public class Home extends javax.swing.JFrame {
                 .addGroup(userPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(usersScrollPanel)
                     .addGroup(userPanelLayout.createSequentialGroup()
-                        .addComponent(userFunctionPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(userFunctionPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 737, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(searchUsersPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addComponent(searchUsersPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addGap(18, 18, 18))
         );
         userPanelLayout.setVerticalGroup(
             userPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2822,6 +2852,10 @@ public class Home extends javax.swing.JFrame {
         loadDataToTableUsers(null);
     }//GEN-LAST:event_searchUsersButtonActionPerformed
 
+    private void viewUserButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewUserButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_viewUserButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -2990,6 +3024,7 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JTable usersTable;
     private javax.swing.JTable usersTable1;
     private javax.swing.JButton viewUserButton;
+    private javax.swing.JButton viewUserButton1;
     private javax.swing.JDialog viewUserDiaglog;
     private javax.swing.JPanel viewUserDiaglogPanel;
     private javax.swing.JLabel viewUserEmailLabel;
