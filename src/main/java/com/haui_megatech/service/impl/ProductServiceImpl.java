@@ -125,6 +125,7 @@ public class ProductServiceImpl implements ProductService {
         foundProduct.setStorage(product.getStorage());
         foundProduct.setDisplay(product.getDisplay());
         foundProduct.setBattery(product.getBattery());
+        foundProduct.setLastUpdated(new Date());
         
         Optional<Product> updatedProduct = productRepository.save(foundProduct);
         return CommonResponseDTO
