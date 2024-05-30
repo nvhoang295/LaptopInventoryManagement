@@ -23,11 +23,11 @@ public class UserController {
         this.userService = userService;
     }
     
-    public ListItemsResponseDTO<User> getList() {
+    public CommonResponseDTO<List<User>> getList() {
         return userService.getList();
     }
     
-    public ListItemsResponseDTO<User> searchList(String keyword) {
+    public CommonResponseDTO<List<User>> searchList(String keyword) {
         return userService.searchList(keyword);
     }
     
