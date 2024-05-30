@@ -39,6 +39,10 @@ public class ApplicationContext {
     // product
     public final String REL_PRODUCTS_DATA_PATH;
     public final String ABS_PRODUCTS_DATA_PATH;
+    
+    // provider
+    public final String REL_PROVIDERS_DATA_PATH;
+    public final String ABS_PROVIDERS_DATA_PATH;
 
     public String getAbsUsersDataPath() {
         return ABS_USERS_DATA_PATH;
@@ -72,7 +76,8 @@ public class ApplicationContext {
         REL_PRODUCTS_DATA_PATH = REL_DATA_PATH_PREFIX + "/products.dat";
         ABS_PRODUCTS_DATA_PATH = ABS_ROOT_PROJECT_PATH + REL_PRODUCTS_DATA_PATH;
         
-        
+        REL_PROVIDERS_DATA_PATH = REL_DATA_PATH_PREFIX + "/providers.dat";
+        ABS_PROVIDERS_DATA_PATH = ABS_ROOT_PROJECT_PATH + REL_PROVIDERS_DATA_PATH;
 
     }
     
