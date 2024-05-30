@@ -40,4 +40,10 @@ public class ErrorMessage {
         public static final String NOT_FOUND = "Không tìm thấy sản phẩm.";
         public static final String BLANK_INPUT = "Vui lòng nhập đầy đủ tất cả các trường thuộc tính.";
     }
+    
+    public static final class Provider {
+        public static final String SAVE = "Lưu nhà cung cấp không thành công.";
+        public static final String NOT_FOUND = "Không tìm thấy nhà cung cấp.";
+        public static final String BLANK_INPUT = "Vui lòng nhập đầy đủ tất cả các trường thuộc tính";
+    }
 }
