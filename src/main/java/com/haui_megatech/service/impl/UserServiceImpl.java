@@ -48,8 +48,8 @@ public class UserServiceImpl implements UserService {
                                     .append(item.getLastName())
                                     .append(item.getPhoneNumber())
                                     .append(item.getEmail())
-                                    .toString()
-                                    .contains(keyword);
+                                    .toString().toLowerCase()
+                                    .contains(keyword.toLowerCase());
                         })
                         .collect(Collectors.toList())
                 )

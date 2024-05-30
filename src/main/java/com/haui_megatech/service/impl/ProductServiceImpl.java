@@ -47,8 +47,8 @@ public class ProductServiceImpl implements ProductService {
                                     .append(item.getMemory())
                                     .append(item.getProcessor())
                                     .append(item.getStorage())
-                                    .toString()
-                                    .contains(keyword);
+                                    .toString().toLowerCase()
+                                    .contains(keyword.toLowerCase());
                         })
                         .collect(Collectors.toList())
                 )

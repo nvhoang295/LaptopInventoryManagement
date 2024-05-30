@@ -353,8 +353,8 @@ public class Home extends javax.swing.JFrame {
         productsTable = new javax.swing.JTable();
         searchProductsPanel = new javax.swing.JPanel();
         productBrandsComboBox = new javax.swing.JComboBox<>();
-        searchProductsTextField1 = new javax.swing.JTextField();
-        searchProductsButton1 = new javax.swing.JButton();
+        searchProductsTextField = new javax.swing.JTextField();
+        searchProductsButton = new javax.swing.JButton();
         productFunctionPanel = new javax.swing.JPanel();
         jSeparator2 = new javax.swing.JToolBar.Separator();
         importProductsFromExcelButton = new javax.swing.JButton();
@@ -1987,15 +1987,25 @@ public class Home extends javax.swing.JFrame {
         productBrandsComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         productBrandsComboBox.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
-        searchProductsTextField1.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        searchProductsTextField.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        searchProductsTextField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                searchProductsTextFieldKeyReleased(evt);
+            }
+        });
 
-        searchProductsButton1.setBackground(new java.awt.Color(65, 120, 190));
-        searchProductsButton1.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        searchProductsButton1.setForeground(new java.awt.Color(255, 255, 255));
-        searchProductsButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/refresh.png"))); // NOI18N
-        searchProductsButton1.setText("Làm mới");
-        searchProductsButton1.setBorderPainted(false);
-        searchProductsButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        searchProductsButton.setBackground(new java.awt.Color(65, 120, 190));
+        searchProductsButton.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        searchProductsButton.setForeground(new java.awt.Color(255, 255, 255));
+        searchProductsButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/refresh.png"))); // NOI18N
+        searchProductsButton.setText("Làm mới");
+        searchProductsButton.setBorderPainted(false);
+        searchProductsButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        searchProductsButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchProductsButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout searchProductsPanelLayout = new javax.swing.GroupLayout(searchProductsPanel);
         searchProductsPanel.setLayout(searchProductsPanelLayout);
@@ -2004,9 +2014,9 @@ public class Home extends javax.swing.JFrame {
             .addGroup(searchProductsPanelLayout.createSequentialGroup()
                 .addComponent(productBrandsComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(searchProductsTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(searchProductsTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(searchProductsButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(searchProductsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         searchProductsPanelLayout.setVerticalGroup(
             searchProductsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2014,8 +2024,8 @@ public class Home extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(searchProductsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(productBrandsComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(searchProductsTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(searchProductsButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(searchProductsTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(searchProductsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(13, Short.MAX_VALUE))
         );
 
@@ -3760,6 +3770,16 @@ public class Home extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_editProductIdTextFieldActionPerformed
 
+    private void searchProductsTextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchProductsTextFieldKeyReleased
+        String keyword = searchProductsTextField.getText();
+        loadDataToTableProducts(keyword);
+    }//GEN-LAST:event_searchProductsTextFieldKeyReleased
+
+    private void searchProductsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchProductsButtonActionPerformed
+        searchProductsTextField.setText("");
+        loadDataToTableProducts(null);
+    }//GEN-LAST:event_searchProductsButtonActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -3957,9 +3977,9 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JPanel searchImportProductPanel;
     private javax.swing.JButton searchImportProductRefreshButton;
     private javax.swing.JTextField searchImportProductTextField;
-    private javax.swing.JButton searchProductsButton1;
+    private javax.swing.JButton searchProductsButton;
     private javax.swing.JPanel searchProductsPanel;
-    private javax.swing.JTextField searchProductsTextField1;
+    private javax.swing.JTextField searchProductsTextField;
     private javax.swing.JButton searchUsersButton;
     private javax.swing.JPanel searchUsersPanel;
     private javax.swing.JTextField searchUsersTextField;
