@@ -4,26 +4,23 @@
  */
 package com.haui_megatech.repository;
 
-import com.haui_megatech.model.User;
+import com.haui_megatech.model.Product;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 
 /**
  *
  * @author vieth
  */
-public interface UserRepository {
+public interface ProductRepository {
     
-    Optional<User> findById(Integer id);
+    Optional<Product> findById(Integer id);
     
-    Optional<User> findByUsername(String username);
+    Optional<Product> save(Product product);
     
-    Optional<User> save(User user);
-
-    ArrayList<User> saveAll(ArrayList<User> users);
+    ArrayList<Product> saveAll(ArrayList<Product> products);
     
     void deleteById(int id);
-
-    ArrayList<User> getAll();
+    
+    ArrayList<Product> getAll();
 }

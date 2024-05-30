@@ -15,4 +15,10 @@ public class SuccessMessage {
         public static final String DELETED = "Xoá người dùng thành công.";
         public static final String UPDATED = "Cập nhật người dùng thành công.";
     }
+    
+    public static final class Product {
+        public static final String DELETED = "Xoá sản phẩm thành công.";
+        public static final String UPDATED = "Cập nhật sản phẩm thành công.";
+        public static final String ADDED = "Thêm mới sản phẩm thành công.";
+    }
 }

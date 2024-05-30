@@ -2569,8 +2569,8 @@
                               </Group>
                           </Group>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="removeBillItemButton" pref="155" max="32767" attributes="0"/>
-                              <Component id="importBillProductButton" pref="155" max="32767" attributes="0"/>
+                              <Component id="removeBillItemButton" max="32767" attributes="0"/>
+                              <Component id="importBillProductButton" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>

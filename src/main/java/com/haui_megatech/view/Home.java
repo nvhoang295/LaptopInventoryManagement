@@ -16,6 +16,7 @@ import com.haui_megatech.service.impl.UserServiceImpl;
 import com.haui_megatech.util.ExcelUtil;
 import com.haui_megatech.util.InputValidator;
 import java.awt.Color;
+import java.awt.Font;
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -34,6 +35,7 @@ import javax.swing.table.DefaultTableModel;
 public class Home extends javax.swing.JFrame {
     
     private final SimpleDateFormat formatter = new SimpleDateFormat("HH:mm:ss dd/MM/yyyy");
+    private final Font tableHeaderFont = new Font("Segoe UI", Font.BOLD, 14);
     
     private final int ID_COL_INDEX = 0;
     private final int USERNAME_COL_INDEX = 1;
@@ -58,6 +60,8 @@ public class Home extends javax.swing.JFrame {
         this.setDisplayedPanel("product");
         this.setBackground(Color.WHITE);
         this.loginedUsername.setText(ApplicationContext.getLoginedUser().getUsername());
+        
+        usersTable.getTableHeader().setFont(tableHeaderFont);
     }
 
     private void loadDataToTableUsers(String keyword) {
@@ -78,7 +82,7 @@ public class Home extends javax.swing.JFrame {
         List<User> users = keyword != null && !keyword.isEmpty()
                 ? userController.searchList(keyword).data()
                 : userController.getList().data();
-
+        
         users.forEach(item -> {
             tableModel.addRow(
                     new Object[]{
@@ -91,6 +95,7 @@ public class Home extends javax.swing.JFrame {
                     }
             );
         });
+        
         
         usersTable.setModel(tableModel);
     }
@@ -2746,6 +2751,7 @@ public class Home extends javax.swing.JFrame {
         CommonResponseDTO response = userController.updateOne(id, new UserDTO(firstName, lastName, phoneNumber, email));
         showUserDiaglogMessage(response.message());
         loadDataToTableUsers(null);
+        editUserDiaglog.dispose();
     }//GEN-LAST:event_editUserDiaglogButtonActionPerformed
 
     private void cancelEditUserDiaglogButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelEditUserDiaglogButtonActionPerformed

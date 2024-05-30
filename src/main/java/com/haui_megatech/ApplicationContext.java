@@ -4,6 +4,7 @@
  */
 package com.haui_megatech;
 
+import com.haui_megatech.model.Product;
 import com.haui_megatech.model.User;
 import com.haui_megatech.repository.*;
 import com.haui_megatech.repository.impl.*;
@@ -19,16 +20,25 @@ public class ApplicationContext {
 
     // MEDIUM PRIORITY
     private static final UserRepository userRepository = new UserRepositoryImpl();
+    private static final ProductRepository productRepository = new ProductRepositoryImpl();
+    
     private static final Map<String, Object> beans = new HashMap<>();
     private static User loginedUser;
 
+    // path
     public static final String REDUNDANT_PATH_PREFIX = "file:/";
     public final String ABS_MAIN_CLASS_PATH;
     public final String ABS_ROOT_PROJECT_PATH;
-
+    
+    public final String REL_DATA_PATH_PREFIX;
+    
+    // user
     public final String REL_USERS_DATA_PATH;
-
     public final String ABS_USERS_DATA_PATH;
+    
+    // product
+    public final String REL_PRODUCTS_DATA_PATH;
+    public final String ABS_PRODUCTS_DATA_PATH;
 
     public String getAbsUsersDataPath() {
         return ABS_USERS_DATA_PATH;
@@ -53,8 +63,15 @@ public class ApplicationContext {
     public ApplicationContext() {
         ABS_MAIN_CLASS_PATH = removeRedundantPathPrefix(Main.class.getResource("").toString());
         ABS_ROOT_PROJECT_PATH = ABS_MAIN_CLASS_PATH.substring(0, ABS_MAIN_CLASS_PATH.indexOf("/target"));
-        REL_USERS_DATA_PATH = "/src/main/java/com/haui_megatech/data/users.dat";
+        
+        REL_DATA_PATH_PREFIX = "/src/main/java/com/haui_megatech/data";
+        
+        REL_USERS_DATA_PATH = REL_DATA_PATH_PREFIX + "/users.dat";
         ABS_USERS_DATA_PATH = ABS_ROOT_PROJECT_PATH + REL_USERS_DATA_PATH;
+        
+        REL_PRODUCTS_DATA_PATH = REL_DATA_PATH_PREFIX + "/products.dat";
+        ABS_PRODUCTS_DATA_PATH = ABS_ROOT_PROJECT_PATH + REL_PRODUCTS_DATA_PATH;
+        
         
 
     }
@@ -62,6 +79,9 @@ public class ApplicationContext {
     public void initCounter() {
         ArrayList<User> users = new ArrayList<>(userRepository.getAll());
         User.counter = users.isEmpty() ? 0 : users.getLast().getId();
+        
+        ArrayList<Product> products = new ArrayList<>(productRepository.getAll());
+        Product.counter = products.isEmpty() ? 0 : products.getLast().getId();
     }
 
     private static String removeRedundantPathPrefix(String s) {
