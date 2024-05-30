@@ -4763,9 +4763,23 @@ public class Home extends javax.swing.JFrame {
     }
     
     private void deleteProviderButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteProviderButtonActionPerformed
-        // TODO add your handling code here:
+        int[] rows = providersTable.getSelectedRows();
+        
+        if (rows.length == 0) {
+            this.showDiaglogMessage(ErrorMessage.EMPTY_SELECTED_ROWS);
+            return;
+        }
+        
+        showDeleteProviderConfirmDiaglog(String.format("Bạn có chắc chắn xoá %d bản ghi này?", rows.length));
     }//GEN-LAST:event_deleteProviderButtonActionPerformed
-
+    
+    private void showDeleteProviderConfirmDiaglog(String message) {
+        this.deleteProviderConfirmDiaglog.setVisible(true);
+        this.deleteProviderConfirmDiaglog.setLocationRelativeTo(this);
+        this.deleteProviderConfirmDiaglogLabel.setText(message);
+    }
+    
+    
     private void viewProviderButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewProviderButtonActionPerformed
         int[] rows = providersTable.getSelectedRows();
         if (rows.length == 0) {
@@ -4801,11 +4815,13 @@ public class Home extends javax.swing.JFrame {
     }
     
     private void searchProvidersTextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchProvidersTextFieldKeyReleased
-        // TODO add your handling code here:
+        String keyword = searchProvidersTextField.getText();
+        loadDataToTableProviders(keyword);
     }//GEN-LAST:event_searchProvidersTextFieldKeyReleased
 
     private void resetSearchProvidersButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetSearchProvidersButtonActionPerformed
-        // TODO add your handling code here:
+        searchProvidersTextField.setText("");
+        loadDataToTableProviders(null);
     }//GEN-LAST:event_resetSearchProvidersButtonActionPerformed
 
     private void addProviderPhoneNumberTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addProviderPhoneNumberTextFieldActionPerformed
@@ -4943,11 +4959,20 @@ public class Home extends javax.swing.JFrame {
     }//GEN-LAST:event_editProviderIdTextFieldActionPerformed
 
     private void confirmDeleteProviderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmDeleteProviderActionPerformed
-        // TODO add your handling code here:
+        int[] rows = providersTable.getSelectedRows();
+        
+        for (int row : rows) {
+            Integer id = Integer.valueOf(providersTable.getValueAt(row, ID_COL_INDEX).toString());
+            providerController.deleteOne(id);
+        }
+        
+        deleteProviderConfirmDiaglog.dispose();
+        loadDataToTableProviders(null);
+        showDiaglogMessage(String.format("Xoá thành công %d nhà cung cấp.", rows.length));
     }//GEN-LAST:event_confirmDeleteProviderActionPerformed
 
     private void cancelDeleteProviderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelDeleteProviderActionPerformed
-        // TODO add your handling code here:
+        deleteProductConfirmDiaglog.dispose();
     }//GEN-LAST:event_cancelDeleteProviderActionPerformed
 
     private void viewProductStorageTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewProductStorageTextField2ActionPerformed
