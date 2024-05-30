@@ -38,5 +38,6 @@ public class ErrorMessage {
     public static final class Product {
         public static final String SAVE = "Lưu sản phẩm không thành công.";
         public static final String NOT_FOUND = "Không tìm thấy sản phẩm.";
+        public static final String BLANK_INPUT = "Vui lòng nhập đầy đủ tất cả các trường thuộc tính.";
     }
 }

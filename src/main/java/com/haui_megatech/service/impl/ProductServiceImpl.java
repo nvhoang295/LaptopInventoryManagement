@@ -63,6 +63,7 @@ public class ProductServiceImpl implements ProductService {
                 ? CommonResponseDTO
                         .builder()
                         .success(true)
+                        .message(SuccessMessage.Product.ADDED)
                         .build()
                 : CommonResponseDTO
                         .builder()
