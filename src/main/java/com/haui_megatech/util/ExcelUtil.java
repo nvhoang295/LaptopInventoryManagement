@@ -1,8 +1,7 @@
 package com.haui_megatech.util;
 
 import com.haui_megatech.dto.CommonResponseDTO;
-import com.haui_megatech.model.Product;
-import com.haui_megatech.model.User;
+import com.haui_megatech.model.*;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -38,8 +37,8 @@ public class ExcelUtil {
     private static final String SELECTED_SHEET_NAME = "Sheet1";
     private static final String EXCEL_FILENAME_EXTENSION = ".xlsx";
 
-    public static ArrayList<User> excelToUsers(File file)  {
-        
+    public static ArrayList<User> excelToUsers(File file) {
+
         InputStream is = null;
         try {
             is = new FileInputStream(file);
@@ -51,9 +50,9 @@ public class ExcelUtil {
             Workbook workbook = new XSSFWorkbook(is);
             Sheet sheet = workbook.getSheet(SELECTED_SHEET_NAME);
             Iterator<Row> rows = sheet.iterator();
-            
+
             ArrayList<User> users = new ArrayList<>();
-            
+
             int rowNumber = 0;
             for (Row row : sheet) {
                 if (rowNumber == 0) {
@@ -61,13 +60,13 @@ public class ExcelUtil {
                     continue;
                 }
                 User user = new User();
-                
+
                 short firstCellNum = row.getFirstCellNum();
                 short lastCellNum = row.getLastCellNum();
-                
+
                 for (int cellIndex = firstCellNum; cellIndex < lastCellNum; ++cellIndex) {
                     Cell currentCell = row.getCell(cellIndex, Row.MissingCellPolicy.CREATE_NULL_AS_BLANK);
-                    
+
                     switch (cellIndex) {
                         case 0 -> {
                             user.setUsername(currentCell.getStringCellValue());
@@ -106,7 +105,7 @@ public class ExcelUtil {
             throw new RuntimeException("Fail to parse Excel file: " + e.getMessage());
         }
     }
-    
+
     public static CommonResponseDTO usersToExcel(List<User> users, String savedPath) {
         String savedFilePath = "";
         try {
@@ -144,27 +143,27 @@ public class ExcelUtil {
             }
             System.out.println(savedFilePath);
             try (FileOutputStream out = new FileOutputStream(new File(
-                            savedPath.replace("\\", "/") + EXCEL_FILENAME_EXTENSION
+                    savedPath.replace("\\", "/") + EXCEL_FILENAME_EXTENSION
             ))) {
                 workbook.write(out);
             }
         } catch (IOException e) {
             return CommonResponseDTO
-                .builder()
-                .success(false)
-                .message("Có lỗi trong quá trình ghi file.")
-                .build();
+                    .builder()
+                    .success(false)
+                    .message("Có lỗi trong quá trình ghi file.")
+                    .build();
         }
-        
+
         return CommonResponseDTO
                 .builder()
                 .success(true)
                 .message(String.format("Xuất thành công %d người dùng.", users.size()))
                 .build();
     }
-    
-    public static ArrayList<Product> excelToProducts(File file)  {
-        
+
+    public static ArrayList<Product> excelToProducts(File file) {
+
         InputStream is = null;
         try {
             is = new FileInputStream(file);
@@ -176,9 +175,9 @@ public class ExcelUtil {
             Workbook workbook = new XSSFWorkbook(is);
             Sheet sheet = workbook.getSheet(SELECTED_SHEET_NAME);
             Iterator<Row> rows = sheet.iterator();
-            
+
             ArrayList<Product> products = new ArrayList<>();
-            
+
             int rowNumber = 0;
             for (Row row : sheet) {
                 if (rowNumber == 0) {
@@ -186,13 +185,13 @@ public class ExcelUtil {
                     continue;
                 }
                 Product product = new Product();
-                
+
                 short firstCellNum = row.getFirstCellNum();
                 short lastCellNum = row.getLastCellNum();
-                
+
                 for (int cellIndex = firstCellNum; cellIndex < lastCellNum; ++cellIndex) {
                     Cell currentCell = row.getCell(cellIndex, Row.MissingCellPolicy.CREATE_NULL_AS_BLANK);
-                    
+
                     switch (cellIndex) {
                         case 0 -> {
                             product.setName(currentCell.getStringCellValue());
@@ -239,8 +238,8 @@ public class ExcelUtil {
             throw new RuntimeException("Fail to parse Excel file: " + e.getMessage());
         }
     }
-    
-     public static CommonResponseDTO productsToExcel(List<Product> products, String savedPath) {
+
+    public static CommonResponseDTO productsToExcel(List<Product> products, String savedPath) {
         String savedFilePath = "";
         try {
             XSSFWorkbook workbook = new XSSFWorkbook();
@@ -283,23 +282,137 @@ public class ExcelUtil {
             }
             System.out.println(savedFilePath);
             try (FileOutputStream out = new FileOutputStream(new File(
-                            savedPath.replace("\\", "/") + EXCEL_FILENAME_EXTENSION
+                    savedPath.replace("\\", "/") + EXCEL_FILENAME_EXTENSION
             ))) {
                 workbook.write(out);
             }
         } catch (IOException e) {
             return CommonResponseDTO
-                .builder()
-                .success(false)
-                .message("Có lỗi trong quá trình ghi file.")
-                .build();
+                    .builder()
+                    .success(false)
+                    .message("Có lỗi trong quá trình ghi file.")
+                    .build();
         }
-        
+
         return CommonResponseDTO
                 .builder()
                 .success(true)
                 .message(String.format("Xuất thành công %d sản phẩm.", products.size()))
                 .build();
     }
+
+    public static ArrayList<Provider> excelToProviders(File file) {
+
+        InputStream is = null;
+        try {
+            is = new FileInputStream(file);
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(ExcelUtil.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        try {
+            Workbook workbook = new XSSFWorkbook(is);
+            Sheet sheet = workbook.getSheet(SELECTED_SHEET_NAME);
+            Iterator<Row> rows = sheet.iterator();
+
+            ArrayList<Provider> providers = new ArrayList<>();
+
+            int rowNumber = 0;
+            for (Row row : sheet) {
+                if (rowNumber == 0) {
+                    ++rowNumber;
+                    continue;
+                }
+                Provider provider = new Provider();
+
+                short firstCellNum = row.getFirstCellNum();
+                short lastCellNum = row.getLastCellNum();
+
+                for (int cellIndex = firstCellNum; cellIndex < lastCellNum; ++cellIndex) {
+                    Cell currentCell = row.getCell(cellIndex, Row.MissingCellPolicy.CREATE_NULL_AS_BLANK);
+
+                    switch (cellIndex) {
+                        case 0 -> {
+                            provider.setName(currentCell.getStringCellValue());
+                            break;
+                        }
+                        case 1 -> {
+                            provider.setPhoneNumber(currentCell.getStringCellValue());
+                            break;
+                        }
+                        case 2 -> {
+                            provider.setEmail(currentCell.getStringCellValue());
+                            break;
+                        }
+                        case 3 -> {
+                            provider.setAddress(currentCell.getStringCellValue());
+                            break;
+                        }
+                        default -> {
+                            break;
+                        }
+                    }
+                }
+                providers.add(provider);
+            }
+            workbook.close();
+            return providers;
+        } catch (IOException e) {
+            throw new RuntimeException("Fail to parse Excel file: " + e.getMessage());
+        }
+    }
     
+    public static CommonResponseDTO providersToExcel(List<Provider> providers, String savedPath) {
+        String savedFilePath = "";
+        try {
+            XSSFWorkbook workbook = new XSSFWorkbook();
+            XSSFSheet spreadsheet = workbook.createSheet("Sheet1");
+
+            XSSFRow row = null;
+            Cell cell = null;
+
+            row = spreadsheet.createRow((short) 0);
+            row.setHeight((short) 500);
+            cell = row.createCell(0, CellType.STRING);
+            cell.setCellValue("id");
+            cell = row.createCell(1, CellType.STRING);
+            cell.setCellValue("name");
+            cell = row.createCell(2, CellType.STRING);
+            cell.setCellValue("phone_number");
+            cell = row.createCell(3, CellType.STRING);
+            cell.setCellValue("email");
+            cell = row.createCell(4, CellType.STRING);
+            cell.setCellValue("address");
+
+            for (int i = 0; i < providers.size(); i++) {
+                Provider provider = providers.get(i);
+                row = spreadsheet.createRow(i + 1);
+                row.setHeight((short) 400);
+                row.createCell(0).setCellValue(provider.getId());
+                row.createCell(1).setCellValue(provider.getName());
+                row.createCell(2).setCellValue(provider.getPhoneNumber());
+                row.createCell(3).setCellValue(provider.getEmail());
+                row.createCell(4).setCellValue(provider.getAddress());
+            }
+            System.out.println(savedFilePath);
+            try (FileOutputStream out = new FileOutputStream(new File(
+                    savedPath.replace("\\", "/") + EXCEL_FILENAME_EXTENSION
+            ))) {
+                workbook.write(out);
+            }
+        } catch (IOException e) {
+            return CommonResponseDTO
+                    .builder()
+                    .success(false)
+                    .message("Có lỗi trong quá trình ghi file.")
+                    .build();
+        }
+
+        return CommonResponseDTO
+                .builder()
+                .success(true)
+                .message(String.format("Xuất thành công %d nhà cung cấp.", providers.size()))
+                .build();
+    }
+
 }

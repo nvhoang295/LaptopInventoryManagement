@@ -4712,11 +4712,35 @@ public class Home extends javax.swing.JFrame {
     }//GEN-LAST:event_viewProductLastUpdatedTextFieldActionPerformed
 
     private void importProvidersFromExcelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_importProvidersFromExcelButtonActionPerformed
-        // TODO add your handling code here:
+        JFileChooser fileChooser = new JFileChooser();
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("Excel Workbook (*.xlsx)", "xlsx");
+        fileChooser.setFileFilter(filter);
+        fileChooser.setMultiSelectionEnabled(false);
+        int result = fileChooser.showDialog(this, "Chọn file");
+        if (result == JFileChooser.APPROVE_OPTION) {
+            File uploadedFile = fileChooser.getSelectedFile();
+            ArrayList<Provider> providers = ExcelUtil.excelToProviders(uploadedFile);
+            CommonResponseDTO response = providerController.addList(providers);
+            showDiaglogMessage(response.message());
+            loadDataToTableProviders(null);
+        }
     }//GEN-LAST:event_importProvidersFromExcelButtonActionPerformed
 
     private void exportProvidersToExcelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exportProvidersToExcelButtonActionPerformed
-        // TODO add your handling code here:
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setDialogTitle("Lựa chọn vị trí lưu file");
+        fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("Excel Workbook (*.xlsx)", "xlsx");
+        fileChooser.setFileFilter(filter);
+        int userSelection = fileChooser.showSaveDialog(fileChooser);
+        if (userSelection == JFileChooser.APPROVE_OPTION) {
+            File directoryToSave = fileChooser.getSelectedFile();
+            CommonResponseDTO response = ExcelUtil.providersToExcel(
+                    providerController.getList().data(), 
+                    directoryToSave.getAbsolutePath()
+            );
+            showDiaglogMessage(response.message());
+        }
     }//GEN-LAST:event_exportProvidersToExcelButtonActionPerformed
 
     private void editProviderButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editProviderButtonActionPerformed
