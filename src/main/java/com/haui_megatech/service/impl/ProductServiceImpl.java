@@ -47,8 +47,8 @@ public class ProductServiceImpl implements ProductService {
                                     .append(item.getMemory())
                                     .append(item.getProcessor())
                                     .append(item.getStorage())
-                                    .toString()
-                                    .contains(keyword);
+                                    .toString().toLowerCase()
+                                    .contains(keyword.toLowerCase());
                         })
                         .collect(Collectors.toList())
                 )
@@ -63,6 +63,7 @@ public class ProductServiceImpl implements ProductService {
                 ? CommonResponseDTO
                         .builder()
                         .success(true)
+                        .message(SuccessMessage.Product.ADDED)
                         .build()
                 : CommonResponseDTO
                         .builder()
@@ -124,6 +125,7 @@ public class ProductServiceImpl implements ProductService {
         foundProduct.setStorage(product.getStorage());
         foundProduct.setDisplay(product.getDisplay());
         foundProduct.setBattery(product.getBattery());
+        foundProduct.setLastUpdated(new Date());
         
         Optional<Product> updatedProduct = productRepository.save(foundProduct);
         return CommonResponseDTO

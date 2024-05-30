@@ -44,5 +44,8 @@ public class ProductController {
         return productService.findById(id);
     }
     
+    public CommonResponseDTO updateOne(Integer id, Product product) {
+        return productService.updateOne(id, product);
+    }
     
 }

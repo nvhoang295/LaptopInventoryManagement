@@ -99,6 +99,7 @@ public class ProductRepositoryImpl implements ProductRepository {
         oldInfo.setBattery(newInfo.getBattery());
         oldInfo.setCard(newInfo.getCard());
         oldInfo.setWeight(newInfo.getWeight());
+        oldInfo.setLastUpdated(newInfo.getLastUpdated());
         return true;
     }
 

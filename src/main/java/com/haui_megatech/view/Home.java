@@ -7,11 +7,15 @@ package com.haui_megatech.view;
 import com.haui_megatech.ApplicationContext;
 import com.haui_megatech.constant.ErrorMessage;
 import com.haui_megatech.constant.SuccessMessage;
+import com.haui_megatech.controller.ProductController;
 import com.haui_megatech.controller.UserController;
 import com.haui_megatech.dto.CommonResponseDTO;
 import com.haui_megatech.dto.UserDTO;
+import com.haui_megatech.model.Product;
 import com.haui_megatech.model.User;
+import com.haui_megatech.repository.impl.ProductRepositoryImpl;
 import com.haui_megatech.repository.impl.UserRepositoryImpl;
+import com.haui_megatech.service.impl.ProductServiceImpl;
 import com.haui_megatech.service.impl.UserServiceImpl;
 import com.haui_megatech.util.ExcelUtil;
 import com.haui_megatech.util.InputValidator;
@@ -23,6 +27,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -38,15 +43,30 @@ public class Home extends javax.swing.JFrame {
     private final Font tableHeaderFont = new Font("Segoe UI", Font.BOLD, 14);
     
     private final int ID_COL_INDEX = 0;
+    
     private final int USERNAME_COL_INDEX = 1;
     private final int FIRSTNAME_COL_INDEX = 2;
     private final int LASTNAME_COL_INDEX = 3;
     private final int PHONENUMBER_COL_INDEX = 4;
     private final int EMAIL_COL_INDEX = 5;
     
+    private final int PRODUCT_NAME_COL_INDEX = 1;
+    private final int PRODUCT_PROCESSOR_COL_INDEX = 2;
+    private final int PRODUCT_MEMORY_COL_INDEX = 3;
+    private final int PRODUCT_STORAGE_COL_INDEX = 4;
+    private final int PRODUCT_DISPLAY_COL_INDEX = 5;
+    private final int PRODUCT_BATTERY_COL_INDEX = 6;
+    private final int PRODUCT_CARD_COL_INDEX = 7;
+    
     private final UserController userController = new UserController(
             new UserServiceImpl(
                     new UserRepositoryImpl()
+            )
+    );
+    
+    private final ProductController productController = new ProductController(
+            new ProductServiceImpl(
+                    new ProductRepositoryImpl()
             )
     );
 
@@ -58,10 +78,12 @@ public class Home extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         this.setActiveTab("product");
         this.setDisplayedPanel("product");
+        loadDataToTableProducts(null);
         this.setBackground(Color.WHITE);
         this.loginedUsername.setText(ApplicationContext.getLoginedUser().getUsername());
         
         usersTable.getTableHeader().setFont(tableHeaderFont);
+        productsTable.getTableHeader().setFont(tableHeaderFont);
     }
 
     private void loadDataToTableUsers(String keyword) {
@@ -79,7 +101,7 @@ public class Home extends javax.swing.JFrame {
                 return false;
             }
         };
-        List<User> users = keyword != null && !keyword.isEmpty()
+        List<User> users = keyword != null && !keyword.isEmpty() && !keyword.isBlank()
                 ? userController.searchList(keyword).data()
                 : userController.getList().data();
         
@@ -95,9 +117,47 @@ public class Home extends javax.swing.JFrame {
                     }
             );
         });
-        
-        
         usersTable.setModel(tableModel);
+    }
+    
+    private void loadDataToTableProducts(String keyword) {
+        String[] tableHeader  = {
+            "ID",
+            "Tên sản phẩm",
+            "CPU",
+            "RAM",
+            "Bộ nhớ trong",
+            "Màn hình",
+            "Dung lượng pin",
+            "Card màn hình"
+        };
+        
+        DefaultTableModel tableModel = new DefaultTableModel(null, tableHeader) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
+        
+        List<Product> products = keyword != null && !keyword.isEmpty() && !keyword.isBlank()
+                ? productController.searchList(keyword).data()
+                : productController.getList().data();
+        
+        products.forEach(item -> {
+            tableModel.addRow(
+                    new Object[] {
+                        item.getId() != null ? item.getId() : "",
+                        item.getName() != null ? item.getName() : "",
+                        item.getProcessor() != null ? item.getProcessor() : "",
+                        item.getMemory() != null ? item.getMemory() : "",
+                        item.getStorage() != null ? item.getStorage() : "",
+                        item.getDisplay() != null ? item.getDisplay() : "",
+                        item.getBattery() != null ? item.getBattery() : "",
+                        item.getCard() != null ? item.getCard() : ""
+                    }
+            );
+        });
+        productsTable.setModel(tableModel);
     }
 
     /**
@@ -188,6 +248,83 @@ public class Home extends javax.swing.JFrame {
         viewUserLoggedInTextField = new javax.swing.JTextField();
         viewUsernameTextField = new javax.swing.JTextField();
         viewUserFirstNameTextField = new javax.swing.JTextField();
+        deleteProductConfirmDiaglog = new javax.swing.JDialog();
+        deleteProductConfirmDiaglogPanel = new javax.swing.JPanel();
+        deleteUserConfirmDiaglogLabel1 = new javax.swing.JLabel();
+        confirmDeleteUser1 = new javax.swing.JButton();
+        cancelDeleteUser1 = new javax.swing.JButton();
+        jLabel12 = new javax.swing.JLabel();
+        editProductDiaglog = new javax.swing.JDialog();
+        editProductDiaglogPanel = new javax.swing.JPanel();
+        editProductNameLabel = new javax.swing.JLabel();
+        editProductProcessorTextField = new javax.swing.JTextField();
+        editProductProcessorLabel = new javax.swing.JLabel();
+        editProductMemoryLabel = new javax.swing.JLabel();
+        editProductStorageLabel = new javax.swing.JLabel();
+        editProductStorageTextField = new javax.swing.JTextField();
+        editProductDisplayLabel = new javax.swing.JLabel();
+        editProductDisplayTextField = new javax.swing.JTextField();
+        editProductBatteryLabel = new javax.swing.JLabel();
+        editProductBatteryTextField = new javax.swing.JTextField();
+        editProductCardLabel = new javax.swing.JLabel();
+        editProductCardTextField = new javax.swing.JTextField();
+        editProductDiaglogButton = new javax.swing.JButton();
+        cancelEditProductDiaglogButton = new javax.swing.JButton();
+        jLabel16 = new javax.swing.JLabel();
+        editProductWeightLabel = new javax.swing.JLabel();
+        editProductWeightTextField = new javax.swing.JTextField();
+        editProductMemoryTextField = new javax.swing.JTextField();
+        editProductNameTextField = new javax.swing.JTextField();
+        editProductIdLabel = new javax.swing.JLabel();
+        editProductIdTextField = new javax.swing.JTextField();
+        viewProductDiaglog = new javax.swing.JDialog();
+        viewProductDiaglogPanel = new javax.swing.JPanel();
+        viewProductNameLabel = new javax.swing.JLabel();
+        viewProductProcessorTextField = new javax.swing.JTextField();
+        viewProductProcessorLabel = new javax.swing.JLabel();
+        viewProductMemoryLabel = new javax.swing.JLabel();
+        viewProductStorageLabel = new javax.swing.JLabel();
+        viewProductStorageTextField = new javax.swing.JTextField();
+        viewProductDisplayLabel = new javax.swing.JLabel();
+        viewProductDisplayTextField = new javax.swing.JTextField();
+        viewProductBatteryLabel = new javax.swing.JLabel();
+        viewProductBatteryTextField = new javax.swing.JTextField();
+        viewProductCardLabel = new javax.swing.JLabel();
+        viewProductCardTextField = new javax.swing.JTextField();
+        updateProductDiaglogButton = new javax.swing.JButton();
+        cancelViewProductDiaglogButton = new javax.swing.JButton();
+        jLabel17 = new javax.swing.JLabel();
+        viewProductWeightLabel = new javax.swing.JLabel();
+        viewProductWeightTextField = new javax.swing.JTextField();
+        viewProductMemoryTextField = new javax.swing.JTextField();
+        viewProductNameTextField = new javax.swing.JTextField();
+        viewProductIdLabel = new javax.swing.JLabel();
+        viewProductIdTextField = new javax.swing.JTextField();
+        viewProductWhenCreatedLabel = new javax.swing.JLabel();
+        viewProductWhenCreatedTextField = new javax.swing.JTextField();
+        viewProductLastUpdatedLabel = new javax.swing.JLabel();
+        viewProductLastUpdatedTextField = new javax.swing.JTextField();
+        addProductDiaglog = new javax.swing.JDialog();
+        addProductDiaglogPanel = new javax.swing.JPanel();
+        productNameLabel = new javax.swing.JLabel();
+        productProcessorTextField = new javax.swing.JTextField();
+        productProcessorLabel = new javax.swing.JLabel();
+        productMemoryLabel = new javax.swing.JLabel();
+        productStorageLabel = new javax.swing.JLabel();
+        productStorageTextField = new javax.swing.JTextField();
+        productDisplayLabel = new javax.swing.JLabel();
+        productDisplayTextField = new javax.swing.JTextField();
+        productBatteryLabel = new javax.swing.JLabel();
+        productBatteryTextField = new javax.swing.JTextField();
+        productCardLabel = new javax.swing.JLabel();
+        productCardTextField = new javax.swing.JTextField();
+        addProductDiaglogButton = new javax.swing.JButton();
+        cancelAddProductDiaglogButton = new javax.swing.JButton();
+        jLabel15 = new javax.swing.JLabel();
+        productWeightLabel = new javax.swing.JLabel();
+        productWeightTextField = new javax.swing.JTextField();
+        productMemoryTextField = new javax.swing.JTextField();
+        productNameTextField = new javax.swing.JTextField();
         sidebarPanel = new javax.swing.JPanel();
         loginedUsername = new javax.swing.JLabel();
         productTab = new javax.swing.JPanel();
@@ -216,20 +353,20 @@ public class Home extends javax.swing.JFrame {
         jSeparator3 = new javax.swing.JSeparator();
         jSeparator5 = new javax.swing.JSeparator();
         productPanel = new javax.swing.JPanel();
-        usersScrollPanel1 = new javax.swing.JScrollPane();
-        usersTable1 = new javax.swing.JTable();
-        searchUsersPanel1 = new javax.swing.JPanel();
+        productsScrollPanel = new javax.swing.JScrollPane();
+        productsTable = new javax.swing.JTable();
+        searchProductsPanel = new javax.swing.JPanel();
         productBrandsComboBox = new javax.swing.JComboBox<>();
-        searchProductsTextField1 = new javax.swing.JTextField();
-        searchProductsButton1 = new javax.swing.JButton();
-        userFunctionPanel1 = new javax.swing.JPanel();
+        searchProductsTextField = new javax.swing.JTextField();
+        searchProductsButton = new javax.swing.JButton();
+        productFunctionPanel = new javax.swing.JPanel();
         jSeparator2 = new javax.swing.JToolBar.Separator();
-        importUsersFromExcelButton1 = new javax.swing.JButton();
-        exportUsersToExcelButton1 = new javax.swing.JButton();
-        editUserButton1 = new javax.swing.JButton();
-        addUserButton1 = new javax.swing.JButton();
-        deleteUserButton1 = new javax.swing.JButton();
-        viewUserButton1 = new javax.swing.JButton();
+        importProductsFromExcelButton = new javax.swing.JButton();
+        exportProductsToExcelButton = new javax.swing.JButton();
+        editProductButton = new javax.swing.JButton();
+        addProductButton = new javax.swing.JButton();
+        deleteProductButton = new javax.swing.JButton();
+        viewProductButton = new javax.swing.JButton();
         providerPanel = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         importProductPanel = new javax.swing.JPanel();
@@ -888,6 +1025,595 @@ public class Home extends javax.swing.JFrame {
             .addComponent(viewUserDiaglogPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 530, Short.MAX_VALUE)
         );
 
+        deleteProductConfirmDiaglog.setTitle("Xác nhận xoá");
+        deleteProductConfirmDiaglog.setMinimumSize(new java.awt.Dimension(420, 230));
+        deleteProductConfirmDiaglog.setResizable(false);
+        deleteProductConfirmDiaglog.setSize(new java.awt.Dimension(420, 230));
+
+        deleteProductConfirmDiaglogPanel.setBackground(new java.awt.Color(255, 255, 255));
+        deleteProductConfirmDiaglogPanel.setMinimumSize(new java.awt.Dimension(420, 230));
+        deleteProductConfirmDiaglogPanel.setPreferredSize(new java.awt.Dimension(420, 230));
+        deleteProductConfirmDiaglogPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        deleteUserConfirmDiaglogLabel1.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        deleteUserConfirmDiaglogLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        deleteUserConfirmDiaglogLabel1.setText("Bạn chắc chắn muốn xoá người dùng abcdeskskskskksd");
+        deleteUserConfirmDiaglogLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        deleteProductConfirmDiaglogPanel.add(deleteUserConfirmDiaglogLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(5, 67, 400, 50));
+
+        confirmDeleteUser1.setBackground(new java.awt.Color(44, 43, 196));
+        confirmDeleteUser1.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        confirmDeleteUser1.setForeground(new java.awt.Color(255, 255, 255));
+        confirmDeleteUser1.setText("Đồng ý");
+        confirmDeleteUser1.setBorderPainted(false);
+        confirmDeleteUser1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                confirmDeleteUser1ActionPerformed(evt);
+            }
+        });
+        deleteProductConfirmDiaglogPanel.add(confirmDeleteUser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 140, -1, 30));
+
+        cancelDeleteUser1.setBackground(new java.awt.Color(212, 57, 68));
+        cancelDeleteUser1.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        cancelDeleteUser1.setForeground(new java.awt.Color(255, 255, 255));
+        cancelDeleteUser1.setText("Huỷ bỏ");
+        cancelDeleteUser1.setBorderPainted(false);
+        cancelDeleteUser1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelDeleteUser1ActionPerformed(evt);
+            }
+        });
+        deleteProductConfirmDiaglogPanel.add(cancelDeleteUser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 140, -1, 30));
+
+        jLabel12.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel12.setForeground(new java.awt.Color(255, 0, 0));
+        jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel12.setText("XÁC NHẬN XOÁ");
+        deleteProductConfirmDiaglogPanel.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 29, 408, -1));
+
+        javax.swing.GroupLayout deleteProductConfirmDiaglogLayout = new javax.swing.GroupLayout(deleteProductConfirmDiaglog.getContentPane());
+        deleteProductConfirmDiaglog.getContentPane().setLayout(deleteProductConfirmDiaglogLayout);
+        deleteProductConfirmDiaglogLayout.setHorizontalGroup(
+            deleteProductConfirmDiaglogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(deleteProductConfirmDiaglogPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        deleteProductConfirmDiaglogLayout.setVerticalGroup(
+            deleteProductConfirmDiaglogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(deleteProductConfirmDiaglogPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
+        editProductDiaglog.setTitle("Thêm người dùng");
+        editProductDiaglog.setBackground(new java.awt.Color(255, 255, 255));
+        editProductDiaglog.setMinimumSize(new java.awt.Dimension(450, 500));
+        editProductDiaglog.setSize(new java.awt.Dimension(450, 500));
+
+        editProductDiaglogPanel.setBackground(new java.awt.Color(255, 255, 255));
+        editProductDiaglogPanel.setMinimumSize(new java.awt.Dimension(430, 450));
+        editProductDiaglogPanel.setPreferredSize(new java.awt.Dimension(430, 450));
+        editProductDiaglogPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        editProductNameLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        editProductNameLabel.setText("Tên sản phẩm");
+        editProductDiaglogPanel.add(editProductNameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, -1, -1));
+
+        editProductProcessorTextField.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        editProductProcessorTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editProductProcessorTextFieldActionPerformed(evt);
+            }
+        });
+        editProductDiaglogPanel.add(editProductProcessorTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 140, 200, 30));
+
+        editProductProcessorLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        editProductProcessorLabel.setText("Vi xử lý");
+        editProductDiaglogPanel.add(editProductProcessorLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, -1, -1));
+
+        editProductMemoryLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        editProductMemoryLabel.setText("Dung lượng RAM");
+        editProductDiaglogPanel.add(editProductMemoryLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 180, -1, -1));
+
+        editProductStorageLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        editProductStorageLabel.setText("Dung lượng lưu trữ");
+        editProductDiaglogPanel.add(editProductStorageLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 220, -1, -1));
+
+        editProductStorageTextField.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        editProductStorageTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editProductStorageTextFieldActionPerformed(evt);
+            }
+        });
+        editProductDiaglogPanel.add(editProductStorageTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 220, 200, 30));
+
+        editProductDisplayLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        editProductDisplayLabel.setText("Màn hình");
+        editProductDiaglogPanel.add(editProductDisplayLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 260, -1, -1));
+
+        editProductDisplayTextField.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        editProductDisplayTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editProductDisplayTextFieldActionPerformed(evt);
+            }
+        });
+        editProductDiaglogPanel.add(editProductDisplayTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 260, 200, 30));
+
+        editProductBatteryLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        editProductBatteryLabel.setText("Dung lượng pin");
+        editProductDiaglogPanel.add(editProductBatteryLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 300, -1, -1));
+
+        editProductBatteryTextField.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        editProductBatteryTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editProductBatteryTextFieldActionPerformed(evt);
+            }
+        });
+        editProductDiaglogPanel.add(editProductBatteryTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 300, 200, 30));
+
+        editProductCardLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        editProductCardLabel.setText("Card đồ hoạ");
+        editProductDiaglogPanel.add(editProductCardLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 340, -1, -1));
+
+        editProductCardTextField.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        editProductCardTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editProductCardTextFieldActionPerformed(evt);
+            }
+        });
+        editProductDiaglogPanel.add(editProductCardTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 340, 200, 30));
+
+        editProductDiaglogButton.setBackground(new java.awt.Color(0, 122, 249));
+        editProductDiaglogButton.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        editProductDiaglogButton.setText("Cập nhật");
+        editProductDiaglogButton.setBorderPainted(false);
+        editProductDiaglogButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editProductDiaglogButtonActionPerformed(evt);
+            }
+        });
+        editProductDiaglogPanel.add(editProductDiaglogButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 440, -1, -1));
+
+        cancelEditProductDiaglogButton.setBackground(new java.awt.Color(212, 57, 68));
+        cancelEditProductDiaglogButton.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        cancelEditProductDiaglogButton.setText("Huỷ bỏ");
+        cancelEditProductDiaglogButton.setBorderPainted(false);
+        cancelEditProductDiaglogButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelEditProductDiaglogButtonActionPerformed(evt);
+            }
+        });
+        editProductDiaglogPanel.add(cancelEditProductDiaglogButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 440, -1, -1));
+
+        jLabel16.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel16.setForeground(new java.awt.Color(44, 43, 196));
+        jLabel16.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel16.setText("CẬP NHẬT SẢN PHẨM");
+        editProductDiaglogPanel.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 20, 440, -1));
+
+        editProductWeightLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        editProductWeightLabel.setText("Trọng lượng");
+        editProductDiaglogPanel.add(editProductWeightLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 380, -1, -1));
+
+        editProductWeightTextField.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        editProductWeightTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editProductWeightTextFieldActionPerformed(evt);
+            }
+        });
+        editProductDiaglogPanel.add(editProductWeightTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 380, 200, 30));
+
+        editProductMemoryTextField.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        editProductMemoryTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editProductMemoryTextFieldActionPerformed(evt);
+            }
+        });
+        editProductDiaglogPanel.add(editProductMemoryTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 180, 200, 30));
+
+        editProductNameTextField.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        editProductNameTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editProductNameTextFieldActionPerformed(evt);
+            }
+        });
+        editProductDiaglogPanel.add(editProductNameTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 100, 200, 30));
+
+        editProductIdLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        editProductIdLabel.setText("Mã sản phẩm");
+        editProductDiaglogPanel.add(editProductIdLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, -1, -1));
+
+        editProductIdTextField.setEditable(false);
+        editProductIdTextField.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        editProductIdTextField.setEnabled(false);
+        editProductIdTextField.setFocusable(false);
+        editProductIdTextField.setRequestFocusEnabled(false);
+        editProductIdTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editProductIdTextFieldActionPerformed(evt);
+            }
+        });
+        editProductDiaglogPanel.add(editProductIdTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 60, 200, 30));
+
+        javax.swing.GroupLayout editProductDiaglogLayout = new javax.swing.GroupLayout(editProductDiaglog.getContentPane());
+        editProductDiaglog.getContentPane().setLayout(editProductDiaglogLayout);
+        editProductDiaglogLayout.setHorizontalGroup(
+            editProductDiaglogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(editProductDiaglogPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 450, Short.MAX_VALUE)
+        );
+        editProductDiaglogLayout.setVerticalGroup(
+            editProductDiaglogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(editProductDiaglogPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 500, Short.MAX_VALUE)
+        );
+
+        viewProductDiaglog.setTitle("Thêm người dùng");
+        viewProductDiaglog.setBackground(new java.awt.Color(255, 255, 255));
+        viewProductDiaglog.setMinimumSize(new java.awt.Dimension(450, 500));
+        viewProductDiaglog.setSize(new java.awt.Dimension(450, 500));
+
+        viewProductDiaglogPanel.setBackground(new java.awt.Color(255, 255, 255));
+        viewProductDiaglogPanel.setMinimumSize(new java.awt.Dimension(430, 450));
+        viewProductDiaglogPanel.setPreferredSize(new java.awt.Dimension(430, 450));
+        viewProductDiaglogPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        viewProductNameLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        viewProductNameLabel.setText("Tên sản phẩm");
+        viewProductDiaglogPanel.add(viewProductNameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, -1, -1));
+
+        viewProductProcessorTextField.setEditable(false);
+        viewProductProcessorTextField.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        viewProductProcessorTextField.setEnabled(false);
+        viewProductProcessorTextField.setFocusable(false);
+        viewProductProcessorTextField.setRequestFocusEnabled(false);
+        viewProductProcessorTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                viewProductProcessorTextFieldActionPerformed(evt);
+            }
+        });
+        viewProductDiaglogPanel.add(viewProductProcessorTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 140, 200, 30));
+
+        viewProductProcessorLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        viewProductProcessorLabel.setText("Vi xử lý");
+        viewProductDiaglogPanel.add(viewProductProcessorLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, -1, -1));
+
+        viewProductMemoryLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        viewProductMemoryLabel.setText("Dung lượng RAM");
+        viewProductDiaglogPanel.add(viewProductMemoryLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 180, -1, -1));
+
+        viewProductStorageLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        viewProductStorageLabel.setText("Dung lượng lưu trữ");
+        viewProductDiaglogPanel.add(viewProductStorageLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 220, -1, -1));
+
+        viewProductStorageTextField.setEditable(false);
+        viewProductStorageTextField.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        viewProductStorageTextField.setEnabled(false);
+        viewProductStorageTextField.setFocusable(false);
+        viewProductStorageTextField.setRequestFocusEnabled(false);
+        viewProductStorageTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                viewProductStorageTextFieldActionPerformed(evt);
+            }
+        });
+        viewProductDiaglogPanel.add(viewProductStorageTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 220, 200, 30));
+
+        viewProductDisplayLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        viewProductDisplayLabel.setText("Màn hình");
+        viewProductDiaglogPanel.add(viewProductDisplayLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 260, -1, -1));
+
+        viewProductDisplayTextField.setEditable(false);
+        viewProductDisplayTextField.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        viewProductDisplayTextField.setEnabled(false);
+        viewProductDisplayTextField.setFocusable(false);
+        viewProductDisplayTextField.setRequestFocusEnabled(false);
+        viewProductDisplayTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                viewProductDisplayTextFieldActionPerformed(evt);
+            }
+        });
+        viewProductDiaglogPanel.add(viewProductDisplayTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 260, 200, 30));
+
+        viewProductBatteryLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        viewProductBatteryLabel.setText("Dung lượng pin");
+        viewProductDiaglogPanel.add(viewProductBatteryLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 300, -1, -1));
+
+        viewProductBatteryTextField.setEditable(false);
+        viewProductBatteryTextField.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        viewProductBatteryTextField.setEnabled(false);
+        viewProductBatteryTextField.setFocusable(false);
+        viewProductBatteryTextField.setRequestFocusEnabled(false);
+        viewProductBatteryTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                viewProductBatteryTextFieldActionPerformed(evt);
+            }
+        });
+        viewProductDiaglogPanel.add(viewProductBatteryTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 300, 200, 30));
+
+        viewProductCardLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        viewProductCardLabel.setText("Card đồ hoạ");
+        viewProductDiaglogPanel.add(viewProductCardLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 340, -1, -1));
+
+        viewProductCardTextField.setEditable(false);
+        viewProductCardTextField.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        viewProductCardTextField.setEnabled(false);
+        viewProductCardTextField.setFocusable(false);
+        viewProductCardTextField.setRequestFocusEnabled(false);
+        viewProductCardTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                viewProductCardTextFieldActionPerformed(evt);
+            }
+        });
+        viewProductDiaglogPanel.add(viewProductCardTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 340, 200, 30));
+
+        updateProductDiaglogButton.setBackground(new java.awt.Color(0, 122, 249));
+        updateProductDiaglogButton.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        updateProductDiaglogButton.setText("Cập nhật");
+        updateProductDiaglogButton.setBorderPainted(false);
+        updateProductDiaglogButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                updateProductDiaglogButtonActionPerformed(evt);
+            }
+        });
+        viewProductDiaglogPanel.add(updateProductDiaglogButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 520, -1, -1));
+
+        cancelViewProductDiaglogButton.setBackground(new java.awt.Color(212, 57, 68));
+        cancelViewProductDiaglogButton.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        cancelViewProductDiaglogButton.setText("Đóng");
+        cancelViewProductDiaglogButton.setBorderPainted(false);
+        cancelViewProductDiaglogButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelViewProductDiaglogButtonActionPerformed(evt);
+            }
+        });
+        viewProductDiaglogPanel.add(cancelViewProductDiaglogButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 520, -1, -1));
+
+        jLabel17.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel17.setForeground(new java.awt.Color(44, 43, 196));
+        jLabel17.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel17.setText("THÔNG TIN SẢN PHẨM");
+        viewProductDiaglogPanel.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 20, 440, -1));
+
+        viewProductWeightLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        viewProductWeightLabel.setText("Trọng lượng");
+        viewProductDiaglogPanel.add(viewProductWeightLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 380, -1, -1));
+
+        viewProductWeightTextField.setEditable(false);
+        viewProductWeightTextField.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        viewProductWeightTextField.setEnabled(false);
+        viewProductWeightTextField.setFocusable(false);
+        viewProductWeightTextField.setRequestFocusEnabled(false);
+        viewProductWeightTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                viewProductWeightTextFieldActionPerformed(evt);
+            }
+        });
+        viewProductDiaglogPanel.add(viewProductWeightTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 380, 200, 30));
+
+        viewProductMemoryTextField.setEditable(false);
+        viewProductMemoryTextField.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        viewProductMemoryTextField.setEnabled(false);
+        viewProductMemoryTextField.setFocusable(false);
+        viewProductMemoryTextField.setRequestFocusEnabled(false);
+        viewProductMemoryTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                viewProductMemoryTextFieldActionPerformed(evt);
+            }
+        });
+        viewProductDiaglogPanel.add(viewProductMemoryTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 180, 200, 30));
+
+        viewProductNameTextField.setEditable(false);
+        viewProductNameTextField.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        viewProductNameTextField.setEnabled(false);
+        viewProductNameTextField.setFocusable(false);
+        viewProductNameTextField.setRequestFocusEnabled(false);
+        viewProductNameTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                viewProductNameTextFieldActionPerformed(evt);
+            }
+        });
+        viewProductDiaglogPanel.add(viewProductNameTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 100, 200, 30));
+
+        viewProductIdLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        viewProductIdLabel.setText("Mã sản phẩm");
+        viewProductDiaglogPanel.add(viewProductIdLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, -1, -1));
+
+        viewProductIdTextField.setEditable(false);
+        viewProductIdTextField.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        viewProductIdTextField.setEnabled(false);
+        viewProductIdTextField.setFocusable(false);
+        viewProductIdTextField.setRequestFocusEnabled(false);
+        viewProductIdTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                viewProductIdTextFieldActionPerformed(evt);
+            }
+        });
+        viewProductDiaglogPanel.add(viewProductIdTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 60, 200, 30));
+
+        viewProductWhenCreatedLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        viewProductWhenCreatedLabel.setText("Ngày tạo");
+        viewProductDiaglogPanel.add(viewProductWhenCreatedLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 420, -1, -1));
+
+        viewProductWhenCreatedTextField.setEditable(false);
+        viewProductWhenCreatedTextField.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        viewProductWhenCreatedTextField.setEnabled(false);
+        viewProductWhenCreatedTextField.setFocusable(false);
+        viewProductWhenCreatedTextField.setRequestFocusEnabled(false);
+        viewProductWhenCreatedTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                viewProductWhenCreatedTextFieldActionPerformed(evt);
+            }
+        });
+        viewProductDiaglogPanel.add(viewProductWhenCreatedTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 420, 200, 30));
+
+        viewProductLastUpdatedLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        viewProductLastUpdatedLabel.setText("Sửa đổi lần cuối");
+        viewProductDiaglogPanel.add(viewProductLastUpdatedLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 460, -1, -1));
+
+        viewProductLastUpdatedTextField.setEditable(false);
+        viewProductLastUpdatedTextField.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        viewProductLastUpdatedTextField.setEnabled(false);
+        viewProductLastUpdatedTextField.setFocusable(false);
+        viewProductLastUpdatedTextField.setRequestFocusEnabled(false);
+        viewProductLastUpdatedTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                viewProductLastUpdatedTextFieldActionPerformed(evt);
+            }
+        });
+        viewProductDiaglogPanel.add(viewProductLastUpdatedTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 460, 200, 30));
+
+        javax.swing.GroupLayout viewProductDiaglogLayout = new javax.swing.GroupLayout(viewProductDiaglog.getContentPane());
+        viewProductDiaglog.getContentPane().setLayout(viewProductDiaglogLayout);
+        viewProductDiaglogLayout.setHorizontalGroup(
+            viewProductDiaglogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(viewProductDiaglogPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 450, Short.MAX_VALUE)
+        );
+        viewProductDiaglogLayout.setVerticalGroup(
+            viewProductDiaglogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(viewProductDiaglogPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 573, Short.MAX_VALUE)
+        );
+
+        addProductDiaglog.setTitle("Thêm người dùng");
+        addProductDiaglog.setBackground(new java.awt.Color(255, 255, 255));
+        addProductDiaglog.setMinimumSize(new java.awt.Dimension(450, 500));
+        addProductDiaglog.setPreferredSize(new java.awt.Dimension(450, 500));
+        addProductDiaglog.setSize(new java.awt.Dimension(450, 500));
+
+        addProductDiaglogPanel.setBackground(new java.awt.Color(255, 255, 255));
+        addProductDiaglogPanel.setMinimumSize(new java.awt.Dimension(430, 450));
+        addProductDiaglogPanel.setPreferredSize(new java.awt.Dimension(430, 450));
+        addProductDiaglogPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        productNameLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        productNameLabel.setText("Tên sản phẩm");
+        addProductDiaglogPanel.add(productNameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, -1, -1));
+
+        productProcessorTextField.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        productProcessorTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                productProcessorTextFieldActionPerformed(evt);
+            }
+        });
+        addProductDiaglogPanel.add(productProcessorTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 110, 200, 30));
+
+        productProcessorLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        productProcessorLabel.setText("Vi xử lý");
+        addProductDiaglogPanel.add(productProcessorLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, -1, -1));
+
+        productMemoryLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        productMemoryLabel.setText("Dung lượng RAM");
+        addProductDiaglogPanel.add(productMemoryLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 150, -1, -1));
+
+        productStorageLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        productStorageLabel.setText("Dung lượng lưu trữ");
+        addProductDiaglogPanel.add(productStorageLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 190, -1, -1));
+
+        productStorageTextField.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        productStorageTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                productStorageTextFieldActionPerformed(evt);
+            }
+        });
+        addProductDiaglogPanel.add(productStorageTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 190, 200, 30));
+
+        productDisplayLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        productDisplayLabel.setText("Màn hình");
+        addProductDiaglogPanel.add(productDisplayLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 230, -1, -1));
+
+        productDisplayTextField.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        productDisplayTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                productDisplayTextFieldActionPerformed(evt);
+            }
+        });
+        addProductDiaglogPanel.add(productDisplayTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 230, 200, 30));
+
+        productBatteryLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        productBatteryLabel.setText("Dung lượng pin");
+        addProductDiaglogPanel.add(productBatteryLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 270, -1, -1));
+
+        productBatteryTextField.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        productBatteryTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                productBatteryTextFieldActionPerformed(evt);
+            }
+        });
+        addProductDiaglogPanel.add(productBatteryTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 270, 200, 30));
+
+        productCardLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        productCardLabel.setText("Card đồ hoạ");
+        addProductDiaglogPanel.add(productCardLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 310, -1, -1));
+
+        productCardTextField.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        productCardTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                productCardTextFieldActionPerformed(evt);
+            }
+        });
+        addProductDiaglogPanel.add(productCardTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 310, 200, 30));
+
+        addProductDiaglogButton.setBackground(new java.awt.Color(0, 122, 249));
+        addProductDiaglogButton.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        addProductDiaglogButton.setText("Thêm mới");
+        addProductDiaglogButton.setBorderPainted(false);
+        addProductDiaglogButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addProductDiaglogButtonActionPerformed(evt);
+            }
+        });
+        addProductDiaglogPanel.add(addProductDiaglogButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 440, -1, -1));
+
+        cancelAddProductDiaglogButton.setBackground(new java.awt.Color(212, 57, 68));
+        cancelAddProductDiaglogButton.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        cancelAddProductDiaglogButton.setText("Huỷ bỏ");
+        cancelAddProductDiaglogButton.setBorderPainted(false);
+        cancelAddProductDiaglogButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelAddProductDiaglogButtonActionPerformed(evt);
+            }
+        });
+        addProductDiaglogPanel.add(cancelAddProductDiaglogButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 440, -1, -1));
+
+        jLabel15.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel15.setForeground(new java.awt.Color(44, 43, 196));
+        jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel15.setText("THÊM MỚI SẢN PHẨM");
+        addProductDiaglogPanel.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 20, 440, -1));
+
+        productWeightLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        productWeightLabel.setText("Trọng lượng");
+        addProductDiaglogPanel.add(productWeightLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 350, -1, -1));
+
+        productWeightTextField.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        productWeightTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                productWeightTextFieldActionPerformed(evt);
+            }
+        });
+        addProductDiaglogPanel.add(productWeightTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 350, 200, 30));
+
+        productMemoryTextField.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        productMemoryTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                productMemoryTextFieldActionPerformed(evt);
+            }
+        });
+        addProductDiaglogPanel.add(productMemoryTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 150, 200, 30));
+
+        productNameTextField.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        productNameTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                productNameTextFieldActionPerformed(evt);
+            }
+        });
+        addProductDiaglogPanel.add(productNameTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 70, 200, 30));
+
+        javax.swing.GroupLayout addProductDiaglogLayout = new javax.swing.GroupLayout(addProductDiaglog.getContentPane());
+        addProductDiaglog.getContentPane().setLayout(addProductDiaglogLayout);
+        addProductDiaglogLayout.setHorizontalGroup(
+            addProductDiaglogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(addProductDiaglogPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 450, Short.MAX_VALUE)
+        );
+        addProductDiaglogLayout.setVerticalGroup(
+            addProductDiaglogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(addProductDiaglogPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 500, Short.MAX_VALUE)
+        );
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1400, 830));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -1330,8 +2056,8 @@ public class Home extends javax.swing.JFrame {
         productPanel.setBackground(new java.awt.Color(255, 255, 255));
         productPanel.setPreferredSize(new java.awt.Dimension(1170, 830));
 
-        usersTable1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        usersTable1.setModel(new javax.swing.table.DefaultTableModel(
+        productsTable.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        productsTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -1339,165 +2065,175 @@ public class Home extends javax.swing.JFrame {
 
             }
         ));
-        usersScrollPanel1.setViewportView(usersTable1);
+        productsScrollPanel.setViewportView(productsTable);
 
-        searchUsersPanel1.setBackground(new java.awt.Color(255, 255, 255));
-        searchUsersPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Tìm kiếm", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 14))); // NOI18N
+        searchProductsPanel.setBackground(new java.awt.Color(255, 255, 255));
+        searchProductsPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Tìm kiếm", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 14))); // NOI18N
 
         productBrandsComboBox.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         productBrandsComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         productBrandsComboBox.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
-        searchProductsTextField1.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        searchProductsTextField.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        searchProductsTextField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                searchProductsTextFieldKeyReleased(evt);
+            }
+        });
 
-        searchProductsButton1.setBackground(new java.awt.Color(65, 120, 190));
-        searchProductsButton1.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        searchProductsButton1.setForeground(new java.awt.Color(255, 255, 255));
-        searchProductsButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/refresh.png"))); // NOI18N
-        searchProductsButton1.setText("Làm mới");
-        searchProductsButton1.setBorderPainted(false);
-        searchProductsButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        searchProductsButton.setBackground(new java.awt.Color(65, 120, 190));
+        searchProductsButton.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        searchProductsButton.setForeground(new java.awt.Color(255, 255, 255));
+        searchProductsButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/refresh.png"))); // NOI18N
+        searchProductsButton.setText("Làm mới");
+        searchProductsButton.setBorderPainted(false);
+        searchProductsButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        searchProductsButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchProductsButtonActionPerformed(evt);
+            }
+        });
 
-        javax.swing.GroupLayout searchUsersPanel1Layout = new javax.swing.GroupLayout(searchUsersPanel1);
-        searchUsersPanel1.setLayout(searchUsersPanel1Layout);
-        searchUsersPanel1Layout.setHorizontalGroup(
-            searchUsersPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(searchUsersPanel1Layout.createSequentialGroup()
+        javax.swing.GroupLayout searchProductsPanelLayout = new javax.swing.GroupLayout(searchProductsPanel);
+        searchProductsPanel.setLayout(searchProductsPanelLayout);
+        searchProductsPanelLayout.setHorizontalGroup(
+            searchProductsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(searchProductsPanelLayout.createSequentialGroup()
                 .addComponent(productBrandsComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(searchProductsTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(searchProductsTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(searchProductsButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(searchProductsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
-        searchUsersPanel1Layout.setVerticalGroup(
-            searchUsersPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(searchUsersPanel1Layout.createSequentialGroup()
+        searchProductsPanelLayout.setVerticalGroup(
+            searchProductsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(searchProductsPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(searchUsersPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(searchProductsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(productBrandsComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(searchProductsTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(searchProductsButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(searchProductsTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(searchProductsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(13, Short.MAX_VALUE))
         );
 
-        userFunctionPanel1.setBackground(new java.awt.Color(255, 255, 255));
-        userFunctionPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Chức năng", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 14))); // NOI18N
-        userFunctionPanel1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        productFunctionPanel.setBackground(new java.awt.Color(255, 255, 255));
+        productFunctionPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Chức năng", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 14))); // NOI18N
+        productFunctionPanel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         jSeparator2.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
-        importUsersFromExcelButton1.setBackground(new java.awt.Color(1, 169, 84));
-        importUsersFromExcelButton1.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        importUsersFromExcelButton1.setForeground(new java.awt.Color(255, 255, 255));
-        importUsersFromExcelButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/sheet.png"))); // NOI18N
-        importUsersFromExcelButton1.setText("Nhập Excel");
-        importUsersFromExcelButton1.setBorderPainted(false);
-        importUsersFromExcelButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        importUsersFromExcelButton1.addActionListener(new java.awt.event.ActionListener() {
+        importProductsFromExcelButton.setBackground(new java.awt.Color(1, 169, 84));
+        importProductsFromExcelButton.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        importProductsFromExcelButton.setForeground(new java.awt.Color(255, 255, 255));
+        importProductsFromExcelButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/sheet.png"))); // NOI18N
+        importProductsFromExcelButton.setText("Nhập Excel");
+        importProductsFromExcelButton.setBorderPainted(false);
+        importProductsFromExcelButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        importProductsFromExcelButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                importUsersFromExcelButton1ActionPerformed(evt);
+                importProductsFromExcelButtonActionPerformed(evt);
             }
         });
 
-        exportUsersToExcelButton1.setBackground(new java.awt.Color(0, 155, 110));
-        exportUsersToExcelButton1.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        exportUsersToExcelButton1.setForeground(new java.awt.Color(255, 255, 255));
-        exportUsersToExcelButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/sheet.png"))); // NOI18N
-        exportUsersToExcelButton1.setText("Xuất Excel");
-        exportUsersToExcelButton1.setBorderPainted(false);
-        exportUsersToExcelButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        exportUsersToExcelButton1.addActionListener(new java.awt.event.ActionListener() {
+        exportProductsToExcelButton.setBackground(new java.awt.Color(0, 155, 110));
+        exportProductsToExcelButton.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        exportProductsToExcelButton.setForeground(new java.awt.Color(255, 255, 255));
+        exportProductsToExcelButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/sheet.png"))); // NOI18N
+        exportProductsToExcelButton.setText("Xuất Excel");
+        exportProductsToExcelButton.setBorderPainted(false);
+        exportProductsToExcelButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        exportProductsToExcelButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                exportUsersToExcelButton1ActionPerformed(evt);
+                exportProductsToExcelButtonActionPerformed(evt);
             }
         });
 
-        editUserButton1.setBackground(new java.awt.Color(255, 193, 7));
-        editUserButton1.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        editUserButton1.setForeground(new java.awt.Color(255, 255, 255));
-        editUserButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/edit_icon.png"))); // NOI18N
-        editUserButton1.setText("Sửa");
-        editUserButton1.setBorderPainted(false);
-        editUserButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        editUserButton1.addActionListener(new java.awt.event.ActionListener() {
+        editProductButton.setBackground(new java.awt.Color(255, 193, 7));
+        editProductButton.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        editProductButton.setForeground(new java.awt.Color(255, 255, 255));
+        editProductButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/edit_icon.png"))); // NOI18N
+        editProductButton.setText("Sửa");
+        editProductButton.setBorderPainted(false);
+        editProductButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        editProductButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                editUserButton1ActionPerformed(evt);
+                editProductButtonActionPerformed(evt);
             }
         });
 
-        addUserButton1.setBackground(new java.awt.Color(36, 169, 65));
-        addUserButton1.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        addUserButton1.setForeground(new java.awt.Color(255, 255, 255));
-        addUserButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/add_circle_icon.png"))); // NOI18N
-        addUserButton1.setText("Thêm");
-        addUserButton1.setBorderPainted(false);
-        addUserButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        addUserButton1.addActionListener(new java.awt.event.ActionListener() {
+        addProductButton.setBackground(new java.awt.Color(36, 169, 65));
+        addProductButton.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        addProductButton.setForeground(new java.awt.Color(255, 255, 255));
+        addProductButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/add_circle_icon.png"))); // NOI18N
+        addProductButton.setText("Thêm");
+        addProductButton.setBorderPainted(false);
+        addProductButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        addProductButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addUserButton1ActionPerformed(evt);
+                addProductButtonActionPerformed(evt);
             }
         });
 
-        deleteUserButton1.setBackground(new java.awt.Color(212, 57, 68));
-        deleteUserButton1.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        deleteUserButton1.setForeground(new java.awt.Color(255, 255, 255));
-        deleteUserButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/remove_icon.png"))); // NOI18N
-        deleteUserButton1.setText("Xoá");
-        deleteUserButton1.setBorderPainted(false);
-        deleteUserButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        deleteUserButton1.addActionListener(new java.awt.event.ActionListener() {
+        deleteProductButton.setBackground(new java.awt.Color(212, 57, 68));
+        deleteProductButton.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        deleteProductButton.setForeground(new java.awt.Color(255, 255, 255));
+        deleteProductButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/remove_icon.png"))); // NOI18N
+        deleteProductButton.setText("Xoá");
+        deleteProductButton.setBorderPainted(false);
+        deleteProductButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        deleteProductButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                deleteUserButton1ActionPerformed(evt);
+                deleteProductButtonActionPerformed(evt);
             }
         });
 
-        viewUserButton1.setBackground(new java.awt.Color(13, 110, 253));
-        viewUserButton1.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        viewUserButton1.setForeground(new java.awt.Color(255, 255, 255));
-        viewUserButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/show.png"))); // NOI18N
-        viewUserButton1.setText("Xem");
-        viewUserButton1.setBorderPainted(false);
-        viewUserButton1.addActionListener(new java.awt.event.ActionListener() {
+        viewProductButton.setBackground(new java.awt.Color(13, 110, 253));
+        viewProductButton.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        viewProductButton.setForeground(new java.awt.Color(255, 255, 255));
+        viewProductButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/show.png"))); // NOI18N
+        viewProductButton.setText("Xem");
+        viewProductButton.setBorderPainted(false);
+        viewProductButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                viewUserButton1ActionPerformed(evt);
+                viewProductButtonActionPerformed(evt);
             }
         });
 
-        javax.swing.GroupLayout userFunctionPanel1Layout = new javax.swing.GroupLayout(userFunctionPanel1);
-        userFunctionPanel1.setLayout(userFunctionPanel1Layout);
-        userFunctionPanel1Layout.setHorizontalGroup(
-            userFunctionPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(userFunctionPanel1Layout.createSequentialGroup()
+        javax.swing.GroupLayout productFunctionPanelLayout = new javax.swing.GroupLayout(productFunctionPanel);
+        productFunctionPanel.setLayout(productFunctionPanelLayout);
+        productFunctionPanelLayout.setHorizontalGroup(
+            productFunctionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(productFunctionPanelLayout.createSequentialGroup()
                 .addGap(2, 2, 2)
-                .addComponent(viewUserButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(viewProductButton, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(addUserButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(addProductButton, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(editUserButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(editProductButton, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(deleteUserButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(deleteProductButton, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(importUsersFromExcelButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(importProductsFromExcelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(exportUsersToExcelButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(exportProductsToExcelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
-        userFunctionPanel1Layout.setVerticalGroup(
-            userFunctionPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(userFunctionPanel1Layout.createSequentialGroup()
+        productFunctionPanelLayout.setVerticalGroup(
+            productFunctionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(productFunctionPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(userFunctionPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(productFunctionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jSeparator2, javax.swing.GroupLayout.DEFAULT_SIZE, 47, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, userFunctionPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(importUsersFromExcelButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(exportUsersToExcelButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, userFunctionPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(addUserButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(editUserButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(viewUserButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(deleteUserButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, productFunctionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(importProductsFromExcelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(exportProductsToExcelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, productFunctionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(addProductButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(editProductButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(viewProductButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(deleteProductButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(0, 7, Short.MAX_VALUE))
         );
 
@@ -1508,22 +2244,22 @@ public class Home extends javax.swing.JFrame {
             .addGroup(productPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(productPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(usersScrollPanel1)
+                    .addComponent(productsScrollPanel)
                     .addGroup(productPanelLayout.createSequentialGroup()
-                        .addComponent(userFunctionPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(productFunctionPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(searchUsersPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(18, Short.MAX_VALUE))
+                        .addComponent(searchProductsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         productPanelLayout.setVerticalGroup(
             productPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(productPanelLayout.createSequentialGroup()
                 .addGap(14, 14, 14)
                 .addGroup(productPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(userFunctionPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(searchUsersPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(productFunctionPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(searchProductsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(usersScrollPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 658, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(productsScrollPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 658, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(59, Short.MAX_VALUE))
         );
 
@@ -2423,7 +3159,7 @@ public class Home extends javax.swing.JFrame {
             File uploadedFile = fileChooser.getSelectedFile();
             ArrayList<User> users = ExcelUtil.excelToUsers(uploadedFile);
             CommonResponseDTO response = userController.addList(users);
-            showUserDiaglogMessage(response.message());
+            showDiaglogMessage(response.message());
             loadDataToTableUsers(null);
         }
         
@@ -2442,18 +3178,18 @@ public class Home extends javax.swing.JFrame {
                     userController.getList().data(), 
                     directoryToSave.getAbsolutePath()
             );
-            showUserDiaglogMessage(response.message());
+            showDiaglogMessage(response.message());
         }
     }//GEN-LAST:event_exportUsersToExcelButtonActionPerformed
 
     private void editUserButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editUserButtonActionPerformed
         int[] rows = usersTable.getSelectedRows();
         if (rows.length == 0) {
-            showUserDiaglogMessage(ErrorMessage.User.EMPTY_SELECTED_ROWS);
+            showDiaglogMessage(ErrorMessage.User.EMPTY_SELECTED_ROWS);
             return;
         }
         if (rows.length > 1) {
-            showUserDiaglogMessage(ErrorMessage.User.EXCEED_SELECTED_ROWS);
+            showDiaglogMessage(ErrorMessage.User.EXCEED_SELECTED_ROWS);
             return;
         }
         
@@ -2482,11 +3218,11 @@ public class Home extends javax.swing.JFrame {
     private void viewUserButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewUserButtonActionPerformed
         int[] rows = usersTable.getSelectedRows();
         if (rows.length == 0) {
-            showUserDiaglogMessage(ErrorMessage.User.EMPTY_SELECTED_ROWS);
+            showDiaglogMessage(ErrorMessage.User.EMPTY_SELECTED_ROWS);
             return;
         }
         if (rows.length > 1) {
-            showUserDiaglogMessage(ErrorMessage.User.EXCEED_SELECTED_ROWS);
+            showDiaglogMessage(ErrorMessage.User.EXCEED_SELECTED_ROWS);
             return;
         }
         
@@ -2497,7 +3233,7 @@ public class Home extends javax.swing.JFrame {
         Integer id = Integer.valueOf(usersTable.getValueAt(selectedRow, ID_COL_INDEX).toString());
         Optional<User> found = userController.findById(id);
         if (found.isEmpty()) {
-            showUserDiaglogMessage(ErrorMessage.User.NOT_FOUND);
+            showDiaglogMessage(ErrorMessage.User.NOT_FOUND);
             return;
         }
         
@@ -2519,7 +3255,7 @@ public class Home extends javax.swing.JFrame {
     private void deleteUserButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteUserButtonActionPerformed
         int[] rows = usersTable.getSelectedRows();
         if (rows.length == 0) {
-            showUserDiaglogMessage(ErrorMessage.User.EMPTY_SELECTED_ROWS);
+            showDiaglogMessage(ErrorMessage.User.EMPTY_SELECTED_ROWS);
             return;
         }
         showDeleteUserConfirmDiaglog(String.format("Bạn có chắc chắn xoá %d bản ghi này?", rows.length));
@@ -2532,25 +3268,67 @@ public class Home extends javax.swing.JFrame {
         deleteUserConfirmDiaglogLabel.setText(content);
     }
     
-    private void importUsersFromExcelButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_importUsersFromExcelButton1ActionPerformed
+    private void importProductsFromExcelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_importProductsFromExcelButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_importUsersFromExcelButton1ActionPerformed
+    }//GEN-LAST:event_importProductsFromExcelButtonActionPerformed
 
-    private void exportUsersToExcelButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exportUsersToExcelButton1ActionPerformed
+    private void exportProductsToExcelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exportProductsToExcelButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_exportUsersToExcelButton1ActionPerformed
+    }//GEN-LAST:event_exportProductsToExcelButtonActionPerformed
 
-    private void editUserButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editUserButton1ActionPerformed
+    private void editProductButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editProductButtonActionPerformed
+        int[] rows = productsTable.getSelectedRows();
+        if (rows.length == 0) {
+            showDiaglogMessage(ErrorMessage.User.EMPTY_SELECTED_ROWS);
+            return;
+        }
+        if (rows.length > 1) {
+            showDiaglogMessage(ErrorMessage.User.EXCEED_SELECTED_ROWS);
+            return;
+        }
+        
+        this.showEditProductDiaglog(rows[0]);
+    }//GEN-LAST:event_editProductButtonActionPerformed
+    
+    private void showEditProductDiaglog(int selectedRow) {
+        Integer id = Integer.valueOf(productsTable.getValueAt(selectedRow, ID_COL_INDEX).toString());
+        
+        Optional<Product> found = productController.findById(id);
+        
+        if (found.isEmpty()) {
+            showDiaglogMessage(ErrorMessage.Product.BLANK_INPUT);
+            return;
+        }
+        
+        Product foundProduct = found.get();
+        
+        editProductIdTextField.setText(foundProduct.getId().toString());
+        editProductNameTextField.setText(foundProduct.getName());
+        editProductProcessorTextField.setText(foundProduct.getProcessor());
+        editProductMemoryTextField.setText(foundProduct.getMemory());
+        editProductStorageTextField.setText(foundProduct.getStorage());
+        editProductDisplayTextField.setText(foundProduct.getDisplay());
+        editProductBatteryTextField.setText(foundProduct.getBattery());
+        editProductCardTextField.setText(foundProduct.getCard());
+        editProductWeightTextField.setText(foundProduct.getWeight());
+        
+        
+        editProductDiaglog.setVisible(true);
+        editProductDiaglog.setLocationRelativeTo(this);
+    }
+    
+    private void addProductButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addProductButtonActionPerformed
+        showAddProductDiaglog();
+    }//GEN-LAST:event_addProductButtonActionPerformed
+    
+    private void showAddProductDiaglog() {
+        addProductDiaglog.setVisible(true);
+        addProductDiaglog.setLocationRelativeTo(this);
+    }
+    
+    private void deleteProductButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteProductButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_editUserButton1ActionPerformed
-
-    private void addUserButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addUserButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_addUserButton1ActionPerformed
-
-    private void deleteUserButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteUserButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_deleteUserButton1ActionPerformed
+    }//GEN-LAST:event_deleteProductButtonActionPerformed
 
     private void searchUsersTextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchUsersTextFieldKeyReleased
         String keyword = searchUsersTextField.getText();
@@ -2716,17 +3494,17 @@ public class Home extends javax.swing.JFrame {
                 username, firstName, lastName, phoneNumber, email, 
                 otp, password, confirmPassword)
         ) {
-            showUserDiaglogMessage(ErrorMessage.User.BLANK_INPUT);
+            showDiaglogMessage(ErrorMessage.User.BLANK_INPUT);
             return;
         }    
         
         if (!password.equals(confirmPassword)) {
-            showUserDiaglogMessage(ErrorMessage.User.MISMATCHED_PASSWORD);
+            showDiaglogMessage(ErrorMessage.User.MISMATCHED_PASSWORD);
             return;
         }
         
         if (userController.findByUsername(username).isPresent()) {
-            showUserDiaglogMessage(ErrorMessage.User.DUPLICATED_USERNAME);
+            showDiaglogMessage(ErrorMessage.User.DUPLICATED_USERNAME);
             return;
         }
         
@@ -2741,12 +3519,12 @@ public class Home extends javax.swing.JFrame {
                 .build());
         if (result.success()) {
             addUserDiaglog.setVisible(false);
-            showUserDiaglogMessage(SuccessMessage.User.ADDED);            
+            showDiaglogMessage(SuccessMessage.User.ADDED);            
             loadDataToTableUsers(null);
         }
     }//GEN-LAST:event_addUserDiaglogButtonActionPerformed
     
-    private void showUserDiaglogMessage(String message) {
+    private void showDiaglogMessage(String message) {
         diaglogMessage.setVisible(true);
         diaglogMessage.setLocationRelativeTo(this);
         diaglogMessageLabel.setText(message);
@@ -2772,7 +3550,7 @@ public class Home extends javax.swing.JFrame {
             userController.deleteOne(Integer.valueOf(usersTable.getValueAt(row, ID_COL_INDEX).toString()));
         }
         loadDataToTableUsers(null);
-        showUserDiaglogMessage(String.format("Xoá thành công %d bản ghi.", rows.length));
+        showDiaglogMessage(String.format("Xoá thành công %d bản ghi.", rows.length));
         
     }//GEN-LAST:event_confirmDeleteUserActionPerformed
 
@@ -2812,7 +3590,7 @@ public class Home extends javax.swing.JFrame {
         String phoneNumber = editPhoneNumberTextField.getText();
         
         CommonResponseDTO response = userController.updateOne(id, new UserDTO(firstName, lastName, phoneNumber, email));
-        showUserDiaglogMessage(response.message());
+        showDiaglogMessage(response.message());
         loadDataToTableUsers(null);
         editUserDiaglog.dispose();
     }//GEN-LAST:event_editUserDiaglogButtonActionPerformed
@@ -2859,11 +3637,11 @@ public class Home extends javax.swing.JFrame {
         // TODO add your handling code here:
         int[] rows = usersTable.getSelectedRows();
         if (rows.length == 0) {
-            showUserDiaglogMessage(ErrorMessage.User.EMPTY_SELECTED_ROWS);
+            showDiaglogMessage(ErrorMessage.User.EMPTY_SELECTED_ROWS);
             return;
         }
         if (rows.length > 1) {
-            showUserDiaglogMessage(ErrorMessage.User.EXCEED_SELECTED_ROWS);
+            showDiaglogMessage(ErrorMessage.User.EXCEED_SELECTED_ROWS);
             return;
         }
         viewUserDiaglog.dispose();
@@ -2891,9 +3669,271 @@ public class Home extends javax.swing.JFrame {
         loadDataToTableUsers(null);
     }//GEN-LAST:event_searchUsersButtonActionPerformed
 
-    private void viewUserButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewUserButton1ActionPerformed
+    private void viewProductButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewProductButtonActionPerformed
+        int[] rows = productsTable.getSelectedRows();
+        if (rows.length == 0) {
+            showDiaglogMessage(ErrorMessage.User.EMPTY_SELECTED_ROWS);
+            return;
+        }
+        if (rows.length > 1) {
+            showDiaglogMessage(ErrorMessage.User.EXCEED_SELECTED_ROWS);
+            return;
+        }
+        this.showViewProductDiaglog(rows[0]);
+    }//GEN-LAST:event_viewProductButtonActionPerformed
+    
+    private void showViewProductDiaglog(int selectedRow) {
+        Integer id = Integer.valueOf(productsTable.getValueAt(selectedRow, ID_COL_INDEX).toString());
+        
+        this.viewProductDiaglog.setVisible(true);
+        this.viewProductDiaglog.setLocationRelativeTo(this);
+        
+        Optional<Product> found = productController.findById(id);
+        
+        if (found.isEmpty()) {
+            showDiaglogMessage(ErrorMessage.Product.NOT_FOUND);
+            return;
+        }
+        
+        Product foundProduct = found.get();
+        viewProductIdTextField.setText(foundProduct.getId().toString());
+        viewProductNameTextField.setText(foundProduct.getName());
+        viewProductProcessorTextField.setText(foundProduct.getProcessor());
+        viewProductMemoryTextField.setText(foundProduct.getMemory());
+        viewProductStorageTextField.setText(foundProduct.getStorage());
+        viewProductDisplayTextField.setText(foundProduct.getDisplay());
+        viewProductBatteryTextField.setText(foundProduct.getBattery());
+        viewProductCardTextField.setText(foundProduct.getCard());
+        viewProductWeightTextField.setText(foundProduct.getWeight());
+        if (foundProduct.getWhenCreated() != null) viewProductWhenCreatedTextField.setText(formatter.format(foundProduct.getWhenCreated()));
+        if (foundProduct.getLastUpdated() != null) viewProductLastUpdatedTextField.setText(formatter.format(foundProduct.getLastUpdated()));
+        
+        
+    }
+    
+    private void confirmDeleteUser1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmDeleteUser1ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_viewUserButton1ActionPerformed
+    }//GEN-LAST:event_confirmDeleteUser1ActionPerformed
+
+    private void cancelDeleteUser1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelDeleteUser1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cancelDeleteUser1ActionPerformed
+
+    private void productProcessorTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_productProcessorTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_productProcessorTextFieldActionPerformed
+
+    private void productStorageTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_productStorageTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_productStorageTextFieldActionPerformed
+
+    private void productDisplayTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_productDisplayTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_productDisplayTextFieldActionPerformed
+
+    private void productBatteryTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_productBatteryTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_productBatteryTextFieldActionPerformed
+
+    private void productCardTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_productCardTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_productCardTextFieldActionPerformed
+
+    private void addProductDiaglogButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addProductDiaglogButtonActionPerformed
+        String name = productNameTextField.getText();
+        String processor = productProcessorTextField.getText();
+        String ram = productMemoryTextField.getText();
+        String storage = productStorageTextField.getText();
+        String display = productDisplayTextField.getText();
+        String battery = productBatteryTextField.getText();
+        String card = productCardTextField.getText();
+        String weight = productWeightTextField.getText();
+        
+        if (InputValidator.anyBlankInput(name, processor, ram, storage, display, battery, card, weight)) {
+            showDiaglogMessage(ErrorMessage.Product.BLANK_INPUT);
+            return;
+        }
+        
+        CommonResponseDTO response = productController.addOne(
+                Product.builder()
+                        .name(name)
+                        .processor(processor)
+                        .memory(ram)
+                        .storage(storage)
+                        .display(display)
+                        .battery(battery)
+                        .card(card)
+                        .weight(weight)
+                        .build()
+        );
+        
+        this.addProductDiaglog.dispose();
+        showDiaglogMessage(response.message());
+        loadDataToTableProducts(null);
+    }//GEN-LAST:event_addProductDiaglogButtonActionPerformed
+
+    private void cancelAddProductDiaglogButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelAddProductDiaglogButtonActionPerformed
+        this.addProductDiaglog.dispose();
+        productNameTextField.setText("");
+        productProcessorTextField.setText("");
+        productMemoryTextField.setText("");
+        productStorageTextField.setText("");
+        productDisplayTextField.setText("");
+        productBatteryTextField.setText("");
+        productCardTextField.setText("");
+        productWeightTextField.setText("");
+    }//GEN-LAST:event_cancelAddProductDiaglogButtonActionPerformed
+
+    private void productWeightTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_productWeightTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_productWeightTextFieldActionPerformed
+
+    private void productMemoryTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_productMemoryTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_productMemoryTextFieldActionPerformed
+
+    private void productNameTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_productNameTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_productNameTextFieldActionPerformed
+
+    private void editProductProcessorTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editProductProcessorTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_editProductProcessorTextFieldActionPerformed
+
+    private void editProductStorageTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editProductStorageTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_editProductStorageTextFieldActionPerformed
+
+    private void editProductDisplayTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editProductDisplayTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_editProductDisplayTextFieldActionPerformed
+
+    private void editProductBatteryTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editProductBatteryTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_editProductBatteryTextFieldActionPerformed
+
+    private void editProductCardTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editProductCardTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_editProductCardTextFieldActionPerformed
+
+    private void editProductDiaglogButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editProductDiaglogButtonActionPerformed
+        Integer id = Integer.valueOf(editProductIdTextField.getText());
+        String name = editProductNameTextField.getText();
+        String processor = editProductProcessorTextField.getText();
+        String memory = editProductMemoryTextField.getText();
+        String storage = editProductStorageTextField.getText();
+        String display = editProductDisplayTextField.getText();
+        String battery = editProductBatteryTextField.getText();
+        String card = editProductCardTextField.getText();
+        String weight = editProductWeightTextField.getText();
+        
+        CommonResponseDTO response = productController.updateOne(
+                id, 
+                Product.builder()
+                        .name(name)
+                        .processor(processor)
+                        .memory(memory)
+                        .storage(storage)
+                        .display(display)
+                        .battery(battery)
+                        .card(card)
+                        .weight(weight)
+                        .build()
+        );
+        
+        this.loadDataToTableProducts(null);
+        this.editProductDiaglog.dispose();
+        this.showDiaglogMessage(response.message());
+        
+    }//GEN-LAST:event_editProductDiaglogButtonActionPerformed
+
+    private void cancelEditProductDiaglogButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelEditProductDiaglogButtonActionPerformed
+        this.editProductDiaglog.dispose();
+    }//GEN-LAST:event_cancelEditProductDiaglogButtonActionPerformed
+
+    private void editProductWeightTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editProductWeightTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_editProductWeightTextFieldActionPerformed
+
+    private void editProductMemoryTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editProductMemoryTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_editProductMemoryTextFieldActionPerformed
+
+    private void editProductNameTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editProductNameTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_editProductNameTextFieldActionPerformed
+
+    private void editProductIdTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editProductIdTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_editProductIdTextFieldActionPerformed
+
+    private void searchProductsTextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchProductsTextFieldKeyReleased
+        String keyword = searchProductsTextField.getText();
+        loadDataToTableProducts(keyword);
+    }//GEN-LAST:event_searchProductsTextFieldKeyReleased
+
+    private void searchProductsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchProductsButtonActionPerformed
+        searchProductsTextField.setText("");
+        loadDataToTableProducts(null);
+    }//GEN-LAST:event_searchProductsButtonActionPerformed
+
+    private void viewProductProcessorTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewProductProcessorTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_viewProductProcessorTextFieldActionPerformed
+
+    private void viewProductStorageTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewProductStorageTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_viewProductStorageTextFieldActionPerformed
+
+    private void viewProductDisplayTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewProductDisplayTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_viewProductDisplayTextFieldActionPerformed
+
+    private void viewProductBatteryTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewProductBatteryTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_viewProductBatteryTextFieldActionPerformed
+
+    private void viewProductCardTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewProductCardTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_viewProductCardTextFieldActionPerformed
+
+    private void updateProductDiaglogButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateProductDiaglogButtonActionPerformed
+        int[] rows = productsTable.getSelectedRows();
+        
+        this.viewProductDiaglog.dispose();
+        
+        this.showEditProductDiaglog(rows[0]);
+        
+        
+    }//GEN-LAST:event_updateProductDiaglogButtonActionPerformed
+
+    private void cancelViewProductDiaglogButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelViewProductDiaglogButtonActionPerformed
+        this.viewProductDiaglog.dispose();
+    }//GEN-LAST:event_cancelViewProductDiaglogButtonActionPerformed
+
+    private void viewProductWeightTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewProductWeightTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_viewProductWeightTextFieldActionPerformed
+
+    private void viewProductMemoryTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewProductMemoryTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_viewProductMemoryTextFieldActionPerformed
+
+    private void viewProductNameTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewProductNameTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_viewProductNameTextFieldActionPerformed
+
+    private void viewProductIdTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewProductIdTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_viewProductIdTextFieldActionPerformed
+
+    private void viewProductWhenCreatedTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewProductWhenCreatedTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_viewProductWhenCreatedTextFieldActionPerformed
+
+    private void viewProductLastUpdatedTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewProductLastUpdatedTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_viewProductLastUpdatedTextFieldActionPerformed
 
     /**
      * @param args the command line arguments
@@ -2914,24 +3954,35 @@ public class Home extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton addProductButton;
+    private javax.swing.JDialog addProductDiaglog;
+    private javax.swing.JButton addProductDiaglogButton;
+    private javax.swing.JPanel addProductDiaglogPanel;
     private javax.swing.JButton addUserButton;
-    private javax.swing.JButton addUserButton1;
     private javax.swing.JDialog addUserDiaglog;
     private javax.swing.JButton addUserDiaglogButton;
     private javax.swing.JPanel addUserDiaglogPanel;
+    private javax.swing.JButton cancelAddProductDiaglogButton;
     private javax.swing.JButton cancelAddUserDiaglogButton;
     private javax.swing.JButton cancelAddUserDiaglogButton1;
     private javax.swing.JButton cancelDeleteUser;
+    private javax.swing.JButton cancelDeleteUser1;
+    private javax.swing.JButton cancelEditProductDiaglogButton;
     private javax.swing.JButton cancelEditUserDiaglogButton;
+    private javax.swing.JButton cancelViewProductDiaglogButton;
     private javax.swing.JButton confirmDeleteUser;
+    private javax.swing.JButton confirmDeleteUser1;
     private javax.swing.JLabel confirmEmailOTPLabel;
     private javax.swing.JTextField confirmEmailOTPTextField;
     private javax.swing.JPasswordField confirmPasswordField;
     private javax.swing.JLabel confirmPasswordLabel;
+    private javax.swing.JButton deleteProductButton;
+    private javax.swing.JDialog deleteProductConfirmDiaglog;
+    private javax.swing.JPanel deleteProductConfirmDiaglogPanel;
     private javax.swing.JButton deleteUserButton;
-    private javax.swing.JButton deleteUserButton1;
     private javax.swing.JDialog deleteUserConfirmDiaglog;
     private javax.swing.JLabel deleteUserConfirmDiaglogLabel;
+    private javax.swing.JLabel deleteUserConfirmDiaglogLabel1;
     private javax.swing.JPanel deleteUserConfirmDiaglogPanel;
     private javax.swing.JDialog diaglogMessage;
     private javax.swing.JLabel diaglogMessageLabel;
@@ -2946,8 +3997,29 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JTextField editLastNameTextField;
     private javax.swing.JLabel editPhoneNumberLabel;
     private javax.swing.JTextField editPhoneNumberTextField;
+    private javax.swing.JLabel editProductBatteryLabel;
+    private javax.swing.JTextField editProductBatteryTextField;
+    private javax.swing.JButton editProductButton;
+    private javax.swing.JLabel editProductCardLabel;
+    private javax.swing.JTextField editProductCardTextField;
+    private javax.swing.JDialog editProductDiaglog;
+    private javax.swing.JButton editProductDiaglogButton;
+    private javax.swing.JPanel editProductDiaglogPanel;
+    private javax.swing.JLabel editProductDisplayLabel;
+    private javax.swing.JTextField editProductDisplayTextField;
+    private javax.swing.JLabel editProductIdLabel;
+    private javax.swing.JTextField editProductIdTextField;
+    private javax.swing.JLabel editProductMemoryLabel;
+    private javax.swing.JTextField editProductMemoryTextField;
+    private javax.swing.JLabel editProductNameLabel;
+    private javax.swing.JTextField editProductNameTextField;
+    private javax.swing.JLabel editProductProcessorLabel;
+    private javax.swing.JTextField editProductProcessorTextField;
+    private javax.swing.JLabel editProductStorageLabel;
+    private javax.swing.JTextField editProductStorageTextField;
+    private javax.swing.JLabel editProductWeightLabel;
+    private javax.swing.JTextField editProductWeightTextField;
     private javax.swing.JButton editUserButton;
-    private javax.swing.JButton editUserButton1;
     private javax.swing.JDialog editUserDiaglog;
     private javax.swing.JButton editUserDiaglogButton;
     private javax.swing.JButton editUserDiaglogButton1;
@@ -2965,8 +4037,8 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JLabel exportProductLabel;
     private javax.swing.JPanel exportProductPanel;
     private javax.swing.JPanel exportProductTab;
+    private javax.swing.JButton exportProductsToExcelButton;
     private javax.swing.JButton exportUsersToExcelButton;
-    private javax.swing.JButton exportUsersToExcelButton1;
     private javax.swing.JLabel firstNameLabel;
     private javax.swing.JTextField firstNameTextField;
     private javax.swing.JLabel importBillIdLabel;
@@ -2988,8 +4060,8 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JScrollPane importProductScrollPanel;
     private javax.swing.JPanel importProductTab;
     private javax.swing.JTable importProductTable;
+    private javax.swing.JButton importProductsFromExcelButton;
     private javax.swing.JButton importUsersFromExcelButton;
-    private javax.swing.JButton importUsersFromExcelButton1;
     private javax.swing.JLabel inStockLabel;
     private javax.swing.JPanel inStockPanel;
     private javax.swing.JPanel inStockTab;
@@ -2998,6 +4070,10 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -3023,10 +4099,29 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JLabel passwordLabel;
     private javax.swing.JLabel phoneNumberLabel;
     private javax.swing.JTextField phoneNumberTextField;
+    private javax.swing.JLabel productBatteryLabel;
+    private javax.swing.JTextField productBatteryTextField;
     private javax.swing.JComboBox<String> productBrandsComboBox;
+    private javax.swing.JLabel productCardLabel;
+    private javax.swing.JTextField productCardTextField;
+    private javax.swing.JLabel productDisplayLabel;
+    private javax.swing.JTextField productDisplayTextField;
+    private javax.swing.JPanel productFunctionPanel;
     private javax.swing.JLabel productLabel;
+    private javax.swing.JLabel productMemoryLabel;
+    private javax.swing.JTextField productMemoryTextField;
+    private javax.swing.JLabel productNameLabel;
+    private javax.swing.JTextField productNameTextField;
     private javax.swing.JPanel productPanel;
+    private javax.swing.JLabel productProcessorLabel;
+    private javax.swing.JTextField productProcessorTextField;
+    private javax.swing.JLabel productStorageLabel;
+    private javax.swing.JTextField productStorageTextField;
     private javax.swing.JPanel productTab;
+    private javax.swing.JLabel productWeightLabel;
+    private javax.swing.JTextField productWeightTextField;
+    private javax.swing.JScrollPane productsScrollPanel;
+    private javax.swing.JTable productsTable;
     private javax.swing.JLabel providerLabel;
     private javax.swing.JComboBox<String> providerNameComboBox;
     private javax.swing.JLabel providerNameLabel;
@@ -3036,11 +4131,11 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JPanel searchImportProductPanel;
     private javax.swing.JButton searchImportProductRefreshButton;
     private javax.swing.JTextField searchImportProductTextField;
-    private javax.swing.JButton searchProductsButton1;
-    private javax.swing.JTextField searchProductsTextField1;
+    private javax.swing.JButton searchProductsButton;
+    private javax.swing.JPanel searchProductsPanel;
+    private javax.swing.JTextField searchProductsTextField;
     private javax.swing.JButton searchUsersButton;
     private javax.swing.JPanel searchUsersPanel;
-    private javax.swing.JPanel searchUsersPanel1;
     private javax.swing.JTextField searchUsersTextField;
     private javax.swing.JButton sendCodeAddUserDiaglogButton;
     private javax.swing.JPanel sidebarPanel;
@@ -3051,19 +4146,41 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JLabel totalValueLabel;
     private javax.swing.JLabel updateInfoLabel;
     private javax.swing.JPanel updateInfoTab;
+    private javax.swing.JButton updateProductDiaglogButton;
     private javax.swing.JPanel userFunctionPanel;
-    private javax.swing.JPanel userFunctionPanel1;
     private javax.swing.JLabel userLabel;
     private javax.swing.JPanel userPanel;
     private javax.swing.JPanel userTab;
     private javax.swing.JLabel usernameLabel;
     private javax.swing.JTextField usernameTextField;
     private javax.swing.JScrollPane usersScrollPanel;
-    private javax.swing.JScrollPane usersScrollPanel1;
     private javax.swing.JTable usersTable;
-    private javax.swing.JTable usersTable1;
+    private javax.swing.JLabel viewProductBatteryLabel;
+    private javax.swing.JTextField viewProductBatteryTextField;
+    private javax.swing.JButton viewProductButton;
+    private javax.swing.JLabel viewProductCardLabel;
+    private javax.swing.JTextField viewProductCardTextField;
+    private javax.swing.JDialog viewProductDiaglog;
+    private javax.swing.JPanel viewProductDiaglogPanel;
+    private javax.swing.JLabel viewProductDisplayLabel;
+    private javax.swing.JTextField viewProductDisplayTextField;
+    private javax.swing.JLabel viewProductIdLabel;
+    private javax.swing.JTextField viewProductIdTextField;
+    private javax.swing.JLabel viewProductLastUpdatedLabel;
+    private javax.swing.JTextField viewProductLastUpdatedTextField;
+    private javax.swing.JLabel viewProductMemoryLabel;
+    private javax.swing.JTextField viewProductMemoryTextField;
+    private javax.swing.JLabel viewProductNameLabel;
+    private javax.swing.JTextField viewProductNameTextField;
+    private javax.swing.JLabel viewProductProcessorLabel;
+    private javax.swing.JTextField viewProductProcessorTextField;
+    private javax.swing.JLabel viewProductStorageLabel;
+    private javax.swing.JTextField viewProductStorageTextField;
+    private javax.swing.JLabel viewProductWeightLabel;
+    private javax.swing.JTextField viewProductWeightTextField;
+    private javax.swing.JLabel viewProductWhenCreatedLabel;
+    private javax.swing.JTextField viewProductWhenCreatedTextField;
     private javax.swing.JButton viewUserButton;
-    private javax.swing.JButton viewUserButton1;
     private javax.swing.JDialog viewUserDiaglog;
     private javax.swing.JPanel viewUserDiaglogPanel;
     private javax.swing.JLabel viewUserEmailLabel;
