@@ -43,11 +43,20 @@ public class Home extends javax.swing.JFrame {
     private final Font tableHeaderFont = new Font("Segoe UI", Font.BOLD, 14);
     
     private final int ID_COL_INDEX = 0;
+    
     private final int USERNAME_COL_INDEX = 1;
     private final int FIRSTNAME_COL_INDEX = 2;
     private final int LASTNAME_COL_INDEX = 3;
     private final int PHONENUMBER_COL_INDEX = 4;
     private final int EMAIL_COL_INDEX = 5;
+    
+    private final int PRODUCT_NAME_COL_INDEX = 1;
+    private final int PRODUCT_PROCESSOR_COL_INDEX = 2;
+    private final int PRODUCT_MEMORY_COL_INDEX = 3;
+    private final int PRODUCT_STORAGE_COL_INDEX = 4;
+    private final int PRODUCT_DISPLAY_COL_INDEX = 5;
+    private final int PRODUCT_BATTERY_COL_INDEX = 6;
+    private final int PRODUCT_CARD_COL_INDEX = 7;
     
     private final UserController userController = new UserController(
             new UserServiceImpl(
@@ -247,21 +256,27 @@ public class Home extends javax.swing.JFrame {
         jLabel12 = new javax.swing.JLabel();
         editProductDiaglog = new javax.swing.JDialog();
         editProductDiaglogPanel = new javax.swing.JPanel();
-        editUsernameLabel1 = new javax.swing.JLabel();
-        editUsernameTextField1 = new javax.swing.JTextField();
-        editFirstNameLabel1 = new javax.swing.JLabel();
-        editFirstNameTextField1 = new javax.swing.JTextField();
-        editLastNameLabel1 = new javax.swing.JLabel();
-        editLastNameTextField1 = new javax.swing.JTextField();
-        editPhoneNumberLabel1 = new javax.swing.JLabel();
-        editPhoneNumberTextField1 = new javax.swing.JTextField();
-        editEmailLabel1 = new javax.swing.JLabel();
-        editEmailTextField1 = new javax.swing.JTextField();
-        editUserDiaglogButton2 = new javax.swing.JButton();
-        cancelEditUserDiaglogButton1 = new javax.swing.JButton();
-        editUserDiaglogLabel1 = new javax.swing.JLabel();
-        editUserIdLabel1 = new javax.swing.JLabel();
-        editUserIdTextField1 = new javax.swing.JTextField();
+        editProductNameLabel = new javax.swing.JLabel();
+        editProductProcessorTextField = new javax.swing.JTextField();
+        editProductProcessorLabel = new javax.swing.JLabel();
+        editProductMemoryLabel = new javax.swing.JLabel();
+        editProductStorageLabel = new javax.swing.JLabel();
+        editProductStorageTextField = new javax.swing.JTextField();
+        editProductDisplayLabel = new javax.swing.JLabel();
+        editProductDisplayTextField = new javax.swing.JTextField();
+        editProductBatteryLabel = new javax.swing.JLabel();
+        editProductBatteryTextField = new javax.swing.JTextField();
+        editProductCardLabel = new javax.swing.JLabel();
+        editProductCardTextField = new javax.swing.JTextField();
+        editProductDiaglogButton = new javax.swing.JButton();
+        cancelEditProductDiaglogButton = new javax.swing.JButton();
+        jLabel16 = new javax.swing.JLabel();
+        editProductWeightLabel = new javax.swing.JLabel();
+        editProductWeightTextField = new javax.swing.JTextField();
+        editProductMemoryTextField = new javax.swing.JTextField();
+        editProductNameTextField = new javax.swing.JTextField();
+        editProductIdLabel = new javax.swing.JLabel();
+        editProductIdTextField = new javax.swing.JTextField();
         viewProductDiaglog = new javax.swing.JDialog();
         viewProductDiaglogPanel = new javax.swing.JPanel();
         viewUsernameLabel1 = new javax.swing.JLabel();
@@ -299,7 +314,6 @@ public class Home extends javax.swing.JFrame {
         productBatteryTextField = new javax.swing.JTextField();
         productCardLabel = new javax.swing.JLabel();
         productCardTextField = new javax.swing.JTextField();
-        productBrandLabel = new javax.swing.JLabel();
         addProductDiaglogButton = new javax.swing.JButton();
         cancelAddProductDiaglogButton = new javax.swing.JButton();
         jLabel15 = new javax.swing.JLabel();
@@ -307,7 +321,6 @@ public class Home extends javax.swing.JFrame {
         productWeightTextField = new javax.swing.JTextField();
         productMemoryTextField = new javax.swing.JTextField();
         productNameTextField = new javax.swing.JTextField();
-        brandNames = new javax.swing.JComboBox<>();
         sidebarPanel = new javax.swing.JPanel();
         loginedUsername = new javax.swing.JLabel();
         productTab = new javax.swing.JPanel();
@@ -1051,117 +1064,155 @@ public class Home extends javax.swing.JFrame {
         editProductDiaglogPanel.setPreferredSize(new java.awt.Dimension(430, 450));
         editProductDiaglogPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        editUsernameLabel1.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        editUsernameLabel1.setText("Tên đăng nhập");
-        editProductDiaglogPanel.add(editUsernameLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, -1, -1));
+        editProductNameLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        editProductNameLabel.setText("Tên sản phẩm");
+        editProductDiaglogPanel.add(editProductNameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, -1, -1));
 
-        editUsernameTextField1.setEditable(false);
-        editUsernameTextField1.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        editUsernameTextField1.addActionListener(new java.awt.event.ActionListener() {
+        editProductProcessorTextField.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        editProductProcessorTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                editUsernameTextField1ActionPerformed(evt);
+                editProductProcessorTextFieldActionPerformed(evt);
             }
         });
-        editProductDiaglogPanel.add(editUsernameTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 110, 200, 30));
+        editProductDiaglogPanel.add(editProductProcessorTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 140, 200, 30));
 
-        editFirstNameLabel1.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        editFirstNameLabel1.setText("Tên");
-        editProductDiaglogPanel.add(editFirstNameLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 190, -1, -1));
+        editProductProcessorLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        editProductProcessorLabel.setText("Vi xử lý");
+        editProductDiaglogPanel.add(editProductProcessorLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, -1, -1));
 
-        editFirstNameTextField1.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        editFirstNameTextField1.addActionListener(new java.awt.event.ActionListener() {
+        editProductMemoryLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        editProductMemoryLabel.setText("Dung lượng RAM");
+        editProductDiaglogPanel.add(editProductMemoryLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 180, -1, -1));
+
+        editProductStorageLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        editProductStorageLabel.setText("Dung lượng lưu trữ");
+        editProductDiaglogPanel.add(editProductStorageLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 220, -1, -1));
+
+        editProductStorageTextField.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        editProductStorageTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                editFirstNameTextField1ActionPerformed(evt);
+                editProductStorageTextFieldActionPerformed(evt);
             }
         });
-        editProductDiaglogPanel.add(editFirstNameTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 190, 200, 30));
+        editProductDiaglogPanel.add(editProductStorageTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 220, 200, 30));
 
-        editLastNameLabel1.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        editLastNameLabel1.setText("Họ đệm");
-        editProductDiaglogPanel.add(editLastNameLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 230, -1, -1));
+        editProductDisplayLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        editProductDisplayLabel.setText("Màn hình");
+        editProductDiaglogPanel.add(editProductDisplayLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 260, -1, -1));
 
-        editLastNameTextField1.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        editLastNameTextField1.addActionListener(new java.awt.event.ActionListener() {
+        editProductDisplayTextField.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        editProductDisplayTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                editLastNameTextField1ActionPerformed(evt);
+                editProductDisplayTextFieldActionPerformed(evt);
             }
         });
-        editProductDiaglogPanel.add(editLastNameTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 230, 200, 30));
+        editProductDiaglogPanel.add(editProductDisplayTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 260, 200, 30));
 
-        editPhoneNumberLabel1.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        editPhoneNumberLabel1.setText("Số điện thoại");
-        editProductDiaglogPanel.add(editPhoneNumberLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 270, -1, -1));
+        editProductBatteryLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        editProductBatteryLabel.setText("Dung lượng pin");
+        editProductDiaglogPanel.add(editProductBatteryLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 300, -1, -1));
 
-        editPhoneNumberTextField1.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        editPhoneNumberTextField1.addActionListener(new java.awt.event.ActionListener() {
+        editProductBatteryTextField.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        editProductBatteryTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                editPhoneNumberTextField1ActionPerformed(evt);
+                editProductBatteryTextFieldActionPerformed(evt);
             }
         });
-        editProductDiaglogPanel.add(editPhoneNumberTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 270, 200, 30));
+        editProductDiaglogPanel.add(editProductBatteryTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 300, 200, 30));
 
-        editEmailLabel1.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        editEmailLabel1.setText("Địa chỉ email");
-        editProductDiaglogPanel.add(editEmailLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 310, -1, -1));
+        editProductCardLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        editProductCardLabel.setText("Card đồ hoạ");
+        editProductDiaglogPanel.add(editProductCardLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 340, -1, -1));
 
-        editEmailTextField1.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        editEmailTextField1.addActionListener(new java.awt.event.ActionListener() {
+        editProductCardTextField.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        editProductCardTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                editEmailTextField1ActionPerformed(evt);
+                editProductCardTextFieldActionPerformed(evt);
             }
         });
-        editProductDiaglogPanel.add(editEmailTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 310, 200, 30));
+        editProductDiaglogPanel.add(editProductCardTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 340, 200, 30));
 
-        editUserDiaglogButton2.setBackground(new java.awt.Color(0, 122, 249));
-        editUserDiaglogButton2.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        editUserDiaglogButton2.setText("Cập nhật");
-        editUserDiaglogButton2.setBorderPainted(false);
-        editUserDiaglogButton2.addActionListener(new java.awt.event.ActionListener() {
+        editProductDiaglogButton.setBackground(new java.awt.Color(0, 122, 249));
+        editProductDiaglogButton.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        editProductDiaglogButton.setText("Cập nhật");
+        editProductDiaglogButton.setBorderPainted(false);
+        editProductDiaglogButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                editUserDiaglogButton2ActionPerformed(evt);
+                editProductDiaglogButtonActionPerformed(evt);
             }
         });
-        editProductDiaglogPanel.add(editUserDiaglogButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 400, -1, -1));
+        editProductDiaglogPanel.add(editProductDiaglogButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 440, -1, -1));
 
-        cancelEditUserDiaglogButton1.setBackground(new java.awt.Color(212, 57, 68));
-        cancelEditUserDiaglogButton1.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        cancelEditUserDiaglogButton1.setText("Huỷ bỏ");
-        cancelEditUserDiaglogButton1.setBorderPainted(false);
-        cancelEditUserDiaglogButton1.addActionListener(new java.awt.event.ActionListener() {
+        cancelEditProductDiaglogButton.setBackground(new java.awt.Color(212, 57, 68));
+        cancelEditProductDiaglogButton.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        cancelEditProductDiaglogButton.setText("Huỷ bỏ");
+        cancelEditProductDiaglogButton.setBorderPainted(false);
+        cancelEditProductDiaglogButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cancelEditUserDiaglogButton1ActionPerformed(evt);
+                cancelEditProductDiaglogButtonActionPerformed(evt);
             }
         });
-        editProductDiaglogPanel.add(cancelEditUserDiaglogButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 400, -1, -1));
+        editProductDiaglogPanel.add(cancelEditProductDiaglogButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 440, -1, -1));
 
-        editUserDiaglogLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        editUserDiaglogLabel1.setForeground(new java.awt.Color(44, 43, 196));
-        editUserDiaglogLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        editUserDiaglogLabel1.setText("CẬP NHẬT NGƯỜI DÙNG");
-        editProductDiaglogPanel.add(editUserDiaglogLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 20, 440, -1));
+        jLabel16.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel16.setForeground(new java.awt.Color(44, 43, 196));
+        jLabel16.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel16.setText("CẬP NHẬT SẢN PHẨM");
+        editProductDiaglogPanel.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 20, 440, -1));
 
-        editUserIdLabel1.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        editUserIdLabel1.setText("Mã người dùng");
-        editProductDiaglogPanel.add(editUserIdLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, -1, -1));
+        editProductWeightLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        editProductWeightLabel.setText("Trọng lượng");
+        editProductDiaglogPanel.add(editProductWeightLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 380, -1, -1));
 
-        editUserIdTextField1.setEditable(false);
-        editUserIdTextField1.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        editUserIdTextField1.addActionListener(new java.awt.event.ActionListener() {
+        editProductWeightTextField.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        editProductWeightTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                editUserIdTextField1ActionPerformed(evt);
+                editProductWeightTextFieldActionPerformed(evt);
             }
         });
-        editProductDiaglogPanel.add(editUserIdTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 60, 200, 30));
+        editProductDiaglogPanel.add(editProductWeightTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 380, 200, 30));
+
+        editProductMemoryTextField.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        editProductMemoryTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editProductMemoryTextFieldActionPerformed(evt);
+            }
+        });
+        editProductDiaglogPanel.add(editProductMemoryTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 180, 200, 30));
+
+        editProductNameTextField.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        editProductNameTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editProductNameTextFieldActionPerformed(evt);
+            }
+        });
+        editProductDiaglogPanel.add(editProductNameTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 100, 200, 30));
+
+        editProductIdLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        editProductIdLabel.setText("Mã sản phẩm");
+        editProductDiaglogPanel.add(editProductIdLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, -1, -1));
+
+        editProductIdTextField.setEditable(false);
+        editProductIdTextField.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        editProductIdTextField.setEnabled(false);
+        editProductIdTextField.setFocusable(false);
+        editProductIdTextField.setRequestFocusEnabled(false);
+        editProductIdTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editProductIdTextFieldActionPerformed(evt);
+            }
+        });
+        editProductDiaglogPanel.add(editProductIdTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 60, 200, 30));
 
         javax.swing.GroupLayout editProductDiaglogLayout = new javax.swing.GroupLayout(editProductDiaglog.getContentPane());
         editProductDiaglog.getContentPane().setLayout(editProductDiaglogLayout);
         editProductDiaglogLayout.setHorizontalGroup(
             editProductDiaglogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(editProductDiaglogPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 448, Short.MAX_VALUE)
+            .addComponent(editProductDiaglogPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 450, Short.MAX_VALUE)
         );
         editProductDiaglogLayout.setVerticalGroup(
             editProductDiaglogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(editProductDiaglogPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 505, Short.MAX_VALUE)
+            .addComponent(editProductDiaglogPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 500, Short.MAX_VALUE)
         );
 
         viewProductDiaglog.setTitle("Thêm người dùng");
@@ -1409,10 +1460,6 @@ public class Home extends javax.swing.JFrame {
         });
         addProductDiaglogPanel.add(productCardTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 310, 200, 30));
 
-        productBrandLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        productBrandLabel.setText("Thương hiệu");
-        addProductDiaglogPanel.add(productBrandLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 390, -1, -1));
-
         addProductDiaglogButton.setBackground(new java.awt.Color(0, 122, 249));
         addProductDiaglogButton.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         addProductDiaglogButton.setText("Thêm mới");
@@ -1469,19 +1516,15 @@ public class Home extends javax.swing.JFrame {
         });
         addProductDiaglogPanel.add(productNameTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 70, 200, 30));
 
-        brandNames.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        brandNames.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        addProductDiaglogPanel.add(brandNames, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 390, 200, -1));
-
         javax.swing.GroupLayout addProductDiaglogLayout = new javax.swing.GroupLayout(addProductDiaglog.getContentPane());
         addProductDiaglog.getContentPane().setLayout(addProductDiaglogLayout);
         addProductDiaglogLayout.setHorizontalGroup(
             addProductDiaglogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(addProductDiaglogPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 770, Short.MAX_VALUE)
+            .addComponent(addProductDiaglogPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 450, Short.MAX_VALUE)
         );
         addProductDiaglogLayout.setVerticalGroup(
             addProductDiaglogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(addProductDiaglogPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 610, Short.MAX_VALUE)
+            .addComponent(addProductDiaglogPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 500, Short.MAX_VALUE)
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -2109,7 +2152,7 @@ public class Home extends javax.swing.JFrame {
                         .addComponent(productFunctionPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(searchProductsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         productPanelLayout.setVerticalGroup(
             productPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -3128,9 +3171,46 @@ public class Home extends javax.swing.JFrame {
     }//GEN-LAST:event_exportProductsToExcelButtonActionPerformed
 
     private void editProductButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editProductButtonActionPerformed
-        // TODO add your handling code here:
+        int[] rows = productsTable.getSelectedRows();
+        if (rows.length == 0) {
+            showDiaglogMessage(ErrorMessage.User.EMPTY_SELECTED_ROWS);
+            return;
+        }
+        if (rows.length > 1) {
+            showDiaglogMessage(ErrorMessage.User.EXCEED_SELECTED_ROWS);
+            return;
+        }
+        
+        this.showEditProductDiaglog(rows[0]);
     }//GEN-LAST:event_editProductButtonActionPerformed
-
+    
+    private void showEditProductDiaglog(int selectedRow) {
+        Integer id = Integer.valueOf(productsTable.getValueAt(selectedRow, ID_COL_INDEX).toString());
+        
+        Optional<Product> found = productController.findById(id);
+        
+        if (found.isEmpty()) {
+            showDiaglogMessage(ErrorMessage.Product.BLANK_INPUT);
+            return;
+        }
+        
+        Product foundProduct = found.get();
+        
+        editProductIdTextField.setText(foundProduct.getId().toString());
+        editProductNameTextField.setText(foundProduct.getName());
+        editProductProcessorTextField.setText(foundProduct.getProcessor());
+        editProductMemoryTextField.setText(foundProduct.getMemory());
+        editProductStorageTextField.setText(foundProduct.getStorage());
+        editProductDisplayTextField.setText(foundProduct.getDisplay());
+        editProductBatteryTextField.setText(foundProduct.getBattery());
+        editProductCardTextField.setText(foundProduct.getCard());
+        editProductWeightTextField.setText(foundProduct.getWeight());
+        
+        
+        editProductDiaglog.setVisible(true);
+        editProductDiaglog.setLocationRelativeTo(this);
+    }
+    
     private void addProductButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addProductButtonActionPerformed
         showAddProductDiaglog();
     }//GEN-LAST:event_addProductButtonActionPerformed
@@ -3496,38 +3576,6 @@ public class Home extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_cancelDeleteUser1ActionPerformed
 
-    private void editUsernameTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editUsernameTextField1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_editUsernameTextField1ActionPerformed
-
-    private void editFirstNameTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editFirstNameTextField1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_editFirstNameTextField1ActionPerformed
-
-    private void editLastNameTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editLastNameTextField1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_editLastNameTextField1ActionPerformed
-
-    private void editPhoneNumberTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editPhoneNumberTextField1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_editPhoneNumberTextField1ActionPerformed
-
-    private void editEmailTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editEmailTextField1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_editEmailTextField1ActionPerformed
-
-    private void editUserDiaglogButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editUserDiaglogButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_editUserDiaglogButton2ActionPerformed
-
-    private void cancelEditUserDiaglogButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelEditUserDiaglogButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cancelEditUserDiaglogButton1ActionPerformed
-
-    private void editUserIdTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editUserIdTextField1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_editUserIdTextField1ActionPerformed
-
     private void viewUserLastNameTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewUserLastNameTextField1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_viewUserLastNameTextField1ActionPerformed
@@ -3641,6 +3689,77 @@ public class Home extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_productNameTextFieldActionPerformed
 
+    private void editProductProcessorTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editProductProcessorTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_editProductProcessorTextFieldActionPerformed
+
+    private void editProductStorageTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editProductStorageTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_editProductStorageTextFieldActionPerformed
+
+    private void editProductDisplayTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editProductDisplayTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_editProductDisplayTextFieldActionPerformed
+
+    private void editProductBatteryTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editProductBatteryTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_editProductBatteryTextFieldActionPerformed
+
+    private void editProductCardTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editProductCardTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_editProductCardTextFieldActionPerformed
+
+    private void editProductDiaglogButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editProductDiaglogButtonActionPerformed
+        Integer id = Integer.valueOf(editProductIdTextField.getText());
+        String name = editProductNameTextField.getText();
+        String processor = editProductProcessorTextField.getText();
+        String memory = editProductMemoryTextField.getText();
+        String storage = editProductStorageTextField.getText();
+        String display = editProductDisplayTextField.getText();
+        String battery = editProductBatteryTextField.getText();
+        String card = editProductCardTextField.getText();
+        String weight = editProductWeightTextField.getText();
+        
+        CommonResponseDTO response = productController.updateOne(
+                id, 
+                Product.builder()
+                        .name(name)
+                        .processor(processor)
+                        .memory(memory)
+                        .storage(storage)
+                        .display(display)
+                        .battery(battery)
+                        .card(card)
+                        .weight(weight)
+                        .build()
+        );
+        
+        this.loadDataToTableProducts(null);
+        this.editProductDiaglog.dispose();
+        this.showDiaglogMessage(response.message());
+        
+    }//GEN-LAST:event_editProductDiaglogButtonActionPerformed
+
+    private void cancelEditProductDiaglogButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelEditProductDiaglogButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cancelEditProductDiaglogButtonActionPerformed
+
+    private void editProductWeightTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editProductWeightTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_editProductWeightTextFieldActionPerformed
+
+    private void editProductMemoryTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editProductMemoryTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_editProductMemoryTextFieldActionPerformed
+
+    private void editProductNameTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editProductNameTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_editProductNameTextFieldActionPerformed
+
+    private void editProductIdTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editProductIdTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_editProductIdTextFieldActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -3668,15 +3787,14 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JDialog addUserDiaglog;
     private javax.swing.JButton addUserDiaglogButton;
     private javax.swing.JPanel addUserDiaglogPanel;
-    private javax.swing.JComboBox<String> brandNames;
     private javax.swing.JButton cancelAddProductDiaglogButton;
     private javax.swing.JButton cancelAddUserDiaglogButton;
     private javax.swing.JButton cancelAddUserDiaglogButton1;
     private javax.swing.JButton cancelAddUserDiaglogButton2;
     private javax.swing.JButton cancelDeleteUser;
     private javax.swing.JButton cancelDeleteUser1;
+    private javax.swing.JButton cancelEditProductDiaglogButton;
     private javax.swing.JButton cancelEditUserDiaglogButton;
-    private javax.swing.JButton cancelEditUserDiaglogButton1;
     private javax.swing.JButton confirmDeleteUser;
     private javax.swing.JButton confirmDeleteUser1;
     private javax.swing.JLabel confirmEmailOTPLabel;
@@ -3697,41 +3815,46 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JPanel diaglogMessagePanel;
     private javax.swing.JButton editBillItemButton;
     private javax.swing.JLabel editEmailLabel;
-    private javax.swing.JLabel editEmailLabel1;
     private javax.swing.JTextField editEmailTextField;
-    private javax.swing.JTextField editEmailTextField1;
     private javax.swing.JLabel editFirstNameLabel;
-    private javax.swing.JLabel editFirstNameLabel1;
     private javax.swing.JTextField editFirstNameTextField;
-    private javax.swing.JTextField editFirstNameTextField1;
     private javax.swing.JLabel editLastNameLabel;
-    private javax.swing.JLabel editLastNameLabel1;
     private javax.swing.JTextField editLastNameTextField;
-    private javax.swing.JTextField editLastNameTextField1;
     private javax.swing.JLabel editPhoneNumberLabel;
-    private javax.swing.JLabel editPhoneNumberLabel1;
     private javax.swing.JTextField editPhoneNumberTextField;
-    private javax.swing.JTextField editPhoneNumberTextField1;
+    private javax.swing.JLabel editProductBatteryLabel;
+    private javax.swing.JTextField editProductBatteryTextField;
     private javax.swing.JButton editProductButton;
+    private javax.swing.JLabel editProductCardLabel;
+    private javax.swing.JTextField editProductCardTextField;
     private javax.swing.JDialog editProductDiaglog;
+    private javax.swing.JButton editProductDiaglogButton;
     private javax.swing.JPanel editProductDiaglogPanel;
+    private javax.swing.JLabel editProductDisplayLabel;
+    private javax.swing.JTextField editProductDisplayTextField;
+    private javax.swing.JLabel editProductIdLabel;
+    private javax.swing.JTextField editProductIdTextField;
+    private javax.swing.JLabel editProductMemoryLabel;
+    private javax.swing.JTextField editProductMemoryTextField;
+    private javax.swing.JLabel editProductNameLabel;
+    private javax.swing.JTextField editProductNameTextField;
+    private javax.swing.JLabel editProductProcessorLabel;
+    private javax.swing.JTextField editProductProcessorTextField;
+    private javax.swing.JLabel editProductStorageLabel;
+    private javax.swing.JTextField editProductStorageTextField;
+    private javax.swing.JLabel editProductWeightLabel;
+    private javax.swing.JTextField editProductWeightTextField;
     private javax.swing.JButton editUserButton;
     private javax.swing.JDialog editUserDiaglog;
     private javax.swing.JButton editUserDiaglogButton;
     private javax.swing.JButton editUserDiaglogButton1;
-    private javax.swing.JButton editUserDiaglogButton2;
     private javax.swing.JButton editUserDiaglogButton3;
     private javax.swing.JLabel editUserDiaglogLabel;
-    private javax.swing.JLabel editUserDiaglogLabel1;
     private javax.swing.JPanel editUserDiaglogPanel;
     private javax.swing.JLabel editUserIdLabel;
-    private javax.swing.JLabel editUserIdLabel1;
     private javax.swing.JTextField editUserIdTextField;
-    private javax.swing.JTextField editUserIdTextField1;
     private javax.swing.JLabel editUsernameLabel;
-    private javax.swing.JLabel editUsernameLabel1;
     private javax.swing.JTextField editUsernameTextField;
-    private javax.swing.JTextField editUsernameTextField1;
     private javax.swing.JLabel emailLabel;
     private javax.swing.JTextField emailTextField;
     private javax.swing.JLabel exportBillLabel;
@@ -3776,6 +3899,7 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -3803,7 +3927,6 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JTextField phoneNumberTextField;
     private javax.swing.JLabel productBatteryLabel;
     private javax.swing.JTextField productBatteryTextField;
-    private javax.swing.JLabel productBrandLabel;
     private javax.swing.JComboBox<String> productBrandsComboBox;
     private javax.swing.JLabel productCardLabel;
     private javax.swing.JTextField productCardTextField;
