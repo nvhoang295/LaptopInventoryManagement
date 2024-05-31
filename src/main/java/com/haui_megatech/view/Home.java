@@ -643,7 +643,6 @@ public class Home extends javax.swing.JFrame {
         viewProviderNameTextField = new javax.swing.JTextField();
         viewProviderIdLabel = new javax.swing.JLabel();
         viewProviderIdTextField = new javax.swing.JTextField();
-        viewProductStorageLabel2 = new javax.swing.JLabel();
         viewProductStorageTextField2 = new javax.swing.JTextField();
         viewProviderWhenCreatedTextField = new javax.swing.JTextField();
         viewProviderWhenCreatedLabel = new javax.swing.JLabel();
@@ -1159,7 +1158,7 @@ public class Home extends javax.swing.JFrame {
             .addComponent(deleteUserConfirmDiaglogPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        editUserDiaglog.setTitle("Thêm người dùng");
+        editUserDiaglog.setTitle("Cập nhật người dùng");
         editUserDiaglog.setBackground(new java.awt.Color(255, 255, 255));
         editUserDiaglog.setMinimumSize(new java.awt.Dimension(450, 500));
         editUserDiaglog.setSize(new java.awt.Dimension(450, 500));
@@ -1287,7 +1286,7 @@ public class Home extends javax.swing.JFrame {
             .addComponent(editUserDiaglogPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 505, Short.MAX_VALUE)
         );
 
-        viewUserDiaglog.setTitle("Thêm người dùng");
+        viewUserDiaglog.setTitle("Thông tin người dùng");
         viewUserDiaglog.setBackground(new java.awt.Color(255, 255, 255));
         viewUserDiaglog.setMinimumSize(new java.awt.Dimension(448, 530));
         viewUserDiaglog.setSize(new java.awt.Dimension(448, 530));
@@ -1457,11 +1456,11 @@ public class Home extends javax.swing.JFrame {
         viewUserDiaglog.getContentPane().setLayout(viewUserDiaglogLayout);
         viewUserDiaglogLayout.setHorizontalGroup(
             viewUserDiaglogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(viewUserDiaglogPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 448, Short.MAX_VALUE)
+            .addComponent(viewUserDiaglogPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         viewUserDiaglogLayout.setVerticalGroup(
             viewUserDiaglogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(viewUserDiaglogPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 530, Short.MAX_VALUE)
+            .addComponent(viewUserDiaglogPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         deleteProductConfirmDiaglog.setTitle("Xác nhận xoá");
@@ -1521,19 +1520,20 @@ public class Home extends javax.swing.JFrame {
             .addComponent(deleteProductConfirmDiaglogPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        editProductDiaglog.setTitle("Thêm người dùng");
+        editProductDiaglog.setTitle("Cập nhật sản phẩm");
         editProductDiaglog.setBackground(new java.awt.Color(255, 255, 255));
-        editProductDiaglog.setMinimumSize(new java.awt.Dimension(450, 500));
-        editProductDiaglog.setSize(new java.awt.Dimension(450, 500));
+        editProductDiaglog.setMinimumSize(new java.awt.Dimension(450, 540));
+        editProductDiaglog.setPreferredSize(new java.awt.Dimension(450, 540));
+        editProductDiaglog.setSize(new java.awt.Dimension(450, 540));
 
         editProductDiaglogPanel.setBackground(new java.awt.Color(255, 255, 255));
-        editProductDiaglogPanel.setMinimumSize(new java.awt.Dimension(430, 450));
-        editProductDiaglogPanel.setPreferredSize(new java.awt.Dimension(430, 450));
+        editProductDiaglogPanel.setMinimumSize(new java.awt.Dimension(450, 540));
+        editProductDiaglogPanel.setPreferredSize(new java.awt.Dimension(450, 540));
         editProductDiaglogPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         editProductNameLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         editProductNameLabel.setText("Tên sản phẩm");
-        editProductDiaglogPanel.add(editProductNameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, -1, -1));
+        editProductDiaglogPanel.add(editProductNameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, -1, 30));
 
         editProductProcessorTextField.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         editProductProcessorTextField.addActionListener(new java.awt.event.ActionListener() {
@@ -1545,15 +1545,15 @@ public class Home extends javax.swing.JFrame {
 
         editProductProcessorLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         editProductProcessorLabel.setText("Vi xử lý");
-        editProductDiaglogPanel.add(editProductProcessorLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, -1, -1));
+        editProductDiaglogPanel.add(editProductProcessorLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, -1, 30));
 
         editProductMemoryLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         editProductMemoryLabel.setText("Dung lượng RAM");
-        editProductDiaglogPanel.add(editProductMemoryLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 180, -1, -1));
+        editProductDiaglogPanel.add(editProductMemoryLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 180, -1, 30));
 
         editProductStorageLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         editProductStorageLabel.setText("Dung lượng lưu trữ");
-        editProductDiaglogPanel.add(editProductStorageLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 220, -1, -1));
+        editProductDiaglogPanel.add(editProductStorageLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 220, -1, 30));
 
         editProductStorageTextField.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         editProductStorageTextField.addActionListener(new java.awt.event.ActionListener() {
@@ -1565,7 +1565,7 @@ public class Home extends javax.swing.JFrame {
 
         editProductDisplayLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         editProductDisplayLabel.setText("Màn hình");
-        editProductDiaglogPanel.add(editProductDisplayLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 260, -1, -1));
+        editProductDiaglogPanel.add(editProductDisplayLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 260, -1, 30));
 
         editProductDisplayTextField.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         editProductDisplayTextField.addActionListener(new java.awt.event.ActionListener() {
@@ -1577,7 +1577,7 @@ public class Home extends javax.swing.JFrame {
 
         editProductBatteryLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         editProductBatteryLabel.setText("Dung lượng pin");
-        editProductDiaglogPanel.add(editProductBatteryLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 300, -1, -1));
+        editProductDiaglogPanel.add(editProductBatteryLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 300, -1, 30));
 
         editProductBatteryTextField.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         editProductBatteryTextField.addActionListener(new java.awt.event.ActionListener() {
@@ -1589,7 +1589,7 @@ public class Home extends javax.swing.JFrame {
 
         editProductCardLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         editProductCardLabel.setText("Card đồ hoạ");
-        editProductDiaglogPanel.add(editProductCardLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 340, -1, -1));
+        editProductDiaglogPanel.add(editProductCardLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 340, -1, 30));
 
         editProductCardTextField.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         editProductCardTextField.addActionListener(new java.awt.event.ActionListener() {
@@ -1629,7 +1629,7 @@ public class Home extends javax.swing.JFrame {
 
         editProductWeightLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         editProductWeightLabel.setText("Trọng lượng");
-        editProductDiaglogPanel.add(editProductWeightLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 380, -1, -1));
+        editProductDiaglogPanel.add(editProductWeightLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 380, -1, 30));
 
         editProductWeightTextField.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         editProductWeightTextField.addActionListener(new java.awt.event.ActionListener() {
@@ -1657,7 +1657,7 @@ public class Home extends javax.swing.JFrame {
 
         editProductIdLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         editProductIdLabel.setText("Mã sản phẩm");
-        editProductDiaglogPanel.add(editProductIdLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, -1, -1));
+        editProductDiaglogPanel.add(editProductIdLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, -1, 30));
 
         editProductIdTextField.setEditable(false);
         editProductIdTextField.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
@@ -1675,26 +1675,26 @@ public class Home extends javax.swing.JFrame {
         editProductDiaglog.getContentPane().setLayout(editProductDiaglogLayout);
         editProductDiaglogLayout.setHorizontalGroup(
             editProductDiaglogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(editProductDiaglogPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 450, Short.MAX_VALUE)
+            .addComponent(editProductDiaglogPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         editProductDiaglogLayout.setVerticalGroup(
             editProductDiaglogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(editProductDiaglogPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 500, Short.MAX_VALUE)
+            .addComponent(editProductDiaglogPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        viewProductDiaglog.setTitle("Thêm người dùng");
+        viewProductDiaglog.setTitle("Thông tin sản phẩm");
         viewProductDiaglog.setBackground(new java.awt.Color(255, 255, 255));
-        viewProductDiaglog.setMinimumSize(new java.awt.Dimension(450, 500));
-        viewProductDiaglog.setSize(new java.awt.Dimension(450, 500));
+        viewProductDiaglog.setMinimumSize(new java.awt.Dimension(450, 600));
+        viewProductDiaglog.setSize(new java.awt.Dimension(450, 600));
 
         viewProductDiaglogPanel.setBackground(new java.awt.Color(255, 255, 255));
-        viewProductDiaglogPanel.setMinimumSize(new java.awt.Dimension(430, 450));
-        viewProductDiaglogPanel.setPreferredSize(new java.awt.Dimension(430, 450));
+        viewProductDiaglogPanel.setMinimumSize(new java.awt.Dimension(450, 600));
+        viewProductDiaglogPanel.setPreferredSize(new java.awt.Dimension(450, 600));
         viewProductDiaglogPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         viewProductNameLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         viewProductNameLabel.setText("Tên sản phẩm");
-        viewProductDiaglogPanel.add(viewProductNameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, -1, -1));
+        viewProductDiaglogPanel.add(viewProductNameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, -1, 30));
 
         viewProductProcessorTextField.setEditable(false);
         viewProductProcessorTextField.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
@@ -1710,15 +1710,15 @@ public class Home extends javax.swing.JFrame {
 
         viewProductProcessorLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         viewProductProcessorLabel.setText("Vi xử lý");
-        viewProductDiaglogPanel.add(viewProductProcessorLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, -1, -1));
+        viewProductDiaglogPanel.add(viewProductProcessorLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, -1, 30));
 
         viewProductMemoryLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         viewProductMemoryLabel.setText("Dung lượng RAM");
-        viewProductDiaglogPanel.add(viewProductMemoryLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 180, -1, -1));
+        viewProductDiaglogPanel.add(viewProductMemoryLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 180, -1, 30));
 
         viewProductStorageLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         viewProductStorageLabel.setText("Dung lượng lưu trữ");
-        viewProductDiaglogPanel.add(viewProductStorageLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 220, -1, -1));
+        viewProductDiaglogPanel.add(viewProductStorageLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 220, -1, 30));
 
         viewProductStorageTextField.setEditable(false);
         viewProductStorageTextField.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
@@ -1734,7 +1734,7 @@ public class Home extends javax.swing.JFrame {
 
         viewProductDisplayLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         viewProductDisplayLabel.setText("Màn hình");
-        viewProductDiaglogPanel.add(viewProductDisplayLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 260, -1, -1));
+        viewProductDiaglogPanel.add(viewProductDisplayLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 260, -1, 30));
 
         viewProductDisplayTextField.setEditable(false);
         viewProductDisplayTextField.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
@@ -1750,7 +1750,7 @@ public class Home extends javax.swing.JFrame {
 
         viewProductBatteryLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         viewProductBatteryLabel.setText("Dung lượng pin");
-        viewProductDiaglogPanel.add(viewProductBatteryLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 300, -1, -1));
+        viewProductDiaglogPanel.add(viewProductBatteryLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 300, -1, 30));
 
         viewProductBatteryTextField.setEditable(false);
         viewProductBatteryTextField.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
@@ -1766,7 +1766,7 @@ public class Home extends javax.swing.JFrame {
 
         viewProductCardLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         viewProductCardLabel.setText("Card đồ hoạ");
-        viewProductDiaglogPanel.add(viewProductCardLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 340, -1, -1));
+        viewProductDiaglogPanel.add(viewProductCardLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 340, -1, 30));
 
         viewProductCardTextField.setEditable(false);
         viewProductCardTextField.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
@@ -1782,25 +1782,31 @@ public class Home extends javax.swing.JFrame {
 
         updateProductDiaglogButton.setBackground(new java.awt.Color(0, 122, 249));
         updateProductDiaglogButton.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        updateProductDiaglogButton.setForeground(new java.awt.Color(255, 255, 255));
         updateProductDiaglogButton.setText("Cập nhật");
         updateProductDiaglogButton.setBorderPainted(false);
+        updateProductDiaglogButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        updateProductDiaglogButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         updateProductDiaglogButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 updateProductDiaglogButtonActionPerformed(evt);
             }
         });
-        viewProductDiaglogPanel.add(updateProductDiaglogButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 520, -1, -1));
+        viewProductDiaglogPanel.add(updateProductDiaglogButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 510, 100, 30));
 
         cancelViewProductDiaglogButton.setBackground(new java.awt.Color(212, 57, 68));
         cancelViewProductDiaglogButton.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        cancelViewProductDiaglogButton.setForeground(new java.awt.Color(255, 255, 255));
         cancelViewProductDiaglogButton.setText("Đóng");
         cancelViewProductDiaglogButton.setBorderPainted(false);
+        cancelViewProductDiaglogButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        cancelViewProductDiaglogButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         cancelViewProductDiaglogButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cancelViewProductDiaglogButtonActionPerformed(evt);
             }
         });
-        viewProductDiaglogPanel.add(cancelViewProductDiaglogButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 520, -1, -1));
+        viewProductDiaglogPanel.add(cancelViewProductDiaglogButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 510, 100, 30));
 
         jLabel17.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel17.setForeground(new java.awt.Color(44, 43, 196));
@@ -1810,7 +1816,7 @@ public class Home extends javax.swing.JFrame {
 
         viewProductWeightLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         viewProductWeightLabel.setText("Trọng lượng");
-        viewProductDiaglogPanel.add(viewProductWeightLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 380, -1, -1));
+        viewProductDiaglogPanel.add(viewProductWeightLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 380, -1, 30));
 
         viewProductWeightTextField.setEditable(false);
         viewProductWeightTextField.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
@@ -1850,7 +1856,7 @@ public class Home extends javax.swing.JFrame {
 
         viewProductIdLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         viewProductIdLabel.setText("Mã sản phẩm");
-        viewProductDiaglogPanel.add(viewProductIdLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, -1, -1));
+        viewProductDiaglogPanel.add(viewProductIdLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, -1, 30));
 
         viewProductIdTextField.setEditable(false);
         viewProductIdTextField.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
@@ -1866,7 +1872,7 @@ public class Home extends javax.swing.JFrame {
 
         viewProductWhenCreatedLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         viewProductWhenCreatedLabel.setText("Ngày tạo");
-        viewProductDiaglogPanel.add(viewProductWhenCreatedLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 420, -1, -1));
+        viewProductDiaglogPanel.add(viewProductWhenCreatedLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 420, -1, 30));
 
         viewProductWhenCreatedTextField.setEditable(false);
         viewProductWhenCreatedTextField.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
@@ -1882,7 +1888,7 @@ public class Home extends javax.swing.JFrame {
 
         viewProductLastUpdatedLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         viewProductLastUpdatedLabel.setText("Sửa đổi lần cuối");
-        viewProductDiaglogPanel.add(viewProductLastUpdatedLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 460, -1, -1));
+        viewProductDiaglogPanel.add(viewProductLastUpdatedLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 460, -1, 30));
 
         viewProductLastUpdatedTextField.setEditable(false);
         viewProductLastUpdatedTextField.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
@@ -1900,14 +1906,14 @@ public class Home extends javax.swing.JFrame {
         viewProductDiaglog.getContentPane().setLayout(viewProductDiaglogLayout);
         viewProductDiaglogLayout.setHorizontalGroup(
             viewProductDiaglogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(viewProductDiaglogPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 450, Short.MAX_VALUE)
+            .addComponent(viewProductDiaglogPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         viewProductDiaglogLayout.setVerticalGroup(
             viewProductDiaglogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(viewProductDiaglogPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 573, Short.MAX_VALUE)
+            .addComponent(viewProductDiaglogPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        addProductDiaglog.setTitle("Thêm người dùng");
+        addProductDiaglog.setTitle("Thêm sản phẩm");
         addProductDiaglog.setBackground(new java.awt.Color(255, 255, 255));
         addProductDiaglog.setMinimumSize(new java.awt.Dimension(450, 500));
         addProductDiaglog.setSize(new java.awt.Dimension(450, 500));
@@ -1919,7 +1925,7 @@ public class Home extends javax.swing.JFrame {
 
         productNameLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         productNameLabel.setText("Tên sản phẩm");
-        addProductDiaglogPanel.add(productNameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, -1, -1));
+        addProductDiaglogPanel.add(productNameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, -1, 30));
 
         productProcessorTextField.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         productProcessorTextField.addActionListener(new java.awt.event.ActionListener() {
@@ -1931,15 +1937,15 @@ public class Home extends javax.swing.JFrame {
 
         productProcessorLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         productProcessorLabel.setText("Vi xử lý");
-        addProductDiaglogPanel.add(productProcessorLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, -1, -1));
+        addProductDiaglogPanel.add(productProcessorLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, -1, 30));
 
         productMemoryLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         productMemoryLabel.setText("Dung lượng RAM");
-        addProductDiaglogPanel.add(productMemoryLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 150, -1, -1));
+        addProductDiaglogPanel.add(productMemoryLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 150, -1, 30));
 
         productStorageLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         productStorageLabel.setText("Dung lượng lưu trữ");
-        addProductDiaglogPanel.add(productStorageLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 190, -1, -1));
+        addProductDiaglogPanel.add(productStorageLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 190, -1, 30));
 
         productStorageTextField.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         productStorageTextField.addActionListener(new java.awt.event.ActionListener() {
@@ -1951,7 +1957,7 @@ public class Home extends javax.swing.JFrame {
 
         productDisplayLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         productDisplayLabel.setText("Màn hình");
-        addProductDiaglogPanel.add(productDisplayLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 230, -1, -1));
+        addProductDiaglogPanel.add(productDisplayLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 230, -1, 30));
 
         productDisplayTextField.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         productDisplayTextField.addActionListener(new java.awt.event.ActionListener() {
@@ -1963,7 +1969,7 @@ public class Home extends javax.swing.JFrame {
 
         productBatteryLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         productBatteryLabel.setText("Dung lượng pin");
-        addProductDiaglogPanel.add(productBatteryLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 270, -1, -1));
+        addProductDiaglogPanel.add(productBatteryLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 270, -1, 30));
 
         productBatteryTextField.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         productBatteryTextField.addActionListener(new java.awt.event.ActionListener() {
@@ -1975,7 +1981,7 @@ public class Home extends javax.swing.JFrame {
 
         productCardLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         productCardLabel.setText("Card đồ hoạ");
-        addProductDiaglogPanel.add(productCardLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 310, -1, -1));
+        addProductDiaglogPanel.add(productCardLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 310, -1, 30));
 
         productCardTextField.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         productCardTextField.addActionListener(new java.awt.event.ActionListener() {
@@ -1987,6 +1993,7 @@ public class Home extends javax.swing.JFrame {
 
         addProductDiaglogButton.setBackground(new java.awt.Color(0, 122, 249));
         addProductDiaglogButton.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        addProductDiaglogButton.setForeground(new java.awt.Color(255, 255, 255));
         addProductDiaglogButton.setText("Thêm mới");
         addProductDiaglogButton.setBorderPainted(false);
         addProductDiaglogButton.addActionListener(new java.awt.event.ActionListener() {
@@ -1994,10 +2001,11 @@ public class Home extends javax.swing.JFrame {
                 addProductDiaglogButtonActionPerformed(evt);
             }
         });
-        addProductDiaglogPanel.add(addProductDiaglogButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 440, -1, -1));
+        addProductDiaglogPanel.add(addProductDiaglogButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 410, 110, 30));
 
         cancelAddProductDiaglogButton.setBackground(new java.awt.Color(212, 57, 68));
         cancelAddProductDiaglogButton.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        cancelAddProductDiaglogButton.setForeground(new java.awt.Color(255, 255, 255));
         cancelAddProductDiaglogButton.setText("Huỷ bỏ");
         cancelAddProductDiaglogButton.setBorderPainted(false);
         cancelAddProductDiaglogButton.addActionListener(new java.awt.event.ActionListener() {
@@ -2005,7 +2013,7 @@ public class Home extends javax.swing.JFrame {
                 cancelAddProductDiaglogButtonActionPerformed(evt);
             }
         });
-        addProductDiaglogPanel.add(cancelAddProductDiaglogButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 440, -1, -1));
+        addProductDiaglogPanel.add(cancelAddProductDiaglogButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 410, 110, 30));
 
         jLabel15.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel15.setForeground(new java.awt.Color(44, 43, 196));
@@ -2015,7 +2023,7 @@ public class Home extends javax.swing.JFrame {
 
         productWeightLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         productWeightLabel.setText("Trọng lượng");
-        addProductDiaglogPanel.add(productWeightLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 350, -1, -1));
+        addProductDiaglogPanel.add(productWeightLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 350, -1, 30));
 
         productWeightTextField.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         productWeightTextField.addActionListener(new java.awt.event.ActionListener() {
@@ -2052,19 +2060,20 @@ public class Home extends javax.swing.JFrame {
             .addComponent(addProductDiaglogPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 500, Short.MAX_VALUE)
         );
 
-        addProviderDiaglog.setTitle("Thêm người dùng");
+        addProviderDiaglog.setTitle("Thêm nhà cung cấp");
         addProviderDiaglog.setBackground(new java.awt.Color(255, 255, 255));
-        addProviderDiaglog.setMinimumSize(new java.awt.Dimension(450, 500));
-        addProviderDiaglog.setSize(new java.awt.Dimension(450, 500));
+        addProviderDiaglog.setMinimumSize(new java.awt.Dimension(450, 320));
+        addProviderDiaglog.setPreferredSize(new java.awt.Dimension(450, 320));
+        addProviderDiaglog.setSize(new java.awt.Dimension(450, 320));
 
         addProductDiaglogPanel1.setBackground(new java.awt.Color(255, 255, 255));
-        addProductDiaglogPanel1.setMinimumSize(new java.awt.Dimension(430, 450));
-        addProductDiaglogPanel1.setPreferredSize(new java.awt.Dimension(430, 450));
+        addProductDiaglogPanel1.setMinimumSize(new java.awt.Dimension(450, 320));
+        addProductDiaglogPanel1.setPreferredSize(new java.awt.Dimension(450, 320));
         addProductDiaglogPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         addProviderNameLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         addProviderNameLabel.setText("Tên nhà cung cấp");
-        addProductDiaglogPanel1.add(addProviderNameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, -1, -1));
+        addProductDiaglogPanel1.add(addProviderNameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, -1, 30));
 
         addProviderPhoneNumberTextField.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         addProviderPhoneNumberTextField.addActionListener(new java.awt.event.ActionListener() {
@@ -2076,15 +2085,15 @@ public class Home extends javax.swing.JFrame {
 
         addProviderPhoneNumberLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         addProviderPhoneNumberLabel.setText("Số điện thoại");
-        addProductDiaglogPanel1.add(addProviderPhoneNumberLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, -1, -1));
+        addProductDiaglogPanel1.add(addProviderPhoneNumberLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, -1, 30));
 
         addProviderEmailLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         addProviderEmailLabel.setText("Email");
-        addProductDiaglogPanel1.add(addProviderEmailLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 150, -1, -1));
+        addProductDiaglogPanel1.add(addProviderEmailLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 150, -1, 30));
 
         addProviderAddressLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         addProviderAddressLabel.setText("Địa chỉ");
-        addProductDiaglogPanel1.add(addProviderAddressLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 190, -1, -1));
+        addProductDiaglogPanel1.add(addProviderAddressLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 190, -1, 30));
 
         addProviderAddressTextField.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         addProviderAddressTextField.addActionListener(new java.awt.event.ActionListener() {
@@ -2096,6 +2105,7 @@ public class Home extends javax.swing.JFrame {
 
         addProviderDiaglogButton.setBackground(new java.awt.Color(0, 122, 249));
         addProviderDiaglogButton.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        addProviderDiaglogButton.setForeground(new java.awt.Color(255, 255, 255));
         addProviderDiaglogButton.setText("Thêm mới");
         addProviderDiaglogButton.setBorderPainted(false);
         addProviderDiaglogButton.addActionListener(new java.awt.event.ActionListener() {
@@ -2103,10 +2113,11 @@ public class Home extends javax.swing.JFrame {
                 addProviderDiaglogButtonActionPerformed(evt);
             }
         });
-        addProductDiaglogPanel1.add(addProviderDiaglogButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 440, -1, -1));
+        addProductDiaglogPanel1.add(addProviderDiaglogButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 240, 110, 30));
 
         cancelAddProviderDiaglogButton.setBackground(new java.awt.Color(212, 57, 68));
         cancelAddProviderDiaglogButton.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        cancelAddProviderDiaglogButton.setForeground(new java.awt.Color(255, 255, 255));
         cancelAddProviderDiaglogButton.setText("Huỷ bỏ");
         cancelAddProviderDiaglogButton.setBorderPainted(false);
         cancelAddProviderDiaglogButton.addActionListener(new java.awt.event.ActionListener() {
@@ -2114,7 +2125,7 @@ public class Home extends javax.swing.JFrame {
                 cancelAddProviderDiaglogButtonActionPerformed(evt);
             }
         });
-        addProductDiaglogPanel1.add(cancelAddProviderDiaglogButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 440, -1, -1));
+        addProductDiaglogPanel1.add(cancelAddProviderDiaglogButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 240, 110, 30));
 
         jLabel18.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel18.setForeground(new java.awt.Color(44, 43, 196));
@@ -2142,26 +2153,27 @@ public class Home extends javax.swing.JFrame {
         addProviderDiaglog.getContentPane().setLayout(addProviderDiaglogLayout);
         addProviderDiaglogLayout.setHorizontalGroup(
             addProviderDiaglogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(addProductDiaglogPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 450, Short.MAX_VALUE)
+            .addComponent(addProductDiaglogPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         addProviderDiaglogLayout.setVerticalGroup(
             addProviderDiaglogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(addProductDiaglogPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 500, Short.MAX_VALUE)
+            .addComponent(addProductDiaglogPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        viewProviderDiaglog.setTitle("Thêm người dùng");
+        viewProviderDiaglog.setTitle("Thông tin nhà cung cấp");
         viewProviderDiaglog.setBackground(new java.awt.Color(255, 255, 255));
-        viewProviderDiaglog.setMinimumSize(new java.awt.Dimension(450, 500));
-        viewProviderDiaglog.setSize(new java.awt.Dimension(450, 500));
+        viewProviderDiaglog.setMinimumSize(new java.awt.Dimension(450, 430));
+        viewProviderDiaglog.setPreferredSize(new java.awt.Dimension(450, 430));
+        viewProviderDiaglog.setSize(new java.awt.Dimension(450, 430));
 
         viewProviderDiaglogPanel.setBackground(new java.awt.Color(255, 255, 255));
-        viewProviderDiaglogPanel.setMinimumSize(new java.awt.Dimension(430, 450));
-        viewProviderDiaglogPanel.setPreferredSize(new java.awt.Dimension(430, 450));
+        viewProviderDiaglogPanel.setMinimumSize(new java.awt.Dimension(450, 430));
+        viewProviderDiaglogPanel.setPreferredSize(new java.awt.Dimension(450, 430));
         viewProviderDiaglogPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         viewProviderNameLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         viewProviderNameLabel.setText("Tên nhà cung cấp");
-        viewProviderDiaglogPanel.add(viewProviderNameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, -1, -1));
+        viewProviderDiaglogPanel.add(viewProviderNameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, -1, 30));
 
         viewProviderPhoneNumberTextField.setEditable(false);
         viewProviderPhoneNumberTextField.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
@@ -2177,15 +2189,15 @@ public class Home extends javax.swing.JFrame {
 
         viewProviderPhoneNumberLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         viewProviderPhoneNumberLabel.setText("Số điện thoại");
-        viewProviderDiaglogPanel.add(viewProviderPhoneNumberLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, -1, -1));
+        viewProviderDiaglogPanel.add(viewProviderPhoneNumberLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, -1, 30));
 
         viewProviderEmailLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         viewProviderEmailLabel.setText("Email");
-        viewProviderDiaglogPanel.add(viewProviderEmailLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 180, -1, -1));
+        viewProviderDiaglogPanel.add(viewProviderEmailLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 180, -1, 30));
 
         viewProviderAddressLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         viewProviderAddressLabel.setText("Địa chỉ");
-        viewProviderDiaglogPanel.add(viewProviderAddressLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 220, -1, -1));
+        viewProviderDiaglogPanel.add(viewProviderAddressLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 220, -1, 30));
 
         viewProviderAddressTextField.setEditable(false);
         viewProviderAddressTextField.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
@@ -2201,6 +2213,7 @@ public class Home extends javax.swing.JFrame {
 
         updateProviderDiaglogButton.setBackground(new java.awt.Color(0, 122, 249));
         updateProviderDiaglogButton.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        updateProviderDiaglogButton.setForeground(new java.awt.Color(255, 255, 255));
         updateProviderDiaglogButton.setText("Cập nhật");
         updateProviderDiaglogButton.setBorderPainted(false);
         updateProviderDiaglogButton.addActionListener(new java.awt.event.ActionListener() {
@@ -2208,10 +2221,11 @@ public class Home extends javax.swing.JFrame {
                 updateProviderDiaglogButtonActionPerformed(evt);
             }
         });
-        viewProviderDiaglogPanel.add(updateProviderDiaglogButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 520, -1, -1));
+        viewProviderDiaglogPanel.add(updateProviderDiaglogButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 350, 100, 30));
 
         cancelViewProviderDiaglogButton.setBackground(new java.awt.Color(212, 57, 68));
         cancelViewProviderDiaglogButton.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        cancelViewProviderDiaglogButton.setForeground(new java.awt.Color(255, 255, 255));
         cancelViewProviderDiaglogButton.setText("Đóng");
         cancelViewProviderDiaglogButton.setBorderPainted(false);
         cancelViewProviderDiaglogButton.addActionListener(new java.awt.event.ActionListener() {
@@ -2219,7 +2233,7 @@ public class Home extends javax.swing.JFrame {
                 cancelViewProviderDiaglogButtonActionPerformed(evt);
             }
         });
-        viewProviderDiaglogPanel.add(cancelViewProviderDiaglogButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 520, -1, -1));
+        viewProviderDiaglogPanel.add(cancelViewProviderDiaglogButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 350, 100, 30));
 
         jLabel19.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel19.setForeground(new java.awt.Color(44, 43, 196));
@@ -2253,7 +2267,7 @@ public class Home extends javax.swing.JFrame {
 
         viewProviderIdLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         viewProviderIdLabel.setText("Mã nhà cung cấp");
-        viewProviderDiaglogPanel.add(viewProviderIdLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, -1, -1));
+        viewProviderDiaglogPanel.add(viewProviderIdLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, -1, 30));
 
         viewProviderIdTextField.setEditable(false);
         viewProviderIdTextField.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
@@ -2266,10 +2280,6 @@ public class Home extends javax.swing.JFrame {
             }
         });
         viewProviderDiaglogPanel.add(viewProviderIdTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 60, 200, 30));
-
-        viewProductStorageLabel2.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        viewProductStorageLabel2.setText("Địa chỉ");
-        viewProviderDiaglogPanel.add(viewProductStorageLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 220, -1, -1));
 
         viewProductStorageTextField2.setEditable(false);
         viewProductStorageTextField2.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
@@ -2297,7 +2307,7 @@ public class Home extends javax.swing.JFrame {
 
         viewProviderWhenCreatedLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         viewProviderWhenCreatedLabel.setText("Ngày tạo");
-        viewProviderDiaglogPanel.add(viewProviderWhenCreatedLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 260, -1, -1));
+        viewProviderDiaglogPanel.add(viewProviderWhenCreatedLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 260, -1, 30));
 
         viewProviderLastUpdatedTextField.setEditable(false);
         viewProviderLastUpdatedTextField.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
@@ -2313,32 +2323,33 @@ public class Home extends javax.swing.JFrame {
 
         viewProviderLastUpdatedLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         viewProviderLastUpdatedLabel.setText("Sửa đổi lần cuối");
-        viewProviderDiaglogPanel.add(viewProviderLastUpdatedLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 300, -1, -1));
+        viewProviderDiaglogPanel.add(viewProviderLastUpdatedLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 300, -1, 30));
 
         javax.swing.GroupLayout viewProviderDiaglogLayout = new javax.swing.GroupLayout(viewProviderDiaglog.getContentPane());
         viewProviderDiaglog.getContentPane().setLayout(viewProviderDiaglogLayout);
         viewProviderDiaglogLayout.setHorizontalGroup(
             viewProviderDiaglogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(viewProviderDiaglogPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 450, Short.MAX_VALUE)
+            .addComponent(viewProviderDiaglogPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         viewProviderDiaglogLayout.setVerticalGroup(
             viewProviderDiaglogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(viewProviderDiaglogPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 573, Short.MAX_VALUE)
+            .addComponent(viewProviderDiaglogPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        editProviderDiaglog.setTitle("Thêm người dùng");
+        editProviderDiaglog.setTitle("Cập nhật nhà cung cấp");
         editProviderDiaglog.setBackground(new java.awt.Color(255, 255, 255));
-        editProviderDiaglog.setMinimumSize(new java.awt.Dimension(450, 500));
-        editProviderDiaglog.setSize(new java.awt.Dimension(450, 500));
+        editProviderDiaglog.setMinimumSize(new java.awt.Dimension(450, 350));
+        editProviderDiaglog.setPreferredSize(new java.awt.Dimension(450, 350));
+        editProviderDiaglog.setSize(new java.awt.Dimension(450, 350));
 
         editProviderDiaglogPanel.setBackground(new java.awt.Color(255, 255, 255));
-        editProviderDiaglogPanel.setMinimumSize(new java.awt.Dimension(430, 450));
-        editProviderDiaglogPanel.setPreferredSize(new java.awt.Dimension(430, 450));
+        editProviderDiaglogPanel.setMinimumSize(new java.awt.Dimension(450, 350));
+        editProviderDiaglogPanel.setPreferredSize(new java.awt.Dimension(450, 350));
         editProviderDiaglogPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         editProviderNameLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         editProviderNameLabel.setText("Tên nhà cung cấp");
-        editProviderDiaglogPanel.add(editProviderNameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, -1, -1));
+        editProviderDiaglogPanel.add(editProviderNameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, -1, 30));
 
         editProviderPhoneNumberTextField.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         editProviderPhoneNumberTextField.addActionListener(new java.awt.event.ActionListener() {
@@ -2350,15 +2361,15 @@ public class Home extends javax.swing.JFrame {
 
         editProviderPhoneNumberLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         editProviderPhoneNumberLabel.setText("Số điện thoại");
-        editProviderDiaglogPanel.add(editProviderPhoneNumberLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, -1, -1));
+        editProviderDiaglogPanel.add(editProviderPhoneNumberLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, -1, 30));
 
         editProviderEmailLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         editProviderEmailLabel.setText("Email");
-        editProviderDiaglogPanel.add(editProviderEmailLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 180, -1, -1));
+        editProviderDiaglogPanel.add(editProviderEmailLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 180, -1, 30));
 
         editProviderAddressLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         editProviderAddressLabel.setText("Địa chỉ");
-        editProviderDiaglogPanel.add(editProviderAddressLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 220, -1, -1));
+        editProviderDiaglogPanel.add(editProviderAddressLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 220, -1, 30));
 
         editProviderAddressTextField.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         editProviderAddressTextField.addActionListener(new java.awt.event.ActionListener() {
@@ -2370,6 +2381,7 @@ public class Home extends javax.swing.JFrame {
 
         editProviderDiaglogButton.setBackground(new java.awt.Color(0, 122, 249));
         editProviderDiaglogButton.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        editProviderDiaglogButton.setForeground(new java.awt.Color(255, 255, 255));
         editProviderDiaglogButton.setText("Cập nhật");
         editProviderDiaglogButton.setBorderPainted(false);
         editProviderDiaglogButton.addActionListener(new java.awt.event.ActionListener() {
@@ -2377,10 +2389,11 @@ public class Home extends javax.swing.JFrame {
                 editProviderDiaglogButtonActionPerformed(evt);
             }
         });
-        editProviderDiaglogPanel.add(editProviderDiaglogButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 440, -1, -1));
+        editProviderDiaglogPanel.add(editProviderDiaglogButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 270, 100, 30));
 
         cancelEditProviderDiaglogButton.setBackground(new java.awt.Color(212, 57, 68));
         cancelEditProviderDiaglogButton.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        cancelEditProviderDiaglogButton.setForeground(new java.awt.Color(255, 255, 255));
         cancelEditProviderDiaglogButton.setText("Huỷ bỏ");
         cancelEditProviderDiaglogButton.setBorderPainted(false);
         cancelEditProviderDiaglogButton.addActionListener(new java.awt.event.ActionListener() {
@@ -2388,7 +2401,7 @@ public class Home extends javax.swing.JFrame {
                 cancelEditProviderDiaglogButtonActionPerformed(evt);
             }
         });
-        editProviderDiaglogPanel.add(cancelEditProviderDiaglogButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 440, -1, -1));
+        editProviderDiaglogPanel.add(cancelEditProviderDiaglogButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 270, 100, 30));
 
         jLabel20.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel20.setForeground(new java.awt.Color(44, 43, 196));
@@ -2414,7 +2427,7 @@ public class Home extends javax.swing.JFrame {
 
         editProviderIdLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         editProviderIdLabel.setText("Mã nhà cung cấp");
-        editProviderDiaglogPanel.add(editProviderIdLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, -1, -1));
+        editProviderDiaglogPanel.add(editProviderIdLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, -1, 30));
 
         editProviderIdTextField.setEditable(false);
         editProviderIdTextField.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
@@ -2432,11 +2445,11 @@ public class Home extends javax.swing.JFrame {
         editProviderDiaglog.getContentPane().setLayout(editProviderDiaglogLayout);
         editProviderDiaglogLayout.setHorizontalGroup(
             editProviderDiaglogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(editProviderDiaglogPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 450, Short.MAX_VALUE)
+            .addComponent(editProviderDiaglogPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         editProviderDiaglogLayout.setVerticalGroup(
             editProviderDiaglogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(editProviderDiaglogPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 500, Short.MAX_VALUE)
+            .addComponent(editProviderDiaglogPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         deleteProviderConfirmDiaglog.setTitle("Xác nhận xoá");
@@ -3492,7 +3505,6 @@ public class Home extends javax.swing.JFrame {
             .addGroup(productFunctionPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(productFunctionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jSeparator2, javax.swing.GroupLayout.DEFAULT_SIZE, 47, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, productFunctionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(importProductsFromExcelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(exportProductsToExcelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -3501,7 +3513,10 @@ public class Home extends javax.swing.JFrame {
                         .addComponent(editProductButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(viewProductButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(deleteProductButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(0, 7, Short.MAX_VALUE))
+                .addContainerGap(14, Short.MAX_VALUE))
+            .addGroup(productFunctionPanelLayout.createSequentialGroup()
+                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout productPanelLayout = new javax.swing.GroupLayout(productPanel);
@@ -6994,7 +7009,6 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JLabel viewProductProcessorLabel;
     private javax.swing.JTextField viewProductProcessorTextField;
     private javax.swing.JLabel viewProductStorageLabel;
-    private javax.swing.JLabel viewProductStorageLabel2;
     private javax.swing.JTextField viewProductStorageTextField;
     private javax.swing.JTextField viewProductStorageTextField2;
     private javax.swing.JLabel viewProductWeightLabel;
