@@ -4,7 +4,7 @@
  */
 package com.haui_megatech.repository;
 
-import com.haui_megatech.model.ImportBill;
+import com.haui_megatech.model.ImportBillItem;
 import java.util.ArrayList;
 import java.util.Optional;
 
@@ -12,13 +12,15 @@ import java.util.Optional;
  *
  * @author vieth
  */
-public interface ImportBillRepository {
+public interface ImportBillItemRepository {
     
-    Optional<ImportBill> findById(Integer id);
+    Optional<ImportBillItem> findById(Integer id);
     
-    Optional<ImportBill> save(ImportBill importBill);
+    Optional<ImportBillItem> save(ImportBillItem item);
+    
+    ArrayList<ImportBillItem> saveAll(ArrayList<ImportBillItem> item);
     
     void deleteById(int id);
     
-    ArrayList<ImportBill> getAll();
+    ArrayList<ImportBillItem> getAll();
 }

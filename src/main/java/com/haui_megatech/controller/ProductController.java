@@ -48,4 +48,8 @@ public class ProductController {
         return productService.updateOne(id, product);
     }
     
+    public List<Product> getListByIds(List<Integer> ids) {
+        return productService.getListByIds(ids);
+    }
+    
 }

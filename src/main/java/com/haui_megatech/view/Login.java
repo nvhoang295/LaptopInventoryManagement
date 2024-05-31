@@ -82,7 +82,6 @@ public class Login extends javax.swing.JFrame {
         recoveryPasswordDiaglog.setTitle("Khôi phục mật khẩu");
         recoveryPasswordDiaglog.setBackground(new java.awt.Color(255, 255, 255));
         recoveryPasswordDiaglog.setMinimumSize(new java.awt.Dimension(700, 500));
-        recoveryPasswordDiaglog.setPreferredSize(new java.awt.Dimension(700, 500));
         recoveryPasswordDiaglog.setSize(new java.awt.Dimension(700, 500));
         recoveryPasswordDiaglog.getContentPane().setLayout(null);
 
@@ -262,7 +261,6 @@ public class Login extends javax.swing.JFrame {
 
         errorLoginDiaglog.setTitle("Lỗi đăng nhập");
         errorLoginDiaglog.setMinimumSize(new java.awt.Dimension(520, 300));
-        errorLoginDiaglog.setPreferredSize(new java.awt.Dimension(520, 300));
         errorLoginDiaglog.setSize(new java.awt.Dimension(520, 300));
         errorLoginDiaglog.getContentPane().setLayout(null);
 
@@ -335,6 +333,7 @@ public class Login extends javax.swing.JFrame {
         tendnlabel.setText("Tên đăng nhập");
 
         uName.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        uName.setText("viethoang");
         uName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 uNameActionPerformed(evt);
@@ -345,6 +344,7 @@ public class Login extends javax.swing.JFrame {
         passlabel.setText("Mật khẩu");
 
         uPass.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        uPass.setText("123");
 
         loginBtn.setBackground(new java.awt.Color(44, 43, 196));
         loginBtn.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N

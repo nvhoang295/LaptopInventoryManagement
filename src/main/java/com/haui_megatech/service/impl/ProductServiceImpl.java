@@ -134,5 +134,15 @@ public class ProductServiceImpl implements ProductService {
                 .message(SuccessMessage.Product.UPDATED)
                 .build();
     }
+    
+    @Override
+    public List<Product> getListByIds(List<Integer> ids) {
+        List<Product> items = new ArrayList<>();
+        ids.forEach(id -> {
+           Optional<Product> found = this.findById(id);
+           found.ifPresent(item -> items.add(item));
+        });
+        return items;
+    }
 
 }

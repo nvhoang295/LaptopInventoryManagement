@@ -97,6 +97,7 @@ public class ProviderRepositoryImpl implements ProviderRepository {
         oldInfo.setEmail(newInfo.getEmail());
         oldInfo.setAddress(newInfo.getAddress());
         oldInfo.setLastUpdated(new Date());
+        oldInfo.setImportBills(newInfo.getImportBills());
         return true;
     }
 
