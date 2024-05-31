@@ -10,6 +10,7 @@ import com.haui_megatech.dto.CommonResponseDTO;
 import com.haui_megatech.model.ExportBill;
 import com.haui_megatech.repository.ExportBillItemRepository;
 import com.haui_megatech.repository.ExportBillRepository;
+import com.haui_megatech.repository.InventoryItemRepository;
 import com.haui_megatech.service.ExportBillService;
 import java.util.Date;
 import java.util.List;
@@ -62,6 +63,8 @@ public class ExportBillServiceImpl implements ExportBillService {
         item.getExportBillItems().forEach(billItem -> {
             exportBillItemRepository.save(billItem);
         });
+        
+        
         
         Optional<ExportBill> savedItem = exportBillRepository.save(item);
         return savedItem.isPresent()

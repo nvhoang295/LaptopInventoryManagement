@@ -28,4 +28,6 @@ public interface InventoryItemService {
     Optional<InventoryItem> findById(Integer id);
     
     CommonResponseDTO updateOne(Integer id, InventoryItem item);
+    
+    void updateList(List<InventoryItem> items);
 }

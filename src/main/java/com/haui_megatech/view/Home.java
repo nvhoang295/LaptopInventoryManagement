@@ -12,6 +12,8 @@ import com.haui_megatech.dto.*;
 import com.haui_megatech.model.*;
 import com.haui_megatech.repository.*;
 import com.haui_megatech.repository.impl.*;
+import com.haui_megatech.service.ExportBillItemService;
+import com.haui_megatech.service.ExportBillService;
 import com.haui_megatech.service.ImportBillItemService;
 import com.haui_megatech.service.ImportBillService;
 import com.haui_megatech.service.InventoryItemService;
@@ -113,7 +115,14 @@ public class Home extends javax.swing.JFrame {
             inventoryItemRepository
     );
     private final ImportBillController importBillController = new ImportBillController(importBillService);
-
+    
+    private final ExportBillItemRepository exportBillItemRepository = new ExportBillItemRepositoryImpl(applicationContext);
+    private final ExportBillItemService exportBillItemService = new ExportBillItemServiceImpl(exportBillItemRepository);
+    
+    private final ExportBillRepository exportBillRepository = new ExportBillRepositoryImpl(applicationContext);
+    private final ExportBillService exportBillService = new ExportBillServiceImpl(exportBillRepository, exportBillItemRepository);
+    private final ExportBillController exportBillController = new ExportBillController(exportBillService);
+    
     private List<InventoryItem> inventoryItems;
 
     /**
@@ -3043,9 +3052,9 @@ public class Home extends javax.swing.JFrame {
 
         editExportBillItemDiaglog.setTitle("Thêm người dùng");
         editExportBillItemDiaglog.setBackground(new java.awt.Color(255, 255, 255));
-        editExportBillItemDiaglog.setMinimumSize(new java.awt.Dimension(1427, 830));
+        editExportBillItemDiaglog.setMinimumSize(new java.awt.Dimension(733, 500));
         editExportBillItemDiaglog.setResizable(false);
-        editExportBillItemDiaglog.setSize(new java.awt.Dimension(1427, 830));
+        editExportBillItemDiaglog.setSize(new java.awt.Dimension(733, 500));
 
         editExportBillItemDiaglogPanel.setBackground(new java.awt.Color(255, 255, 255));
         editExportBillItemDiaglogPanel.setMinimumSize(new java.awt.Dimension(430, 450));
@@ -3180,6 +3189,8 @@ public class Home extends javax.swing.JFrame {
             editExportBillItemDiaglogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(editExportBillItemDiaglogPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 500, Short.MAX_VALUE)
         );
+
+        editExportBillItemDiaglog.getAccessibleContext().setAccessibleName("Sửa phiếu xuất");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1400, 830));
@@ -4617,13 +4628,16 @@ public class Home extends javax.swing.JFrame {
         exportProductQuantityLabel.setText("Số Lượng: ");
 
         clientNameTextField.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        clientNameTextField.setText("Anh Hoàng");
 
         clientPhoneNumberTextField.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        clientPhoneNumberTextField.setText("0336118268");
 
         clientPhoneNumberLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         clientPhoneNumberLabel.setText("Số điện thoại khách hàng");
 
         clientAddressTextField.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        clientAddressTextField.setText("Bắc Giang");
 
         clientAddressLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         clientAddressLabel.setText("Địa chỉ giao hàng");
@@ -6885,7 +6899,45 @@ public class Home extends javax.swing.JFrame {
     }//GEN-LAST:event_viewInStockButtonActionPerformed
 
     private void exportBillProductButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exportBillProductButtonActionPerformed
-        // TODO add your handling code here:
+        
+        String clientName = clientNameTextField.getText().trim();
+        if (clientName.isEmpty() || clientName.isBlank()) {
+            showDiaglogMessage("Trường tên khách hàng không được để trống.");
+            return;
+        }
+        
+        String clientPhoneNumber = clientPhoneNumberTextField.getText().trim();
+        if (clientPhoneNumber.isEmpty() || clientPhoneNumber.isBlank()) {
+            showDiaglogMessage("Trường số điện thoại khách hàng không được để trống.");
+            return;
+        }
+        
+        String clientAddress = clientAddressTextField.getText().trim();
+        if (clientAddress.isEmpty() || clientAddress.isBlank()) {
+            showDiaglogMessage("Trường địa chỉ khách hàng không được để trống.");
+            return;
+        }
+        
+        exportBillController.addOne(exportBill);
+        
+        double total = exportBill.getExportBillItems()
+                .parallelStream()
+                .mapToDouble(item -> item.getQuantity() * item.getExportPrice())
+                .sum();
+        
+        exportBill.setTotal(total);
+        exportBillController.addOne(exportBill);
+        inventoryItemController.updateList(inventoryItems);
+        
+        showDiaglogMessage("Xuất hàng thành công.");
+        initExportBill();
+        System.gc();
+        
+        loadDataToExportProductsBillTable(exportBill);
+        clientNameTextField.setText("");
+        clientPhoneNumberTextField.setText("");
+        clientAddressTextField("");
+        
     }//GEN-LAST:event_exportBillProductButtonActionPerformed
 
     private void removeExportBillItemButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeExportBillItemButtonActionPerformed

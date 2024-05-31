@@ -125,5 +125,8 @@ public class InventoryItemServiceImpl implements InventoryItemService {
                 .build();
     }
     
-    
+    @Override
+    public void updateList(List<InventoryItem> items) {
+        items.forEach(item -> this.updateOne(item.getId(), item));
+    }
 }

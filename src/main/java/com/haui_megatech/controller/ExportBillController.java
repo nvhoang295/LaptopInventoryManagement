@@ -5,9 +5,8 @@
 package com.haui_megatech.controller;
 
 import com.haui_megatech.dto.CommonResponseDTO;
-import com.haui_megatech.model.InventoryItem;
-import com.haui_megatech.service.InventoryItemService;
-import java.util.ArrayList;
+import com.haui_megatech.model.ExportBill;
+import com.haui_megatech.service.ExportBillService;
 import java.util.List;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
@@ -17,38 +16,31 @@ import lombok.RequiredArgsConstructor;
  * @author vieth
  */
 @RequiredArgsConstructor
-public class InventoryItemController {
-    private final InventoryItemService service;
+public class ExportBillController {
+    private final ExportBillService service;
     
-    public CommonResponseDTO<List<InventoryItem>> getList() {
+    public CommonResponseDTO<List<ExportBill>> getList() {
         return service.getList();
     }
     
-    public CommonResponseDTO<List<InventoryItem>> searchList(String keyword) {
+    public CommonResponseDTO<List<ExportBill>> searchList(String keyword) {
         return service.searchList(keyword);
     }
     
-    public CommonResponseDTO addOne(InventoryItem item) {
+    public CommonResponseDTO addOne(ExportBill item) {
         return service.addOne(item);
-    }
-    
-    public CommonResponseDTO addList(ArrayList<InventoryItem> items) {
-        return service.addList(items);
     }
     
     public CommonResponseDTO deleteOne(Integer id) {
         return service.deleteOne(id);
     }
     
-    public Optional<InventoryItem> findById(Integer id) {
+    public Optional<ExportBill> findById(Integer id) {
         return service.findById(id);
     }
     
-    public CommonResponseDTO updateOne(Integer id, InventoryItem item) {
+    public CommonResponseDTO updateOne(Integer id, ExportBill item) {
         return service.updateOne(id, item);
     }
     
-    public void updateList(List<InventoryItem> items) {
-        service.updateList(items);
-    }
 }
