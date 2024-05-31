@@ -6,6 +6,7 @@ package com.haui_megatech.model;
 
 import java.io.Serial;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -35,4 +36,5 @@ public class ImportBill implements Serializable {
     
     private User user;
     private Provider provider;
+    private ArrayList<ImportBillItem> importBillItems;
 }

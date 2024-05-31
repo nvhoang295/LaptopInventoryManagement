@@ -45,5 +45,4 @@ public class Product implements Serializable {
     private Date whenCreated;
     private Date lastUpdated;
     
-    private ArrayList<InventoryItem> inventoryItems;
 }

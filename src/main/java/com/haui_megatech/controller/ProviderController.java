@@ -48,4 +48,8 @@ public class ProviderController {
     public CommonResponseDTO updateOne(Integer id, Provider provider) {
         return providerService.updateOne(id, provider);
     }
+    
+    public Optional<Provider> findByName(String name) {
+        return providerService.findByName(name);
+    }
 }

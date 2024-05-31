@@ -27,4 +27,16 @@ public class SuccessMessage {
         public static final String UPDATED = "Cập nhật nhà cung cấp thành công.";
         public static final String DELETED = "Xoá nhà cung cấp thành công.";
     }
+    
+    public static final class ImportBillItem {
+        public static final String ADDED = "Thêm mới sản phẩm vào kho thành công.";
+        public static final String UPDATED = "Cập nhật kho hàng thành công.";
+        public static final String DELETED = "Xoá kho hàng thành công.";
+    }
+    
+    public static final class ImportBill {
+        public static final String ADDED = "Nhập hàng thành công.";
+        public static final String UPDATED = "Cập nhật hoá đơn nhập hàng thành công.";
+        public static final String DELETE = "Xoá hoá đơn nhập hàng thành công.";
+    }
 }

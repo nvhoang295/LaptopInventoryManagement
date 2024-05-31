@@ -93,17 +93,6 @@ public class ImportBillRepositoryImpl implements ImportBillRepository {
         return true;
     }
 
-    @Override
-    public ArrayList<ImportBill> saveAll(ArrayList<ImportBill> importBills) {
-        ArrayList<ImportBill> savedImportBills = new ArrayList<>();
-        importBills.forEach(item -> {
-            Optional<ImportBill> saved = this.save(item);
-            if (saved.isPresent()) {
-                savedImportBills.add(saved.get());
-            }
-        });
-        return savedImportBills;
-    }
 
     @Override
     public void deleteById(int id) {
