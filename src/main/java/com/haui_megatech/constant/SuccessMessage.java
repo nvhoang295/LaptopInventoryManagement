@@ -21,4 +21,10 @@ public class SuccessMessage {
         public static final String UPDATED = "Cập nhật sản phẩm thành công.";
         public static final String ADDED = "Thêm mới sản phẩm thành công.";
     }
+    
+    public static final class Provider {
+        public static final String ADDED = "Thêm mới nhà cung cấp thành công.";
+        public static final String UPDATED = "Cập nhật nhà cung cấp thành công.";
+        public static final String DELETED = "Xoá nhà cung cấp thành công.";
+    }
 }
