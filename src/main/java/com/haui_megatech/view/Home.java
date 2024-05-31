@@ -73,13 +73,13 @@ public class Home extends javax.swing.JFrame {
     private final int EXPORT_INVENTORY_ITEM_PRODUCT_NAME_COL_INDEX = 2;
     private final int EXPORT_INVENTORY_ITEM_QUANTITY_COL_INDEX = 3;
     private final int EXPORT_INVENTORY_ITEM_PRICE_COL_INDEX = 4;
-    
+
     private final int EXPORT_BILL_ITEM_INVENTORY_ID = 1;
     private final int EXPORT_BILL_ITEM_PRODUCT_ID = 2;
     private final int EXPORT_BILL_ITEM_PRODUCT_NAME = 3;
     private final int EXPORT_BILL_ITEM_QUANTITY = 4;
     private final int EXPORT_BILL_ITEM_PRICE = 5;
-    
+
     private ImportBill importBill;
     private ExportBill exportBill;
 
@@ -113,14 +113,9 @@ public class Home extends javax.swing.JFrame {
             inventoryItemRepository
     );
     private final ImportBillController importBillController = new ImportBillController(importBillService);
-        
-    
-    
-    
+
     private List<InventoryItem> inventoryItems;
-    
-    
-    
+
     /**
      * Creates new form Home
      */
@@ -150,7 +145,7 @@ public class Home extends javax.swing.JFrame {
         exportProductsBillTable.getTableHeader().setFont(tableHeaderFont);
 
         loadDataToProvidersNameCombobox();
-        
+
         inventoryItems = inventoryItemController.getList().data();
     }
 
@@ -787,6 +782,23 @@ public class Home extends javax.swing.JFrame {
         cancelDeleteExportBillItemDiaglogButton = new javax.swing.JButton();
         jLabel24 = new javax.swing.JLabel();
         deleteExportBillItemDiaglogLabel = new javax.swing.JLabel();
+        editExportBillItemDiaglog = new javax.swing.JDialog();
+        editExportBillItemDiaglogPanel = new javax.swing.JPanel();
+        editExportBillItemQuantityLabel = new javax.swing.JLabel();
+        editExportBillItemPriceTextField = new javax.swing.JTextField();
+        editExportBillItemPriceLabel = new javax.swing.JLabel();
+        editExportBillItemDiaglogButton = new javax.swing.JButton();
+        cancelEditExportBillItemDiaglogButton = new javax.swing.JButton();
+        jLabel25 = new javax.swing.JLabel();
+        editExportBillItemQuantityTextField = new javax.swing.JTextField();
+        editExportBillItemProductNameLabel = new javax.swing.JLabel();
+        editExportBillItemProductNameTextField = new javax.swing.JTextField();
+        editExportBillItemProductIdLabel = new javax.swing.JLabel();
+        editExportBillItemProductIdTextField = new javax.swing.JTextField();
+        editExportBillItemIndexLabel = new javax.swing.JLabel();
+        editExportBillItemIndexTextField = new javax.swing.JTextField();
+        editExportBillItemInventoryIdLabel = new javax.swing.JLabel();
+        editExportBillItemInventoryIdTextField = new javax.swing.JTextField();
         sidebarPanel = new javax.swing.JPanel();
         loginedUsername = new javax.swing.JLabel();
         productTab = new javax.swing.JPanel();
@@ -1133,24 +1145,24 @@ public class Home extends javax.swing.JFrame {
         );
 
         diaglogMessage.setTitle("Thông báo");
-        diaglogMessage.setMinimumSize(new java.awt.Dimension(400, 250));
-        diaglogMessage.setSize(new java.awt.Dimension(400, 250));
+        diaglogMessage.setMinimumSize(new java.awt.Dimension(605, 250));
+        diaglogMessage.setSize(new java.awt.Dimension(605, 250));
 
         diaglogMessagePanel.setBackground(new java.awt.Color(255, 255, 255));
-        diaglogMessagePanel.setMinimumSize(new java.awt.Dimension(400, 250));
-        diaglogMessagePanel.setPreferredSize(new java.awt.Dimension(400, 250));
+        diaglogMessagePanel.setMinimumSize(new java.awt.Dimension(605, 250));
+        diaglogMessagePanel.setPreferredSize(new java.awt.Dimension(605, 250));
         diaglogMessagePanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         diaglogMessageLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         diaglogMessageLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         diaglogMessageLabel.setText("Thêm mới người dùng thành công!");
-        diaglogMessagePanel.add(diaglogMessageLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 65, 380, 65));
+        diaglogMessagePanel.add(diaglogMessageLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 80, 610, 65));
 
         jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(212, 57, 68));
         jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel10.setText("THÔNG BÁO");
-        diaglogMessagePanel.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 34, 388, -1));
+        diaglogMessagePanel.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 50, 388, -1));
 
         diaglogMessageOkButton.setBackground(new java.awt.Color(44, 43, 196));
         diaglogMessageOkButton.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
@@ -1163,13 +1175,15 @@ public class Home extends javax.swing.JFrame {
                 diaglogMessageOkButtonActionPerformed(evt);
             }
         });
-        diaglogMessagePanel.add(diaglogMessageOkButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 150, 82, 30));
+        diaglogMessagePanel.add(diaglogMessageOkButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 170, 82, 30));
 
         javax.swing.GroupLayout diaglogMessageLayout = new javax.swing.GroupLayout(diaglogMessage.getContentPane());
         diaglogMessage.getContentPane().setLayout(diaglogMessageLayout);
         diaglogMessageLayout.setHorizontalGroup(
             diaglogMessageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(diaglogMessagePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(diaglogMessageLayout.createSequentialGroup()
+                .addComponent(diaglogMessagePanel, javax.swing.GroupLayout.PREFERRED_SIZE, 605, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         diaglogMessageLayout.setVerticalGroup(
             diaglogMessageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -3025,6 +3039,146 @@ public class Home extends javax.swing.JFrame {
         deleteExportBillItemDiaglogLayout.setVerticalGroup(
             deleteExportBillItemDiaglogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(deleteExportBillItemPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 500, Short.MAX_VALUE)
+        );
+
+        editExportBillItemDiaglog.setTitle("Thêm người dùng");
+        editExportBillItemDiaglog.setBackground(new java.awt.Color(255, 255, 255));
+        editExportBillItemDiaglog.setMinimumSize(new java.awt.Dimension(1427, 830));
+        editExportBillItemDiaglog.setResizable(false);
+        editExportBillItemDiaglog.setSize(new java.awt.Dimension(1427, 830));
+
+        editExportBillItemDiaglogPanel.setBackground(new java.awt.Color(255, 255, 255));
+        editExportBillItemDiaglogPanel.setMinimumSize(new java.awt.Dimension(430, 450));
+        editExportBillItemDiaglogPanel.setPreferredSize(new java.awt.Dimension(430, 450));
+        editExportBillItemDiaglogPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        editExportBillItemQuantityLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        editExportBillItemQuantityLabel.setText("Số lượng");
+        editExportBillItemDiaglogPanel.add(editExportBillItemQuantityLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 270, -1, -1));
+
+        editExportBillItemPriceTextField.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        editExportBillItemPriceTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editExportBillItemPriceTextFieldActionPerformed(evt);
+            }
+        });
+        editExportBillItemDiaglogPanel.add(editExportBillItemPriceTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 320, 540, 30));
+
+        editExportBillItemPriceLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        editExportBillItemPriceLabel.setText("Giá xuất");
+        editExportBillItemDiaglogPanel.add(editExportBillItemPriceLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 320, -1, -1));
+
+        editExportBillItemDiaglogButton.setBackground(new java.awt.Color(0, 122, 249));
+        editExportBillItemDiaglogButton.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        editExportBillItemDiaglogButton.setText("Cập nhật");
+        editExportBillItemDiaglogButton.setBorderPainted(false);
+        editExportBillItemDiaglogButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editExportBillItemDiaglogButtonActionPerformed(evt);
+            }
+        });
+        editExportBillItemDiaglogPanel.add(editExportBillItemDiaglogButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 380, -1, -1));
+
+        cancelEditExportBillItemDiaglogButton.setBackground(new java.awt.Color(212, 57, 68));
+        cancelEditExportBillItemDiaglogButton.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        cancelEditExportBillItemDiaglogButton.setText("Huỷ bỏ");
+        cancelEditExportBillItemDiaglogButton.setBorderPainted(false);
+        cancelEditExportBillItemDiaglogButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelEditExportBillItemDiaglogButtonActionPerformed(evt);
+            }
+        });
+        editExportBillItemDiaglogPanel.add(cancelEditExportBillItemDiaglogButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 380, -1, -1));
+
+        jLabel25.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel25.setForeground(new java.awt.Color(44, 43, 196));
+        jLabel25.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel25.setText("CẬP NHẬT MẶT HÀNG XUẤT");
+        editExportBillItemDiaglogPanel.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 20, 440, -1));
+
+        editExportBillItemQuantityTextField.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        editExportBillItemQuantityTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editExportBillItemQuantityTextFieldActionPerformed(evt);
+            }
+        });
+        editExportBillItemDiaglogPanel.add(editExportBillItemQuantityTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 270, 540, 30));
+
+        editExportBillItemProductNameLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        editExportBillItemProductNameLabel.setText("Tên sản phẩm");
+        editExportBillItemDiaglogPanel.add(editExportBillItemProductNameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 220, -1, -1));
+
+        editExportBillItemProductNameTextField.setEditable(false);
+        editExportBillItemProductNameTextField.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        editExportBillItemProductNameTextField.setEnabled(false);
+        editExportBillItemProductNameTextField.setFocusable(false);
+        editExportBillItemProductNameTextField.setRequestFocusEnabled(false);
+        editExportBillItemProductNameTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editExportBillItemProductNameTextFieldActionPerformed(evt);
+            }
+        });
+        editExportBillItemDiaglogPanel.add(editExportBillItemProductNameTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 220, 540, 30));
+
+        editExportBillItemProductIdLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        editExportBillItemProductIdLabel.setText("Mã sản phẩm");
+        editExportBillItemDiaglogPanel.add(editExportBillItemProductIdLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 170, -1, -1));
+
+        editExportBillItemProductIdTextField.setEditable(false);
+        editExportBillItemProductIdTextField.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        editExportBillItemProductIdTextField.setEnabled(false);
+        editExportBillItemProductIdTextField.setFocusable(false);
+        editExportBillItemProductIdTextField.setRequestFocusEnabled(false);
+        editExportBillItemProductIdTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editExportBillItemProductIdTextFieldActionPerformed(evt);
+            }
+        });
+        editExportBillItemDiaglogPanel.add(editExportBillItemProductIdTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 170, 540, 30));
+
+        editExportBillItemIndexLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        editExportBillItemIndexLabel.setText("Số thứ tự");
+        editExportBillItemDiaglogPanel.add(editExportBillItemIndexLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, -1, -1));
+
+        editExportBillItemIndexTextField.setEditable(false);
+        editExportBillItemIndexTextField.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        editExportBillItemIndexTextField.setEnabled(false);
+        editExportBillItemIndexTextField.setFocusable(false);
+        editExportBillItemIndexTextField.setRequestFocusEnabled(false);
+        editExportBillItemIndexTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editExportBillItemIndexTextFieldActionPerformed(evt);
+            }
+        });
+        editExportBillItemDiaglogPanel.add(editExportBillItemIndexTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 70, 540, 30));
+
+        editExportBillItemInventoryIdLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        editExportBillItemInventoryIdLabel.setText("Mã kho");
+        editExportBillItemDiaglogPanel.add(editExportBillItemInventoryIdLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 120, -1, -1));
+
+        editExportBillItemInventoryIdTextField.setEditable(false);
+        editExportBillItemInventoryIdTextField.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        editExportBillItemInventoryIdTextField.setEnabled(false);
+        editExportBillItemInventoryIdTextField.setFocusable(false);
+        editExportBillItemInventoryIdTextField.setRequestFocusEnabled(false);
+        editExportBillItemInventoryIdTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editExportBillItemInventoryIdTextFieldActionPerformed(evt);
+            }
+        });
+        editExportBillItemDiaglogPanel.add(editExportBillItemInventoryIdTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 120, 540, 30));
+
+        javax.swing.GroupLayout editExportBillItemDiaglogLayout = new javax.swing.GroupLayout(editExportBillItemDiaglog.getContentPane());
+        editExportBillItemDiaglog.getContentPane().setLayout(editExportBillItemDiaglogLayout);
+        editExportBillItemDiaglogLayout.setHorizontalGroup(
+            editExportBillItemDiaglogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(editExportBillItemDiaglogLayout.createSequentialGroup()
+                .addComponent(editExportBillItemDiaglogPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 733, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+        editExportBillItemDiaglogLayout.setVerticalGroup(
+            editExportBillItemDiaglogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(editExportBillItemDiaglogPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 500, Short.MAX_VALUE)
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -5329,8 +5483,7 @@ public class Home extends javax.swing.JFrame {
                         )
                         .toList()
                 );
-        
-        
+
         loadDataToImportProductBillTable(importBill);
     }//GEN-LAST:event_importProductAddButtonActionPerformed
 
@@ -6618,21 +6771,21 @@ public class Home extends javax.swing.JFrame {
 
         importBillController.addOne(importBill);
         showDiaglogMessage("Nhập sản phẩm thành công.");
-        
+
         inventoryItems.addAll(
                 importBill.getImportBillItems()
                         .parallelStream()
                         .map(item -> InventoryItem
-                                .builder()
-                                .id(InventoryItem.counter)
-                                .importPrice(item.getImportPrice())
-                                .quantity(item.getQuantity())
-                                .importBillItem(item)
-                                .build()
+                        .builder()
+                        .id(InventoryItem.counter)
+                        .importPrice(item.getImportPrice())
+                        .quantity(item.getQuantity())
+                        .importBillItem(item)
+                        .build()
                         )
                         .toList()
         );
-        
+
         initImportBill();
         System.gc();
         System.out.println(importBill.getImportBillItems().size());
@@ -6736,29 +6889,53 @@ public class Home extends javax.swing.JFrame {
     }//GEN-LAST:event_exportBillProductButtonActionPerformed
 
     private void removeExportBillItemButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeExportBillItemButtonActionPerformed
-        
+
         if (exportBill.getExportBillItems().isEmpty()) {
             showDiaglogMessage("Danh sách này hiện đang trống.");
             return;
         }
-        
+
         int[] rows = exportProductsBillTable.getSelectedRows();
         if (rows.length == 0) {
             showDiaglogMessage(ErrorMessage.EMPTY_SELECTED_ROWS);
             return;
         }
-        
+
         showDeleteExportBillItemDiaglog();
     }//GEN-LAST:event_removeExportBillItemButtonActionPerformed
-    
+
     private void showDeleteExportBillItemDiaglog() {
         deleteExportBillItemDiaglog.setVisible(true);
         deleteExportBillItemDiaglog.setLocationRelativeTo(this);
     }
-    
+
     private void editExportBillItemButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editExportBillItemButtonActionPerformed
-        // TODO add your handling code here:
+
+        if (exportBill.getExportBillItems().isEmpty()) {
+            showDiaglogMessage("Danh sách này hiện đang trống.");
+            return;
+        }
+
+        int[] rows = exportProductsBillTable.getSelectedRows();
+        if (rows.length == 0) {
+            showDiaglogMessage(ErrorMessage.EMPTY_SELECTED_ROWS);
+            return;
+        }
+
+        showEditExportBillItemDiaglog(rows[0]);
     }//GEN-LAST:event_editExportBillItemButtonActionPerformed
+
+    private void showEditExportBillItemDiaglog(int selectedRow) {
+        editExportBillItemDiaglog.setVisible(true);
+        editExportBillItemDiaglog.setLocationRelativeTo(this);
+
+        editExportBillItemIndexTextField.setText(exportProductsBillTable.getValueAt(selectedRow, ID_COL_INDEX).toString());
+        editExportBillItemInventoryIdTextField.setText(exportProductsBillTable.getValueAt(selectedRow, EXPORT_BILL_ITEM_INVENTORY_ID).toString());
+        editExportBillItemProductIdTextField.setText(exportProductsBillTable.getValueAt(selectedRow, EXPORT_BILL_ITEM_PRODUCT_ID).toString());
+        editExportBillItemProductNameTextField.setText(exportProductsBillTable.getValueAt(selectedRow, EXPORT_BILL_ITEM_PRODUCT_NAME).toString());
+        editExportBillItemQuantityTextField.setText(exportProductsBillTable.getValueAt(selectedRow, EXPORT_BILL_ITEM_QUANTITY).toString());
+        editExportBillItemPriceTextField.setText(exportProductsBillTable.getValueAt(selectedRow, EXPORT_BILL_ITEM_PRICE).toString().replace("đ", ""));
+    }
 
     private void exportProductAddButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exportProductAddButtonActionPerformed
         int[] rows = exportInStockProductsTable.getSelectedRows();
@@ -6767,9 +6944,14 @@ public class Home extends javax.swing.JFrame {
             return;
         }
 
-        Integer selectedId = Integer.valueOf(exportInStockProductsTable.getValueAt(rows[0], ID_COL_INDEX).toString());
+        Integer selectedInventoryId = Integer.valueOf(exportInStockProductsTable.getValueAt(rows[0], ID_COL_INDEX).toString());
 
-        InventoryItem selectedInventoryItem = inventoryItemController.findById(selectedId).get();
+        //InventoryItem selectedInventoryItem = inventoryItemController.findById(selectedId).get();
+        InventoryItem selectedInventoryItem
+                = inventoryItems.parallelStream()
+                        .filter(item -> item.getId().equals(selectedInventoryId))
+                        .findFirst()
+                        .get();
 
         if (exportProductQuantityTextField.getText().trim().length() == 0) {
             showDiaglogMessage("Vui lòng nhập trường số lượng nhập.");
@@ -6795,67 +6977,67 @@ public class Home extends javax.swing.JFrame {
             showDiaglogMessage("Giá sản phẩm phải là một số thực.");
             return;
         }
-        
+
         Integer limitQuantity = Integer.valueOf(exportInStockProductsTable.getValueAt(rows[0], EXPORT_INVENTORY_ITEM_QUANTITY_COL_INDEX).toString());
         if (quantity > limitQuantity) {
             showDiaglogMessage("Số lượng xuất vượt quá số lượng trong kho.");
             return;
         }
-        
+
         Float minExportPrice = Float.valueOf(exportInStockProductsTable.getValueAt(rows[0], EXPORT_INVENTORY_ITEM_PRICE_COL_INDEX).toString().replace(",", ""));
         if (price < minExportPrice) {
             showDiaglogMessage("Giá xuất phải lớn hơn hoặc bằng giá nhập.");
             return;
         }
-        
+
         selectedInventoryItem.setQuantity(limitQuantity - quantity);
-        
+
         int foundIndex = IntStream
                 .range(0, inventoryItems.size())
-                .filter(index -> inventoryItems.get(index).getId().equals(selectedId))
+                .filter(index -> inventoryItems.get(index).getId().equals(selectedInventoryId))
                 .findFirst()
                 .orElse(-1);
-        
+
         inventoryItems.set(foundIndex, selectedInventoryItem);
-        
+
         final Integer finalQuantity = quantity;
         final Float finalPrice = price;
-        
-        Integer selectedProductId = 
-                Integer.valueOf(exportInStockProductsTable
+
+        Integer selectedProductId
+                = Integer.valueOf(exportInStockProductsTable
                         .getValueAt(rows[0], EXPORT_INVENTORY_ITEM_PRODUCT_ID_COL_INDEX)
                         .toString());
-        
+
         Product selectedProduct = productController.findById(selectedProductId).get();
-        
+
         Integer foundInventoryIndex = IntStream
                 .range(0, exportBill.getExportBillItems().size())
-                .filter(index -> 
-                        exportBill.getExportBillItems()
-                                .get(index)
-                                .getInventoryItem()
-                                .getId()
-                                .equals(selectedInventoryItem.getId())
+                .filter(index
+                        -> exportBill.getExportBillItems()
+                        .get(index)
+                        .getInventoryItem()
+                        .getId()
+                        .equals(selectedInventoryItem.getId())
                 )
                 .findFirst()
                 .orElse(-1);
-        
+
         if (foundInventoryIndex != -1) {
             int oldQuantity = exportBill.getExportBillItems().get(foundInventoryIndex).getQuantity();
             exportBill.getExportBillItems().get(foundInventoryIndex).setQuantity(oldQuantity + quantity);
         } else {
             exportBill.getExportBillItems()
-                .add(ExportBillItem
-                        .builder()
-                        .product(selectedProduct)
-                        .quantity(finalQuantity)
-                        .exportPrice(finalPrice)
-                        .exportBill(exportBill)
-                        .inventoryItem(selectedInventoryItem)
-                        .build()
-                );
+                    .add(ExportBillItem
+                            .builder()
+                            .product(selectedProduct)
+                            .quantity(finalQuantity)
+                            .exportPrice(finalPrice)
+                            .exportBill(exportBill)
+                            .inventoryItem(selectedInventoryItem)
+                            .build()
+                    );
         }
-        
+
         loadDataToExportProductsBillTable(exportBill);
         loadDataToExportInStockProductsTable(inventoryItems);
     }//GEN-LAST:event_exportProductAddButtonActionPerformed
@@ -6876,32 +7058,138 @@ public class Home extends javax.swing.JFrame {
 
     private void deleteExportBillItemDiaglogButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteExportBillItemDiaglogButtonActionPerformed
         int[] rows = exportProductsBillTable.getSelectedRows();
-        
+
         int selectedInventoryId = Integer.parseInt(exportProductsBillTable.getValueAt(rows[0], EXPORT_BILL_ITEM_INVENTORY_ID).toString());
-        
+
         int quantity = Integer.parseInt(exportProductsBillTable.getValueAt(rows[0], EXPORT_BILL_ITEM_QUANTITY).toString());
-        
+
         int foundIndex = IntStream.range(0, inventoryItems.size())
                 .filter(index -> inventoryItems.get(index).getId().equals(selectedInventoryId))
                 .findFirst()
                 .orElse(-1);
-        
+
         int oldQuantity = inventoryItems.get(foundIndex).getQuantity();
         inventoryItems.get(foundIndex).setQuantity(oldQuantity + quantity);
         inventoryItems.set(foundIndex, inventoryItems.get(foundIndex));
-        
+
         exportBill.getExportBillItems().removeIf(item -> item.getInventoryItem().getId().equals(selectedInventoryId));
-        
+
         loadDataToExportProductsBillTable(exportBill);
         loadDataToExportInStockProductsTable(inventoryItems);
-        
+
         deleteExportBillItemDiaglog.dispose();
         showDiaglogMessage("Xoá thành công.");
     }//GEN-LAST:event_deleteExportBillItemDiaglogButtonActionPerformed
-    
+
     private void cancelDeleteExportBillItemDiaglogButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelDeleteExportBillItemDiaglogButtonActionPerformed
         deleteExportBillItemDiaglog.dispose();
     }//GEN-LAST:event_cancelDeleteExportBillItemDiaglogButtonActionPerformed
+
+    private void editExportBillItemPriceTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editExportBillItemPriceTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_editExportBillItemPriceTextFieldActionPerformed
+
+    private void editExportBillItemDiaglogButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editExportBillItemDiaglogButtonActionPerformed
+
+        int[] rightRows = exportProductsBillTable.getSelectedRows();
+        int rightSelectedRow = rightRows[0];
+
+        if (editExportBillItemQuantityTextField.getText().trim().length() == 0) {
+            showDiaglogMessage("Vui lòng nhập trường số lượng xuất.");
+            return;
+        }
+
+        
+        if (editExportBillItemPriceTextField.getText().trim().length() == 0) {
+            showDiaglogMessage("Vui lòng nhập trường giá xuất.");
+            return;
+        }
+
+        
+        Integer newQuantity = 0;
+        try {
+            newQuantity = Integer.valueOf(editExportBillItemQuantityTextField.getText());
+        } catch (NumberFormatException e) {
+            showDiaglogMessage("Số lượng xuất phải là một số nguyên.");
+            return;
+        }
+
+        
+        Float newPrice = 0.0f;
+        try {
+            newPrice = Float.valueOf(editExportBillItemPriceTextField.getText().replace(",", ""));
+        } catch (NumberFormatException e) {
+            showDiaglogMessage("Giá xuất phải là một số thực.");
+            return;
+        }
+
+        
+        Integer selectedInventoryId = Integer.valueOf(exportProductsBillTable.getValueAt(rightSelectedRow, EXPORT_BILL_ITEM_INVENTORY_ID).toString());
+        Integer foundInventoryItemIndex = IntStream
+                .range(0, inventoryItems.size())
+                .filter(index -> inventoryItems.get(index).getId().equals(selectedInventoryId))
+                .findFirst()
+                .orElse(-1);
+        InventoryItem foundInventoryItem = inventoryItems.get(foundInventoryItemIndex);
+
+        Float minExportPrice = foundInventoryItem.getImportPrice();
+        if (newPrice < minExportPrice) {
+            showDiaglogMessage("Giá xuất phải lớn hơn hoặc bằng giá nhập.");
+            return;
+        }
+
+        
+        Integer maxQuantity = foundInventoryItem.getQuantity();
+        int prevQuantity = Integer.parseInt(exportProductsBillTable.getValueAt(rightSelectedRow, EXPORT_BILL_ITEM_QUANTITY).toString());
+        int change = newQuantity - prevQuantity;
+        if (change > maxQuantity) {
+            showDiaglogMessage("Số lượng trong kho không đủ, vui lòng nhập một giá trị nhỏ hơn hoặc bằng " + (prevQuantity + maxQuantity));
+            return;
+        }
+
+        
+        foundInventoryItem.setQuantity(maxQuantity - change);
+        inventoryItems.set(foundInventoryItemIndex, foundInventoryItem);
+                
+        int foundExportBillItemIndex = IntStream.range(0, exportBill.getExportBillItems().size())
+                .filter(index -> exportBill.getExportBillItems().get(index).getInventoryItem().getId().equals(selectedInventoryId))
+                .findFirst()
+                .orElse(-1);
+        ExportBillItem selectedExportBillItem = exportBill.getExportBillItems().get(foundExportBillItemIndex);
+        selectedExportBillItem.setQuantity(newQuantity);
+        selectedExportBillItem.setExportPrice(newPrice);
+        exportBill.getExportBillItems().set(foundExportBillItemIndex, selectedExportBillItem);
+
+        
+        editExportBillItemDiaglog.dispose();
+        showDiaglogMessage("Cập nhật thành công.");
+        loadDataToExportInStockProductsTable(inventoryItems);
+        loadDataToExportProductsBillTable(exportBill);
+    }//GEN-LAST:event_editExportBillItemDiaglogButtonActionPerformed
+
+    private void cancelEditExportBillItemDiaglogButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelEditExportBillItemDiaglogButtonActionPerformed
+        editExportBillItemDiaglog.dispose();
+    }//GEN-LAST:event_cancelEditExportBillItemDiaglogButtonActionPerformed
+
+    private void editExportBillItemQuantityTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editExportBillItemQuantityTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_editExportBillItemQuantityTextFieldActionPerformed
+
+    private void editExportBillItemProductNameTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editExportBillItemProductNameTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_editExportBillItemProductNameTextFieldActionPerformed
+
+    private void editExportBillItemProductIdTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editExportBillItemProductIdTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_editExportBillItemProductIdTextFieldActionPerformed
+
+    private void editExportBillItemIndexTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editExportBillItemIndexTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_editExportBillItemIndexTextFieldActionPerformed
+
+    private void editExportBillItemInventoryIdTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editExportBillItemInventoryIdTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_editExportBillItemInventoryIdTextFieldActionPerformed
 
     private void showViewImportBillDetailDiaglog(int selectedRow) {
         viewImportBillDetailDiaglog.setVisible(true);
@@ -6975,6 +7263,7 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JButton cancelDeleteProduct;
     private javax.swing.JButton cancelDeleteProvider;
     private javax.swing.JButton cancelDeleteUser;
+    private javax.swing.JButton cancelEditExportBillItemDiaglogButton;
     private javax.swing.JButton cancelEditImportBillItemDiaglogButton;
     private javax.swing.JButton cancelEditProductDiaglogButton;
     private javax.swing.JButton cancelEditProviderDiaglogButton;
@@ -7028,6 +7317,21 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JLabel editEmailLabel;
     private javax.swing.JTextField editEmailTextField;
     private javax.swing.JButton editExportBillItemButton;
+    private javax.swing.JDialog editExportBillItemDiaglog;
+    private javax.swing.JButton editExportBillItemDiaglogButton;
+    private javax.swing.JPanel editExportBillItemDiaglogPanel;
+    private javax.swing.JLabel editExportBillItemIndexLabel;
+    private javax.swing.JTextField editExportBillItemIndexTextField;
+    private javax.swing.JLabel editExportBillItemInventoryIdLabel;
+    private javax.swing.JTextField editExportBillItemInventoryIdTextField;
+    private javax.swing.JLabel editExportBillItemPriceLabel;
+    private javax.swing.JTextField editExportBillItemPriceTextField;
+    private javax.swing.JLabel editExportBillItemProductIdLabel;
+    private javax.swing.JTextField editExportBillItemProductIdTextField;
+    private javax.swing.JLabel editExportBillItemProductNameLabel;
+    private javax.swing.JTextField editExportBillItemProductNameTextField;
+    private javax.swing.JLabel editExportBillItemQuantityLabel;
+    private javax.swing.JTextField editExportBillItemQuantityTextField;
     private javax.swing.JLabel editFirstNameLabel;
     private javax.swing.JTextField editFirstNameTextField;
     private javax.swing.JButton editImportBillButton;
@@ -7169,6 +7473,7 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
+    private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel8;
