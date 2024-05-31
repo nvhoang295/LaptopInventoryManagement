@@ -21,10 +21,14 @@ import java.util.Optional;
  * @author vieth
  */
 public class ProductRepositoryImpl implements ProductRepository {
-
+    
+    private final ApplicationContext applicationContext;
+    
     private final String ABS_DATA_PATH;
 
-    public ProductRepositoryImpl() {
+    public ProductRepositoryImpl(ApplicationContext applicationContext) {
+        this.applicationContext = applicationContext;
+        
         ABS_DATA_PATH = new ApplicationContext().ABS_PRODUCTS_DATA_PATH;
 
         initCounter();

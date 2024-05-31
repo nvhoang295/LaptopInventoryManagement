@@ -20,9 +20,9 @@ import java.util.Map;
 public class ApplicationContext {
 
     // MEDIUM PRIORITY
-    private static final UserRepository userRepository = new UserRepositoryImpl();
-    private static final ProductRepository productRepository = new ProductRepositoryImpl();
-    private static final ProviderRepository providerRepository = new ProviderRepositoryImpl();
+//    private static final UserRepository userRepository = new UserRepositoryImpl();
+//    private static final ProductRepository productRepository = new ProductRepositoryImpl();
+//    private static final ProviderRepository providerRepository = new ProviderRepositoryImpl();
     
     private static final Map<String, Object> beans = new HashMap<>();
     private static User loginedUser;

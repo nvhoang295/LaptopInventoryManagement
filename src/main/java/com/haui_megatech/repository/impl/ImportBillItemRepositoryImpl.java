@@ -21,10 +21,14 @@ import com.haui_megatech.repository.ImportBillItemRepository;
  * @author vieth
  */
 public class ImportBillItemRepositoryImpl implements ImportBillItemRepository {
-
+    
+    private final ApplicationContext applicationContext;
+    
     private final String ABS_DATA_PATH;
     
-    public ImportBillItemRepositoryImpl() {
+    public ImportBillItemRepositoryImpl(ApplicationContext applicationContext) {
+        this.applicationContext = applicationContext;
+        
         ABS_DATA_PATH = new ApplicationContext().ABS_IMPORT_BILL_ITEMS_DATA_PATH;
         
         initCounter();

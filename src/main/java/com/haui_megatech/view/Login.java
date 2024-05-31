@@ -8,7 +8,9 @@ import com.haui_megatech.ApplicationContext;
 import com.haui_megatech.controller.AuthController;
 import com.haui_megatech.dto.AuthRequestDTO;
 import com.haui_megatech.dto.CommonResponseDTO;
+import com.haui_megatech.repository.UserRepository;
 import com.haui_megatech.repository.impl.UserRepositoryImpl;
+import com.haui_megatech.service.AuthService;
 import com.haui_megatech.service.impl.AuthServiceImpl;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
@@ -18,11 +20,12 @@ import javax.swing.UnsupportedLookAndFeelException;
  * @author caoth
  */
 public class Login extends javax.swing.JFrame {
-    private final AuthController authController = new AuthController(
-            new AuthServiceImpl(
-                    new UserRepositoryImpl()
-            )
-    );
+    
+    private final ApplicationContext applicationContext = new ApplicationContext();
+    
+    private final UserRepository userRepository = new UserRepositoryImpl(applicationContext);
+    private final AuthService authService = new AuthServiceImpl(userRepository);
+    private final AuthController authController = new AuthController(authService);
     
     
     /**

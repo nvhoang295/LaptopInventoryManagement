@@ -22,9 +22,13 @@ import java.util.Optional;
  */
 public class ProviderRepositoryImpl implements ProviderRepository {
 
+    private final ApplicationContext applicationContext;
+    
     private final String ABS_DATA_PATH;
 
-    public ProviderRepositoryImpl() {
+    public ProviderRepositoryImpl(ApplicationContext applicationContext) {
+        this.applicationContext = applicationContext;
+        
         ABS_DATA_PATH = new ApplicationContext().ABS_PROVIDERS_DATA_PATH;
 
         initCounter();

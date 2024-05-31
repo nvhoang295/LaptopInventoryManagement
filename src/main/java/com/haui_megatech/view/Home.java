@@ -68,24 +68,26 @@ public class Home extends javax.swing.JFrame {
     private final int IMPORT_BILL_ITEM_PRICE_COL_INDEX = 4;
 
     private ImportBill importBill;
-
-    private final UserRepository userRepository = new UserRepositoryImpl();
+    
+    private final ApplicationContext applicationContext = new ApplicationContext();
+    
+    private final UserRepository userRepository = new UserRepositoryImpl(applicationContext);
     private final UserService userService = new UserServiceImpl(userRepository);
     private final UserController userController = new UserController(userService);
 
-    private final ProductRepository productRepository = new ProductRepositoryImpl();
+    private final ProductRepository productRepository = new ProductRepositoryImpl(applicationContext);
     private final ProductService productService = new ProductServiceImpl(productRepository);
     private final ProductController productController = new ProductController(productService);
 
-    private final ProviderRepository providerRepository = new ProviderRepositoryImpl();
+    private final ProviderRepository providerRepository = new ProviderRepositoryImpl(applicationContext);
     private final ProviderService providerService = new ProviderServiceImpl(providerRepository);
     private final ProviderController providerController = new ProviderController(providerService);
 
-    private final ImportBillItemRepository importBillItemRepository = new ImportBillItemRepositoryImpl();
+    private final ImportBillItemRepository importBillItemRepository = new ImportBillItemRepositoryImpl(applicationContext);
     private final ImportBillItemService importBillItemService = new ImportBillItemServiceImpl(importBillItemRepository);
     private final ImportBillItemController importBillItemController = new ImportBillItemController(importBillItemService);
 
-    private final ImportBillRepository importBillRepository = new ImportBillRepositoryImpl();
+    private final ImportBillRepository importBillRepository = new ImportBillRepositoryImpl(applicationContext);
     private final ImportBillService importBillService = new ImportBillServiceImpl(
             importBillRepository,
             importBillItemRepository,
