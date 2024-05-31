@@ -46,4 +46,9 @@ public class ErrorMessage {
         public static final String NOT_FOUND = "Không tìm thấy nhà cung cấp.";
         public static final String BLANK_INPUT = "Vui lòng nhập đầy đủ tất cả các trường thuộc tính";
     }
+    
+    public static final class InventoryItem {
+        public static final String SAVE = "Lưu kho hàng thất bại.";
+        public static final String NOT_FOUND = "Không tìm thấy sản phẩm trong kho.";
+    }
 }

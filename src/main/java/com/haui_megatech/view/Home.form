@@ -5132,10 +5132,14 @@
                       <Component id="importProductScrollPanel" max="32767" attributes="0"/>
                       <Component id="searchImportProductPanel" max="32767" attributes="0"/>
                       <Group type="102" attributes="0">
+                          <Component id="importProductQuantityLabel1" min="-2" pref="76" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="importProductQuantityTextField1" min="-2" pref="48" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
                           <Component id="importProductQuantityLabel" min="-2" pref="76" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="importProductQuantityTextField" min="-2" pref="84" max="-2" attributes="0"/>
-                          <EmptySpace max="32767" attributes="0"/>
+                          <Component id="importProductQuantityTextField" max="32767" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="importProductAddButton" min="-2" pref="113" max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -5182,48 +5186,62 @@
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Component id="searchImportProductPanel" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Component id="importProductScrollPanel" min="-2" pref="614" max="-2" attributes="0"/>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="importProductAddButton" alignment="3" min="-2" pref="36" max="-2" attributes="0"/>
-                      <Component id="importProductQuantityTextField" alignment="3" min="-2" pref="36" max="-2" attributes="0"/>
-                      <Component id="importProductQuantityLabel" alignment="3" min="-2" pref="36" max="-2" attributes="0"/>
-                      <Component id="totalImportBillLabel" alignment="3" min="-2" pref="36" max="-2" attributes="0"/>
-                      <Component id="totalValueLabel" alignment="3" min="-2" pref="36" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace max="32767" attributes="0"/>
-              </Group>
               <Group type="102" alignment="1" attributes="0">
-                  <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="importBillIdLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="importBillIdTextField" alignment="3" min="-2" pref="36" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="1" attributes="0">
+                      <Group type="102" attributes="0">
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="searchImportProductPanel" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Component id="importProductScrollPanel" min="-2" pref="614" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" attributes="0">
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="totalImportBillLabel" alignment="3" min="-2" pref="36" max="-2" attributes="0"/>
+                                      <Component id="totalValueLabel" alignment="3" min="-2" pref="36" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace max="32767" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="1" attributes="0">
+                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="importProductQuantityTextField" alignment="3" min="-2" pref="36" max="-2" attributes="0"/>
+                                      <Component id="importProductQuantityTextField1" alignment="3" min="-2" pref="36" max="-2" attributes="0"/>
+                                      <Component id="importProductQuantityLabel" alignment="3" min="-2" pref="36" max="-2" attributes="0"/>
+                                      <Component id="importProductQuantityLabel1" alignment="3" min="-2" pref="36" max="-2" attributes="0"/>
+                                      <Component id="importProductAddButton" alignment="3" min="-2" pref="36" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                          </Group>
+                      </Group>
+                      <Group type="102" attributes="0">
+                          <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="importBillIdLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="importBillIdTextField" alignment="3" min="-2" pref="36" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="providerNameLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="providerNameComboBox" alignment="3" min="-2" pref="36" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="importProductBillCreatorTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="importProductBillCreatorLabel" alignment="3" min="-2" pref="36" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Component id="importProductBillScrollPane" min="-2" pref="498" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="removeBillItemButton" alignment="3" min="-2" pref="36" max="-2" attributes="0"/>
+                              <Component id="editBillItemButton" alignment="3" min="-2" pref="36" max="-2" attributes="0"/>
+                              <Component id="importBillItemFromExcelButton" alignment="3" min="-2" pref="36" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Component id="importBillProductButton" min="-2" pref="36" max="-2" attributes="0"/>
+                      </Group>
                   </Group>
-                  <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="providerNameLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="providerNameComboBox" alignment="3" min="-2" pref="36" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="importProductBillCreatorTextField" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="importProductBillCreatorLabel" alignment="3" min="-2" pref="36" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Component id="importProductBillScrollPane" min="-2" pref="498" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="removeBillItemButton" alignment="3" min="-2" pref="36" max="-2" attributes="0"/>
-                      <Component id="editBillItemButton" alignment="3" min="-2" pref="36" max="-2" attributes="0"/>
-                      <Component id="importBillItemFromExcelButton" alignment="3" min="-2" pref="36" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Component id="importBillProductButton" min="-2" pref="36" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="58" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="57" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -5345,7 +5363,7 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="16" style="0"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="S&#x1ed1; L&#x1b0;&#x1ee3;ng: "/>
+            <Property name="text" type="java.lang.String" value="&#x110;&#x1a1;n gi&#xe1;"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="importProductQuantityTextField">
@@ -5572,6 +5590,25 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Nh&#x1ead;p h&#xe0;ng"/>
             <Property name="borderPainted" type="boolean" value="false"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="importProductQuantityTextField1">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="16" style="0"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="10"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="importProductQuantityTextField1ActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JLabel" name="importProductQuantityLabel1">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="16" style="0"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="S&#x1ed1; L&#x1b0;&#x1ee3;ng: "/>
           </Properties>
         </Component>
       </SubComponents>
