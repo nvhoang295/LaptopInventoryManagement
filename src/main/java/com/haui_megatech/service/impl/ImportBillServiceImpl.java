@@ -9,8 +9,10 @@ import com.haui_megatech.constant.SuccessMessage;
 import com.haui_megatech.dto.CommonResponseDTO;
 import com.haui_megatech.model.ImportBill;
 import com.haui_megatech.model.ImportBillItem;
+import com.haui_megatech.model.InventoryItem;
 import com.haui_megatech.repository.ImportBillItemRepository;
 import com.haui_megatech.repository.ImportBillRepository;
+import com.haui_megatech.repository.InventoryItemRepository;
 import com.haui_megatech.repository.ProviderRepository;
 import com.haui_megatech.service.ImportBillService;
 import java.util.ArrayList;
@@ -30,6 +32,7 @@ public class ImportBillServiceImpl implements ImportBillService {
     private final ImportBillRepository importBillRepository;
     private final ImportBillItemRepository importBillItemRepository;
     private final ProviderRepository providerRepository;
+    private final InventoryItemRepository inventoryItemRepository;
     
     @Override
     public CommonResponseDTO<List<ImportBill>> getList() {
@@ -65,6 +68,12 @@ public class ImportBillServiceImpl implements ImportBillService {
         
         item.getImportBillItems().forEach(billItem -> {
             importBillItemRepository.save(billItem);
+            inventoryItemRepository.save(InventoryItem
+                    .builder()
+                    .quantity(billItem.getQuantity())
+                    .importPrice(billItem.getImportPrice())
+                    .importBillItem(billItem)
+                    .build());
         });
         
         item.getProvider().getImportBills().add(item);

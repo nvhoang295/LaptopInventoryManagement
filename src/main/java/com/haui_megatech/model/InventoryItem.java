@@ -30,4 +30,6 @@ public class InventoryItem implements Serializable {
     private Integer id;
     private Integer quantity;
     private Float importPrice;
+    
+    private ImportBillItem importBillItem;
 }

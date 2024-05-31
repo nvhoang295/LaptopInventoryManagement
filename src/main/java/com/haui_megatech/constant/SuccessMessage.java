@@ -39,4 +39,10 @@ public class SuccessMessage {
         public static final String UPDATED = "Cập nhật hoá đơn nhập hàng thành công.";
         public static final String DELETE = "Xoá hoá đơn nhập hàng thành công.";
     }
+    
+    public static final class InventoryItem {
+        public static final String ADDED = "Thêm sản phẩm vào kho hàng thành công.";
+        public static final String UPDATED = "Cập nhật sản phẩm trong kho hàng thành công.";
+        public static final String DELETE = "Xoá sản phẩm trong kho hàng thành công.";
+    }
 }

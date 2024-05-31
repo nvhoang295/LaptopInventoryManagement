@@ -14,6 +14,7 @@ import com.haui_megatech.repository.*;
 import com.haui_megatech.repository.impl.*;
 import com.haui_megatech.service.ImportBillItemService;
 import com.haui_megatech.service.ImportBillService;
+import com.haui_megatech.service.InventoryItemService;
 import com.haui_megatech.service.ProductService;
 import com.haui_megatech.service.ProviderService;
 import com.haui_megatech.service.UserService;
@@ -69,31 +70,46 @@ public class Home extends javax.swing.JFrame {
 
     private ImportBill importBill;
     
+    
     private final ApplicationContext applicationContext = new ApplicationContext();
+    
     
     private final UserRepository userRepository = new UserRepositoryImpl(applicationContext);
     private final UserService userService = new UserServiceImpl(userRepository);
     private final UserController userController = new UserController(userService);
 
+    
     private final ProductRepository productRepository = new ProductRepositoryImpl(applicationContext);
     private final ProductService productService = new ProductServiceImpl(productRepository);
     private final ProductController productController = new ProductController(productService);
 
+    
     private final ProviderRepository providerRepository = new ProviderRepositoryImpl(applicationContext);
     private final ProviderService providerService = new ProviderServiceImpl(providerRepository);
     private final ProviderController providerController = new ProviderController(providerService);
 
+    
     private final ImportBillItemRepository importBillItemRepository = new ImportBillItemRepositoryImpl(applicationContext);
     private final ImportBillItemService importBillItemService = new ImportBillItemServiceImpl(importBillItemRepository);
     private final ImportBillItemController importBillItemController = new ImportBillItemController(importBillItemService);
 
+    
+    private final InventoryItemRepository inventoryItemRepository = new InventoryItemRepositoryImpl(applicationContext);
+    private final InventoryItemService inventoryItemService = new InventoryItemServiceImpl(inventoryItemRepository);
+    private final InventoryItemController inventoryItemController = new InventoryItemController(inventoryItemService);
+    
+    
     private final ImportBillRepository importBillRepository = new ImportBillRepositoryImpl(applicationContext);
     private final ImportBillService importBillService = new ImportBillServiceImpl(
             importBillRepository,
             importBillItemRepository,
-            providerRepository
+            providerRepository,
+            inventoryItemRepository
     );
     private final ImportBillController importBillController = new ImportBillController(importBillService);
+    
+    
+
 
     /**
      * Creates new form Home
@@ -399,19 +415,19 @@ public class Home extends javax.swing.JFrame {
             }
         };
         
-        List<ImportBillItem> items = keyword != null && !keyword.isEmpty() && !keyword.isBlank()
-                ? importBillItemController.searchList(keyword).data()
-                : importBillItemController.getList().data();
+        List<InventoryItem> items = keyword != null && !keyword.isEmpty() && !keyword.isBlank()
+                ? inventoryItemController.searchList(keyword).data()
+                : inventoryItemController.getList().data();
 
         items.forEach(item -> {
             tableModel.addRow(
                     new Object[]{
                         item.getId(),
-                        item.getProduct().getId(),
-                        item.getProduct().getName(),
+                        item.getImportBillItem().getProduct().getId(),
+                        item.getImportBillItem().getProduct().getName(),
                         item.getQuantity(),
                         priceFormatter.format(item.getImportPrice()),
-                        formatter.format(item.getImportBill().getWhenCreated())
+                        formatter.format(item.getImportBillItem().getImportBill().getWhenCreated())
                     }
             );
         });
@@ -434,16 +450,16 @@ public class Home extends javax.swing.JFrame {
             }
         };
         
-        List<ImportBillItem> items = keyword != null && !keyword.isEmpty() && !keyword.isBlank()
-                ? importBillItemController.searchList(keyword).data()
-                : importBillItemController.getList().data();
+        List<InventoryItem> items = keyword != null && !keyword.isEmpty() && !keyword.isBlank()
+                ? inventoryItemController.searchList(keyword).data()
+                : inventoryItemController.getList().data();
 
         items.forEach(item -> {
             tableModel.addRow(
                     new Object[]{
                         item.getId(),
-                        item.getProduct().getId(),
-                        item.getProduct().getName(),
+                        item.getImportBillItem().getProduct().getId(),
+                        item.getImportBillItem().getProduct().getName(),
                         item.getQuantity(),
                         priceFormatter.format(item.getImportPrice()),
                     }
