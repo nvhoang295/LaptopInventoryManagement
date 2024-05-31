@@ -45,6 +45,10 @@ public class ApplicationContext {
     // provider
     public final String REL_PROVIDERS_DATA_PATH;
     public final String ABS_PROVIDERS_DATA_PATH;
+    
+    // import bill
+    public final String REL_IMPORT_BILLS_DATA_PATH;
+    public final String ABS_IMPORT_BILLS_DATA_PATH;
 
     public String getAbsUsersDataPath() {
         return ABS_USERS_DATA_PATH;
@@ -80,6 +84,9 @@ public class ApplicationContext {
         
         REL_PROVIDERS_DATA_PATH = REL_DATA_PATH_PREFIX + "/providers.dat";
         ABS_PROVIDERS_DATA_PATH = ABS_ROOT_PROJECT_PATH + REL_PROVIDERS_DATA_PATH;
+        
+        REL_IMPORT_BILLS_DATA_PATH = REL_DATA_PATH_PREFIX + "/import-bills.dat";
+        ABS_IMPORT_BILLS_DATA_PATH = ABS_ROOT_PROJECT_PATH + REL_IMPORT_BILLS_DATA_PATH;
 
     }
     

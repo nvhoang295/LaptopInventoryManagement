@@ -6,6 +6,7 @@ package com.haui_megatech.model;
 
 import java.io.Serial;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -43,4 +44,6 @@ public class Product implements Serializable {
     
     private Date whenCreated;
     private Date lastUpdated;
+    
+    private ArrayList<InventoryItem> inventoryItems;
 }

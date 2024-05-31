@@ -6,36 +6,33 @@ package com.haui_megatech.model;
 
 import java.io.Serial;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Date;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 /**
  *
  * @author vieth
  */
-@Getter
-@Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
-public class Provider implements Serializable {
+@Getter
+@Setter
+@ToString
+public class ImportBill implements Serializable {
     
     @Serial
     private static final long serialVersionUID = 1L;
     
     public static Integer counter;
-    private Integer id;
-    private String name;
-    private String phoneNumber;
-    private String email;
-    private String address;
-    private Date whenCreated;
-    private Date lastUpdated;
     
-    private ArrayList<ImportBill> importBills;
+    private Integer id;
+    private Float total;
+    private Date whenCreated;
+    
+    private User user;
+    private Provider provider;
 }

@@ -73,6 +73,7 @@ public class ProviderRepositoryImpl implements ProviderRepository {
 
         provider.setId(++Provider.counter);
         provider.setWhenCreated(new Date());
+        provider.setImportBills(new ArrayList<>());
         providers.add(provider);
 
         return this.saveToDisk(providers)

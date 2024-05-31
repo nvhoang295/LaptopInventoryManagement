@@ -266,6 +266,8 @@ public class ExcelUtil {
             cell.setCellValue("graphic_card");
             cell = row.createCell(7, CellType.STRING);
             cell.setCellValue("weight");
+            cell = row.createCell(8, CellType.STRING);
+            cell.setCellValue("in_stock");
 
             for (int i = 0; i < products.size(); i++) {
                 Product product = products.get(i);
@@ -279,6 +281,7 @@ public class ExcelUtil {
                 row.createCell(5).setCellValue(product.getBattery());
                 row.createCell(6).setCellValue(product.getCard());
                 row.createCell(7).setCellValue(product.getWeight());
+                row.createCell(8).setCellValue(product.getInventoryItems().size());
             }
             System.out.println(savedFilePath);
             try (FileOutputStream out = new FileOutputStream(new File(

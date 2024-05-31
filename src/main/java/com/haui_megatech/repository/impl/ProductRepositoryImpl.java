@@ -73,6 +73,7 @@ public class ProductRepositoryImpl implements ProductRepository {
 
         product.setId(++Product.counter);
         product.setWhenCreated(new Date());
+        product.setInventoryItems(new ArrayList<>());
         products.add(product);
 
         return this.saveToDisk(products)

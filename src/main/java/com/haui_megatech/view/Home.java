@@ -85,6 +85,7 @@ public class Home extends javax.swing.JFrame {
         
         usersTable.getTableHeader().setFont(tableHeaderFont);
         productsTable.getTableHeader().setFont(tableHeaderFont);
+        providersTable.getTableHeader().setFont(tableHeaderFont);
     }
 
     private void loadDataToTableUsers(String keyword) {
@@ -130,7 +131,8 @@ public class Home extends javax.swing.JFrame {
             "Bộ nhớ trong",
             "Màn hình",
             "Dung lượng pin",
-            "Card màn hình"
+            "Card màn hình",
+            "Tồn kho"
         };
         
         DefaultTableModel tableModel = new DefaultTableModel(null, tableHeader) {
@@ -154,7 +156,8 @@ public class Home extends javax.swing.JFrame {
                         item.getStorage() != null ? item.getStorage() : "",
                         item.getDisplay() != null ? item.getDisplay() : "",
                         item.getBattery() != null ? item.getBattery() : "",
-                        item.getCard() != null ? item.getCard() : ""
+                        item.getCard() != null ? item.getCard() : "",
+                        item.getInventoryItems().size()
                     }
             );
         });
@@ -167,7 +170,8 @@ public class Home extends javax.swing.JFrame {
             "Tên nhà cung cấp",
             "Số điện thoại",
             "Email",
-            "Địa chỉ"
+            "Địa chỉ",
+            "Số đơn đã nhập"
         };
         
         DefaultTableModel tableModel = new DefaultTableModel(null, tableHeader) {
@@ -188,7 +192,8 @@ public class Home extends javax.swing.JFrame {
                         item.getName() != null ? item.getName() : "",
                         item.getPhoneNumber() != null ? item.getPhoneNumber() : "",
                         item.getEmail() != null ? item.getEmail() : "",
-                        item.getAddress() != null ? item.getAddress() : ""
+                        item.getAddress() != null ? item.getAddress() : "",
+                        item.getImportBills().size()
                     }
             );
         });
