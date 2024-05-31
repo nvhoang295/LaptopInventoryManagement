@@ -51,4 +51,9 @@ public class ErrorMessage {
         public static final String SAVE = "Lưu kho hàng thất bại.";
         public static final String NOT_FOUND = "Không tìm thấy sản phẩm trong kho.";
     }
+    
+    public static final class ImportBill {
+        public static final String SAVE = "Lưu phiếu nhập hàng thất bại.";
+        public static final String NOT_FOUND = "Không tìm thấy phiếu nhập.";
+    }
 }

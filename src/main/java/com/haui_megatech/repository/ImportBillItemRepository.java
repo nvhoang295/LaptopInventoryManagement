@@ -16,9 +16,9 @@ public interface ImportBillItemRepository {
     
     Optional<ImportBillItem> findById(Integer id);
     
-    Optional<ImportBillItem> save(ImportBillItem inventoryItem);
+    Optional<ImportBillItem> save(ImportBillItem item);
     
-    ArrayList<ImportBillItem> saveAll(ArrayList<ImportBillItem> inventoryItems);
+    ArrayList<ImportBillItem> saveAll(ArrayList<ImportBillItem> item);
     
     void deleteById(int id);
     

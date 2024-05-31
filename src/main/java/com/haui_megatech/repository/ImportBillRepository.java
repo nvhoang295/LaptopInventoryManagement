@@ -18,8 +18,6 @@ public interface ImportBillRepository {
     
     Optional<ImportBill> save(ImportBill importBill);
     
-    ArrayList<ImportBill> saveAll(ArrayList<ImportBill> importBills);
-    
     void deleteById(int id);
     
     ArrayList<ImportBill> getAll();

@@ -59,23 +59,23 @@ public class ImportBillItemRepositoryImpl implements ImportBillItemRepository {
     }
 
     @Override
-    public Optional<ImportBillItem> save(ImportBillItem inventoryItem) {
+    public Optional<ImportBillItem> save(ImportBillItem item) {
         ArrayList<ImportBillItem> items = this.getAll();
-        if (inventoryItem.getId() != null) {
-            int foundIndex = this.findIndexById(inventoryItem.getId());
+        if (item.getId() != null) {
+            int foundIndex = this.findIndexById(item.getId());
             ImportBillItem foundItem = items.get(foundIndex);
-            update(foundItem, inventoryItem);
+            update(foundItem, item);
             items.set(foundIndex, foundItem);
             return this.saveToDisk(items)
                     ? Optional.of(foundItem)
                     : Optional.empty();
         }
 
-        inventoryItem.setId(++ImportBillItem.counter);
-        items.add(inventoryItem);
+        item.setId(++ImportBillItem.counter);
+        items.add(item);
 
         return this.saveToDisk(items)
-                ? Optional.of(inventoryItem)
+                ? Optional.of(item)
                 : Optional.empty();
     }
     
@@ -93,9 +93,9 @@ public class ImportBillItemRepositoryImpl implements ImportBillItemRepository {
     }
 
     @Override
-    public ArrayList<ImportBillItem> saveAll(ArrayList<ImportBillItem> inventoryItems) {
+    public ArrayList<ImportBillItem> saveAll(ArrayList<ImportBillItem> items) {
         ArrayList<ImportBillItem> savedItems = new ArrayList<>();
-        inventoryItems.forEach(item -> {
+        items.forEach(item -> {
             Optional<ImportBillItem> savedItem = this.save(item);
             if (savedItem.isPresent()) {
                 savedItems.add(savedItem.get());

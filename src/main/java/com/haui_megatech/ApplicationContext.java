@@ -96,8 +96,8 @@ public class ApplicationContext {
         REL_IMPORT_BILLS_DATA_PATH = REL_DATA_PATH_PREFIX + "/import-bills.dat";
         ABS_IMPORT_BILLS_DATA_PATH = ABS_ROOT_PROJECT_PATH + REL_IMPORT_BILLS_DATA_PATH;
         
-        // inventory items
-        REL_IMPORT_BILL_ITEMS_DATA_PATH = REL_DATA_PATH_PREFIX + "/inventory-items.dat";
+        // import bill items
+        REL_IMPORT_BILL_ITEMS_DATA_PATH = REL_DATA_PATH_PREFIX + "/import-bill-items.dat";
         ABS_IMPORT_BILL_ITEMS_DATA_PATH = ABS_ROOT_PROJECT_PATH + REL_IMPORT_BILL_ITEMS_DATA_PATH;
     }
     
