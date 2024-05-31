@@ -413,7 +413,7 @@ public class Home extends javax.swing.JFrame {
                     }
             );
         });
-        exportInStockProductsTable.setModel(tableModel);
+        inStocksTable.setModel(tableModel);
     }
     
     private void loadDataToExportInStockProductsTable(String keyword) {
@@ -1523,7 +1523,6 @@ public class Home extends javax.swing.JFrame {
         editProductDiaglog.setTitle("Cập nhật sản phẩm");
         editProductDiaglog.setBackground(new java.awt.Color(255, 255, 255));
         editProductDiaglog.setMinimumSize(new java.awt.Dimension(450, 540));
-        editProductDiaglog.setPreferredSize(new java.awt.Dimension(450, 540));
         editProductDiaglog.setSize(new java.awt.Dimension(450, 540));
 
         editProductDiaglogPanel.setBackground(new java.awt.Color(255, 255, 255));
@@ -2063,7 +2062,6 @@ public class Home extends javax.swing.JFrame {
         addProviderDiaglog.setTitle("Thêm nhà cung cấp");
         addProviderDiaglog.setBackground(new java.awt.Color(255, 255, 255));
         addProviderDiaglog.setMinimumSize(new java.awt.Dimension(450, 320));
-        addProviderDiaglog.setPreferredSize(new java.awt.Dimension(450, 320));
         addProviderDiaglog.setSize(new java.awt.Dimension(450, 320));
 
         addProductDiaglogPanel1.setBackground(new java.awt.Color(255, 255, 255));
@@ -2163,7 +2161,6 @@ public class Home extends javax.swing.JFrame {
         viewProviderDiaglog.setTitle("Thông tin nhà cung cấp");
         viewProviderDiaglog.setBackground(new java.awt.Color(255, 255, 255));
         viewProviderDiaglog.setMinimumSize(new java.awt.Dimension(450, 430));
-        viewProviderDiaglog.setPreferredSize(new java.awt.Dimension(450, 430));
         viewProviderDiaglog.setSize(new java.awt.Dimension(450, 430));
 
         viewProviderDiaglogPanel.setBackground(new java.awt.Color(255, 255, 255));
@@ -2339,7 +2336,6 @@ public class Home extends javax.swing.JFrame {
         editProviderDiaglog.setTitle("Cập nhật nhà cung cấp");
         editProviderDiaglog.setBackground(new java.awt.Color(255, 255, 255));
         editProviderDiaglog.setMinimumSize(new java.awt.Dimension(450, 350));
-        editProviderDiaglog.setPreferredSize(new java.awt.Dimension(450, 350));
         editProviderDiaglog.setSize(new java.awt.Dimension(450, 350));
 
         editProviderDiaglogPanel.setBackground(new java.awt.Color(255, 255, 255));
@@ -2691,7 +2687,6 @@ public class Home extends javax.swing.JFrame {
         );
 
         viewImportBillDetailDiaglog.setMinimumSize(new java.awt.Dimension(880, 520));
-        viewImportBillDetailDiaglog.setPreferredSize(new java.awt.Dimension(880, 520));
         viewImportBillDetailDiaglog.setSize(new java.awt.Dimension(880, 520));
 
         viewImportBillDetailPanel.setBackground(new java.awt.Color(255, 255, 255));
@@ -3970,7 +3965,7 @@ public class Home extends javax.swing.JFrame {
                         .addComponent(searchImportProductPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(importProductScrollPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 607, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(importProductPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(importProductPriceTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(importProductQuantityTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -6606,11 +6601,13 @@ public class Home extends javax.swing.JFrame {
     }//GEN-LAST:event_exportProductAddButtonActionPerformed
 
     private void searchExportProductRefreshButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchExportProductRefreshButtonActionPerformed
-        // TODO add your handling code here:
+        searchExportProductTextField.setText("");
+        loadDataToExportInStockProductsTable(null);
     }//GEN-LAST:event_searchExportProductRefreshButtonActionPerformed
 
     private void searchExportProductTextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchExportProductTextFieldKeyReleased
-        // TODO add your handling code here:
+        String keyword = searchExportProductTextField.getText();
+        loadDataToExportInStockProductsTable(keyword);
     }//GEN-LAST:event_searchExportProductTextFieldKeyReleased
     
     private void showViewImportBillDetailDiaglog(int selectedRow) {

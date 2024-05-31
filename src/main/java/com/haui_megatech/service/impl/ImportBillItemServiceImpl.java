@@ -43,6 +43,7 @@ public class ImportBillItemServiceImpl implements ImportBillItemService {
                         .filter(item -> {
                             return new StringBuilder()
                                     .append(item.getImportPrice())
+                                    .append(item.getProduct().getName())
                                     .append(item.getQuantity())
                                     .toString().toLowerCase()
                                     .contains(keyword.toLowerCase());
