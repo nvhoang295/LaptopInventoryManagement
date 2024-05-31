@@ -30,6 +30,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.IntStream;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
@@ -68,38 +69,36 @@ public class Home extends javax.swing.JFrame {
     private final int IMPORT_BILL_ITEM_QUANTITY_COL_INDEX = 3;
     private final int IMPORT_BILL_ITEM_PRICE_COL_INDEX = 4;
 
+    private final int EXPORT_BILL_ITEM_PRODUCT_ID_COL_INDEX = 1;
+    private final int EXPORT_BILL_ITEM_PRODUCT_NAME_COL_INDEX = 2;
+    private final int EXPORT_BILL_ITEM_QUANTITY_COL_INDEX = 3;
+    private final int EXPORT_BILL_ITEM_PRICE_COL_INDEX = 4;
+
     private ImportBill importBill;
     private ExportBill exportBill;
-    
-    
+
     private final ApplicationContext applicationContext = new ApplicationContext();
-    
-    
+
     private final UserRepository userRepository = new UserRepositoryImpl(applicationContext);
     private final UserService userService = new UserServiceImpl(userRepository);
     private final UserController userController = new UserController(userService);
 
-    
     private final ProductRepository productRepository = new ProductRepositoryImpl(applicationContext);
     private final ProductService productService = new ProductServiceImpl(productRepository);
     private final ProductController productController = new ProductController(productService);
 
-    
     private final ProviderRepository providerRepository = new ProviderRepositoryImpl(applicationContext);
     private final ProviderService providerService = new ProviderServiceImpl(providerRepository);
     private final ProviderController providerController = new ProviderController(providerService);
 
-    
     private final ImportBillItemRepository importBillItemRepository = new ImportBillItemRepositoryImpl(applicationContext);
     private final ImportBillItemService importBillItemService = new ImportBillItemServiceImpl(importBillItemRepository);
     private final ImportBillItemController importBillItemController = new ImportBillItemController(importBillItemService);
 
-    
     private final InventoryItemRepository inventoryItemRepository = new InventoryItemRepositoryImpl(applicationContext);
     private final InventoryItemService inventoryItemService = new InventoryItemServiceImpl(inventoryItemRepository);
     private final InventoryItemController inventoryItemController = new InventoryItemController(inventoryItemService);
-    
-    
+
     private final ImportBillRepository importBillRepository = new ImportBillRepositoryImpl(applicationContext);
     private final ImportBillService importBillService = new ImportBillServiceImpl(
             importBillRepository,
@@ -108,10 +107,14 @@ public class Home extends javax.swing.JFrame {
             inventoryItemRepository
     );
     private final ImportBillController importBillController = new ImportBillController(importBillService);
+        
     
     
-
-
+    
+    private List<InventoryItem> inventoryItems;
+    
+    
+    
     /**
      * Creates new form Home
      */
@@ -125,8 +128,10 @@ public class Home extends javax.swing.JFrame {
         this.loginedUsername.setText(ApplicationContext.getLoginedUser().getUsername());
 
         importProductBillCreatorLabel.setText(ApplicationContext.getLoginedUser().getUsername());
+        exportProductBillCreatorLabel.setText(ApplicationContext.getLoginedUser().getUsername());
 
         initImportBill();
+        initExportBill();
 
         usersTable.getTableHeader().setFont(tableHeaderFont);
         productsTable.getTableHeader().setFont(tableHeaderFont);
@@ -136,14 +141,23 @@ public class Home extends javax.swing.JFrame {
         importBillsTable.getTableHeader().setFont(tableHeaderFont);
         viewImportBillDetailItemsTable.getTableHeader().setFont(tableHeaderFont);
         exportInStockProductsTable.getTableHeader().setFont(tableHeaderFont);
-        
+        exportProductsBillTable.getTableHeader().setFont(tableHeaderFont);
+
         loadDataToProvidersNameCombobox();
+        
+        inventoryItems = inventoryItemController.getList().data();
     }
 
     private void initImportBill() {
         importBill = new ImportBill();
         importBill.setImportBillItems(new ArrayList<>());
         importBill.setUser(ApplicationContext.getLoginedUser());
+    }
+
+    private void initExportBill() {
+        exportBill = new ExportBill();
+        exportBill.setExportBillItems(new ArrayList<>());
+        exportBill.setUser(ApplicationContext.getLoginedUser());
     }
 
     private void loadDataToTableUsers(String keyword) {
@@ -188,8 +202,7 @@ public class Home extends javax.swing.JFrame {
             "Bộ nhớ trong",
             "Màn hình",
             "Dung lượng pin",
-            "Card màn hình",
-        };
+            "Card màn hình",};
 
         DefaultTableModel tableModel = new DefaultTableModel(null, tableHeader) {
             @Override
@@ -212,8 +225,7 @@ public class Home extends javax.swing.JFrame {
                         item.getStorage() != null ? item.getStorage() : "",
                         item.getDisplay() != null ? item.getDisplay() : "",
                         item.getBattery() != null ? item.getBattery() : "",
-                        item.getCard() != null ? item.getCard() : "",
-                    }
+                        item.getCard() != null ? item.getCard() : "",}
             );
         });
         productsTable.setModel(tableModel);
@@ -258,8 +270,7 @@ public class Home extends javax.swing.JFrame {
     private void loadDataToTableImportProducts(String keyword) {
         String[] tableHeader = {
             "ID",
-            "Tên sản phẩm",
-        };
+            "Tên sản phẩm",};
 
         DefaultTableModel tableModel = new DefaultTableModel(null, tableHeader) {
             @Override
@@ -291,7 +302,7 @@ public class Home extends javax.swing.JFrame {
         });
     }
 
-    private void loadImportBillItems(ImportBill importBill) {
+    private void loadDataToImportProductBillTable(ImportBill importBill) {
         String[] tableHeader = {
             "STT",
             "Mã sản phẩm",
@@ -364,7 +375,7 @@ public class Home extends javax.swing.JFrame {
         });
         importBillsTable.setModel(tableModel);
     }
-    
+
     private void loadDataToViewImportBillDetailItems(ImportBill importBill) {
         String[] tableHeader = {
             "STT",
@@ -395,10 +406,10 @@ public class Home extends javax.swing.JFrame {
                     }
             );
         }
-        
+
         viewImportBillDetailItemsTable.setModel(tableModel);
     }
-    
+
     private void loadDataToInStocksTable(String keyword) {
         String[] tableHeader = {
             "STT",
@@ -408,19 +419,15 @@ public class Home extends javax.swing.JFrame {
             "Giá nhập",
             "Ngày nhập"
         };
-        
+
         DefaultTableModel tableModel = new DefaultTableModel(null, tableHeader) {
             @Override
             public boolean isCellEditable(int row, int column) {
                 return false;
             }
         };
-        
-        List<InventoryItem> items = keyword != null && !keyword.isEmpty() && !keyword.isBlank()
-                ? inventoryItemController.searchList(keyword).data()
-                : inventoryItemController.getList().data();
 
-        items.forEach(item -> {
+        inventoryItems.forEach(item -> {
             tableModel.addRow(
                     new Object[]{
                         item.getId(),
@@ -434,26 +441,22 @@ public class Home extends javax.swing.JFrame {
         });
         inStocksTable.setModel(tableModel);
     }
-    
-    private void loadDataToExportInStockProductsTable(String keyword) {
+
+    private void loadDataToExportInStockProductsTable(List<InventoryItem> items) {
         String[] tableHeader = {
             "ID",
             "Mã sản phẩm",
             "Tên sản phẩm",
             "Trong kho",
-            "Giá nhập",
+            "Giá nhập"
         };
-        
+
         DefaultTableModel tableModel = new DefaultTableModel(null, tableHeader) {
             @Override
             public boolean isCellEditable(int row, int column) {
                 return false;
             }
         };
-        
-        List<InventoryItem> items = keyword != null && !keyword.isEmpty() && !keyword.isBlank()
-                ? inventoryItemController.searchList(keyword).data()
-                : inventoryItemController.getList().data();
 
         items.forEach(item -> {
             tableModel.addRow(
@@ -462,11 +465,52 @@ public class Home extends javax.swing.JFrame {
                         item.getImportBillItem().getProduct().getId(),
                         item.getImportBillItem().getProduct().getName(),
                         item.getQuantity(),
-                        priceFormatter.format(item.getImportPrice()),
-                    }
+                        priceFormatter.format(item.getImportPrice()),}
             );
         });
         exportInStockProductsTable.setModel(tableModel);
+    }
+
+    private void loadDataToExportProductsBillTable(ExportBill exportBill) {
+        String[] tableHeader = {
+            "STT",
+            "Mã kho",
+            "Mã sản phẩm",
+            "Tên sản phẩm",
+            "Số lượng",
+            "Giá xuất",
+            "Thành tiền"
+        };
+
+        DefaultTableModel tableModel = new DefaultTableModel(null, tableHeader) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
+
+        for (int i = 1; i <= exportBill.getExportBillItems().size(); ++i) {
+            tableModel.addRow(
+                    new Object[]{
+                        i,
+                        exportBill.getExportBillItems().get(i - 1).getInventoryItem().getId(),
+                        exportBill.getExportBillItems().get(i - 1).getProduct().getId(),
+                        exportBill.getExportBillItems().get(i - 1).getProduct().getName(),
+                        exportBill.getExportBillItems().get(i - 1).getQuantity(),
+                        priceFormatter.format(exportBill.getExportBillItems().get(i - 1).getExportPrice()) + "đ",
+                        priceFormatter.format(exportBill.getExportBillItems().get(i - 1).getQuantity()
+                                * exportBill.getExportBillItems().get(i - 1).getExportPrice()) + "đ"
+                    }
+            );
+        }
+        exportProductsBillTable.setModel(tableModel);
+
+        totalExportPriceLabel.setText(priceFormatter.format(
+                exportBill.getExportBillItems()
+                        .parallelStream()
+                        .mapToDouble(item -> item.getExportPrice() * item.getQuantity())
+                        .sum()
+        ) + "đ");
     }
 
     /**
@@ -4251,6 +4295,7 @@ public class Home extends javax.swing.JFrame {
 
             }
         ));
+        exportInStockProductsTable.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         exportProductScrollPanel.setViewportView(exportInStockProductsTable);
 
         exportProductPriceLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
@@ -5201,25 +5246,23 @@ public class Home extends javax.swing.JFrame {
 
         final Integer finalQuantity = quantity;
         final Float finalPrice = price;
-        
-        System.out.println("finalQuantity: " + finalQuantity);
-        System.out.println("finalPrice: " + finalPrice);
-        
+
         importBill.getImportBillItems()
                 .addAll(selectedProducts
                         .stream()
                         .map(item -> ImportBillItem
-                                .builder()
-                                .product(item)
-                                .quantity(finalQuantity)
-                                .importPrice(finalPrice)
-                                .importBill(importBill)
-                                .build()
+                        .builder()
+                        .product(item)
+                        .quantity(finalQuantity)
+                        .importPrice(finalPrice)
+                        .importBill(importBill)
+                        .build()
                         )
                         .toList()
                 );
-
-        loadImportBillItems(importBill);
+        
+        
+        loadDataToImportProductBillTable(importBill);
     }//GEN-LAST:event_importProductAddButtonActionPerformed
 
     private void importUsersFromExcelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_importUsersFromExcelButtonActionPerformed
@@ -5539,7 +5582,7 @@ public class Home extends javax.swing.JFrame {
     private void exportProductLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exportProductLabelMouseClicked
         this.setActiveTab("export-product");
         this.setDisplayedPanel("export-product");
-        loadDataToExportInStockProductsTable(null);        
+        loadDataToExportInStockProductsTable(inventoryItems);
     }//GEN-LAST:event_exportProductLabelMouseClicked
 
     private void importBillTabMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_importBillTabMouseClicked
@@ -6368,8 +6411,6 @@ public class Home extends javax.swing.JFrame {
     }//GEN-LAST:event_searchImportProductTextFieldKeyReleased
 
     private void providerNameComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_providerNameComboBoxActionPerformed
-        System.out.println("Hello");
-        System.out.println(providerNameComboBox.getSelectedItem());
         Optional<Provider> found = providerController.findByName(providerNameComboBox.getSelectedItem().toString());
         found.ifPresent(item -> importBill.setProvider(item));
     }//GEN-LAST:event_providerNameComboBoxActionPerformed
@@ -6434,7 +6475,7 @@ public class Home extends javax.swing.JFrame {
 
         showDiaglogMessage("Cập nhật thành công.");
         editImportBillItemDiaglog.dispose();
-        loadImportBillItems(importBill);
+        loadDataToImportProductBillTable(importBill);
     }//GEN-LAST:event_editImportBillItemDiaglogButtonActionPerformed
 
     private void cancelEditImportBillItemDiaglogButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelEditImportBillItemDiaglogButtonActionPerformed
@@ -6482,7 +6523,7 @@ public class Home extends javax.swing.JFrame {
         int targetIndex = Integer.parseInt(importProductBillTable.getValueAt(rows[0], ID_COL_INDEX).toString()) - 1;
         importBill.getImportBillItems().remove(targetIndex);
 
-        loadImportBillItems(importBill);
+        loadDataToImportProductBillTable(importBill);
         deleteImportBillItemDiaglog.dispose();
         showDiaglogMessage("Xoá bản ghi thành công.");
 
@@ -6497,20 +6538,38 @@ public class Home extends javax.swing.JFrame {
             showDiaglogMessage("Vui lòng chọn nhà cung cấp.");
             return;
         }
-            
+
         float total = (float) importBill
-                        .getImportBillItems()
-                        .parallelStream()
-                        .mapToDouble(item -> item.getImportPrice() * item.getQuantity())
-                        .sum();
-        
+                .getImportBillItems()
+                .parallelStream()
+                .mapToDouble(item -> item.getImportPrice() * item.getQuantity())
+                .sum();
+
         importBill.setTotal(total);
-        System.out.println("Import bill total: " + importBill.getTotal());
 
         importBillController.addOne(importBill);
         showDiaglogMessage("Nhập sản phẩm thành công.");
+        
+        inventoryItems.addAll(
+                importBill.getImportBillItems()
+                        .parallelStream()
+                        .map(item -> InventoryItem
+                                .builder()
+                                .id(InventoryItem.counter)
+                                .importPrice(item.getImportPrice())
+                                .quantity(item.getQuantity())
+                                .importBillItem(item)
+                                .build()
+                        )
+                        .toList()
+        );
+        
         initImportBill();
         System.gc();
+        System.out.println(importBill.getImportBillItems().size());
+        providerNameComboBox.setSelectedIndex(0);
+        loadDataToImportProductBillTable(importBill);
+        loadDataToExportInStockProductsTable(inventoryItems);
     }//GEN-LAST:event_importBillProductButtonActionPerformed
 
     private void searchImportBillsTextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchImportBillsTextFieldKeyReleased
@@ -6547,7 +6606,7 @@ public class Home extends javax.swing.JFrame {
         deleteImportBillDiaglog.setLocationRelativeTo(this);
         deleteImportBillDiaglogLabel.setText(message);
     }
-    
+
     private void viewImportBillButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewImportBillButtonActionPerformed
         int[] rows = importBillsTable.getSelectedRows();
         if (rows.length == 0) {
@@ -6563,16 +6622,16 @@ public class Home extends javax.swing.JFrame {
 
     private void deleteImportBillDiaglogButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteImportBillDiaglogButtonActionPerformed
         int[] rows = importBillsTable.getSelectedRows();
-        
+
         for (int row : rows) {
             int id = Integer.parseInt(importBillsTable.getValueAt(row, ID_COL_INDEX).toString());
             importBillController.deleteOne(id);
         }
-        
+
         deleteImportBillDiaglog.dispose();
         loadDataToTableImportBills(null);
         showDiaglogMessage(String.format("Xoá thành công %d phiếu nhập.", rows.length));
-        
+
     }//GEN-LAST:event_deleteImportBillDiaglogButtonActionPerformed
 
     private void cancelDeleteImportBillDiaglogButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelDeleteImportBillDiaglogButtonActionPerformed
@@ -6616,26 +6675,109 @@ public class Home extends javax.swing.JFrame {
     }//GEN-LAST:event_editExportBillItemButtonActionPerformed
 
     private void exportProductAddButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exportProductAddButtonActionPerformed
-        // TODO add your handling code here:
+        int[] rows = exportInStockProductsTable.getSelectedRows();
+        if (rows.length == 0) {
+            showDiaglogMessage(ErrorMessage.EMPTY_SELECTED_ROWS);
+            return;
+        }
+
+        Integer selectedId = Integer.valueOf(exportInStockProductsTable.getValueAt(rows[0], ID_COL_INDEX).toString());
+
+        InventoryItem selectedInventoryItem = inventoryItemController.findById(selectedId).get();
+
+        if (exportProductQuantityTextField.getText().trim().length() == 0) {
+            showDiaglogMessage("Vui lòng nhập trường số lượng nhập.");
+            return;
+        }
+
+        if (exportProductPriceTextField.getText().trim().length() == 0) {
+            showDiaglogMessage("Vui lòng nhập trường giá nhập.");
+            return;
+        }
+
+        Integer quantity = 0;
+        try {
+            quantity = Integer.valueOf(exportProductQuantityTextField.getText());
+        } catch (NumberFormatException e) {
+            showDiaglogMessage("Số lượng phải là một số nguyên.");
+            return;
+        }
+        Float price = 0.0f;
+        try {
+            price = Float.valueOf(exportProductPriceTextField.getText().replace(",", ""));
+        } catch (NumberFormatException e) {
+            showDiaglogMessage("Giá sản phẩm phải là một số thực.");
+            return;
+        }
+        
+        Integer limitQuantity = Integer.valueOf(exportInStockProductsTable.getValueAt(rows[0], EXPORT_BILL_ITEM_QUANTITY_COL_INDEX).toString());
+        if (quantity > limitQuantity) {
+            showDiaglogMessage("Số lượng xuất vượt quá số lượng trong kho.");
+            return;
+        }
+        
+        Float minExportPrice = Float.valueOf(exportInStockProductsTable.getValueAt(rows[0], EXPORT_BILL_ITEM_PRICE_COL_INDEX).toString().replace(",", ""));
+        if (price < minExportPrice) {
+            showDiaglogMessage("Giá xuất phải lớn hơn hoặc bằng giá nhập.");
+            return;
+        }
+        
+        selectedInventoryItem.setQuantity(limitQuantity - quantity);
+        
+        int foundIndex = IntStream
+                .range(0, inventoryItems.size())
+                .filter(index -> inventoryItems.get(index).getId().equals(selectedId))
+                .findFirst()
+                .orElse(-1);
+        
+        inventoryItems.set(foundIndex, selectedInventoryItem);
+        
+        final Integer finalQuantity = quantity;
+        final Float finalPrice = price;
+        
+        Integer selectedProductId = 
+                Integer.valueOf(exportInStockProductsTable
+                        .getValueAt(rows[0], EXPORT_BILL_ITEM_PRODUCT_ID_COL_INDEX)
+                        .toString());
+        
+        Product selectedProduct = productController.findById(selectedProductId).get();
+        
+        exportBill.getExportBillItems()
+                .add(ExportBillItem
+                        .builder()
+                        .product(selectedProduct)
+                        .quantity(finalQuantity)
+                        .exportPrice(finalPrice)
+                        .exportBill(exportBill)
+                        .inventoryItem(selectedInventoryItem)
+                        .build()
+                );
+        
+        loadDataToExportProductsBillTable(exportBill);
+        loadDataToExportInStockProductsTable(inventoryItems);
     }//GEN-LAST:event_exportProductAddButtonActionPerformed
 
     private void searchExportProductRefreshButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchExportProductRefreshButtonActionPerformed
         searchExportProductTextField.setText("");
-        loadDataToExportInStockProductsTable(null);
+        loadDataToExportInStockProductsTable(inventoryItems);
     }//GEN-LAST:event_searchExportProductRefreshButtonActionPerformed
 
     private void searchExportProductTextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchExportProductTextFieldKeyReleased
         String keyword = searchExportProductTextField.getText();
-        loadDataToExportInStockProductsTable(keyword);
+        loadDataToExportInStockProductsTable(
+                inventoryItems.parallelStream()
+                        .filter(item -> item.getImportBillItem().getProduct().getName().contains(keyword))
+                        .toList()
+        );
     }//GEN-LAST:event_searchExportProductTextFieldKeyReleased
-    
+
     private void showViewImportBillDetailDiaglog(int selectedRow) {
         viewImportBillDetailDiaglog.setVisible(true);
         viewImportBillDetailDiaglog.setLocationRelativeTo(this);
-        
+
         int id = Integer.parseInt(importBillsTable.getValueAt(selectedRow, ID_COL_INDEX).toString());
         Optional<ImportBill> found = importBillController.findById(id);
-        
+
         found.ifPresentOrElse(
                 (item) -> {
                     viewImportBillIdValueLabel.setText(item.getId().toString());
@@ -6645,13 +6787,13 @@ public class Home extends javax.swing.JFrame {
                     viewImportBillTotalValueLabel.setText(priceFormatter.format(item.getTotal()) + "đ");
 
                     loadDataToViewImportBillDetailItems(item);
-                }, 
+                },
                 () -> {
                     showDiaglogMessage(ErrorMessage.ImportBill.NOT_FOUND);
                 }
         );
     }
-    
+
     /**
      * @param args the command line arguments
      */

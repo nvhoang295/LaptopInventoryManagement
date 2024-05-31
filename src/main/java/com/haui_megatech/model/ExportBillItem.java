@@ -34,4 +34,5 @@ public class ExportBillItem implements Serializable {
     
     private InventoryItem inventoryItem;
     private ExportBill exportBill;
+    private Product product;
 }
