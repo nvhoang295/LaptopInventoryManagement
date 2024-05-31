@@ -5965,7 +5965,7 @@
                           <Component id="searchImportProductPanel" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Component id="importProductScrollPanel" min="-2" pref="607" max="-2" attributes="0"/>
-                          <EmptySpace pref="7" max="32767" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="importProductPriceTextField" alignment="3" min="-2" pref="36" max="-2" attributes="0"/>
                               <Component id="importProductQuantityTextField" alignment="3" min="-2" pref="36" max="-2" attributes="0"/>
@@ -6697,23 +6697,23 @@
                       <Group type="102" alignment="0" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="clientNameLabel" alignment="0" min="-2" pref="119" max="-2" attributes="0"/>
-                              <Component id="clientNameLabel1" min="-2" pref="189" max="-2" attributes="0"/>
+                              <Component id="clientPhoneNumberLabel" min="-2" pref="189" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="clientNameTextField1" max="32767" attributes="0"/>
+                              <Component id="clientPhoneNumberTextField" max="32767" attributes="0"/>
                               <Component id="clientNameTextField" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="clientNameLabel2" alignment="0" min="-2" pref="189" max="-2" attributes="0"/>
+                              <Component id="clientAddressLabel" alignment="0" min="-2" pref="189" max="-2" attributes="0"/>
                               <Component id="exportProductBillCreatorTextField" alignment="0" min="-2" pref="119" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="exportProductBillCreatorLabel" max="32767" attributes="0"/>
-                              <Component id="clientNameTextField2" max="32767" attributes="0"/>
+                              <Component id="clientAddressTextField" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -6746,17 +6746,17 @@
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
-                                  <Component id="clientNameLabel1" min="-2" max="-2" attributes="0"/>
+                                  <Component id="clientPhoneNumberLabel" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <Component id="clientNameTextField1" alignment="0" min="-2" pref="37" max="-2" attributes="0"/>
+                              <Component id="clientPhoneNumberTextField" alignment="0" min="-2" pref="37" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
-                                  <Component id="clientNameLabel2" min="-2" max="-2" attributes="0"/>
+                                  <Component id="clientAddressLabel" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <Component id="clientNameTextField2" alignment="0" min="-2" pref="37" max="-2" attributes="0"/>
+                              <Component id="clientAddressTextField" alignment="0" min="-2" pref="37" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
@@ -6884,7 +6884,7 @@
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
           <SubComponents>
-            <Component class="javax.swing.JTable" name="exportProductsTable">
+            <Component class="javax.swing.JTable" name="exportInStockProductsTable">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Segoe UI" size="14" style="0"/>
@@ -6907,7 +6907,7 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="16" style="0"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Gi&#xe1; xu&#x1ea5;t"/>
+            <Property name="text" type="java.lang.String" value="Gi&#xe1; xu&#x1ea5;t:"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="exportProductPriceTextField">
@@ -7110,14 +7110,14 @@
             </Property>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="clientNameTextField1">
+        <Component class="javax.swing.JTextField" name="clientPhoneNumberTextField">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="14" style="0"/>
             </Property>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="clientNameLabel1">
+        <Component class="javax.swing.JLabel" name="clientPhoneNumberLabel">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="16" style="0"/>
@@ -7125,14 +7125,14 @@
             <Property name="text" type="java.lang.String" value="S&#x1ed1; &#x111;i&#x1ec7;n tho&#x1ea1;i kh&#xe1;ch h&#xe0;ng"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="clientNameTextField2">
+        <Component class="javax.swing.JTextField" name="clientAddressTextField">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="14" style="0"/>
             </Property>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="clientNameLabel2">
+        <Component class="javax.swing.JLabel" name="clientAddressLabel">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="16" style="0"/>

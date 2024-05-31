@@ -116,6 +116,9 @@ public class Home extends javax.swing.JFrame {
         importProductBillTable.getTableHeader().setFont(tableHeaderFont);
         importBillsTable.getTableHeader().setFont(tableHeaderFont);
         viewImportBillDetailItemsTable.getTableHeader().setFont(tableHeaderFont);
+        exportInStockProductsTable.getTableHeader().setFont(tableHeaderFont);
+        
+        loadDataToProvidersNameCombobox();
     }
 
     private void initImportBill() {
@@ -262,7 +265,6 @@ public class Home extends javax.swing.JFrame {
     }
 
     private void loadDataToProvidersNameCombobox() {
-        providerNameComboBox.removeAll();
         List<Provider> providers = providerController.getList().data();
         providerNameComboBox.addItem("------- Chọn -------");
         providers.forEach(item -> {
@@ -383,7 +385,7 @@ public class Home extends javax.swing.JFrame {
             "STT",
             "Mã sản phẩm",
             "Tên sản phẩm",
-            "Số lượng",
+            "Trong kho",
             "Giá nhập",
             "Ngày nhập"
         };
@@ -411,7 +413,41 @@ public class Home extends javax.swing.JFrame {
                     }
             );
         });
-        inStocksTable.setModel(tableModel);
+        exportInStockProductsTable.setModel(tableModel);
+    }
+    
+    private void loadDataToExportInStockProductsTable(String keyword) {
+        String[] tableHeader = {
+            "ID",
+            "Mã sản phẩm",
+            "Tên sản phẩm",
+            "Trong kho",
+            "Giá nhập",
+        };
+        
+        DefaultTableModel tableModel = new DefaultTableModel(null, tableHeader) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
+        
+        List<ImportBillItem> items = keyword != null && !keyword.isEmpty() && !keyword.isBlank()
+                ? importBillItemController.searchList(keyword).data()
+                : importBillItemController.getList().data();
+
+        items.forEach(item -> {
+            tableModel.addRow(
+                    new Object[]{
+                        item.getId(),
+                        item.getProduct().getId(),
+                        item.getProduct().getName(),
+                        item.getQuantity(),
+                        priceFormatter.format(item.getImportPrice()),
+                    }
+            );
+        });
+        exportInStockProductsTable.setModel(tableModel);
     }
 
     /**
@@ -771,7 +807,7 @@ public class Home extends javax.swing.JFrame {
         searchExportProductTextField = new javax.swing.JTextField();
         searchExportProductRefreshButton = new javax.swing.JButton();
         exportProductScrollPanel = new javax.swing.JScrollPane();
-        exportProductsTable = new javax.swing.JTable();
+        exportInStockProductsTable = new javax.swing.JTable();
         exportProductPriceLabel = new javax.swing.JLabel();
         exportProductPriceTextField = new javax.swing.JTextField();
         exportProductAddButton = new javax.swing.JButton();
@@ -788,10 +824,10 @@ public class Home extends javax.swing.JFrame {
         exportProductQuantityTextField = new javax.swing.JTextField();
         exportProductQuantityLabel = new javax.swing.JLabel();
         clientNameTextField = new javax.swing.JTextField();
-        clientNameTextField1 = new javax.swing.JTextField();
-        clientNameLabel1 = new javax.swing.JLabel();
-        clientNameTextField2 = new javax.swing.JTextField();
-        clientNameLabel2 = new javax.swing.JLabel();
+        clientPhoneNumberTextField = new javax.swing.JTextField();
+        clientPhoneNumberLabel = new javax.swing.JLabel();
+        clientAddressTextField = new javax.swing.JTextField();
+        clientAddressLabel = new javax.swing.JLabel();
         exportBillPanel = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         inStockPanel = new javax.swing.JPanel();
@@ -4177,8 +4213,8 @@ public class Home extends javax.swing.JFrame {
         exportProductScrollPanel.setBackground(new java.awt.Color(255, 255, 255));
         exportProductScrollPanel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
-        exportProductsTable.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        exportProductsTable.setModel(new javax.swing.table.DefaultTableModel(
+        exportInStockProductsTable.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        exportInStockProductsTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -4186,10 +4222,10 @@ public class Home extends javax.swing.JFrame {
 
             }
         ));
-        exportProductScrollPanel.setViewportView(exportProductsTable);
+        exportProductScrollPanel.setViewportView(exportInStockProductsTable);
 
         exportProductPriceLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        exportProductPriceLabel.setText("Giá xuất");
+        exportProductPriceLabel.setText("Giá xuất:");
 
         exportProductPriceTextField.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         exportProductPriceTextField.setText("29,000,000");
@@ -4285,15 +4321,15 @@ public class Home extends javax.swing.JFrame {
 
         clientNameTextField.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
-        clientNameTextField1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        clientPhoneNumberTextField.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
-        clientNameLabel1.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        clientNameLabel1.setText("Số điện thoại khách hàng");
+        clientPhoneNumberLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        clientPhoneNumberLabel.setText("Số điện thoại khách hàng");
 
-        clientNameTextField2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        clientAddressTextField.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
-        clientNameLabel2.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        clientNameLabel2.setText("Địa chỉ giao hàng");
+        clientAddressLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        clientAddressLabel.setText("Địa chỉ giao hàng");
 
         javax.swing.GroupLayout exportProductPanelLayout = new javax.swing.GroupLayout(exportProductPanel);
         exportProductPanel.setLayout(exportProductPanelLayout);
@@ -4333,19 +4369,19 @@ public class Home extends javax.swing.JFrame {
                     .addGroup(exportProductPanelLayout.createSequentialGroup()
                         .addGroup(exportProductPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(clientNameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(clientNameLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(clientPhoneNumberLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(exportProductPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(clientNameTextField1)
+                            .addComponent(clientPhoneNumberTextField)
                             .addComponent(clientNameTextField)))
                     .addGroup(exportProductPanelLayout.createSequentialGroup()
                         .addGroup(exportProductPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(clientNameLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(clientAddressLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(exportProductBillCreatorTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(exportProductPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(exportProductBillCreatorLabel)
-                            .addComponent(clientNameTextField2))))
+                            .addComponent(clientAddressTextField))))
                 .addContainerGap())
         );
         exportProductPanelLayout.setVerticalGroup(
@@ -4369,14 +4405,14 @@ public class Home extends javax.swing.JFrame {
                         .addGroup(exportProductPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(exportProductPanelLayout.createSequentialGroup()
                                 .addGap(4, 4, 4)
-                                .addComponent(clientNameLabel1))
-                            .addComponent(clientNameTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(clientPhoneNumberLabel))
+                            .addComponent(clientPhoneNumberTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(exportProductPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(exportProductPanelLayout.createSequentialGroup()
                                 .addGap(4, 4, 4)
-                                .addComponent(clientNameLabel2))
-                            .addComponent(clientNameTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(clientAddressLabel))
+                            .addComponent(clientAddressTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(exportProductPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(exportProductBillCreatorTextField)
@@ -5474,6 +5510,7 @@ public class Home extends javax.swing.JFrame {
     private void exportProductLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exportProductLabelMouseClicked
         this.setActiveTab("export-product");
         this.setDisplayedPanel("export-product");
+        loadDataToExportInStockProductsTable(null);        
     }//GEN-LAST:event_exportProductLabelMouseClicked
 
     private void importBillTabMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_importBillTabMouseClicked
@@ -5494,7 +5531,6 @@ public class Home extends javax.swing.JFrame {
         this.setActiveTab("import-product");
         this.setDisplayedPanel("import-product");
         loadDataToTableImportProducts(null);
-        loadDataToProvidersNameCombobox();
     }//GEN-LAST:event_importProductLabelMouseClicked
 
     private void providerTabMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_providerTabMouseClicked
@@ -6639,12 +6675,12 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JButton cancelEditUserDiaglogButton;
     private javax.swing.JButton cancelViewProductDiaglogButton;
     private javax.swing.JButton cancelViewProviderDiaglogButton;
+    private javax.swing.JLabel clientAddressLabel;
+    private javax.swing.JTextField clientAddressTextField;
     private javax.swing.JLabel clientNameLabel;
-    private javax.swing.JLabel clientNameLabel1;
-    private javax.swing.JLabel clientNameLabel2;
     private javax.swing.JTextField clientNameTextField;
-    private javax.swing.JTextField clientNameTextField1;
-    private javax.swing.JTextField clientNameTextField2;
+    private javax.swing.JLabel clientPhoneNumberLabel;
+    private javax.swing.JTextField clientPhoneNumberTextField;
     private javax.swing.JButton confirmDeleteProduct;
     private javax.swing.JButton confirmDeleteProvider;
     private javax.swing.JButton confirmDeleteUser;
@@ -6756,6 +6792,7 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JButton exportBillProductButton;
     private javax.swing.JPanel exportBillTab;
     private javax.swing.JButton exportImportBillsToExcelButton;
+    private javax.swing.JTable exportInStockProductsTable;
     private javax.swing.JButton exportInStocksToExcelButton;
     private javax.swing.JButton exportProductAddButton;
     private javax.swing.JTextField exportProductBillCreatorLabel;
@@ -6770,7 +6807,6 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JScrollPane exportProductScrollPanel;
     private javax.swing.JPanel exportProductTab;
     private javax.swing.JTable exportProductsBillTable;
-    private javax.swing.JTable exportProductsTable;
     private javax.swing.JButton exportProductsToExcelButton;
     private javax.swing.JButton exportProvidersToExcelButton;
     private javax.swing.JButton exportUsersToExcelButton;
