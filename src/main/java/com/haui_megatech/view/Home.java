@@ -6927,7 +6927,10 @@ public class Home extends javax.swing.JFrame {
         
         exportBill.setTotal(total);
         exportBillController.addOne(exportBill);
-        inventoryItemController.updateList(inventoryItems);
+        exportBill.getExportBillItems().forEach(item -> {
+            InventoryItem inventoryItem = item.getInventoryItem();
+            inventoryItemController.updateOne(inventoryItem.getId(), inventoryItem);
+        });
         
         showDiaglogMessage("Xuất hàng thành công.");
         initExportBill();
@@ -6936,7 +6939,7 @@ public class Home extends javax.swing.JFrame {
         loadDataToExportProductsBillTable(exportBill);
         clientNameTextField.setText("");
         clientPhoneNumberTextField.setText("");
-        clientAddressTextField("");
+        clientAddressTextField.setText("");
         
     }//GEN-LAST:event_exportBillProductButtonActionPerformed
 
