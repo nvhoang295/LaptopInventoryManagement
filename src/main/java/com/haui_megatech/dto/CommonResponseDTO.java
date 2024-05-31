@@ -4,43 +4,54 @@
  */
 package com.haui_megatech.dto;
 
+import lombok.Builder;
+
 /**
  *
  * @author vieth
  */
-public record CommonResponseDTO(
+@Builder
+public record CommonResponseDTO<T>(
         Boolean success,
-        String message
+        String message,
+        T data
 ) {
-    public CommonResponseDTO(Boolean success, String message) {
+    public CommonResponseDTO(Boolean success, String message, T data) {
         this.success = success;
         this.message = message;
+        this.data = data;
     }
     
-    public static CommonResponseDTOBuilder builder() {
-        return new CommonResponseDTOBuilder();
-    }
-    
-    public static class CommonResponseDTOBuilder{
-        private Boolean success;
-        private String message;
-        
-        public CommonResponseDTOBuilder() {
-            
-        }
-        
-        public CommonResponseDTOBuilder success(Boolean success) {
-            this.success = success;
-            return this;
-        }
-        
-        public CommonResponseDTOBuilder message(String message) {
-            this.message = message;
-            return this;
-        }
-        
-        public CommonResponseDTO build() {
-            return new CommonResponseDTO(success, message);
-        }
-    }
+//    public static CommonResponseDTOBuilder builder() {
+//        return new CommonResponseDTOBuilder();
+//    }
+//    
+//    public static class CommonResponseDTOBuilder<T>{
+//        private Boolean success;
+//        private String message;
+//        T data;
+//        
+//        public CommonResponseDTOBuilder() {
+//            
+//        }
+//        
+//        public CommonResponseDTOBuilder success(Boolean success) {
+//            this.success = success;
+//            return this;
+//        }
+//        
+//        public CommonResponseDTOBuilder message(String message) {
+//            this.message = message;
+//            return this;
+//        }
+//        
+//        public CommonResponseDTOBuilder data(T data) {
+//            this.data = data;
+//            return this;
+//        }
+//        
+//        public CommonResponseDTO build() {
+//            return new CommonResponseDTO(success, message, data);
+//        }
+//    }
 }

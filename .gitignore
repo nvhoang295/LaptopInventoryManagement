@@ -1,1 +1,7 @@
 /target
+/nbproject/
+<<<<<<< HEAD
+/src/main/java/com/haui_megatech/data/*.dat
+=======
+/src/main/java/com/haui_megatech/data/*.dat
+>>>>>>> f0f8b96234a04b132f7e53843b1feecda6318b91
