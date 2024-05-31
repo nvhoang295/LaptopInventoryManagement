@@ -33,7 +33,7 @@ public class UserRepositoryImpl implements UserRepository {
     public UserRepositoryImpl(ApplicationContext applicationContext) {
         this.applicationContext = applicationContext;
         
-        ABS_DATA_PATH = new ApplicationContext().ABS_USERS_DATA_PATH;
+        ABS_DATA_PATH = this.applicationContext.ABS_USERS_DATA_PATH;
         
         initCounter();
     }

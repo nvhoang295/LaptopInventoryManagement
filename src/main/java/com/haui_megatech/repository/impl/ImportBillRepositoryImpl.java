@@ -29,7 +29,7 @@ public class ImportBillRepositoryImpl implements ImportBillRepository {
     public ImportBillRepositoryImpl(ApplicationContext applicationContext) {
         this.applicationContext = applicationContext;
         
-        ABS_DATA_PATH = new ApplicationContext().ABS_IMPORT_BILLS_DATA_PATH;
+        ABS_DATA_PATH = this.applicationContext.ABS_IMPORT_BILLS_DATA_PATH;
         
         initCounter();
     }

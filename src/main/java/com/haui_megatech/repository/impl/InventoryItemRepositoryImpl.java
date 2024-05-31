@@ -30,7 +30,7 @@ public class InventoryItemRepositoryImpl implements InventoryItemRepository {
     public InventoryItemRepositoryImpl(ApplicationContext applicationContext) {
         this.applicationContext = applicationContext;
         
-        ABS_DATA_PATH = applicationContext.ABS_INVENTORY_ITEMS_DATA_PATH;
+        ABS_DATA_PATH = this.applicationContext.ABS_INVENTORY_ITEMS_DATA_PATH;
         
         initCounter();
     }

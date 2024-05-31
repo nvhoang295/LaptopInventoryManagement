@@ -45,4 +45,10 @@ public class SuccessMessage {
         public static final String UPDATED = "Cập nhật sản phẩm trong kho hàng thành công.";
         public static final String DELETE = "Xoá sản phẩm trong kho hàng thành công.";
     }
+    
+    public static final class ExportBill {
+        public static final String ADDED = "Xuất hàng thành công.";
+        public static final String UPDATED = "Cập nhật phiếu xuất thành công.";
+        public static final String DELETE = "Xoá phiếu xuất thành công.";
+    }
 }

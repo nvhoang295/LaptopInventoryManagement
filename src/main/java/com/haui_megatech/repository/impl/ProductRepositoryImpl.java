@@ -29,7 +29,7 @@ public class ProductRepositoryImpl implements ProductRepository {
     public ProductRepositoryImpl(ApplicationContext applicationContext) {
         this.applicationContext = applicationContext;
         
-        ABS_DATA_PATH = new ApplicationContext().ABS_PRODUCTS_DATA_PATH;
+        ABS_DATA_PATH = this.applicationContext.ABS_PRODUCTS_DATA_PATH;
 
         initCounter();
     }

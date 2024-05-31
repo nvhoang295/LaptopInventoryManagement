@@ -58,6 +58,14 @@ public class ApplicationContext {
     public final String REL_INVENTORY_ITEMS_DATA_PATH;
     public final String ABS_INVENTORY_ITEMS_DATA_PATH;
     
+    // export bill
+    public final String REL_EXPORT_BILLS_DATA_PATH;
+    public final String ABS_EXPORT_BILLS_DATA_PATH;
+    
+    // export bill items
+    public final String REL_EXPORT_BILL_ITEMS_DATA_PATH;
+    public final String ABS_EXPORT_BILL_ITEMS_DATA_PATH;
+    
     public String getAbsUsersDataPath() {
         return ABS_USERS_DATA_PATH;
     }
@@ -107,6 +115,14 @@ public class ApplicationContext {
         // inventory items
         REL_INVENTORY_ITEMS_DATA_PATH = REL_DATA_PATH_PREFIX + "/inventory-items.dat";
         ABS_INVENTORY_ITEMS_DATA_PATH = ABS_ROOT_PROJECT_PATH + REL_INVENTORY_ITEMS_DATA_PATH;
+        
+        // export bills
+        REL_EXPORT_BILLS_DATA_PATH = REL_DATA_PATH_PREFIX + "/export-bills.dat";
+        ABS_EXPORT_BILLS_DATA_PATH = ABS_ROOT_PROJECT_PATH + REL_EXPORT_BILLS_DATA_PATH;
+        
+        // export bill items
+        REL_EXPORT_BILL_ITEMS_DATA_PATH = REL_DATA_PATH_PREFIX + "/export-bill-items.dat";
+        ABS_EXPORT_BILL_ITEMS_DATA_PATH = ABS_ROOT_PROJECT_PATH + REL_EXPORT_BILL_ITEMS_DATA_PATH;
     }
     
     public void initCounter() {

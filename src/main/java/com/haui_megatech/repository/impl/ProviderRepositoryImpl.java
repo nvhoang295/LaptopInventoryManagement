@@ -29,7 +29,7 @@ public class ProviderRepositoryImpl implements ProviderRepository {
     public ProviderRepositoryImpl(ApplicationContext applicationContext) {
         this.applicationContext = applicationContext;
         
-        ABS_DATA_PATH = new ApplicationContext().ABS_PROVIDERS_DATA_PATH;
+        ABS_DATA_PATH = this.applicationContext.ABS_PROVIDERS_DATA_PATH;
 
         initCounter();
     }

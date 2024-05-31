@@ -69,6 +69,7 @@ public class Home extends javax.swing.JFrame {
     private final int IMPORT_BILL_ITEM_PRICE_COL_INDEX = 4;
 
     private ImportBill importBill;
+    private ExportBill exportBill;
     
     
     private final ApplicationContext applicationContext = new ApplicationContext();

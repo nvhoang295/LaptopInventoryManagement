@@ -4,72 +4,42 @@
  */
 package com.haui_megatech.model;
 
+import java.io.Serial;
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 /**
  *
  * @author Phuc
  */
-public class ExportBill {
-    private Integer exportBillId;
-    private Client client;
-    private User user;
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
+@Builder
+public class ExportBill implements Serializable {
+    
+    @Serial
+    private static final long serialVersionUID = 1L;
+    
+    public static Integer counter;
+    
+    private Integer id;
+    private String clientName;
+    private String clientPhoneNumber;
+    private String clientAddress;
+    
     private Double total;
+    
     private Date whenCreated;
-
-    public ExportBill(
-            Integer exportBillId, 
-            Client client, 
-            User user, 
-            Double total, 
-            Date whenCreated
-    ) {
-        this.exportBillId = exportBillId;
-        this.client = client;
-        this.user = user;
-        this.total = total;
-        this.whenCreated = whenCreated;
-    }
+    private Date lastUpdated;
     
-
-    public Integer getExportBillId() {
-        return exportBillId;
-    }
-
-    public void setExportBillId(Integer exportBillId) {
-        this.exportBillId = exportBillId;
-    }
-
-    public Client getClient() {
-        return client;
-    }
-
-    public void setClient(Client client) {
-        this.client = client;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    public Double getTotal() {
-        return total;
-    }
-
-    public void setTotal(Double total) {
-        this.total = total;
-    }
-
-    public Date getWhenCreated() {
-        return whenCreated;
-    }
-
-    public void setWhenCreated(Date whenCreated) {
-        this.whenCreated = whenCreated;
-    }
-    
+    private User user;
+    private ArrayList<ExportBillItem> exportBillItems;
 }

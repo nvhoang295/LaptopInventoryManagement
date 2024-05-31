@@ -4,10 +4,34 @@
  */
 package com.haui_megatech.model;
 
+import java.io.Serial;
+import java.io.Serializable;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 /**
  *
  * @author vieth
  */
-public class ExportBillItem {
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
+@Builder
+public class ExportBillItem implements Serializable {
     
+    @Serial
+    private static final long serialVersionUID = 1L;
+    
+    public static Integer counter;
+    
+    private Integer id;
+    private Integer quantity;
+    private Float exportPrice;
+    
+    private InventoryItem inventoryItem;
+    private ExportBill exportBill;
 }
