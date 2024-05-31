@@ -45,7 +45,15 @@ public class ApplicationContext {
     // provider
     public final String REL_PROVIDERS_DATA_PATH;
     public final String ABS_PROVIDERS_DATA_PATH;
-
+    
+    // import bill
+    public final String REL_IMPORT_BILLS_DATA_PATH;
+    public final String ABS_IMPORT_BILLS_DATA_PATH;
+    
+    // import bill items
+    public final String REL_IMPORT_BILL_ITEMS_DATA_PATH;
+    public final String ABS_IMPORT_BILL_ITEMS_DATA_PATH;
+    
     public String getAbsUsersDataPath() {
         return ABS_USERS_DATA_PATH;
     }
@@ -72,26 +80,36 @@ public class ApplicationContext {
         
         REL_DATA_PATH_PREFIX = "/src/main/java/com/haui_megatech/data";
         
+        // users
         REL_USERS_DATA_PATH = REL_DATA_PATH_PREFIX + "/users.dat";
         ABS_USERS_DATA_PATH = ABS_ROOT_PROJECT_PATH + REL_USERS_DATA_PATH;
         
+        // products
         REL_PRODUCTS_DATA_PATH = REL_DATA_PATH_PREFIX + "/products.dat";
         ABS_PRODUCTS_DATA_PATH = ABS_ROOT_PROJECT_PATH + REL_PRODUCTS_DATA_PATH;
         
+        // providers
         REL_PROVIDERS_DATA_PATH = REL_DATA_PATH_PREFIX + "/providers.dat";
         ABS_PROVIDERS_DATA_PATH = ABS_ROOT_PROJECT_PATH + REL_PROVIDERS_DATA_PATH;
-
+        
+        // import bills
+        REL_IMPORT_BILLS_DATA_PATH = REL_DATA_PATH_PREFIX + "/import-bills.dat";
+        ABS_IMPORT_BILLS_DATA_PATH = ABS_ROOT_PROJECT_PATH + REL_IMPORT_BILLS_DATA_PATH;
+        
+        // import bill items
+        REL_IMPORT_BILL_ITEMS_DATA_PATH = REL_DATA_PATH_PREFIX + "/import-bill-items.dat";
+        ABS_IMPORT_BILL_ITEMS_DATA_PATH = ABS_ROOT_PROJECT_PATH + REL_IMPORT_BILL_ITEMS_DATA_PATH;
     }
     
     public void initCounter() {
-        ArrayList<User> users = new ArrayList<>(userRepository.getAll());
-        User.counter = users.isEmpty() ? 0 : users.getLast().getId();
-        
-        ArrayList<Product> products = new ArrayList<>(productRepository.getAll());
-        Product.counter = products.isEmpty() ? 0 : products.getLast().getId();
-        
-        ArrayList<Provider> providers = new ArrayList<>(providerRepository.getAll());
-        Provider.counter = providers.isEmpty() ? 0 : providers.getLast().getId();
+//        ArrayList<User> users = new ArrayList<>(userRepository.getAll());
+//        User.counter = users.isEmpty() ? 0 : users.getLast().getId();
+//        
+//        ArrayList<Product> products = new ArrayList<>(productRepository.getAll());
+//        Product.counter = products.isEmpty() ? 0 : products.getLast().getId();
+//        
+//        ArrayList<Provider> providers = new ArrayList<>(providerRepository.getAll());
+//        Provider.counter = providers.isEmpty() ? 0 : providers.getLast().getId();
     }
 
     private static String removeRedundantPathPrefix(String s) {

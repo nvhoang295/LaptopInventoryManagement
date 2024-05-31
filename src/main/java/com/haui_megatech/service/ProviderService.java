@@ -28,4 +28,6 @@ public interface ProviderService {
     Optional<Provider> findById(Integer id);
     
     CommonResponseDTO updateOne(Integer id, Provider provider);
+    
+    Optional<Provider> findByName(String name);
 }
