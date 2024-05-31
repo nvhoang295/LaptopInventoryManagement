@@ -23,9 +23,9 @@ import lombok.RequiredArgsConstructor;
  */
 @RequiredArgsConstructor
 public class ProviderServiceImpl implements ProviderService {
-    
+
     private final ProviderRepository providerRepository;
-    
+
     @Override
     public CommonResponseDTO<List<Provider>> getList() {
         return CommonResponseDTO
@@ -92,9 +92,9 @@ public class ProviderServiceImpl implements ProviderService {
                     .message(ErrorMessage.Provider.NOT_FOUND)
                     .build();
         }
-        
+
         providerRepository.deleteById(id);
-        
+
         return CommonResponseDTO
                 .builder()
                 .success(Boolean.TRUE)
@@ -117,14 +117,14 @@ public class ProviderServiceImpl implements ProviderService {
                     .message(ErrorMessage.Product.NOT_FOUND)
                     .build();
         }
-        
+
         Provider foundProvider = found.get();
         foundProvider.setName(provider.getName());
         foundProvider.setPhoneNumber(provider.getPhoneNumber());
         foundProvider.setEmail(provider.getEmail());
         foundProvider.setAddress(provider.getAddress());
         foundProvider.setLastUpdated(new Date());
-        
+
         Optional<Provider> updatedProvider = providerRepository.save(foundProvider);
         return CommonResponseDTO
                 .builder()
@@ -132,5 +132,14 @@ public class ProviderServiceImpl implements ProviderService {
                 .message(SuccessMessage.Product.UPDATED)
                 .build();
     }
-    
+
+    @Override
+    public Optional<Provider> findByName(String name) {
+        return providerRepository
+                .getAll()
+                .parallelStream()
+                .filter(item -> item.getName().equals(name))
+                .findFirst();
+    }
+
 }

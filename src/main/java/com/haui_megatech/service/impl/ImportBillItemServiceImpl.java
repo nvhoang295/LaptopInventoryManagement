@@ -7,43 +7,43 @@ package com.haui_megatech.service.impl;
 import com.haui_megatech.constant.ErrorMessage;
 import com.haui_megatech.constant.SuccessMessage;
 import com.haui_megatech.dto.CommonResponseDTO;
-import com.haui_megatech.model.InventoryItem;
-import com.haui_megatech.repository.InventoryItemRepository;
-import com.haui_megatech.service.InventoryItemService;
+import com.haui_megatech.model.ImportBillItem;
+import com.haui_megatech.service.ImportBillItemService;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
+import com.haui_megatech.repository.ImportBillItemRepository;
 
 /**
  *
  * @author vieth
  */
 @RequiredArgsConstructor
-public class InventoryItemServiceImpl implements InventoryItemService {
+public class ImportBillItemServiceImpl implements ImportBillItemService {
     
-    private final InventoryItemRepository inventoryItemRepository;
+    private final ImportBillItemRepository importBillItemRepository;
     
     @Override
-    public CommonResponseDTO<List<InventoryItem>> getList() {
+    public CommonResponseDTO<List<ImportBillItem>> getList() {
         return CommonResponseDTO
-                .<List<InventoryItem>>builder()
-                .data(inventoryItemRepository.getAll())
+                .<List<ImportBillItem>>builder()
+                .data(importBillItemRepository.getAll())
                 .build();
     }
 
     @Override
-    public CommonResponseDTO<List<InventoryItem>> searchList(String keyword) {
+    public CommonResponseDTO<List<ImportBillItem>> searchList(String keyword) {
         return CommonResponseDTO
-                .<List<InventoryItem>>builder()
-                .data(inventoryItemRepository
+                .<List<ImportBillItem>>builder()
+                .data(importBillItemRepository
                         .getAll()
                         .parallelStream()
                         .filter(item -> {
                             return new StringBuilder()
                                     .append(item.getImportPrice())
-                                    .append(item.getTotalQuantity())
+                                    .append(item.getQuantity())
                                     .toString().toLowerCase()
                                     .contains(keyword.toLowerCase());
                         })
@@ -53,24 +53,24 @@ public class InventoryItemServiceImpl implements InventoryItemService {
     }
 
     @Override
-    public CommonResponseDTO addOne(InventoryItem item) {
-        Optional<InventoryItem> savedProduct = inventoryItemRepository.save(item);
+    public CommonResponseDTO addOne(ImportBillItem item) {
+        Optional<ImportBillItem> savedProduct = importBillItemRepository.save(item);
         return savedProduct.isPresent()
                 ? CommonResponseDTO
                         .builder()
                         .success(true)
-                        .message(SuccessMessage.InventoryItem.ADDED)
+                        .message(SuccessMessage.ImportBillItem.ADDED)
                         .build()
                 : CommonResponseDTO
                         .builder()
                         .success(false)
-                        .message(ErrorMessage.InventoryItem.SAVE)
+                        .message(ErrorMessage.ImportBillItem.SAVE)
                         .build();
     }
 
     @Override
-    public CommonResponseDTO addList(ArrayList<InventoryItem> items) {
-        ArrayList<InventoryItem> savedProducts = inventoryItemRepository.saveAll(items);
+    public CommonResponseDTO addList(ArrayList<ImportBillItem> items) {
+        ArrayList<ImportBillItem> savedProducts = importBillItemRepository.saveAll(items);
         return CommonResponseDTO
                 .builder()
                 .success(Boolean.TRUE)
@@ -80,32 +80,32 @@ public class InventoryItemServiceImpl implements InventoryItemService {
 
     @Override
     public CommonResponseDTO deleteOne(Integer id) {
-        Optional<InventoryItem> found = inventoryItemRepository.findById(id);
+        Optional<ImportBillItem> found = importBillItemRepository.findById(id);
         if (found.isEmpty()) {
             return CommonResponseDTO
                     .builder()
                     .success(Boolean.FALSE)
-                    .message(ErrorMessage.InventoryItem.NOT_FOUND)
+                    .message(ErrorMessage.ImportBillItem.NOT_FOUND)
                     .build();
         }
         
-        inventoryItemRepository.deleteById(id);
+        importBillItemRepository.deleteById(id);
         
         return CommonResponseDTO
                 .builder()
                 .success(Boolean.TRUE)
-                .message(SuccessMessage.InventoryItem.DELETED)
+                .message(SuccessMessage.ImportBillItem.DELETED)
                 .build();
     }
 
     @Override
-    public Optional<InventoryItem> findById(Integer id) {
-        return inventoryItemRepository.findById(id);
+    public Optional<ImportBillItem> findById(Integer id) {
+        return importBillItemRepository.findById(id);
     }
 
     @Override
-    public CommonResponseDTO updateOne(Integer id, InventoryItem item) {
-        Optional<InventoryItem> found = inventoryItemRepository.findById(id);
+    public CommonResponseDTO updateOne(Integer id, ImportBillItem item) {
+        Optional<ImportBillItem> found = importBillItemRepository.findById(id);
         if (found.isEmpty()) {
             return CommonResponseDTO
                     .builder()
@@ -114,14 +114,14 @@ public class InventoryItemServiceImpl implements InventoryItemService {
                     .build();
         }
         
-        InventoryItem foundItem = found.get();
-        foundItem.setTotalQuantity(item.getTotalQuantity());
+        ImportBillItem foundItem = found.get();
+        foundItem.setQuantity(item.getQuantity());
         
-        Optional<InventoryItem> updatedItem = inventoryItemRepository.save(foundItem);
+        Optional<ImportBillItem> updatedItem = importBillItemRepository.save(foundItem);
         return CommonResponseDTO
                 .builder()
                 .success(Boolean.TRUE)
-                .message(SuccessMessage.InventoryItem.UPDATED)
+                .message(SuccessMessage.ImportBillItem.UPDATED)
                 .build();
     }
 

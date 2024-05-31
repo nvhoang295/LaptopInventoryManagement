@@ -5,7 +5,7 @@
 package com.haui_megatech.service;
 
 import com.haui_megatech.dto.CommonResponseDTO;
-import com.haui_megatech.model.InventoryItem;
+import com.haui_megatech.model.ImportBillItem;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -14,18 +14,18 @@ import java.util.Optional;
  *
  * @author vieth
  */
-public interface InventoryItemService {
-    CommonResponseDTO<List<InventoryItem>> getList();
+public interface ImportBillItemService {
+    CommonResponseDTO<List<ImportBillItem>> getList();
     
-    CommonResponseDTO<List<InventoryItem>> searchList(String keyword);
+    CommonResponseDTO<List<ImportBillItem>> searchList(String keyword);
     
-    CommonResponseDTO addOne(InventoryItem item);
+    CommonResponseDTO addOne(ImportBillItem item);
     
-    CommonResponseDTO addList(ArrayList<InventoryItem> items);
+    CommonResponseDTO addList(ArrayList<ImportBillItem> items);
     
     CommonResponseDTO deleteOne(Integer id);
     
-    Optional<InventoryItem> findById(Integer id);
+    Optional<ImportBillItem> findById(Integer id);
     
-    CommonResponseDTO updateOne(Integer id, InventoryItem item);
+    CommonResponseDTO updateOne(Integer id, ImportBillItem item);
 }

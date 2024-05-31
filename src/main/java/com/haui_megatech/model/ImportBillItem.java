@@ -6,11 +6,23 @@ package com.haui_megatech.model;
 
 import java.io.Serial;
 import java.io.Serializable;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 /**
  *
  * @author vieth
  */
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
+@ToString
+@Builder
 public class ImportBillItem implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;
@@ -22,5 +34,5 @@ public class ImportBillItem implements Serializable {
     private Float importPrice;
     
     private ImportBill importBill;
-    private InventoryItem inventoryItem;
+    private Product product;
 }

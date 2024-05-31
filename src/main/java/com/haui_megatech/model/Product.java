@@ -45,5 +45,6 @@ public class Product implements Serializable {
     private Date whenCreated;
     private Date lastUpdated;
     
-    private ArrayList<InventoryItem> inventoryItems;
+    private ArrayList<ImportBillItem> importBillItems;
+    private ArrayList<ExportBillItem> exportBillItems;
 }

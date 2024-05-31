@@ -17,6 +17,7 @@ import com.haui_megatech.util.*;
 import java.awt.Color;
 import java.awt.Font;
 import java.io.File;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -35,6 +36,7 @@ import javax.swing.table.DefaultTableModel;
 public class Home extends javax.swing.JFrame {
     
     private final SimpleDateFormat formatter = new SimpleDateFormat("HH:mm:ss dd/MM/yyyy");
+    private final DecimalFormat priceFormatter = new DecimalFormat("0,000");
     private final Font tableHeaderFont = new Font("Segoe UI", Font.BOLD, 14);
     
     private final int ID_COL_INDEX = 0;
@@ -53,6 +55,8 @@ public class Home extends javax.swing.JFrame {
     private final int PRODUCT_BATTERY_COL_INDEX = 6;
     private final int PRODUCT_CARD_COL_INDEX = 7;
     
+    private ImportBill importBill = new ImportBill();
+    
     private final UserController userController = new UserController(
             new UserServiceImpl(
                     new UserRepositoryImpl()
@@ -70,6 +74,12 @@ public class Home extends javax.swing.JFrame {
                     new ProviderRepositoryImpl()
             )
     );
+    
+    private final ImportBillItemController importBillItemController = new ImportBillItemController(
+            new ImportBillItemServiceImpl(
+                    new ImportBillItemRepositoryImpl()
+            )
+    );
 
     /**
      * Creates new form Home
@@ -83,9 +93,15 @@ public class Home extends javax.swing.JFrame {
         this.setBackground(Color.WHITE);
         this.loginedUsername.setText(ApplicationContext.getLoginedUser().getUsername());
         
+        importProductBillCreatorLabel.setText(ApplicationContext.getLoginedUser().getUsername());
+        
+        importBill.setImportBillItems(new ArrayList<>());
+        
         usersTable.getTableHeader().setFont(tableHeaderFont);
         productsTable.getTableHeader().setFont(tableHeaderFont);
         providersTable.getTableHeader().setFont(tableHeaderFont);
+        importProductsTable.getTableHeader().setFont(tableHeaderFont);
+        importProductBillTable.getTableHeader().setFont(tableHeaderFont);
     }
 
     private void loadDataToTableUsers(String keyword) {
@@ -132,7 +148,7 @@ public class Home extends javax.swing.JFrame {
             "Màn hình",
             "Dung lượng pin",
             "Card màn hình",
-            "Tồn kho"
+            "Đã nhập"
         };
         
         DefaultTableModel tableModel = new DefaultTableModel(null, tableHeader) {
@@ -157,7 +173,7 @@ public class Home extends javax.swing.JFrame {
                         item.getDisplay() != null ? item.getDisplay() : "",
                         item.getBattery() != null ? item.getBattery() : "",
                         item.getCard() != null ? item.getCard() : "",
-                        item.getInventoryItems().size()
+                        item.getImportBillItems().size()
                     }
             );
         });
@@ -198,6 +214,79 @@ public class Home extends javax.swing.JFrame {
             );
         });
         providersTable.setModel(tableModel);
+    }
+    
+    private void loadDataToTableImportProducts(String keyword) {
+        String[] tableHeader  = {
+            "ID",
+            "Tên sản phẩm",
+            "Đã nhập"
+        };
+        
+        DefaultTableModel tableModel = new DefaultTableModel(null, tableHeader) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
+        
+        List<Product> products = keyword != null && !keyword.isEmpty() && !keyword.isBlank()
+                ? productController.searchList(keyword).data()
+                : productController.getList().data();
+        
+        products.forEach(item -> {
+            tableModel.addRow(
+                    new Object[] {
+                        item.getId() != null ? item.getId() : "",
+                        item.getName() != null ? item.getName() : "",
+                        item.getImportBillItems().size()
+                    }
+            );
+        });
+        importProductsTable.setModel(tableModel);
+    }
+    
+    private void loadDataToProvidersNameCombobox() {
+        List<Provider> providers = providerController.getList().data();
+        providerNameComboBox.addItem("---- Chọn ----");
+        providers.forEach(item -> {
+            providerNameComboBox.addItem(item.getName());
+        });
+    }
+    
+    private void loadImportBillItems(ImportBill importBill) {
+        String[] tableHeader  = {
+            "STT",
+            "Mã sản phẩm",
+            "Tên sản phẩm",
+            "Số lượng",
+            "Thành tiền"
+        };
+        
+        DefaultTableModel tableModel = new DefaultTableModel(null, tableHeader) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
+        
+        for (int i = 1; i <= importBill.getImportBillItems().size(); ++i) {
+            tableModel.addRow(
+                    new Object[] {
+                        i,
+                        
+                        importBill.getImportBillItems().get(i - 1).getProduct().getId(),
+                        
+                        importBill.getImportBillItems().get(i - 1).getProduct().getName(),
+                        
+                        importBill.getImportBillItems().get(i - 1).getQuantity(),
+                        
+                        priceFormatter.format(importBill.getImportBillItems().get(i - 1).getQuantity() 
+                                * importBill.getImportBillItems().get(i - 1).getImportPrice())
+                    }
+            );
+        }
+        importProductBillTable.setModel(tableModel);
     }
 
     /**
@@ -480,12 +569,10 @@ public class Home extends javax.swing.JFrame {
         searchImportProductTextField = new javax.swing.JTextField();
         searchImportProductRefreshButton = new javax.swing.JButton();
         importProductScrollPanel = new javax.swing.JScrollPane();
-        importProductTable = new javax.swing.JTable();
-        importProductQuantityLabel = new javax.swing.JLabel();
-        importProductQuantityTextField = new javax.swing.JTextField();
+        importProductsTable = new javax.swing.JTable();
+        importProductPriceLabel = new javax.swing.JLabel();
+        importProductPriceTextField = new javax.swing.JTextField();
         importProductAddButton = new javax.swing.JButton();
-        importBillIdLabel = new javax.swing.JLabel();
-        importBillIdTextField = new javax.swing.JTextField();
         providerNameLabel = new javax.swing.JLabel();
         providerNameComboBox = new javax.swing.JComboBox<>();
         importProductBillCreatorLabel = new javax.swing.JTextField();
@@ -498,8 +585,8 @@ public class Home extends javax.swing.JFrame {
         totalValueLabel = new javax.swing.JLabel();
         totalImportBillLabel = new javax.swing.JLabel();
         importBillProductButton = new javax.swing.JButton();
-        importProductQuantityTextField1 = new javax.swing.JTextField();
-        importProductQuantityLabel1 = new javax.swing.JLabel();
+        importProductQuantityTextField = new javax.swing.JTextField();
+        importProductQuantityLabel = new javax.swing.JLabel();
         importBillPanel = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         exportProductPanel = new javax.swing.JPanel();
@@ -3026,6 +3113,11 @@ public class Home extends javax.swing.JFrame {
                 searchImportProductTextFieldActionPerformed(evt);
             }
         });
+        searchImportProductTextField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                searchImportProductTextFieldKeyReleased(evt);
+            }
+        });
 
         searchImportProductRefreshButton.setBackground(new java.awt.Color(65, 120, 190));
         searchImportProductRefreshButton.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
@@ -3063,28 +3155,25 @@ public class Home extends javax.swing.JFrame {
         importProductScrollPanel.setBackground(new java.awt.Color(255, 255, 255));
         importProductScrollPanel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
-        importProductTable.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        importProductTable.setModel(new javax.swing.table.DefaultTableModel(
+        importProductsTable.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        importProductsTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Mã máy", "Tên máy", "Số lượng", "Đơn giá"
+
             }
         ));
-        importProductScrollPanel.setViewportView(importProductTable);
+        importProductScrollPanel.setViewportView(importProductsTable);
 
-        importProductQuantityLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        importProductQuantityLabel.setText("Đơn giá");
+        importProductPriceLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        importProductPriceLabel.setText("Đơn giá");
 
-        importProductQuantityTextField.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        importProductQuantityTextField.setText("10");
-        importProductQuantityTextField.addActionListener(new java.awt.event.ActionListener() {
+        importProductPriceTextField.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        importProductPriceTextField.setText("29,000,000");
+        importProductPriceTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                importProductQuantityTextFieldActionPerformed(evt);
+                importProductPriceTextFieldActionPerformed(evt);
             }
         });
 
@@ -3103,18 +3192,21 @@ public class Home extends javax.swing.JFrame {
             }
         });
 
-        importBillIdLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        importBillIdLabel.setText("Mã phiếu nhập:");
-
-        importBillIdTextField.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-
         providerNameLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         providerNameLabel.setText("Nhà cung cấp:");
 
         providerNameComboBox.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        providerNameComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Công Ty TNHH Minh Nghĩa", "Công ty TNHH Hoàng Việt", "Công ty TNHH Hoàng Phúc" }));
+        providerNameComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                providerNameComboBoxActionPerformed(evt);
+            }
+        });
 
+        importProductBillCreatorLabel.setEditable(false);
         importProductBillCreatorLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        importProductBillCreatorLabel.setEnabled(false);
+        importProductBillCreatorLabel.setFocusable(false);
+        importProductBillCreatorLabel.setRequestFocusEnabled(false);
         importProductBillCreatorLabel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 importProductBillCreatorLabelActionPerformed(evt);
@@ -3129,13 +3221,10 @@ public class Home extends javax.swing.JFrame {
         importProductBillTable.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         importProductBillTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+
             },
             new String [] {
-                "STT", "Mã SP", "Tên SP", "Số lượng", "Đơn giá"
+
             }
         ));
         importProductBillScrollPane.setViewportView(importProductBillTable);
@@ -3180,16 +3269,16 @@ public class Home extends javax.swing.JFrame {
         importBillProductButton.setText("Nhập hàng");
         importBillProductButton.setBorderPainted(false);
 
-        importProductQuantityTextField1.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        importProductQuantityTextField1.setText("10");
-        importProductQuantityTextField1.addActionListener(new java.awt.event.ActionListener() {
+        importProductQuantityTextField.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        importProductQuantityTextField.setText("5");
+        importProductQuantityTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                importProductQuantityTextField1ActionPerformed(evt);
+                importProductQuantityTextFieldActionPerformed(evt);
             }
         });
 
-        importProductQuantityLabel1.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        importProductQuantityLabel1.setText("Số Lượng: ");
+        importProductQuantityLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        importProductQuantityLabel.setText("Số Lượng: ");
 
         javax.swing.GroupLayout importProductPanelLayout = new javax.swing.GroupLayout(importProductPanel);
         importProductPanel.setLayout(importProductPanelLayout);
@@ -3201,13 +3290,13 @@ public class Home extends javax.swing.JFrame {
                     .addComponent(importProductScrollPanel)
                     .addComponent(searchImportProductPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(importProductPanelLayout.createSequentialGroup()
-                        .addComponent(importProductQuantityLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(importProductQuantityTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(32, 32, 32)
                         .addComponent(importProductQuantityLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(importProductQuantityTextField)
+                        .addComponent(importProductQuantityTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(32, 32, 32)
+                        .addComponent(importProductPriceLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(importProductPriceTextField)
                         .addGap(18, 18, 18)
                         .addComponent(importProductAddButton, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
@@ -3230,13 +3319,11 @@ public class Home extends javax.swing.JFrame {
                     .addComponent(importProductBillScrollPane, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, importProductPanelLayout.createSequentialGroup()
                         .addGroup(importProductPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(importBillIdLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(providerNameLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(importProductBillCreatorTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(76, 76, 76)
                         .addGroup(importProductPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(providerNameComboBox, 0, 429, Short.MAX_VALUE)
-                            .addComponent(importBillIdTextField)
                             .addComponent(importProductBillCreatorLabel))))
                 .addContainerGap())
         );
@@ -3248,27 +3335,24 @@ public class Home extends javax.swing.JFrame {
                         .addContainerGap()
                         .addComponent(searchImportProductPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(importProductScrollPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 614, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(importProductScrollPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 607, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(7, 7, 7)
                         .addGroup(importProductPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(importProductPanelLayout.createSequentialGroup()
                                 .addGroup(importProductPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(totalImportBillLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(totalValueLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, importProductPanelLayout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
                                 .addGroup(importProductPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(importProductPriceTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(importProductQuantityTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(importProductQuantityTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(importProductPriceLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(importProductQuantityLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(importProductQuantityLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(importProductAddButton, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addGroup(importProductPanelLayout.createSequentialGroup()
-                        .addGap(16, 16, 16)
-                        .addGroup(importProductPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(importBillIdLabel)
-                            .addComponent(importBillIdTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(23, 23, 23)
+                        .addGap(17, 17, 17)
                         .addGroup(importProductPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(providerNameLabel)
                             .addComponent(providerNameComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -3276,9 +3360,9 @@ public class Home extends javax.swing.JFrame {
                         .addGroup(importProductPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(importProductBillCreatorTextField)
                             .addComponent(importProductBillCreatorLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addComponent(importProductBillScrollPane)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(importProductBillScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 498, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(20, 20, 20)
                         .addGroup(importProductPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(removeBillItemButton, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(editBillItemButton, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -3877,15 +3961,74 @@ public class Home extends javax.swing.JFrame {
     }//GEN-LAST:event_searchImportProductTextFieldActionPerformed
 
     private void searchImportProductRefreshButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchImportProductRefreshButtonActionPerformed
-        // TODO add your handling code here:
+        searchImportProductTextField.setText("");
+        loadDataToTableImportProducts(null);
     }//GEN-LAST:event_searchImportProductRefreshButtonActionPerformed
 
-    private void importProductQuantityTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_importProductQuantityTextFieldActionPerformed
+    private void importProductPriceTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_importProductPriceTextFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_importProductQuantityTextFieldActionPerformed
+    }//GEN-LAST:event_importProductPriceTextFieldActionPerformed
 
     private void importProductAddButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_importProductAddButtonActionPerformed
-        // TODO add your handling code here:
+        int[] rows = importProductsTable.getSelectedRows();
+        if (rows.length == 0) {
+            showDiaglogMessage(ErrorMessage.EMPTY_SELECTED_ROWS);
+            return;
+        }
+        
+        List<Integer> selectedIds = new ArrayList<>();
+        for (int row : rows) {
+            selectedIds.add(Integer.valueOf(importProductsTable.getValueAt(row, ID_COL_INDEX).toString()));
+        }
+        
+        List<Product> selectedProducts = productController.getListByIds(selectedIds);
+        
+        if (importProductQuantityTextField.getText().trim().length() == 0) {
+            showDiaglogMessage("Vui lòng nhập trường số lượng nhập.");
+            return;
+        }
+        
+        if (importProductPriceTextField.getText().trim().length() == 0) {
+            showDiaglogMessage("Vui lòng nhập trường giá nhập.");
+            return;
+        }
+        
+        Integer quantity = 0;
+        try {
+            quantity = Integer.valueOf(importProductQuantityTextField.getText());
+        } catch (NumberFormatException e) {
+            showDiaglogMessage("Số lượng phải là một số nguyên.");
+            return;
+        }
+        Float price = 0.0f;
+        try {
+            price = Float.valueOf(importProductPriceTextField.getText().replace(",", ""));
+        } catch (NumberFormatException e) {
+            showDiaglogMessage("Giá sản phẩm phải là một số thực.");
+            return;
+        }
+        
+        final Integer finalQuantity = quantity;
+        final Float finalPrice = price;
+        
+        importBill.getImportBillItems()
+                .addAll(selectedProducts
+                        .stream()
+                        .map(item ->ImportBillItem
+                                .builder()
+                                .product(item)
+                                .quantity(finalQuantity)
+                                .importPrice(finalPrice)
+                                .importBill(importBill)
+                                .build())
+                        .toList()
+                );
+        
+        loadImportBillItems(importBill);
+        
+        System.out.println("quantity:" + quantity);
+        System.out.println("price" + price);
+        selectedProducts.forEach(System.out::println);
     }//GEN-LAST:event_importProductAddButtonActionPerformed
 
     private void importProductBillCreatorLabelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_importProductBillCreatorLabelActionPerformed
@@ -4241,6 +4384,8 @@ public class Home extends javax.swing.JFrame {
         // TODO add your handling code here:
         this.setActiveTab("import-product");
         this.setDisplayedPanel("import-product");
+        loadDataToTableImportProducts(null);
+        loadDataToProvidersNameCombobox();
     }//GEN-LAST:event_importProductLabelMouseClicked
 
     private void providerTabMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_providerTabMouseClicked
@@ -5041,9 +5186,21 @@ public class Home extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_viewProviderLastUpdatedTextFieldActionPerformed
 
-    private void importProductQuantityTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_importProductQuantityTextField1ActionPerformed
+    private void importProductQuantityTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_importProductQuantityTextFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_importProductQuantityTextField1ActionPerformed
+    }//GEN-LAST:event_importProductQuantityTextFieldActionPerformed
+
+    private void searchImportProductTextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchImportProductTextFieldKeyReleased
+        String keyword = searchImportProductTextField.getText();
+        loadDataToTableImportProducts(keyword);
+    }//GEN-LAST:event_searchImportProductTextFieldKeyReleased
+
+    private void providerNameComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_providerNameComboBoxActionPerformed
+        System.out.println("Hello");
+        System.out.println(providerNameComboBox.getSelectedItem());
+        Optional<Provider> found = providerController.findByName(providerNameComboBox.getSelectedItem().toString());
+        found.ifPresent(item -> System.out.println(item));
+    }//GEN-LAST:event_providerNameComboBoxActionPerformed
 
     /**
      * @param args the command line arguments
@@ -5187,8 +5344,6 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JButton exportUsersToExcelButton;
     private javax.swing.JLabel firstNameLabel;
     private javax.swing.JTextField firstNameTextField;
-    private javax.swing.JLabel importBillIdLabel;
-    private javax.swing.JTextField importBillIdTextField;
     private javax.swing.JButton importBillItemFromExcelButton;
     private javax.swing.JLabel importBillLabel;
     private javax.swing.JPanel importBillPanel;
@@ -5201,14 +5356,14 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JTable importProductBillTable;
     private javax.swing.JLabel importProductLabel;
     private javax.swing.JPanel importProductPanel;
+    private javax.swing.JLabel importProductPriceLabel;
+    private javax.swing.JTextField importProductPriceTextField;
     private javax.swing.JLabel importProductQuantityLabel;
-    private javax.swing.JLabel importProductQuantityLabel1;
     private javax.swing.JTextField importProductQuantityTextField;
-    private javax.swing.JTextField importProductQuantityTextField1;
     private javax.swing.JScrollPane importProductScrollPanel;
     private javax.swing.JPanel importProductTab;
-    private javax.swing.JTable importProductTable;
     private javax.swing.JButton importProductsFromExcelButton;
+    private javax.swing.JTable importProductsTable;
     private javax.swing.JButton importProvidersFromExcelButton;
     private javax.swing.JButton importUsersFromExcelButton;
     private javax.swing.JLabel inStockLabel;

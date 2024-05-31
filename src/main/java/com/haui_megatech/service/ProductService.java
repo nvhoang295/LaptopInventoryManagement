@@ -30,4 +30,6 @@ public interface ProductService {
     
     CommonResponseDTO updateOne(Integer id, Product product);
     
+    List<Product> getListByIds(List<Integer> ids);
+    
 }

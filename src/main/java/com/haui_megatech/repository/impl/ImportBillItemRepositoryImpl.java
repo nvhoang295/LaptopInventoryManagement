@@ -5,8 +5,7 @@
 package com.haui_megatech.repository.impl;
 
 import com.haui_megatech.ApplicationContext;
-import com.haui_megatech.model.InventoryItem;
-import com.haui_megatech.repository.InventoryItemRepository;
+import com.haui_megatech.model.ImportBillItem;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -15,31 +14,32 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Optional;
+import com.haui_megatech.repository.ImportBillItemRepository;
 
 /**
  *
  * @author vieth
  */
-public class InventoryItemRepositoryImpl implements InventoryItemRepository {
+public class ImportBillItemRepositoryImpl implements ImportBillItemRepository {
 
     private final String ABS_DATA_PATH;
     
-    public InventoryItemRepositoryImpl() {
-        ABS_DATA_PATH = new ApplicationContext().ABS_INVENTORY_ITEMS_DATA_PATH;
+    public ImportBillItemRepositoryImpl() {
+        ABS_DATA_PATH = new ApplicationContext().ABS_IMPORT_BILL_ITEMS_DATA_PATH;
         
         initCounter();
     }
     
     private void initCounter() {
-        ArrayList<InventoryItem> items = this.getAll();
+        ArrayList<ImportBillItem> items = this.getAll();
         if (items.isEmpty()) {
-            InventoryItem.counter = 0;
+            ImportBillItem.counter = 0;
         } else {
-            InventoryItem.counter = items.getLast().getId();
+            ImportBillItem.counter = items.getLast().getId();
         }
     }
     
-    private boolean saveToDisk(ArrayList<InventoryItem> list) {
+    private boolean saveToDisk(ArrayList<ImportBillItem> list) {
         try (ObjectOutputStream oos = new ObjectOutputStream(
                 new FileOutputStream(ABS_DATA_PATH)
         )) {
@@ -51,7 +51,7 @@ public class InventoryItemRepositoryImpl implements InventoryItemRepository {
     }
     
     @Override
-    public Optional<InventoryItem> findById(Integer id) {
+    public Optional<ImportBillItem> findById(Integer id) {
         return this.getAll()
                 .parallelStream()
                 .filter(item -> item.getId().equals(id))
@@ -59,11 +59,11 @@ public class InventoryItemRepositoryImpl implements InventoryItemRepository {
     }
 
     @Override
-    public Optional<InventoryItem> save(InventoryItem inventoryItem) {
-        ArrayList<InventoryItem> items = this.getAll();
+    public Optional<ImportBillItem> save(ImportBillItem inventoryItem) {
+        ArrayList<ImportBillItem> items = this.getAll();
         if (inventoryItem.getId() != null) {
             int foundIndex = this.findIndexById(inventoryItem.getId());
-            InventoryItem foundItem = items.get(foundIndex);
+            ImportBillItem foundItem = items.get(foundIndex);
             update(foundItem, inventoryItem);
             items.set(foundIndex, foundItem);
             return this.saveToDisk(items)
@@ -71,7 +71,7 @@ public class InventoryItemRepositoryImpl implements InventoryItemRepository {
                     : Optional.empty();
         }
 
-        inventoryItem.setId(++InventoryItem.counter);
+        inventoryItem.setId(++ImportBillItem.counter);
         items.add(inventoryItem);
 
         return this.saveToDisk(items)
@@ -80,23 +80,23 @@ public class InventoryItemRepositoryImpl implements InventoryItemRepository {
     }
     
     private int findIndexById(Integer id) {
-        ArrayList<InventoryItem> items = this.getAll();
+        ArrayList<ImportBillItem> items = this.getAll();
         for (int i = 0; i < items.size(); ++i) {
             if (items.get(i).getId().equals(id)) return i;
         }
         return -1;
     }
     
-    private boolean update(InventoryItem oldInfo, InventoryItem newInfo) {
-        oldInfo.setTotalQuantity(newInfo.getTotalQuantity());
+    private boolean update(ImportBillItem oldInfo, ImportBillItem newInfo) {
+        oldInfo.setQuantity(newInfo.getQuantity());
         return true;
     }
 
     @Override
-    public ArrayList<InventoryItem> saveAll(ArrayList<InventoryItem> inventoryItems) {
-        ArrayList<InventoryItem> savedItems = new ArrayList<>();
+    public ArrayList<ImportBillItem> saveAll(ArrayList<ImportBillItem> inventoryItems) {
+        ArrayList<ImportBillItem> savedItems = new ArrayList<>();
         inventoryItems.forEach(item -> {
-            Optional<InventoryItem> savedItem = this.save(item);
+            Optional<ImportBillItem> savedItem = this.save(item);
             if (savedItem.isPresent()) {
                 savedItems.add(savedItem.get());
             }
@@ -106,18 +106,18 @@ public class InventoryItemRepositoryImpl implements InventoryItemRepository {
 
     @Override
     public void deleteById(int id) {
-        ArrayList<InventoryItem> items = this.getAll();
+        ArrayList<ImportBillItem> items = this.getAll();
         items.removeIf(item -> item.getId().equals(id));
         this.saveToDisk(items);
     }
 
     @Override
-    public ArrayList<InventoryItem> getAll() {
-        ArrayList<InventoryItem> products;
+    public ArrayList<ImportBillItem> getAll() {
+        ArrayList<ImportBillItem> products;
         try (ObjectInputStream ois = new ObjectInputStream(
                 (new FileInputStream(ABS_DATA_PATH))
         )) {
-            products = (ArrayList<InventoryItem>) ois.readObject();
+            products = (ArrayList<ImportBillItem>) ois.readObject();
             if (products == null) {
                 products = new ArrayList<>();
             }
