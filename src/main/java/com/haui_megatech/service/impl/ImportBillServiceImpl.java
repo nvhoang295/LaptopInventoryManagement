@@ -99,7 +99,7 @@ public class ImportBillServiceImpl implements ImportBillService {
             importBillItemRepository.deleteById(item.getId());
         });
         
-        importBillItemRepository.deleteById(id);
+        importBillRepository.deleteById(id);
         
         return CommonResponseDTO
                 .builder()
