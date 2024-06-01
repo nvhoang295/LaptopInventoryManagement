@@ -154,6 +154,7 @@ public class Home extends javax.swing.JFrame {
         exportProductsBillTable.getTableHeader().setFont(tableHeaderFont);
         exportBillsTable.getTableHeader().setFont(tableHeaderFont);
         inStocksTable.getTableHeader().setFont(tableHeaderFont);
+        viewExportBillDetailItemsTable.getTableHeader().setFont(tableHeaderFont);
 
         loadDataToProvidersNameCombobox();
 
@@ -560,6 +561,40 @@ public class Home extends javax.swing.JFrame {
         });
         exportBillsTable.setModel(tableModel);
     }
+    
+    private void loadDataToWiewExportBillDetailItemsTable(ExportBill item) {
+        String[] tableHeader = {
+            "STT",
+            "Mã sản phẩm",
+            "Tên sản phẩm",
+            "Số lượng",
+            "Đơn giá",
+            "Thành tiền"
+        };
+
+        DefaultTableModel tableModel = new DefaultTableModel(null, tableHeader) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
+
+        for (int i = 1; i <= item.getExportBillItems().size(); ++i) {
+            tableModel.addRow(
+                    new Object[]{
+                        i,
+                        item.getExportBillItems().get(i - 1).getProduct().getId(),
+                        item.getExportBillItems().get(i - 1).getProduct().getName(),
+                        item.getExportBillItems().get(i - 1).getQuantity(),
+                        priceFormatter.format(item.getExportBillItems().get(i - 1).getExportPrice()) + "đ",
+                        priceFormatter.format(item.getExportBillItems().get(i - 1).getQuantity()
+                                * item.getExportBillItems().get(i - 1).getExportPrice()) + "đ"
+                    }
+            );
+        }
+
+        viewExportBillDetailItemsTable.setModel(tableModel);
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -846,6 +881,26 @@ public class Home extends javax.swing.JFrame {
         editExportBillItemIndexTextField = new javax.swing.JTextField();
         editExportBillItemInventoryIdLabel = new javax.swing.JLabel();
         editExportBillItemInventoryIdTextField = new javax.swing.JTextField();
+        viewExportBillDetailDiaglog = new javax.swing.JDialog();
+        viewExportBillDetailPanel = new javax.swing.JPanel();
+        viewExportBillDetailHeaderPanel = new javax.swing.JPanel();
+        viewExportBillDetailHeaderLabel = new javax.swing.JLabel();
+        viewExportBillIdLabel = new javax.swing.JLabel();
+        viewExportBillClientNameLabel = new javax.swing.JLabel();
+        viewExportBillWhenCreatedLabel = new javax.swing.JLabel();
+        viewExportBillCreatorLabel = new javax.swing.JLabel();
+        viewImportBillProductsScrollTable1 = new javax.swing.JScrollPane();
+        viewExportBillDetailItemsTable = new javax.swing.JTable();
+        viewExportBillTotalLabel = new javax.swing.JLabel();
+        viewExportBillIdValueLabel = new javax.swing.JLabel();
+        viewExportBillClientNameValueLabel = new javax.swing.JLabel();
+        viewExportBillWhenCreatedValueLabel = new javax.swing.JLabel();
+        viewExportBillCreatorValueLabel = new javax.swing.JLabel();
+        viewExportBillTotalValueLabel = new javax.swing.JLabel();
+        viewExportBillClientAddressLabel = new javax.swing.JLabel();
+        viewExportBillClientAddressValueLabel = new javax.swing.JLabel();
+        viewExportBillClientPhoneNumberLabel = new javax.swing.JLabel();
+        viewExportBillClientPhoneNumberValueLabel = new javax.swing.JLabel();
         sidebarPanel = new javax.swing.JPanel();
         loginedUsername = new javax.swing.JLabel();
         productTab = new javax.swing.JPanel();
@@ -3240,6 +3295,178 @@ public class Home extends javax.swing.JFrame {
 
         editExportBillItemDiaglog.getAccessibleContext().setAccessibleName("Sửa phiếu xuất");
 
+        viewExportBillDetailDiaglog.setMinimumSize(new java.awt.Dimension(880, 520));
+        viewExportBillDetailDiaglog.setSize(new java.awt.Dimension(880, 520));
+
+        viewExportBillDetailPanel.setBackground(new java.awt.Color(255, 255, 255));
+        viewExportBillDetailPanel.setMinimumSize(new java.awt.Dimension(880, 520));
+
+        viewExportBillDetailHeaderPanel.setBackground(new java.awt.Color(44, 43, 196));
+
+        viewExportBillDetailHeaderLabel.setBackground(javax.swing.UIManager.getDefaults().getColor("Actions.Blue"));
+        viewExportBillDetailHeaderLabel.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        viewExportBillDetailHeaderLabel.setForeground(new java.awt.Color(255, 255, 255));
+        viewExportBillDetailHeaderLabel.setText("CHI TIẾT PHIẾU XUẤT");
+
+        javax.swing.GroupLayout viewExportBillDetailHeaderPanelLayout = new javax.swing.GroupLayout(viewExportBillDetailHeaderPanel);
+        viewExportBillDetailHeaderPanel.setLayout(viewExportBillDetailHeaderPanelLayout);
+        viewExportBillDetailHeaderPanelLayout.setHorizontalGroup(
+            viewExportBillDetailHeaderPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, viewExportBillDetailHeaderPanelLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(viewExportBillDetailHeaderLabel)
+                .addGap(310, 310, 310))
+        );
+        viewExportBillDetailHeaderPanelLayout.setVerticalGroup(
+            viewExportBillDetailHeaderPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(viewExportBillDetailHeaderPanelLayout.createSequentialGroup()
+                .addGap(24, 24, 24)
+                .addComponent(viewExportBillDetailHeaderLabel)
+                .addContainerGap(28, Short.MAX_VALUE))
+        );
+
+        viewExportBillIdLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        viewExportBillIdLabel.setText("Mã phiếu xuất:");
+
+        viewExportBillClientNameLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        viewExportBillClientNameLabel.setText("Tên khách hàng:");
+
+        viewExportBillWhenCreatedLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        viewExportBillWhenCreatedLabel.setText("Thời gian tạo:");
+
+        viewExportBillCreatorLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        viewExportBillCreatorLabel.setText("Người lập:");
+
+        viewExportBillDetailItemsTable.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        viewExportBillDetailItemsTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+
+            }
+        ));
+        viewExportBillDetailItemsTable.setShowGrid(true);
+        viewImportBillProductsScrollTable1.setViewportView(viewExportBillDetailItemsTable);
+
+        viewExportBillTotalLabel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        viewExportBillTotalLabel.setText("TỔNG TIỀN:");
+
+        viewExportBillIdValueLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        viewExportBillIdValueLabel.setText("1");
+
+        viewExportBillClientNameValueLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        viewExportBillClientNameValueLabel.setText("Anh Hoàng");
+
+        viewExportBillWhenCreatedValueLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        viewExportBillWhenCreatedValueLabel.setText("jLabel9");
+
+        viewExportBillCreatorValueLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        viewExportBillCreatorValueLabel.setText("viethoang");
+
+        viewExportBillTotalValueLabel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        viewExportBillTotalValueLabel.setForeground(new java.awt.Color(204, 0, 51));
+        viewExportBillTotalValueLabel.setText("...đ");
+
+        viewExportBillClientAddressLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        viewExportBillClientAddressLabel.setText("Địa chỉ:");
+
+        viewExportBillClientAddressValueLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        viewExportBillClientAddressValueLabel.setText("Bắc Giang");
+
+        viewExportBillClientPhoneNumberLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        viewExportBillClientPhoneNumberLabel.setText("Số điện thoại:");
+
+        viewExportBillClientPhoneNumberValueLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        viewExportBillClientPhoneNumberValueLabel.setText("0336118268");
+
+        javax.swing.GroupLayout viewExportBillDetailPanelLayout = new javax.swing.GroupLayout(viewExportBillDetailPanel);
+        viewExportBillDetailPanel.setLayout(viewExportBillDetailPanelLayout);
+        viewExportBillDetailPanelLayout.setHorizontalGroup(
+            viewExportBillDetailPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(viewExportBillDetailHeaderPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(viewExportBillDetailPanelLayout.createSequentialGroup()
+                .addGap(36, 36, 36)
+                .addGroup(viewExportBillDetailPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(viewExportBillDetailPanelLayout.createSequentialGroup()
+                        .addGroup(viewExportBillDetailPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(viewExportBillDetailPanelLayout.createSequentialGroup()
+                                .addComponent(viewExportBillTotalLabel)
+                                .addGap(18, 18, 18)
+                                .addComponent(viewExportBillTotalValueLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(viewImportBillProductsScrollTable1, javax.swing.GroupLayout.PREFERRED_SIZE, 810, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(34, Short.MAX_VALUE))
+                    .addGroup(viewExportBillDetailPanelLayout.createSequentialGroup()
+                        .addGroup(viewExportBillDetailPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, viewExportBillDetailPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(viewExportBillClientNameLabel)
+                                .addComponent(viewExportBillIdLabel, javax.swing.GroupLayout.Alignment.LEADING))
+                            .addComponent(viewExportBillClientAddressLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(12, 12, 12)
+                        .addGroup(viewExportBillDetailPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(viewExportBillClientAddressValueLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(viewExportBillClientNameValueLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 225, Short.MAX_VALUE)
+                            .addComponent(viewExportBillIdValueLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(63, 63, 63)
+                        .addGroup(viewExportBillDetailPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(viewExportBillDetailPanelLayout.createSequentialGroup()
+                                .addGroup(viewExportBillDetailPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(viewExportBillWhenCreatedLabel)
+                                    .addComponent(viewExportBillCreatorLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(viewExportBillDetailPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(viewExportBillDetailPanelLayout.createSequentialGroup()
+                                        .addComponent(viewExportBillWhenCreatedValueLabel)
+                                        .addContainerGap())
+                                    .addComponent(viewExportBillCreatorValueLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addGroup(viewExportBillDetailPanelLayout.createSequentialGroup()
+                                .addComponent(viewExportBillClientPhoneNumberLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(viewExportBillClientPhoneNumberValueLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
+        );
+        viewExportBillDetailPanelLayout.setVerticalGroup(
+            viewExportBillDetailPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(viewExportBillDetailPanelLayout.createSequentialGroup()
+                .addComponent(viewExportBillDetailHeaderPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(viewExportBillDetailPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(viewExportBillIdLabel)
+                    .addComponent(viewExportBillWhenCreatedLabel)
+                    .addComponent(viewExportBillIdValueLabel)
+                    .addComponent(viewExportBillWhenCreatedValueLabel))
+                .addGap(18, 18, 18)
+                .addGroup(viewExportBillDetailPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(viewExportBillClientNameLabel)
+                    .addComponent(viewExportBillClientNameValueLabel)
+                    .addComponent(viewExportBillCreatorLabel)
+                    .addComponent(viewExportBillCreatorValueLabel))
+                .addGap(18, 18, 18)
+                .addGroup(viewExportBillDetailPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(viewExportBillClientAddressLabel)
+                    .addComponent(viewExportBillClientAddressValueLabel)
+                    .addGroup(viewExportBillDetailPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(viewExportBillClientPhoneNumberLabel)
+                        .addComponent(viewExportBillClientPhoneNumberValueLabel)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(viewImportBillProductsScrollTable1, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(12, 12, 12)
+                .addGroup(viewExportBillDetailPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(viewExportBillTotalLabel)
+                    .addComponent(viewExportBillTotalValueLabel))
+                .addContainerGap(55, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout viewExportBillDetailDiaglogLayout = new javax.swing.GroupLayout(viewExportBillDetailDiaglog.getContentPane());
+        viewExportBillDetailDiaglog.getContentPane().setLayout(viewExportBillDetailDiaglogLayout);
+        viewExportBillDetailDiaglogLayout.setHorizontalGroup(
+            viewExportBillDetailDiaglogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(viewExportBillDetailPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        viewExportBillDetailDiaglogLayout.setVerticalGroup(
+            viewExportBillDetailDiaglogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(viewExportBillDetailPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1400, 830));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -4950,25 +5177,25 @@ public class Home extends javax.swing.JFrame {
         exportBillPanelLayout.setHorizontalGroup(
             exportBillPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(exportBillPanelLayout.createSequentialGroup()
-                .addGap(12, 12, 12)
+                .addContainerGap()
                 .addGroup(exportBillPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, exportBillPanelLayout.createSequentialGroup()
                         .addComponent(exportBillsFunctionPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(searchExportBillsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addComponent(exportBillsScrollPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 1146, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(12, 12, 12))
+                .addGap(18, 18, 18))
         );
         exportBillPanelLayout.setVerticalGroup(
             exportBillPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(exportBillPanelLayout.createSequentialGroup()
-                .addGap(36, 36, 36)
+                .addContainerGap()
                 .addGroup(exportBillPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(exportBillsFunctionPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(searchExportBillsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(searchExportBillsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(exportBillsScrollPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 658, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(44, Short.MAX_VALUE))
+                .addContainerGap(74, Short.MAX_VALUE))
         );
 
         getContentPane().add(exportBillPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 0, 1170, 830));
@@ -7447,11 +7674,13 @@ public class Home extends javax.swing.JFrame {
     }//GEN-LAST:event_editExportBillItemInventoryIdTextFieldActionPerformed
 
     private void searchExportBillsTextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchExportBillsTextFieldKeyReleased
-        // TODO add your handling code here:
+        String keyword = searchExportBillsTextField.getText();
+        loadDataToExportBillsTable(keyword);
     }//GEN-LAST:event_searchExportBillsTextFieldKeyReleased
 
     private void resetSearchExportBillsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetSearchExportBillsButtonActionPerformed
-        // TODO add your handling code here:
+        searchExportBillsTextField.setText("");
+        loadDataToExportBillsTable(null);
     }//GEN-LAST:event_resetSearchExportBillsButtonActionPerformed
 
     private void exportImportBillsToExcelButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exportImportBillsToExcelButton1ActionPerformed
@@ -7467,9 +7696,43 @@ public class Home extends javax.swing.JFrame {
     }//GEN-LAST:event_deleteExportBillButtonActionPerformed
 
     private void viewExportBillButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewExportBillButtonActionPerformed
-        // TODO add your handling code here:
+        int[] rows = exportBillsTable.getSelectedRows();
+        if (rows.length == 0) {
+            showDiaglogMessage(ErrorMessage.EMPTY_SELECTED_ROWS);
+            return;
+        }
+        if (rows.length > 1) {
+            showDiaglogMessage(ErrorMessage.EXCEED_SELECTED_ROWS);
+            return;
+        }
+        this.showViewExportBillDetailDiaglog(rows[0]);
     }//GEN-LAST:event_viewExportBillButtonActionPerformed
-
+    
+    private void showViewExportBillDetailDiaglog(int selectedRow) {
+        viewExportBillDetailDiaglog.setVisible(true);
+        viewExportBillDetailDiaglog.setLocationRelativeTo(this);
+        
+        int id = Integer.parseInt(exportBillsTable.getValueAt(selectedRow, ID_COL_INDEX).toString());
+        Optional<ExportBill> found = exportBillController.findById(id);
+        found.ifPresentOrElse(
+                (item) -> {
+                    viewExportBillIdValueLabel.setText(item.getId().toString());
+                    viewExportBillWhenCreatedValueLabel.setText(formatter.format(item.getWhenCreated()));
+                    viewExportBillClientNameValueLabel.setText(item.getClientName());
+                    viewExportBillCreatorValueLabel.setText(item.getUser().getUsername());
+                    viewExportBillClientAddressValueLabel.setText(item.getClientAddress());
+                    viewExportBillClientPhoneNumberValueLabel.setText(item.getClientPhoneNumber());
+                    viewExportBillTotalValueLabel.setText(priceFormatter.format(item.getTotal()) + "đ");
+                    loadDataToWiewExportBillDetailItemsTable(item);
+                },
+                () -> {
+                    showDiaglogMessage("Không tìm thấy!");
+                }
+        );
+        
+    }
+    
+    
     private void showViewImportBillDetailDiaglog(int selectedRow) {
         viewImportBillDetailDiaglog.setVisible(true);
         viewImportBillDetailDiaglog.setLocationRelativeTo(this);
@@ -7861,6 +8124,25 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JScrollPane usersScrollPanel;
     private javax.swing.JTable usersTable;
     private javax.swing.JButton viewExportBillButton;
+    private javax.swing.JLabel viewExportBillClientAddressLabel;
+    private javax.swing.JLabel viewExportBillClientAddressValueLabel;
+    private javax.swing.JLabel viewExportBillClientNameLabel;
+    private javax.swing.JLabel viewExportBillClientNameValueLabel;
+    private javax.swing.JLabel viewExportBillClientPhoneNumberLabel;
+    private javax.swing.JLabel viewExportBillClientPhoneNumberValueLabel;
+    private javax.swing.JLabel viewExportBillCreatorLabel;
+    private javax.swing.JLabel viewExportBillCreatorValueLabel;
+    private javax.swing.JDialog viewExportBillDetailDiaglog;
+    private javax.swing.JLabel viewExportBillDetailHeaderLabel;
+    private javax.swing.JPanel viewExportBillDetailHeaderPanel;
+    private javax.swing.JTable viewExportBillDetailItemsTable;
+    private javax.swing.JPanel viewExportBillDetailPanel;
+    private javax.swing.JLabel viewExportBillIdLabel;
+    private javax.swing.JLabel viewExportBillIdValueLabel;
+    private javax.swing.JLabel viewExportBillTotalLabel;
+    private javax.swing.JLabel viewExportBillTotalValueLabel;
+    private javax.swing.JLabel viewExportBillWhenCreatedLabel;
+    private javax.swing.JLabel viewExportBillWhenCreatedValueLabel;
     private javax.swing.JButton viewImportBillButton;
     private javax.swing.JLabel viewImportBillCreatorLabel;
     private javax.swing.JLabel viewImportBillCreatorValueLabel;
@@ -7872,6 +8154,7 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JLabel viewImportBillIdLabel;
     private javax.swing.JLabel viewImportBillIdValueLabel;
     private javax.swing.JScrollPane viewImportBillProductsScrollTable;
+    private javax.swing.JScrollPane viewImportBillProductsScrollTable1;
     private javax.swing.JLabel viewImportBillProviderNameLabel;
     private javax.swing.JLabel viewImportBillProviderNameValueLabel;
     private javax.swing.JLabel viewImportBillTotalLabel;
