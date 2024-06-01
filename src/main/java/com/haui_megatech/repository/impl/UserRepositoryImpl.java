@@ -25,11 +25,15 @@ import java.util.stream.Collectors;
  * @author vieth
  */
 public class UserRepositoryImpl implements UserRepository {
-
+    
+    private final ApplicationContext applicationContext;
+    
     private final String ABS_DATA_PATH;
     
-    public UserRepositoryImpl() {
-        ABS_DATA_PATH = new ApplicationContext().ABS_USERS_DATA_PATH;
+    public UserRepositoryImpl(ApplicationContext applicationContext) {
+        this.applicationContext = applicationContext;
+        
+        ABS_DATA_PATH = this.applicationContext.ABS_USERS_DATA_PATH;
         
         initCounter();
     }
