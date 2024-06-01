@@ -43,6 +43,7 @@ public class Login extends javax.swing.JFrame {
     public Login() {
         initComponents();
         this.setLocationRelativeTo(null);
+        loginBtn.setEnabled(false);
     }
 
     /**
@@ -494,6 +495,7 @@ public class Login extends javax.swing.JFrame {
     private void loginBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_loginBtnMouseClicked
         String username = uName.getText();
         String password = String.valueOf(uPass.getPassword());
+        if (!validateUsername(username) && !validatePassword(password)) return;
         CommonResponseDTO response = authController.authenticate(
                 AuthRequestDTO
                         .builder()
@@ -518,81 +520,86 @@ public class Login extends javax.swing.JFrame {
 
     private void uNameKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_uNameKeyReleased
         String username = uName.getText();
-
+        String password = String.valueOf(uPass.getPassword());
+        
         validateUsername(username);
+        loginBtn.setEnabled(validatePassword(password) && validateUsername(username));
     }//GEN-LAST:event_uNameKeyReleased
     
-    private void validateUsername(String username) {
+    private boolean validateUsername(String username) {
+        loginBtn.setEnabled(false);
         uNameError.setForeground(Color.red);
         if (username.isEmpty() || username.isBlank()) {
             uNameError.setText("Tên đăng nhập không được để trống.");
-            return;
+            return false;
         }
         
         if (username.indexOf(SPACE_CHAR) != -1) {
             uNameError.setText("Tên đăng nhập không được chứa dấu cách.");
-            return;
+            return false;
         }
         
         if (username.length() < MIN_LENGTH) {
             uNameError.setText(String.format("Tên đăng nhập phải tối thiểu %d ký tự.", MIN_LENGTH));
-            return;
+            return false;
         }
         
         if (!EMAIL_REGEX.matcher(username).find()) {
             uNameError.setText("Tên đăng nhập không đúng định dạng.");
-            return;
+            return false;
         }
         
         uNameError.setText("Tên đăng nhập hợp lệ.");
         uNameError.setForeground(Color.GREEN);
+        return true;
     }
     
     private void uPassKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_uPassKeyReleased
         String password = String.valueOf(uPass.getPassword());
-
-        validatePassword(password);
+        String username = uName.getText();
+        loginBtn.setEnabled(validatePassword(password) && validateUsername(username));
     }//GEN-LAST:event_uPassKeyReleased
     
-    private void validatePassword(String password) {
+    private boolean validatePassword(String password) {
         uPassError.setForeground(Color.red);
         if (password.length() == 0) {
             uPassError.setText("Mật khẩu không được để trống.");
-            return;
+            return false;
         }
 
         if (password.indexOf(SPACE_CHAR) != -1) {
             uPassError.setText("Mật khẩu không được chứa dấu cách.");
-            return;
+            return false;
         }
 
         if (password.length() < MIN_LENGTH) {
             uPassError.setText(String.format("Mật khẩu phải tối thiểu %d ký tự.", MIN_LENGTH));
-            return;
+            return false;
         }
 
         if (!UPPER_CASE_REGEX.matcher(password).find()) {
             uPassError.setText("Mật khẩu phải có ít nhất 1 ký tự in hoa.");
-            return;
+            return false;
         }
 
         if (!LOWER_CASE_REGEX.matcher(password).find()) {
             uPassError.setText("Mật khẩu phải có ít nhất 1 ký tự in thường.");
-            return;
+            return false;
         }
 
         if (!NUMBER_REGEX.matcher(password).find()) {
             uPassError.setText("Mật khẩu phải có ít nhất 1 chữ số.");
-            return;
+            return false;
         }
 
         if (!SPEC_CHAR_REGEX.matcher(password).find()) {
             uPassError.setText("Mật khẩu phải có ít nhất 1 ký tự đặc biệt");
-            return;
+            return false;
         }
 
         uPassError.setText("Mật khẩu hợp lệ.");
         uPassError.setForeground(Color.GREEN);
+        return true;
     }
     
     private void loginBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginBtnActionPerformed
