@@ -4,6 +4,7 @@
  */
 package com.haui_megatech.util;
 
+import com.haui_megatech.model.ExportBill;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Element;
@@ -16,6 +17,8 @@ import com.itextpdf.text.pdf.PdfWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 
 /**
  *
@@ -23,6 +26,102 @@ import java.io.FileOutputStream;
  */
 public class PdfUtil {
     
+    private static final SimpleDateFormat formatter = new SimpleDateFormat("HH:mm:ss dd/MM/yyyy");
+    private static final DecimalFormat priceFormatter = new DecimalFormat("0,000");
+    
+    private static final String PDF_FILENAME_EXTENSION = ".pdf";
+    
+    public static boolean exportBillToPdf(ExportBill item, String savedFilePath) {
+        Document document = new Document();
+        try {
+            PdfWriter.getInstance(document, new FileOutputStream(new File(savedFilePath.replace("\\", "/") + PDF_FILENAME_EXTENSION)));
+            document.open();
+
+            
+            Font headingFont = new Font();
+            headingFont.setStyle(Font.BOLD);
+            headingFont.setSize(24);
+            
+            
+            Font simpleFont = new Font();
+            simpleFont.setStyle(Font.NORMAL);
+            simpleFont.setSize(14);
+            
+            
+            Paragraph headingParagraph = new Paragraph("PHIEU XUAT HANG");
+            headingParagraph.setAlignment(Element.ALIGN_CENTER);
+            headingParagraph.setFont(headingFont);
+            
+            Paragraph exportBillId = new Paragraph("Ma phieu xuat: " + item.getId());
+            Paragraph creator = new Paragraph("Nguoi lap: " + item.getUser().getUsername());
+            Paragraph whenCreated = new Paragraph("Thoi gian tao: " + formatter.format(item.getWhenCreated()));
+            Paragraph clientName = new Paragraph("Ten khach hang: " + item.getClientName());
+            Paragraph clientPhoneNumber = new Paragraph("So dien thoai: " + item.getClientPhoneNumber());
+            Paragraph clientAddress = new Paragraph("Dia chi: " + item.getClientAddress());
+            exportBillId.setFont(simpleFont);
+            creator.setFont(simpleFont);
+            whenCreated.setFont(simpleFont);
+            clientName.setFont(simpleFont);  
+            clientPhoneNumber.setFont(simpleFont);
+            clientAddress.setFont(simpleFont);
+            clientAddress.setSpacingAfter(30);
+            
+            final int PROPS_COUNT = 6;
+            PdfPTable table = new PdfPTable(PROPS_COUNT);
+            PdfPCell indexHeader = new PdfPCell(new Paragraph("STT"));
+            PdfPCell productIdHeader = new PdfPCell(new Paragraph("Ma san pham"));
+            PdfPCell productNameHeader = new PdfPCell(new Paragraph("Ten san pham"));
+            PdfPCell quantityHeader = new PdfPCell(new Paragraph("So luong"));
+            PdfPCell exportPriceHeader = new PdfPCell(new Paragraph("Don gia"));
+            PdfPCell totalHeader = new PdfPCell(new Paragraph("Thanh tien"));
+            
+            table.addCell(indexHeader);
+            table.addCell(productIdHeader);
+            table.addCell(productNameHeader);
+            table.addCell(quantityHeader);
+            table.addCell(exportPriceHeader);
+            table.addCell(totalHeader);
+
+            for (int i = 0; i < item.getExportBillItems().size(); ++i) {
+                PdfPCell indexData = new PdfPCell(new Paragraph((i + 1) + ""));
+                PdfPCell productIdData = new PdfPCell(new Paragraph(item.getExportBillItems().get(i).getProduct().getId().toString()));
+                PdfPCell productNameData = new PdfPCell(new Paragraph(item.getExportBillItems().get(i).getProduct().getName()));
+                PdfPCell quantityData = new PdfPCell(new Paragraph(item.getExportBillItems().get(i).getQuantity().toString()));
+                PdfPCell exportPriceData = new PdfPCell(new Paragraph(priceFormatter.format(
+                        item.getExportBillItems().get(i).getExportPrice())));
+                PdfPCell totalData = new PdfPCell(new Paragraph(
+                        priceFormatter.format(
+                                item.getExportBillItems().get(i).getExportPrice() 
+                                        * item.getExportBillItems().get(i).getQuantity()
+                )));
+                
+                table.addCell(indexData);
+                table.addCell(productIdData);
+                table.addCell(productNameData);
+                table.addCell(quantityData);
+                table.addCell(exportPriceData);
+                table.addCell(totalData);
+            }
+            
+            document.add(headingParagraph);
+            
+            document.add(exportBillId);
+            document.add(creator);
+            document.add(whenCreated);
+            document.add(clientName);
+            document.add(clientPhoneNumber);
+            document.add(clientAddress);
+            
+            document.add(table);
+            
+            document.close();
+        } catch (FileNotFoundException | DocumentException e) {
+            return false;
+        } finally {
+            
+        }
+        return true;
+    }
     
     private static final String FILE_NAME = "D:\\itext.pdf";
     public static void main(String[] args) {

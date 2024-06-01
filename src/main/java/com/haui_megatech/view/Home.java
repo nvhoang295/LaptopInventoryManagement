@@ -901,6 +901,7 @@ public class Home extends javax.swing.JFrame {
         viewExportBillClientAddressValueLabel = new javax.swing.JLabel();
         viewExportBillClientPhoneNumberLabel = new javax.swing.JLabel();
         viewExportBillClientPhoneNumberValueLabel = new javax.swing.JLabel();
+        exportPdf = new javax.swing.JButton();
         sidebarPanel = new javax.swing.JPanel();
         loginedUsername = new javax.swing.JLabel();
         productTab = new javax.swing.JPanel();
@@ -2706,11 +2707,10 @@ public class Home extends javax.swing.JFrame {
             .addComponent(deleteProviderConfirmDiaglogPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        editImportBillItemDiaglog.setTitle("Thêm người dùng");
         editImportBillItemDiaglog.setBackground(new java.awt.Color(255, 255, 255));
-        editImportBillItemDiaglog.setMinimumSize(new java.awt.Dimension(1427, 830));
+        editImportBillItemDiaglog.setMinimumSize(new java.awt.Dimension(733, 500));
         editImportBillItemDiaglog.setResizable(false);
-        editImportBillItemDiaglog.setSize(new java.awt.Dimension(1427, 830));
+        editImportBillItemDiaglog.setSize(new java.awt.Dimension(733, 500));
 
         editImportBillItemDiaglogPanel.setBackground(new java.awt.Color(255, 255, 255));
         editImportBillItemDiaglogPanel.setMinimumSize(new java.awt.Dimension(430, 450));
@@ -2759,7 +2759,7 @@ public class Home extends javax.swing.JFrame {
         jLabel21.setForeground(new java.awt.Color(44, 43, 196));
         jLabel21.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel21.setText("CẬP NHẬT MẶT HÀNG NHẬP");
-        editImportBillItemDiaglogPanel.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 20, 440, -1));
+        editImportBillItemDiaglogPanel.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 20, 440, -1));
 
         editImportBillItemQuantityTextField.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         editImportBillItemQuantityTextField.addActionListener(new java.awt.event.ActionListener() {
@@ -2830,10 +2830,9 @@ public class Home extends javax.swing.JFrame {
             .addComponent(editImportBillItemDiaglogPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 500, Short.MAX_VALUE)
         );
 
-        deleteImportBillItemDiaglog.setTitle("Thêm người dùng");
         deleteImportBillItemDiaglog.setBackground(new java.awt.Color(255, 255, 255));
-        deleteImportBillItemDiaglog.setMinimumSize(new java.awt.Dimension(450, 500));
-        deleteImportBillItemDiaglog.setSize(new java.awt.Dimension(450, 500));
+        deleteImportBillItemDiaglog.setMinimumSize(new java.awt.Dimension(733, 500));
+        deleteImportBillItemDiaglog.setSize(new java.awt.Dimension(733, 500));
 
         deleteImportBillItemDiaglogPanel.setBackground(new java.awt.Color(255, 255, 255));
         deleteImportBillItemDiaglogPanel.setMinimumSize(new java.awt.Dimension(430, 450));
@@ -3096,7 +3095,6 @@ public class Home extends javax.swing.JFrame {
             .addComponent(deleteImportBillPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 500, Short.MAX_VALUE)
         );
 
-        deleteExportBillItemDiaglog.setTitle("Thêm người dùng");
         deleteExportBillItemDiaglog.setBackground(new java.awt.Color(255, 255, 255));
         deleteExportBillItemDiaglog.setMinimumSize(new java.awt.Dimension(450, 500));
         deleteExportBillItemDiaglog.setSize(new java.awt.Dimension(450, 500));
@@ -3153,7 +3151,6 @@ public class Home extends javax.swing.JFrame {
             .addComponent(deleteExportBillItemPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 500, Short.MAX_VALUE)
         );
 
-        editExportBillItemDiaglog.setTitle("Thêm người dùng");
         editExportBillItemDiaglog.setBackground(new java.awt.Color(255, 255, 255));
         editExportBillItemDiaglog.setMinimumSize(new java.awt.Dimension(733, 500));
         editExportBillItemDiaglog.setResizable(false);
@@ -3380,6 +3377,14 @@ public class Home extends javax.swing.JFrame {
         viewExportBillClientPhoneNumberValueLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         viewExportBillClientPhoneNumberValueLabel.setText("0336118268");
 
+        exportPdf.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        exportPdf.setText("Xuất PDF");
+        exportPdf.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                exportPdfActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout viewExportBillDetailPanelLayout = new javax.swing.GroupLayout(viewExportBillDetailPanel);
         viewExportBillDetailPanel.setLayout(viewExportBillDetailPanelLayout);
         viewExportBillDetailPanelLayout.setHorizontalGroup(
@@ -3388,14 +3393,6 @@ public class Home extends javax.swing.JFrame {
             .addGroup(viewExportBillDetailPanelLayout.createSequentialGroup()
                 .addGap(36, 36, 36)
                 .addGroup(viewExportBillDetailPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(viewExportBillDetailPanelLayout.createSequentialGroup()
-                        .addGroup(viewExportBillDetailPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(viewExportBillDetailPanelLayout.createSequentialGroup()
-                                .addComponent(viewExportBillTotalLabel)
-                                .addGap(18, 18, 18)
-                                .addComponent(viewExportBillTotalValueLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(viewImportBillProductsScrollTable1, javax.swing.GroupLayout.PREFERRED_SIZE, 810, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(34, Short.MAX_VALUE))
                     .addGroup(viewExportBillDetailPanelLayout.createSequentialGroup()
                         .addGroup(viewExportBillDetailPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, viewExportBillDetailPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -3422,7 +3419,17 @@ public class Home extends javax.swing.JFrame {
                             .addGroup(viewExportBillDetailPanelLayout.createSequentialGroup()
                                 .addComponent(viewExportBillClientPhoneNumberLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(viewExportBillClientPhoneNumberValueLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
+                                .addComponent(viewExportBillClientPhoneNumberValueLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                    .addGroup(viewExportBillDetailPanelLayout.createSequentialGroup()
+                        .addGroup(viewExportBillDetailPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(viewExportBillDetailPanelLayout.createSequentialGroup()
+                                .addComponent(viewExportBillTotalLabel)
+                                .addGap(18, 18, 18)
+                                .addComponent(viewExportBillTotalValueLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(394, 394, 394)
+                                .addComponent(exportPdf))
+                            .addComponent(viewImportBillProductsScrollTable1, javax.swing.GroupLayout.PREFERRED_SIZE, 810, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(34, Short.MAX_VALUE))))
         );
         viewExportBillDetailPanelLayout.setVerticalGroup(
             viewExportBillDetailPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -3452,8 +3459,9 @@ public class Home extends javax.swing.JFrame {
                 .addGap(12, 12, 12)
                 .addGroup(viewExportBillDetailPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(viewExportBillTotalLabel)
-                    .addComponent(viewExportBillTotalValueLabel))
-                .addContainerGap(55, Short.MAX_VALUE))
+                    .addComponent(viewExportBillTotalValueLabel)
+                    .addComponent(exportPdf))
+                .addContainerGap(52, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout viewExportBillDetailDiaglogLayout = new javax.swing.GroupLayout(viewExportBillDetailDiaglog.getContentPane());
@@ -4385,7 +4393,6 @@ public class Home extends javax.swing.JFrame {
         importProductPriceLabel.setText("Giá nhập");
 
         importProductPriceTextField.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        importProductPriceTextField.setText("29,000,000");
 
         importProductAddButton.setBackground(new java.awt.Color(0, 122, 249));
         importProductAddButton.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
@@ -4478,7 +4485,6 @@ public class Home extends javax.swing.JFrame {
         });
 
         importProductQuantityTextField.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        importProductQuantityTextField.setText("5");
 
         importProductQuantityLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         importProductQuantityLabel.setText("Số Lượng: ");
@@ -4811,7 +4817,6 @@ public class Home extends javax.swing.JFrame {
         exportProductPriceLabel.setText("Giá xuất:");
 
         exportProductPriceTextField.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        exportProductPriceTextField.setText("29,000,000");
 
         exportProductAddButton.setBackground(new java.awt.Color(0, 122, 249));
         exportProductAddButton.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
@@ -4897,7 +4902,6 @@ public class Home extends javax.swing.JFrame {
         });
 
         exportProductQuantityTextField.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        exportProductQuantityTextField.setText("1");
 
         exportProductQuantityLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         exportProductQuantityLabel.setText("Số Lượng: ");
@@ -5924,6 +5928,8 @@ public class Home extends javax.swing.JFrame {
                 );
 
         loadDataToImportProductBillTable(importBill);
+        importProductPriceTextField.setText("");
+        importProductQuantityTextField.setText("");
     }//GEN-LAST:event_importProductAddButtonActionPerformed
 
     private void importUsersFromExcelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_importUsersFromExcelButtonActionPerformed
@@ -7428,7 +7434,6 @@ public class Home extends javax.swing.JFrame {
 
         Integer selectedInventoryId = Integer.valueOf(exportInStockProductsTable.getValueAt(rows[0], ID_COL_INDEX).toString());
 
-        //InventoryItem selectedInventoryItem = inventoryItemController.findById(selectedId).get();
         InventoryItem selectedInventoryItem
                 = inventoryItems.parallelStream()
                         .filter(item -> item.getId().equals(selectedInventoryId))
@@ -7522,6 +7527,8 @@ public class Home extends javax.swing.JFrame {
 
         loadDataToExportProductsBillTable(exportBill);
         loadDataToExportInStockProductsTable(inventoryItems);
+        exportProductQuantityTextField.setText("");
+        exportProductPriceTextField.setText("");
     }//GEN-LAST:event_exportProductAddButtonActionPerformed
 
     private void searchExportProductRefreshButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchExportProductRefreshButtonActionPerformed
@@ -7707,6 +7714,23 @@ public class Home extends javax.swing.JFrame {
         }
         this.showViewExportBillDetailDiaglog(rows[0]);
     }//GEN-LAST:event_viewExportBillButtonActionPerformed
+
+    private void exportPdfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exportPdfActionPerformed
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setDialogTitle("Lựa chọn vị trí lưu file");
+        fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("PDF (*.pdf)", "pdf");
+        fileChooser.setFileFilter(filter);
+        int userSelection = fileChooser.showSaveDialog(fileChooser);
+        if (userSelection == JFileChooser.APPROVE_OPTION) {
+            File directoryToSave = fileChooser.getSelectedFile();
+            int[] rows = exportBillsTable.getSelectedRows();
+            int id = Integer.parseInt(exportBillsTable.getValueAt(rows[0], ID_COL_INDEX).toString());
+            Optional<ExportBill> found = exportBillController.findById(id);
+            boolean result = PdfUtil.exportBillToPdf(found.get(), directoryToSave.getAbsolutePath());
+            showDiaglogMessage(result ? "Xuất PDF thành công." : "Xuất PDF thất bại.");
+        }
+    }//GEN-LAST:event_exportPdfActionPerformed
     
     private void showViewExportBillDetailDiaglog(int selectedRow) {
         viewExportBillDetailDiaglog.setVisible(true);
@@ -7956,6 +7980,7 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JButton exportImportBillsToExcelButton1;
     private javax.swing.JTable exportInStockProductsTable;
     private javax.swing.JButton exportInStocksToExcelButton;
+    private javax.swing.JButton exportPdf;
     private javax.swing.JButton exportProductAddButton;
     private javax.swing.JTextField exportProductBillCreatorLabel;
     private javax.swing.JLabel exportProductBillCreatorTextField;
