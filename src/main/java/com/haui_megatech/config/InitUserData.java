@@ -16,17 +16,17 @@ import java.util.*;
  */
 public class InitUserData {
 
-//    public static void main(String[] args) {
-//        UserRepository userRepository = new UserRepositoryImpl();
-//        userRepository.saveAll(new ArrayList<>(List.of(
-//                User.builder()
-//                        .username("viethoang")
-//                        .password("123")
-//                        .firstName("Hoàng")
-//                        .lastName("Nguyễn Việt")
-//                        .phoneNumber("0336118268")
-//                        .email("hoangnv.swe@gmail.com")
-//                        .build(),
+    public static void main(String[] args) {
+        UserRepository userRepository = new UserRepositoryImpl(new ApplicationContext());
+        userRepository.saveAll(new ArrayList<>(List.of(
+                User.builder()
+                        .username("admin@gmail.com")
+                        .password("12345678Abc!")
+                        .firstName("Hoàng")
+                        .lastName("Nguyễn Việt")
+                        .phoneNumber("0336118268")
+                        .email("hoangnv.swe@gmail.com")
+                        .build()
 //                User.builder()
 //                        .username("thanhquynh")
 //                        .password("123")
@@ -59,7 +59,7 @@ public class InitUserData {
 //                        .phoneNumber("0336118272")
 //                        .email("hoangphuc@gmail.com")
 //                        .build()
-//        )));
+        )));
 
-//    }
+    }
 }
