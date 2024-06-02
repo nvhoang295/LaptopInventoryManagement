@@ -7,43 +7,42 @@ package com.haui_megatech.service.impl;
 import com.haui_megatech.constant.ErrorMessage;
 import com.haui_megatech.constant.SuccessMessage;
 import com.haui_megatech.dto.CommonResponseDTO;
-import com.haui_megatech.model.ImportBillItem;
-import com.haui_megatech.service.ImportBillItemService;
+import com.haui_megatech.model.InventoryItem;
+import com.haui_megatech.repository.InventoryItemRepository;
+import com.haui_megatech.service.InventoryItemService;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
-import com.haui_megatech.repository.ImportBillItemRepository;
 
 /**
  *
  * @author vieth
  */
 @RequiredArgsConstructor
-public class ImportBillItemServiceImpl implements ImportBillItemService {
-    
-    private final ImportBillItemRepository importBillItemRepository;
-    
+public class InventoryItemServiceImpl implements InventoryItemService {
+    private final InventoryItemRepository inventoryItemRepository;
+
     @Override
-    public CommonResponseDTO<List<ImportBillItem>> getList() {
+    public CommonResponseDTO<List<InventoryItem>> getList() {
         return CommonResponseDTO
-                .<List<ImportBillItem>>builder()
-                .data(importBillItemRepository.getAll())
+                .<List<InventoryItem>>builder()
+                .data(inventoryItemRepository.getAll())
                 .build();
     }
 
     @Override
-    public CommonResponseDTO<List<ImportBillItem>> searchList(String keyword) {
+    public CommonResponseDTO<List<InventoryItem>> searchList(String keyword) {
         return CommonResponseDTO
-                .<List<ImportBillItem>>builder()
-                .data(importBillItemRepository
+                .<List<InventoryItem>>builder()
+                .data(inventoryItemRepository
                         .getAll()
                         .parallelStream()
                         .filter(item -> {
                             return new StringBuilder()
                                     .append(item.getImportPrice())
-                                    .append(item.getProduct().getName())
+                                    .append(item.getImportBillItem().getProduct().getName())
                                     .append(item.getQuantity())
                                     .toString().toLowerCase()
                                     .contains(keyword.toLowerCase());
@@ -54,24 +53,24 @@ public class ImportBillItemServiceImpl implements ImportBillItemService {
     }
 
     @Override
-    public CommonResponseDTO addOne(ImportBillItem item) {
-        Optional<ImportBillItem> savedProduct = importBillItemRepository.save(item);
+    public CommonResponseDTO addOne(InventoryItem item) {
+        Optional<InventoryItem> savedProduct = inventoryItemRepository.save(item);
         return savedProduct.isPresent()
                 ? CommonResponseDTO
                         .builder()
                         .success(true)
-                        .message(SuccessMessage.ImportBillItem.ADDED)
+                        .message(SuccessMessage.InventoryItem.ADDED)
                         .build()
                 : CommonResponseDTO
                         .builder()
                         .success(false)
-                        .message(ErrorMessage.ImportBillItem.SAVE)
+                        .message(ErrorMessage.InventoryItem.SAVE)
                         .build();
     }
 
     @Override
-    public CommonResponseDTO addList(ArrayList<ImportBillItem> items) {
-        ArrayList<ImportBillItem> savedProducts = importBillItemRepository.saveAll(items);
+    public CommonResponseDTO addList(ArrayList<InventoryItem> items) {
+        ArrayList<InventoryItem> savedProducts = inventoryItemRepository.saveAll(items);
         return CommonResponseDTO
                 .builder()
                 .success(Boolean.TRUE)
@@ -81,7 +80,7 @@ public class ImportBillItemServiceImpl implements ImportBillItemService {
 
     @Override
     public CommonResponseDTO deleteOne(Integer id) {
-        Optional<ImportBillItem> found = importBillItemRepository.findById(id);
+        Optional<InventoryItem> found = inventoryItemRepository.findById(id);
         if (found.isEmpty()) {
             return CommonResponseDTO
                     .builder()
@@ -90,7 +89,7 @@ public class ImportBillItemServiceImpl implements ImportBillItemService {
                     .build();
         }
         
-        importBillItemRepository.deleteById(id);
+        inventoryItemRepository.deleteById(id);
         
         return CommonResponseDTO
                 .builder()
@@ -100,13 +99,13 @@ public class ImportBillItemServiceImpl implements ImportBillItemService {
     }
 
     @Override
-    public Optional<ImportBillItem> findById(Integer id) {
-        return importBillItemRepository.findById(id);
+    public Optional<InventoryItem> findById(Integer id) {
+        return inventoryItemRepository.findById(id);
     }
 
     @Override
-    public CommonResponseDTO updateOne(Integer id, ImportBillItem item) {
-        Optional<ImportBillItem> found = importBillItemRepository.findById(id);
+    public CommonResponseDTO updateOne(Integer id, InventoryItem item) {
+        Optional<InventoryItem> found = inventoryItemRepository.findById(id);
         if (found.isEmpty()) {
             return CommonResponseDTO
                     .builder()
@@ -115,15 +114,19 @@ public class ImportBillItemServiceImpl implements ImportBillItemService {
                     .build();
         }
         
-        ImportBillItem foundItem = found.get();
+        InventoryItem foundItem = found.get();
         foundItem.setQuantity(item.getQuantity());
         
-        Optional<ImportBillItem> updatedItem = importBillItemRepository.save(foundItem);
+        Optional<InventoryItem> updatedItem = inventoryItemRepository.save(foundItem);
         return CommonResponseDTO
                 .builder()
                 .success(Boolean.TRUE)
                 .message(SuccessMessage.ImportBillItem.UPDATED)
                 .build();
     }
-
+    
+    @Override
+    public void updateList(List<InventoryItem> items) {
+        items.forEach(item -> this.updateOne(item.getId(), item));
+    }
 }

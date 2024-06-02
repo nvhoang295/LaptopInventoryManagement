@@ -21,8 +21,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Builder
-public class ExportBillItem implements Serializable {
-    
+public class InventoryItem implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;
     
@@ -30,9 +29,7 @@ public class ExportBillItem implements Serializable {
     
     private Integer id;
     private Integer quantity;
-    private Float exportPrice;
+    private Float importPrice;
     
-    private InventoryItem inventoryItem;
-    private ExportBill exportBill;
-    private Product product;
+    private ImportBillItem importBillItem;
 }

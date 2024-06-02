@@ -5,7 +5,8 @@
 package com.haui_megatech.repository.impl;
 
 import com.haui_megatech.ApplicationContext;
-import com.haui_megatech.model.ImportBillItem;
+import com.haui_megatech.model.ExportBill;
+import com.haui_megatech.repository.ExportBillRepository;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -14,36 +15,35 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Optional;
-import com.haui_megatech.repository.ImportBillItemRepository;
 
 /**
  *
  * @author vieth
  */
-public class ImportBillItemRepositoryImpl implements ImportBillItemRepository {
+public class ExportBillRepositoryImpl implements ExportBillRepository {
     
     private final ApplicationContext applicationContext;
     
     private final String ABS_DATA_PATH;
     
-    public ImportBillItemRepositoryImpl(ApplicationContext applicationContext) {
+    public ExportBillRepositoryImpl(ApplicationContext applicationContext) {
         this.applicationContext = applicationContext;
         
-        ABS_DATA_PATH = this.applicationContext.ABS_IMPORT_BILL_ITEMS_DATA_PATH;
+        ABS_DATA_PATH = this.applicationContext.ABS_EXPORT_BILLS_DATA_PATH;
         
         initCounter();
     }
     
     private void initCounter() {
-        ArrayList<ImportBillItem> items = this.getAll();
+        ArrayList<ExportBill> items = this.getAll();
         if (items.isEmpty()) {
-            ImportBillItem.counter = 0;
+            ExportBill.counter = 0;
         } else {
-            ImportBillItem.counter = items.getLast().getId();
+            ExportBill.counter = items.getLast().getId();
         }
     }
     
-    private boolean saveToDisk(ArrayList<ImportBillItem> list) {
+    private boolean saveToDisk(ArrayList<ExportBill> list) {
         try (ObjectOutputStream oos = new ObjectOutputStream(
                 new FileOutputStream(ABS_DATA_PATH)
         )) {
@@ -53,9 +53,9 @@ public class ImportBillItemRepositoryImpl implements ImportBillItemRepository {
             return false;
         }
     }
-    
+
     @Override
-    public Optional<ImportBillItem> findById(Integer id) {
+    public Optional<ExportBill> findById(Integer id) {
         return this.getAll()
                 .parallelStream()
                 .filter(item -> item.getId().equals(id))
@@ -63,72 +63,64 @@ public class ImportBillItemRepositoryImpl implements ImportBillItemRepository {
     }
 
     @Override
-    public Optional<ImportBillItem> save(ImportBillItem item) {
-        ArrayList<ImportBillItem> items = this.getAll();
+    public Optional<ExportBill> save(ExportBill item) {
+        ArrayList<ExportBill> items = this.getAll();
         if (item.getId() != null) {
             int foundIndex = this.findIndexById(item.getId());
-            ImportBillItem foundItem = items.get(foundIndex);
-            update(foundItem, item);
-            items.set(foundIndex, foundItem);
+            ExportBill found = items.get(foundIndex);
+            update(found, item);
+            items.set(foundIndex, found);
             return this.saveToDisk(items)
-                    ? Optional.of(foundItem)
+                    ? Optional.of(found)
                     : Optional.empty();
         }
-
-        item.setId(++ImportBillItem.counter);
+        
+        item.setId(++ExportBill.counter);
+        item.setWhenCreated(new Date());
         items.add(item);
-
+        
         return this.saveToDisk(items)
                 ? Optional.of(item)
                 : Optional.empty();
     }
     
     private int findIndexById(Integer id) {
-        ArrayList<ImportBillItem> items = this.getAll();
+        ArrayList<ExportBill> items = this.getAll();
         for (int i = 0; i < items.size(); ++i) {
             if (items.get(i).getId().equals(id)) return i;
         }
         return -1;
     }
     
-    private boolean update(ImportBillItem oldInfo, ImportBillItem newInfo) {
-        oldInfo.setQuantity(newInfo.getQuantity());
+    private boolean update(ExportBill oldInfo, ExportBill newInfo) {
+        oldInfo.setClientName(newInfo.getClientName());
+        oldInfo.setClientPhoneNumber(newInfo.getClientPhoneNumber());
+        oldInfo.setClientAddress(newInfo.getClientAddress());
+        oldInfo.setLastUpdated(new Date());
         return true;
     }
 
     @Override
-    public ArrayList<ImportBillItem> saveAll(ArrayList<ImportBillItem> items) {
-        ArrayList<ImportBillItem> savedItems = new ArrayList<>();
-        items.forEach(item -> {
-            Optional<ImportBillItem> savedItem = this.save(item);
-            if (savedItem.isPresent()) {
-                savedItems.add(savedItem.get());
-            }
-        });
-        return savedItems;
-    }
-
-    @Override
     public void deleteById(int id) {
-        ArrayList<ImportBillItem> items = this.getAll();
+        ArrayList<ExportBill> items = this.getAll();
         items.removeIf(item -> item.getId().equals(id));
         this.saveToDisk(items);
     }
 
     @Override
-    public ArrayList<ImportBillItem> getAll() {
-        ArrayList<ImportBillItem> products;
+    public ArrayList<ExportBill> getAll() {
+        ArrayList<ExportBill> items;
         try (ObjectInputStream ois = new ObjectInputStream(
                 (new FileInputStream(ABS_DATA_PATH))
         )) {
-            products = (ArrayList<ImportBillItem>) ois.readObject();
-            if (products == null) {
-                products = new ArrayList<>();
+            items = (ArrayList<ExportBill>) ois.readObject();
+            if (items == null) {
+                items = new ArrayList<>();
             }
         } catch (IOException | ClassNotFoundException e) {
             return new ArrayList();
         }
-        return products;
+        return items;
     }
     
 }
