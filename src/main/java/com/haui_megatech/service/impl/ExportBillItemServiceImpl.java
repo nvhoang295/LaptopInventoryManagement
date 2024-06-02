@@ -7,44 +7,43 @@ package com.haui_megatech.service.impl;
 import com.haui_megatech.constant.ErrorMessage;
 import com.haui_megatech.constant.SuccessMessage;
 import com.haui_megatech.dto.CommonResponseDTO;
-import com.haui_megatech.model.ImportBillItem;
-import com.haui_megatech.service.ImportBillItemService;
+import com.haui_megatech.model.ExportBillItem;
+import com.haui_megatech.repository.ExportBillItemRepository;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
-import com.haui_megatech.repository.ImportBillItemRepository;
+import com.haui_megatech.service.ExportBillItemService;
 
 /**
  *
  * @author vieth
  */
 @RequiredArgsConstructor
-public class ImportBillItemServiceImpl implements ImportBillItemService {
+public class ExportBillItemServiceImpl implements ExportBillItemService {
     
-    private final ImportBillItemRepository importBillItemRepository;
+    private final ExportBillItemRepository exportBillItemRepository;
     
     @Override
-    public CommonResponseDTO<List<ImportBillItem>> getList() {
+    public CommonResponseDTO<List<ExportBillItem>> getList() {
         return CommonResponseDTO
-                .<List<ImportBillItem>>builder()
-                .data(importBillItemRepository.getAll())
+                .<List<ExportBillItem>>builder()
+                .data(exportBillItemRepository.getAll())
                 .build();
     }
 
     @Override
-    public CommonResponseDTO<List<ImportBillItem>> searchList(String keyword) {
+    public CommonResponseDTO<List<ExportBillItem>> searchList(String keyword) {
         return CommonResponseDTO
-                .<List<ImportBillItem>>builder()
-                .data(importBillItemRepository
+                .<List<ExportBillItem>>builder()
+                .data(exportBillItemRepository
                         .getAll()
                         .parallelStream()
                         .filter(item -> {
                             return new StringBuilder()
-                                    .append(item.getImportPrice())
-                                    .append(item.getProduct().getName())
                                     .append(item.getQuantity())
+                                    .append(item.getExportPrice())
                                     .toString().toLowerCase()
                                     .contains(keyword.toLowerCase());
                         })
@@ -54,8 +53,8 @@ public class ImportBillItemServiceImpl implements ImportBillItemService {
     }
 
     @Override
-    public CommonResponseDTO addOne(ImportBillItem item) {
-        Optional<ImportBillItem> savedProduct = importBillItemRepository.save(item);
+    public CommonResponseDTO addOne(ExportBillItem item) {
+        Optional<ExportBillItem> savedProduct = exportBillItemRepository.save(item);
         return savedProduct.isPresent()
                 ? CommonResponseDTO
                         .builder()
@@ -70,8 +69,8 @@ public class ImportBillItemServiceImpl implements ImportBillItemService {
     }
 
     @Override
-    public CommonResponseDTO addList(ArrayList<ImportBillItem> items) {
-        ArrayList<ImportBillItem> savedProducts = importBillItemRepository.saveAll(items);
+    public CommonResponseDTO addList(ArrayList<ExportBillItem> items) {
+        ArrayList<ExportBillItem> savedProducts = exportBillItemRepository.saveAll(items);
         return CommonResponseDTO
                 .builder()
                 .success(Boolean.TRUE)
@@ -81,7 +80,7 @@ public class ImportBillItemServiceImpl implements ImportBillItemService {
 
     @Override
     public CommonResponseDTO deleteOne(Integer id) {
-        Optional<ImportBillItem> found = importBillItemRepository.findById(id);
+        Optional<ExportBillItem> found = exportBillItemRepository.findById(id);
         if (found.isEmpty()) {
             return CommonResponseDTO
                     .builder()
@@ -90,7 +89,7 @@ public class ImportBillItemServiceImpl implements ImportBillItemService {
                     .build();
         }
         
-        importBillItemRepository.deleteById(id);
+        exportBillItemRepository.deleteById(id);
         
         return CommonResponseDTO
                 .builder()
@@ -100,13 +99,13 @@ public class ImportBillItemServiceImpl implements ImportBillItemService {
     }
 
     @Override
-    public Optional<ImportBillItem> findById(Integer id) {
-        return importBillItemRepository.findById(id);
+    public Optional<ExportBillItem> findById(Integer id) {
+        return exportBillItemRepository.findById(id);
     }
 
     @Override
-    public CommonResponseDTO updateOne(Integer id, ImportBillItem item) {
-        Optional<ImportBillItem> found = importBillItemRepository.findById(id);
+    public CommonResponseDTO updateOne(Integer id, ExportBillItem item) {
+        Optional<ExportBillItem> found = exportBillItemRepository.findById(id);
         if (found.isEmpty()) {
             return CommonResponseDTO
                     .builder()
@@ -115,10 +114,10 @@ public class ImportBillItemServiceImpl implements ImportBillItemService {
                     .build();
         }
         
-        ImportBillItem foundItem = found.get();
+        ExportBillItem foundItem = found.get();
         foundItem.setQuantity(item.getQuantity());
         
-        Optional<ImportBillItem> updatedItem = importBillItemRepository.save(foundItem);
+        Optional<ExportBillItem> updatedItem = exportBillItemRepository.save(foundItem);
         return CommonResponseDTO
                 .builder()
                 .success(Boolean.TRUE)

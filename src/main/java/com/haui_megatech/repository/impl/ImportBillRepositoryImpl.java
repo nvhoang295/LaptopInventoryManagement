@@ -22,10 +22,14 @@ import java.util.Optional;
  */
 public class ImportBillRepositoryImpl implements ImportBillRepository {
     
+    private final ApplicationContext applicationContext;
+    
     private final String ABS_DATA_PATH;
     
-    public ImportBillRepositoryImpl() {
-        ABS_DATA_PATH = new ApplicationContext().ABS_IMPORT_BILLS_DATA_PATH;
+    public ImportBillRepositoryImpl(ApplicationContext applicationContext) {
+        this.applicationContext = applicationContext;
+        
+        ABS_DATA_PATH = this.applicationContext.ABS_IMPORT_BILLS_DATA_PATH;
         
         initCounter();
     }

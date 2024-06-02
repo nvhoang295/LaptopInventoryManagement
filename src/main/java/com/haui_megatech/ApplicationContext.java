@@ -20,9 +20,9 @@ import java.util.Map;
 public class ApplicationContext {
 
     // MEDIUM PRIORITY
-    private static final UserRepository userRepository = new UserRepositoryImpl();
-    private static final ProductRepository productRepository = new ProductRepositoryImpl();
-    private static final ProviderRepository providerRepository = new ProviderRepositoryImpl();
+//    private static final UserRepository userRepository = new UserRepositoryImpl();
+//    private static final ProductRepository productRepository = new ProductRepositoryImpl();
+//    private static final ProviderRepository providerRepository = new ProviderRepositoryImpl();
     
     private static final Map<String, Object> beans = new HashMap<>();
     private static User loginedUser;
@@ -53,6 +53,18 @@ public class ApplicationContext {
     // import bill items
     public final String REL_IMPORT_BILL_ITEMS_DATA_PATH;
     public final String ABS_IMPORT_BILL_ITEMS_DATA_PATH;
+    
+    // inventory items
+    public final String REL_INVENTORY_ITEMS_DATA_PATH;
+    public final String ABS_INVENTORY_ITEMS_DATA_PATH;
+    
+    // export bill
+    public final String REL_EXPORT_BILLS_DATA_PATH;
+    public final String ABS_EXPORT_BILLS_DATA_PATH;
+    
+    // export bill items
+    public final String REL_EXPORT_BILL_ITEMS_DATA_PATH;
+    public final String ABS_EXPORT_BILL_ITEMS_DATA_PATH;
     
     public String getAbsUsersDataPath() {
         return ABS_USERS_DATA_PATH;
@@ -99,6 +111,18 @@ public class ApplicationContext {
         // import bill items
         REL_IMPORT_BILL_ITEMS_DATA_PATH = REL_DATA_PATH_PREFIX + "/import-bill-items.dat";
         ABS_IMPORT_BILL_ITEMS_DATA_PATH = ABS_ROOT_PROJECT_PATH + REL_IMPORT_BILL_ITEMS_DATA_PATH;
+        
+        // inventory items
+        REL_INVENTORY_ITEMS_DATA_PATH = REL_DATA_PATH_PREFIX + "/inventory-items.dat";
+        ABS_INVENTORY_ITEMS_DATA_PATH = ABS_ROOT_PROJECT_PATH + REL_INVENTORY_ITEMS_DATA_PATH;
+        
+        // export bills
+        REL_EXPORT_BILLS_DATA_PATH = REL_DATA_PATH_PREFIX + "/export-bills.dat";
+        ABS_EXPORT_BILLS_DATA_PATH = ABS_ROOT_PROJECT_PATH + REL_EXPORT_BILLS_DATA_PATH;
+        
+        // export bill items
+        REL_EXPORT_BILL_ITEMS_DATA_PATH = REL_DATA_PATH_PREFIX + "/export-bill-items.dat";
+        ABS_EXPORT_BILL_ITEMS_DATA_PATH = ABS_ROOT_PROJECT_PATH + REL_EXPORT_BILL_ITEMS_DATA_PATH;
     }
     
     public void initCounter() {

@@ -8,8 +8,12 @@ import com.haui_megatech.ApplicationContext;
 import com.haui_megatech.controller.AuthController;
 import com.haui_megatech.dto.AuthRequestDTO;
 import com.haui_megatech.dto.CommonResponseDTO;
+import com.haui_megatech.repository.UserRepository;
 import com.haui_megatech.repository.impl.UserRepositoryImpl;
+import com.haui_megatech.service.AuthService;
 import com.haui_megatech.service.impl.AuthServiceImpl;
+import java.awt.Color;
+import java.util.regex.Pattern;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
@@ -18,19 +22,28 @@ import javax.swing.UnsupportedLookAndFeelException;
  * @author caoth
  */
 public class Login extends javax.swing.JFrame {
-    private final AuthController authController = new AuthController(
-            new AuthServiceImpl(
-                    new UserRepositoryImpl()
-            )
-    );
-    
-    
+
+    private final ApplicationContext applicationContext = new ApplicationContext();
+
+    private final UserRepository userRepository = new UserRepositoryImpl(applicationContext);
+    private final AuthService authService = new AuthServiceImpl(userRepository);
+    private final AuthController authController = new AuthController(authService);
+
+    private static final int MIN_LENGTH = 8;
+    private static final char SPACE_CHAR = ' ';
+    private static final Pattern UPPER_CASE_REGEX = Pattern.compile("[A-Z]");
+    private static final Pattern LOWER_CASE_REGEX = Pattern.compile("[a-z]");
+    private static final Pattern NUMBER_REGEX = Pattern.compile("[0-9]");
+    private static final Pattern SPEC_CHAR_REGEX = Pattern.compile("[!@#$%^&*]");
+    private static final Pattern EMAIL_REGEX = Pattern.compile("^.*(?=.{5}).*@\\w+[.]\\w+.*$");
+
     /**
      * Creates new form Login_
      */
     public Login() {
         initComponents();
         this.setLocationRelativeTo(null);
+        loginBtn.setEnabled(false);
     }
 
     /**
@@ -339,12 +352,22 @@ public class Login extends javax.swing.JFrame {
                 uNameActionPerformed(evt);
             }
         });
+        uName.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                uNameKeyReleased(evt);
+            }
+        });
 
         passlabel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         passlabel.setText("Mật khẩu");
 
         uPass.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         uPass.setText("123");
+        uPass.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                uPassKeyReleased(evt);
+            }
+        });
 
         loginBtn.setBackground(new java.awt.Color(44, 43, 196));
         loginBtn.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -354,6 +377,11 @@ public class Login extends javax.swing.JFrame {
         loginBtn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 loginBtnMouseClicked(evt);
+            }
+        });
+        loginBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                loginBtnActionPerformed(evt);
             }
         });
 
@@ -467,6 +495,7 @@ public class Login extends javax.swing.JFrame {
     private void loginBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_loginBtnMouseClicked
         String username = uName.getText();
         String password = String.valueOf(uPass.getPassword());
+        if (!validateUsername(username) && !validatePassword(password)) return;
         CommonResponseDTO response = authController.authenticate(
                 AuthRequestDTO
                         .builder()
@@ -488,6 +517,94 @@ public class Login extends javax.swing.JFrame {
         // TODO add your handling code here:
         errorLoginDiaglog.dispose();
     }//GEN-LAST:event_errorLoginOkButtonMouseClicked
+
+    private void uNameKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_uNameKeyReleased
+        String username = uName.getText();
+        String password = String.valueOf(uPass.getPassword());
+        
+        validateUsername(username);
+        loginBtn.setEnabled(validatePassword(password) && validateUsername(username));
+    }//GEN-LAST:event_uNameKeyReleased
+    
+    private boolean validateUsername(String username) {
+        loginBtn.setEnabled(false);
+        uNameError.setForeground(Color.red);
+        if (username.isEmpty() || username.isBlank()) {
+            uNameError.setText("Tên đăng nhập không được để trống.");
+            return false;
+        }
+        
+        if (username.indexOf(SPACE_CHAR) != -1) {
+            uNameError.setText("Tên đăng nhập không được chứa dấu cách.");
+            return false;
+        }
+        
+        if (username.length() < MIN_LENGTH) {
+            uNameError.setText(String.format("Tên đăng nhập phải tối thiểu %d ký tự.", MIN_LENGTH));
+            return false;
+        }
+        
+        if (!EMAIL_REGEX.matcher(username).find()) {
+            uNameError.setText("Tên đăng nhập không đúng định dạng.");
+            return false;
+        }
+        
+        uNameError.setText("Tên đăng nhập hợp lệ.");
+        uNameError.setForeground(Color.GREEN);
+        return true;
+    }
+    
+    private void uPassKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_uPassKeyReleased
+        String password = String.valueOf(uPass.getPassword());
+        String username = uName.getText();
+        loginBtn.setEnabled(validatePassword(password) && validateUsername(username));
+    }//GEN-LAST:event_uPassKeyReleased
+    
+    private boolean validatePassword(String password) {
+        uPassError.setForeground(Color.red);
+        if (password.length() == 0) {
+            uPassError.setText("Mật khẩu không được để trống.");
+            return false;
+        }
+
+        if (password.indexOf(SPACE_CHAR) != -1) {
+            uPassError.setText("Mật khẩu không được chứa dấu cách.");
+            return false;
+        }
+
+        if (password.length() < MIN_LENGTH) {
+            uPassError.setText(String.format("Mật khẩu phải tối thiểu %d ký tự.", MIN_LENGTH));
+            return false;
+        }
+
+        if (!UPPER_CASE_REGEX.matcher(password).find()) {
+            uPassError.setText("Mật khẩu phải có ít nhất 1 ký tự in hoa.");
+            return false;
+        }
+
+        if (!LOWER_CASE_REGEX.matcher(password).find()) {
+            uPassError.setText("Mật khẩu phải có ít nhất 1 ký tự in thường.");
+            return false;
+        }
+
+        if (!NUMBER_REGEX.matcher(password).find()) {
+            uPassError.setText("Mật khẩu phải có ít nhất 1 chữ số.");
+            return false;
+        }
+
+        if (!SPEC_CHAR_REGEX.matcher(password).find()) {
+            uPassError.setText("Mật khẩu phải có ít nhất 1 ký tự đặc biệt");
+            return false;
+        }
+
+        uPassError.setText("Mật khẩu hợp lệ.");
+        uPassError.setForeground(Color.GREEN);
+        return true;
+    }
+    
+    private void loginBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginBtnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_loginBtnActionPerformed
 
     /**
      * @param args the command line arguments

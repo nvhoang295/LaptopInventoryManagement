@@ -29,7 +29,7 @@ public class UserRepositoryTest {
     private final ApplicationContext context;
 
     public UserRepositoryTest() {
-        underTest = new UserRepositoryImpl();
+        underTest = new UserRepositoryImpl(new ApplicationContext());
         context = new ApplicationContext();
     }
 
@@ -181,7 +181,7 @@ public class UserRepositoryTest {
     @Test
     public void testGetAll() {
         System.out.println("getAll");
-        UserRepository instance = new UserRepositoryImpl();
+        UserRepository instance = new UserRepositoryImpl(new ApplicationContext());
         ArrayList<User> result = instance.getAll();
         assertTrue(result != null);
     }
