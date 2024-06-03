@@ -22,6 +22,7 @@ import com.haui_megatech.service.ProviderService;
 import com.haui_megatech.service.UserService;
 import com.haui_megatech.service.impl.*;
 import com.haui_megatech.util.*;
+import com.sun.tools.javac.Main;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -32,6 +33,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.stream.IntStream;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
@@ -1093,6 +1096,11 @@ public class Home extends javax.swing.JFrame {
         jButton1.setForeground(new java.awt.Color(255, 255, 255));
         jButton1.setText("Huỷ");
         jButton1.setBorderPainted(false);
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
         jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 150, 80, 30));
 
         jButton2.setBackground(new java.awt.Color(255, 51, 51));
@@ -1100,6 +1108,11 @@ public class Home extends javax.swing.JFrame {
         jButton2.setForeground(new java.awt.Color(255, 255, 255));
         jButton2.setText("Thoát");
         jButton2.setBorderPainted(false);
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
         jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 150, 80, 30));
 
         javax.swing.GroupLayout logoutDiaglogLayout = new javax.swing.GroupLayout(logoutDiaglog.getContentPane());
@@ -3096,8 +3109,8 @@ public class Home extends javax.swing.JFrame {
         );
 
         deleteExportBillItemDiaglog.setBackground(new java.awt.Color(255, 255, 255));
-        deleteExportBillItemDiaglog.setMinimumSize(new java.awt.Dimension(450, 500));
-        deleteExportBillItemDiaglog.setSize(new java.awt.Dimension(450, 500));
+        deleteExportBillItemDiaglog.setMinimumSize(new java.awt.Dimension(733, 500));
+        deleteExportBillItemDiaglog.setSize(new java.awt.Dimension(733, 500));
 
         deleteExportBillItemPanel.setBackground(new java.awt.Color(255, 255, 255));
         deleteExportBillItemPanel.setMinimumSize(new java.awt.Dimension(430, 450));
@@ -3448,12 +3461,13 @@ public class Home extends javax.swing.JFrame {
                     .addComponent(viewExportBillCreatorLabel)
                     .addComponent(viewExportBillCreatorValueLabel))
                 .addGap(18, 18, 18)
-                .addGroup(viewExportBillDetailPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(viewExportBillClientAddressLabel)
-                    .addComponent(viewExportBillClientAddressValueLabel)
+                .addGroup(viewExportBillDetailPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(viewExportBillDetailPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(viewExportBillClientPhoneNumberLabel)
-                        .addComponent(viewExportBillClientPhoneNumberValueLabel)))
+                        .addComponent(viewExportBillClientPhoneNumberValueLabel))
+                    .addGroup(viewExportBillDetailPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(viewExportBillClientAddressLabel)
+                        .addComponent(viewExportBillClientAddressValueLabel)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(viewImportBillProductsScrollTable1, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(12, 12, 12)
@@ -4907,16 +4921,13 @@ public class Home extends javax.swing.JFrame {
         exportProductQuantityLabel.setText("Số Lượng: ");
 
         clientNameTextField.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        clientNameTextField.setText("Anh Hoàng");
 
         clientPhoneNumberTextField.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        clientPhoneNumberTextField.setText("0336118268");
 
         clientPhoneNumberLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         clientPhoneNumberLabel.setText("Số điện thoại khách hàng");
 
         clientAddressTextField.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        clientAddressTextField.setText("Bắc Giang");
 
         clientAddressLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         clientAddressLabel.setText("Địa chỉ giao hàng");
@@ -7350,7 +7361,7 @@ public class Home extends javax.swing.JFrame {
             return;
         }
         
-        Double total = exportBill.getExportBillItems()
+        double total = exportBill.getExportBillItems()
                 .stream()
                 .mapToDouble(item -> item.getQuantity() * item.getExportPrice())
                 .sum();
@@ -7359,6 +7370,7 @@ public class Home extends javax.swing.JFrame {
         exportBill.setClientName(clientName);
         exportBill.setClientPhoneNumber(clientPhoneNumber);
         exportBill.setClientAddress(clientAddress);
+        
         exportBillController.addOne(exportBill);
         exportBill.getExportBillItems().forEach(item -> {
             InventoryItem inventoryItem = item.getInventoryItem();
@@ -7383,8 +7395,8 @@ public class Home extends javax.swing.JFrame {
             return;
         }
 
-        int[] rows = exportProductsBillTable.getSelectedRows();
-        if (rows.length == 0) {
+        int[] selectedRightRows = exportProductsBillTable.getSelectedRows();
+        if (selectedRightRows.length == 0) {
             showDiaglogMessage(ErrorMessage.EMPTY_SELECTED_ROWS);
             return;
         }
@@ -7426,103 +7438,116 @@ public class Home extends javax.swing.JFrame {
     }
 
     private void exportProductAddButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exportProductAddButtonActionPerformed
-        int[] rows = exportInStockProductsTable.getSelectedRows();
-        if (rows.length == 0) {
+        
+        int[] leftSelectedRows = exportInStockProductsTable.getSelectedRows();
+        if (leftSelectedRows.length == 0) {
             showDiaglogMessage(ErrorMessage.EMPTY_SELECTED_ROWS);
             return;
         }
 
-        Integer selectedInventoryId = Integer.valueOf(exportInStockProductsTable.getValueAt(rows[0], ID_COL_INDEX).toString());
-
-        InventoryItem selectedInventoryItem
-                = inventoryItems.parallelStream()
-                        .filter(item -> item.getId().equals(selectedInventoryId))
-                        .findFirst()
-                        .get();
-
+        
         if (exportProductQuantityTextField.getText().trim().length() == 0) {
             showDiaglogMessage("Vui lòng nhập trường số lượng nhập.");
             return;
         }
 
+        
         if (exportProductPriceTextField.getText().trim().length() == 0) {
             showDiaglogMessage("Vui lòng nhập trường giá nhập.");
             return;
         }
-
-        Integer quantity = 0;
+        
+        
+        int exportQuantity = 0;
         try {
-            quantity = Integer.valueOf(exportProductQuantityTextField.getText());
+            exportQuantity = Integer.parseInt(exportProductQuantityTextField.getText());
         } catch (NumberFormatException e) {
             showDiaglogMessage("Số lượng phải là một số nguyên.");
             return;
         }
-        Float price = 0.0f;
+        
+        
+        int selectedInventoryItemId = Integer.parseInt(
+                exportInStockProductsTable.getValueAt(
+                        leftSelectedRows[0], 
+                        ID_COL_INDEX
+                ).toString()
+        );
+        int foundInventoryItemIndexInInventoryItems = IntStream
+                .range(0, inventoryItems.size())
+                .filter(index -> inventoryItems.get(index).getId().equals(selectedInventoryItemId))
+                .findFirst()
+                .orElse(-1);
+        InventoryItem selectedInventoryItem = inventoryItems.get(foundInventoryItemIndexInInventoryItems);
+        
+        Integer remainingQuantity = selectedInventoryItem.getQuantity();
+        if (exportQuantity > remainingQuantity) {
+            showDiaglogMessage("Số lượng xuất vượt quá số lượng trong kho.");
+            return;
+        }
+        
+        
+        float exportPrice = 0.0f;
         try {
-            price = Float.valueOf(exportProductPriceTextField.getText().replace(",", ""));
+            exportPrice = Float.parseFloat(exportProductPriceTextField.getText().replace(",", ""));
         } catch (NumberFormatException e) {
             showDiaglogMessage("Giá sản phẩm phải là một số thực.");
             return;
         }
-
-        Integer limitQuantity = Integer.valueOf(exportInStockProductsTable.getValueAt(rows[0], EXPORT_INVENTORY_ITEM_QUANTITY_COL_INDEX).toString());
-        if (quantity > limitQuantity) {
-            showDiaglogMessage("Số lượng xuất vượt quá số lượng trong kho.");
-            return;
-        }
-
-        Float minExportPrice = Float.valueOf(exportInStockProductsTable.getValueAt(rows[0], EXPORT_INVENTORY_ITEM_PRICE_COL_INDEX).toString().replace(",", ""));
-        if (price < minExportPrice) {
+        Float minExportPrice = selectedInventoryItem.getImportPrice();
+        if (exportPrice < minExportPrice) {
             showDiaglogMessage("Giá xuất phải lớn hơn hoặc bằng giá nhập.");
             return;
         }
 
-        selectedInventoryItem.setQuantity(limitQuantity - quantity);
+        
+        selectedInventoryItem.setQuantity(remainingQuantity - exportQuantity);
+        inventoryItems.set(foundInventoryItemIndexInInventoryItems, selectedInventoryItem);
 
-        int foundIndex = IntStream
-                .range(0, inventoryItems.size())
-                .filter(index -> inventoryItems.get(index).getId().equals(selectedInventoryId))
-                .findFirst()
-                .orElse(-1);
 
-        inventoryItems.set(foundIndex, selectedInventoryItem);
-
-        final Integer finalQuantity = quantity;
-        final Float finalPrice = price;
-
-        Integer selectedProductId
-                = Integer.valueOf(exportInStockProductsTable
-                        .getValueAt(rows[0], EXPORT_INVENTORY_ITEM_PRODUCT_ID_COL_INDEX)
-                        .toString());
-
-        Product selectedProduct = productController.findById(selectedProductId).get();
-
-        Integer foundInventoryIndex = IntStream
+        int foundInventoryItemIndexInExportBill = IntStream
                 .range(0, exportBill.getExportBillItems().size())
-                .filter(index
-                        -> exportBill.getExportBillItems()
-                        .get(index)
-                        .getInventoryItem()
-                        .getId()
-                        .equals(selectedInventoryItem.getId())
+                .filter(index -> exportBill.getExportBillItems()
+                                            .get(index)
+                                            .getInventoryItem()
+                                            .getId()
+                                            .equals(selectedInventoryItem.getId())
                 )
                 .findFirst()
                 .orElse(-1);
 
-        if (foundInventoryIndex != -1) {
-            int oldQuantity = exportBill.getExportBillItems().get(foundInventoryIndex).getQuantity();
-            exportBill.getExportBillItems().get(foundInventoryIndex).setQuantity(oldQuantity + quantity);
+        if (foundInventoryItemIndexInExportBill != -1) {
+            int oldQuantity = exportBill.getExportBillItems().get(foundInventoryItemIndexInExportBill).getQuantity();
+            exportBill.getExportBillItems().get(foundInventoryItemIndexInExportBill).setQuantity(oldQuantity + exportQuantity);
         } else {
-            exportBill.getExportBillItems()
-                    .add(ExportBillItem
-                            .builder()
-                            .product(selectedProduct)
-                            .quantity(finalQuantity)
-                            .exportPrice(finalPrice)
-                            .exportBill(exportBill)
-                            .inventoryItem(selectedInventoryItem)
-                            .build()
-                    );
+            int selectedProductId = Integer.parseInt(
+                exportInStockProductsTable.getValueAt(
+                        leftSelectedRows[0], 
+                        EXPORT_INVENTORY_ITEM_PRODUCT_ID_COL_INDEX
+                ).toString()
+            );
+
+            Optional<Product> selectedProductInInventoryItem = productController.findById(selectedProductId);
+            
+            final int finalExportQuantity = exportQuantity;
+            final float finalExportPrice = exportPrice;
+            selectedProductInInventoryItem.ifPresentOrElse(
+                    item -> {
+                        exportBill.getExportBillItems()
+                                .add(ExportBillItem
+                                            .builder()
+                                            .product(item)
+                                            .quantity(finalExportQuantity)
+                                            .exportPrice(finalExportPrice)
+                                            .exportBill(exportBill)
+                                            .inventoryItem(selectedInventoryItem)
+                                            .build()
+                        );
+                    },
+                    () -> {
+                        showDiaglogMessage(ErrorMessage.Product.NOT_FOUND);
+                    }
+            );
         }
 
         loadDataToExportProductsBillTable(exportBill);
@@ -7546,28 +7571,47 @@ public class Home extends javax.swing.JFrame {
     }//GEN-LAST:event_searchExportProductTextFieldKeyReleased
 
     private void deleteExportBillItemDiaglogButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteExportBillItemDiaglogButtonActionPerformed
-        int[] rows = exportProductsBillTable.getSelectedRows();
+        int[] rightSelectedRows = exportProductsBillTable.getSelectedRows();
 
-        int selectedInventoryId = Integer.parseInt(exportProductsBillTable.getValueAt(rows[0], EXPORT_BILL_ITEM_INVENTORY_ID).toString());
+        int selectedInventoryItemIdInExportBill = Integer.parseInt(
+                exportProductsBillTable.getValueAt(
+                        rightSelectedRows[0], 
+                        EXPORT_BILL_ITEM_INVENTORY_ID
+                ).toString()
+        );
 
-        int quantity = Integer.parseInt(exportProductsBillTable.getValueAt(rows[0], EXPORT_BILL_ITEM_QUANTITY).toString());
+        int returnQuantity = Integer.parseInt(
+                exportProductsBillTable.getValueAt(
+                        rightSelectedRows[0], 
+                        EXPORT_BILL_ITEM_QUANTITY
+                ).toString()
+        );
 
-        int foundIndex = IntStream.range(0, inventoryItems.size())
-                .filter(index -> inventoryItems.get(index).getId().equals(selectedInventoryId))
+        int foundInventoryItemIndexInInventoryItems = IntStream.range(0, inventoryItems.size())
+                .filter(index -> inventoryItems.get(index).getId().equals(selectedInventoryItemIdInExportBill))
                 .findFirst()
                 .orElse(-1);
+        
+        InventoryItem selectedInventoryItem = inventoryItems.get(foundInventoryItemIndexInInventoryItems);
+        int currentQuantity = selectedInventoryItem.getQuantity();
+        selectedInventoryItem.setQuantity(currentQuantity + returnQuantity);
+        inventoryItems.set(foundInventoryItemIndexInInventoryItems, selectedInventoryItem);
 
-        int oldQuantity = inventoryItems.get(foundIndex).getQuantity();
-        inventoryItems.get(foundIndex).setQuantity(oldQuantity + quantity);
-        inventoryItems.set(foundIndex, inventoryItems.get(foundIndex));
+        boolean result = exportBill.getExportBillItems()
+                .removeIf(item -> 
+                        item.getInventoryItem().getId().equals(selectedInventoryItemIdInExportBill)
+                );
+        
+        if (result) {
+            loadDataToExportProductsBillTable(exportBill);
+            loadDataToExportInStockProductsTable(inventoryItems);
 
-        exportBill.getExportBillItems().removeIf(item -> item.getInventoryItem().getId().equals(selectedInventoryId));
-
-        loadDataToExportProductsBillTable(exportBill);
-        loadDataToExportInStockProductsTable(inventoryItems);
-
-        deleteExportBillItemDiaglog.dispose();
-        showDiaglogMessage("Xoá thành công.");
+            deleteExportBillItemDiaglog.dispose();
+            showDiaglogMessage("Xoá thành công."); 
+        } else {
+            deleteExportBillItemDiaglog.dispose();
+            showDiaglogMessage("Có lỗi trong quá trình khỏi hoá đơn xuất.");
+        }
     }//GEN-LAST:event_deleteExportBillItemDiaglogButtonActionPerformed
 
     private void cancelDeleteExportBillItemDiaglogButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelDeleteExportBillItemDiaglogButtonActionPerformed
@@ -7595,18 +7639,18 @@ public class Home extends javax.swing.JFrame {
         }
 
         
-        Integer newQuantity = 0;
+        int newQuantity = 0;
         try {
-            newQuantity = Integer.valueOf(editExportBillItemQuantityTextField.getText());
+            newQuantity = Integer.parseInt(editExportBillItemQuantityTextField.getText());
         } catch (NumberFormatException e) {
             showDiaglogMessage("Số lượng xuất phải là một số nguyên.");
             return;
         }
 
         
-        Float newPrice = 0.0f;
+        float newPrice = 0.0f;
         try {
-            newPrice = Float.valueOf(editExportBillItemPriceTextField.getText().replace(",", ""));
+            newPrice = Float.parseFloat(editExportBillItemPriceTextField.getText().replace(",", ""));
         } catch (NumberFormatException e) {
             showDiaglogMessage("Giá xuất phải là một số thực.");
             return;
@@ -7614,40 +7658,44 @@ public class Home extends javax.swing.JFrame {
 
         
         Integer selectedInventoryId = Integer.valueOf(exportProductsBillTable.getValueAt(rightSelectedRow, EXPORT_BILL_ITEM_INVENTORY_ID).toString());
-        Integer foundInventoryItemIndex = IntStream
+        Integer foundInventoryItemIndexInInventoryItems = IntStream
                 .range(0, inventoryItems.size())
                 .filter(index -> inventoryItems.get(index).getId().equals(selectedInventoryId))
                 .findFirst()
                 .orElse(-1);
-        InventoryItem foundInventoryItem = inventoryItems.get(foundInventoryItemIndex);
-
+        InventoryItem foundInventoryItem = inventoryItems.get(foundInventoryItemIndexInInventoryItems);
+        
+        
         Float minExportPrice = foundInventoryItem.getImportPrice();
         if (newPrice < minExportPrice) {
             showDiaglogMessage("Giá xuất phải lớn hơn hoặc bằng giá nhập.");
             return;
         }
-
         
-        Integer maxQuantity = foundInventoryItem.getQuantity();
-        int prevQuantity = Integer.parseInt(exportProductsBillTable.getValueAt(rightSelectedRow, EXPORT_BILL_ITEM_QUANTITY).toString());
-        int change = newQuantity - prevQuantity;
-        if (change > maxQuantity) {
-            showDiaglogMessage("Số lượng trong kho không đủ, vui lòng nhập một giá trị nhỏ hơn hoặc bằng " + (prevQuantity + maxQuantity));
+        
+        Integer remainingQuantity = foundInventoryItem.getQuantity();
+        int currentQuantity = Integer.parseInt(exportProductsBillTable.getValueAt(
+                rightSelectedRow, 
+                EXPORT_BILL_ITEM_QUANTITY
+        ).toString());
+        int changeQuantity = newQuantity - currentQuantity;
+        if (changeQuantity > remainingQuantity) {
+            showDiaglogMessage("Số lượng trong kho không đủ, vui lòng nhập một giá trị nhỏ hơn hoặc bằng " + (currentQuantity + remainingQuantity));
             return;
         }
 
         
-        foundInventoryItem.setQuantity(maxQuantity - change);
-        inventoryItems.set(foundInventoryItemIndex, foundInventoryItem);
+        foundInventoryItem.setQuantity(remainingQuantity - changeQuantity);
+        inventoryItems.set(foundInventoryItemIndexInInventoryItems, foundInventoryItem);
                 
-        int foundExportBillItemIndex = IntStream.range(0, exportBill.getExportBillItems().size())
+        int foundExportBillItemIndexInExportBillItems = IntStream.range(0, exportBill.getExportBillItems().size())
                 .filter(index -> exportBill.getExportBillItems().get(index).getInventoryItem().getId().equals(selectedInventoryId))
                 .findFirst()
                 .orElse(-1);
-        ExportBillItem selectedExportBillItem = exportBill.getExportBillItems().get(foundExportBillItemIndex);
+        ExportBillItem selectedExportBillItem = exportBill.getExportBillItems().get(foundExportBillItemIndexInExportBillItems);
         selectedExportBillItem.setQuantity(newQuantity);
         selectedExportBillItem.setExportPrice(newPrice);
-        exportBill.getExportBillItems().set(foundExportBillItemIndex, selectedExportBillItem);
+        exportBill.getExportBillItems().set(foundExportBillItemIndexInExportBillItems, selectedExportBillItem);
 
         
         editExportBillItemDiaglog.dispose();
@@ -7731,6 +7779,17 @@ public class Home extends javax.swing.JFrame {
             showDiaglogMessage(result ? "Xuất PDF thành công." : "Xuất PDF thất bại.");
         }
     }//GEN-LAST:event_exportPdfActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        logoutDiaglog.dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        ApplicationContext.setLoginedUser(null);
+        this.dispose();
+        logoutDiaglog.dispose();
+        Login.main(new String[]{});
+    }//GEN-LAST:event_jButton2ActionPerformed
     
     private void showViewExportBillDetailDiaglog(int selectedRow) {
         viewExportBillDetailDiaglog.setVisible(true);

@@ -49,8 +49,10 @@ public class PdfUtil {
             
             
             Paragraph headingParagraph = new Paragraph("PHIEU XUAT HANG");
+            
             headingParagraph.setAlignment(Element.ALIGN_CENTER);
             headingParagraph.setFont(headingFont);
+            
             
             Paragraph exportBillId = new Paragraph("Ma phieu xuat: " + item.getId());
             Paragraph creator = new Paragraph("Nguoi lap: " + item.getUser().getUsername());
@@ -58,18 +60,20 @@ public class PdfUtil {
             Paragraph clientName = new Paragraph("Ten khach hang: " + item.getClientName());
             Paragraph clientPhoneNumber = new Paragraph("So dien thoai: " + item.getClientPhoneNumber());
             Paragraph clientAddress = new Paragraph("Dia chi: " + item.getClientAddress());
+            
             exportBillId.setFont(simpleFont);
             creator.setFont(simpleFont);
             whenCreated.setFont(simpleFont);
             clientName.setFont(simpleFont);  
             clientPhoneNumber.setFont(simpleFont);
             clientAddress.setFont(simpleFont);
+            
             clientAddress.setSpacingAfter(30);
             
-            final int PROPS_COUNT = 6;
-            PdfPTable table = new PdfPTable(PROPS_COUNT);
+            final int COLS_COUNT = 6;
+            PdfPTable table = new PdfPTable(COLS_COUNT);
             PdfPCell indexHeader = new PdfPCell(new Paragraph("STT"));
-            PdfPCell productIdHeader = new PdfPCell(new Paragraph("Ma san pham"));
+            PdfPCell productIdHeader = new PdfPCell(new Paragraph("Ma SP"));
             PdfPCell productNameHeader = new PdfPCell(new Paragraph("Ten san pham"));
             PdfPCell quantityHeader = new PdfPCell(new Paragraph("So luong"));
             PdfPCell exportPriceHeader = new PdfPCell(new Paragraph("Don gia"));
@@ -84,16 +88,31 @@ public class PdfUtil {
 
             for (int i = 0; i < item.getExportBillItems().size(); ++i) {
                 PdfPCell indexData = new PdfPCell(new Paragraph((i + 1) + ""));
-                PdfPCell productIdData = new PdfPCell(new Paragraph(item.getExportBillItems().get(i).getProduct().getId().toString()));
-                PdfPCell productNameData = new PdfPCell(new Paragraph(item.getExportBillItems().get(i).getProduct().getName()));
-                PdfPCell quantityData = new PdfPCell(new Paragraph(item.getExportBillItems().get(i).getQuantity().toString()));
-                PdfPCell exportPriceData = new PdfPCell(new Paragraph(priceFormatter.format(
-                        item.getExportBillItems().get(i).getExportPrice())));
-                PdfPCell totalData = new PdfPCell(new Paragraph(
-                        priceFormatter.format(
+                
+                PdfPCell productIdData = new PdfPCell(
+                        new Paragraph(item.getExportBillItems().get(i).getProduct().getId().toString())
+                );
+                
+                PdfPCell productNameData = new PdfPCell(
+                        new Paragraph(item.getExportBillItems().get(i).getProduct().getName())
+                );
+                
+                PdfPCell quantityData = new PdfPCell(
+                        new Paragraph(item.getExportBillItems().get(i).getQuantity().toString())
+                );
+                
+                PdfPCell exportPriceData = new PdfPCell(
+                        new Paragraph(priceFormatter.format(
+                                item.getExportBillItems().get(i).getExportPrice()
+                        ))
+                );
+                
+                PdfPCell totalData = new PdfPCell(
+                        new Paragraph(priceFormatter.format(
                                 item.getExportBillItems().get(i).getExportPrice() 
-                                        * item.getExportBillItems().get(i).getQuantity()
-                )));
+                                    * item.getExportBillItems().get(i).getQuantity()
+                        ))
+                );
                 
                 table.addCell(indexData);
                 table.addCell(productIdData);
@@ -113,12 +132,10 @@ public class PdfUtil {
             document.add(clientAddress);
             
             document.add(table);
-            
-            document.close();
         } catch (FileNotFoundException | DocumentException e) {
             return false;
         } finally {
-            
+            document.close();
         }
         return true;
     }

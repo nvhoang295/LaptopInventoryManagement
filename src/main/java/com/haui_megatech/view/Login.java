@@ -346,7 +346,7 @@ public class Login extends javax.swing.JFrame {
         tendnlabel.setText("Tên đăng nhập");
 
         uName.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        uName.setText("viethoang");
+        uName.setText("admin@gmail.com");
         uName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 uNameActionPerformed(evt);
@@ -362,7 +362,7 @@ public class Login extends javax.swing.JFrame {
         passlabel.setText("Mật khẩu");
 
         uPass.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        uPass.setText("123");
+        uPass.setText("12345678Abc");
         uPass.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 uPassKeyReleased(evt);

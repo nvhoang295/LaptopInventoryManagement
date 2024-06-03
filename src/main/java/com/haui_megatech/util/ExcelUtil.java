@@ -43,7 +43,7 @@ public class ExcelUtil {
         try {
             is = new FileInputStream(file);
         } catch (FileNotFoundException ex) {
-            Logger.getLogger(ExcelUtil.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("Không tìm thấy file.");
         }
 
         try {
