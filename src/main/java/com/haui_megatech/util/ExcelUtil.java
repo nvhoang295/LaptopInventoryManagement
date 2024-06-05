@@ -8,6 +8,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -33,7 +34,9 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
  * @author vieth
  */
 public class ExcelUtil {
-
+    private static final SimpleDateFormat formatter = new SimpleDateFormat("HH:mm:ss dd/MM/yyyy");
+    private static final DecimalFormat priceFormatter = new DecimalFormat("0,000");
+    
     private static final String SELECTED_SHEET_NAME = "Sheet1";
     private static final String EXCEL_FILENAME_EXTENSION = ".xlsx";
 
@@ -141,7 +144,6 @@ public class ExcelUtil {
                 row.createCell(4).setCellValue(user.getPhoneNumber());
                 row.createCell(5).setCellValue(user.getEmail());
             }
-            System.out.println(savedFilePath);
             try (FileOutputStream out = new FileOutputStream(new File(
                     savedPath.replace("\\", "/") + EXCEL_FILENAME_EXTENSION
             ))) {
@@ -280,7 +282,6 @@ public class ExcelUtil {
                 row.createCell(6).setCellValue(product.getCard());
                 row.createCell(7).setCellValue(product.getWeight());
             }
-            System.out.println(savedFilePath);
             try (FileOutputStream out = new FileOutputStream(new File(
                     savedPath.replace("\\", "/") + EXCEL_FILENAME_EXTENSION
             ))) {
@@ -394,7 +395,6 @@ public class ExcelUtil {
                 row.createCell(3).setCellValue(provider.getEmail());
                 row.createCell(4).setCellValue(provider.getAddress());
             }
-            System.out.println(savedFilePath);
             try (FileOutputStream out = new FileOutputStream(new File(
                     savedPath.replace("\\", "/") + EXCEL_FILENAME_EXTENSION
             ))) {
@@ -412,6 +412,168 @@ public class ExcelUtil {
                 .builder()
                 .success(true)
                 .message(String.format("Xuất thành công %d nhà cung cấp.", providers.size()))
+                .build();
+    }
+    
+    public static CommonResponseDTO exportBillsToExcel(List<ExportBill> items, String savedPath) {
+        String savedFilePath = "";
+        try {
+            XSSFWorkbook workbook = new XSSFWorkbook();
+            XSSFSheet spreadsheet = workbook.createSheet("Sheet1");
+
+            XSSFRow row = null;
+            Cell cell = null;
+
+            row = spreadsheet.createRow((short) 0);
+            row.setHeight((short) 500);
+            cell = row.createCell(0, CellType.STRING);
+            cell.setCellValue("id");
+            cell = row.createCell(1, CellType.STRING);
+            cell.setCellValue("client_name");
+            cell = row.createCell(2, CellType.STRING);
+            cell.setCellValue("client_phone_number");
+            cell = row.createCell(3, CellType.STRING);
+            cell.setCellValue("client_address");
+            cell = row.createCell(4, CellType.STRING);
+            cell.setCellValue("total");
+            cell = row.createCell(5, CellType.STRING);
+            cell.setCellValue("when_created");
+
+            for (int i = 0; i < items.size(); i++) {
+                ExportBill item = items.get(i);
+                row = spreadsheet.createRow(i + 1);
+                row.setHeight((short) 400);
+                row.createCell(0).setCellValue(item.getId());
+                row.createCell(1).setCellValue(item.getClientName());
+                row.createCell(2).setCellValue(item.getClientPhoneNumber());
+                row.createCell(3).setCellValue(item.getClientAddress());
+                row.createCell(4).setCellValue(priceFormatter.format(item.getTotal()) + "đ");
+                row.createCell(5).setCellValue(formatter.format(item.getWhenCreated()));
+            }
+            try (FileOutputStream out = new FileOutputStream(new File(
+                    savedPath.replace("\\", "/") + EXCEL_FILENAME_EXTENSION
+            ))) {
+                workbook.write(out);
+            }
+        } catch (IOException e) {
+            return CommonResponseDTO
+                    .builder()
+                    .success(false)
+                    .message("Có lỗi trong quá trình ghi file.")
+                    .build();
+        }
+
+        return CommonResponseDTO
+                .builder()
+                .success(true)
+                .message(String.format("Xuất thành công %d phiếu xuất.", items.size()))
+                .build();
+    }
+    
+    public static CommonResponseDTO importBillsToExcel(List<ImportBill> items, String savedPath) {
+        String savedFilePath = "";
+        try {
+            XSSFWorkbook workbook = new XSSFWorkbook();
+            XSSFSheet spreadsheet = workbook.createSheet("Sheet1");
+
+            XSSFRow row = null;
+            Cell cell = null;
+
+            row = spreadsheet.createRow((short) 0);
+            row.setHeight((short) 500);
+            cell = row.createCell(0, CellType.STRING);
+            cell.setCellValue("id");
+            cell = row.createCell(1, CellType.STRING);
+            cell.setCellValue("provider_name");
+            cell = row.createCell(2, CellType.STRING);
+            cell.setCellValue("receiver");
+            cell = row.createCell(3, CellType.STRING);
+            cell.setCellValue("when_created");
+            cell = row.createCell(4, CellType.STRING);
+            cell.setCellValue("total");
+
+            for (int i = 0; i < items.size(); i++) {
+                ImportBill item = items.get(i);
+                row = spreadsheet.createRow(i + 1);
+                row.setHeight((short) 400);
+                row.createCell(0).setCellValue(item.getId());
+                row.createCell(1).setCellValue(item.getProvider().getName());
+                row.createCell(2).setCellValue(item.getUser().getUsername());
+                row.createCell(3).setCellValue(formatter.format(item.getWhenCreated()));
+                row.createCell(4).setCellValue(priceFormatter.format(item.getTotal()) + "đ");
+            }
+            try (FileOutputStream out = new FileOutputStream(new File(
+                    savedPath.replace("\\", "/") + EXCEL_FILENAME_EXTENSION
+            ))) {
+                workbook.write(out);
+            }
+        } catch (IOException e) {
+            return CommonResponseDTO
+                    .builder()
+                    .success(false)
+                    .message("Có lỗi trong quá trình ghi file.")
+                    .build();
+        }
+
+        return CommonResponseDTO
+                .builder()
+                .success(true)
+                .message(String.format("Xuất thành công %d phiếu nhập.", items.size()))
+                .build();
+    }
+    
+    public static CommonResponseDTO inventoryItemsToExcel(List<InventoryItem> items, String savedPath) {
+        String savedFilePath = "";
+        try {
+            XSSFWorkbook workbook = new XSSFWorkbook();
+            XSSFSheet spreadsheet = workbook.createSheet("Sheet1");
+
+            XSSFRow row = null;
+            Cell cell = null;
+
+            row = spreadsheet.createRow((short) 0);
+            row.setHeight((short) 500);
+            cell = row.createCell(0, CellType.STRING);
+            cell.setCellValue("stt");
+            cell = row.createCell(1, CellType.STRING);
+            cell.setCellValue("product_id");
+            cell = row.createCell(2, CellType.STRING);
+            cell.setCellValue("product_name");
+            cell = row.createCell(3, CellType.STRING);
+            cell.setCellValue("remaining");
+            cell = row.createCell(4, CellType.STRING);
+            cell.setCellValue("import_price");
+            cell = row.createCell(4, CellType.STRING);
+            cell.setCellValue("imported_at");
+
+            for (int i = 0; i < items.size(); i++) {
+                InventoryItem item = items.get(i);
+                row = spreadsheet.createRow(i + 1);
+                row.setHeight((short) 400);
+                row.createCell(0).setCellValue(item.getId());
+                row.createCell(1).setCellValue(item.getImportBillItem().getProduct().getId());
+                row.createCell(2).setCellValue(item.getImportBillItem().getProduct().getName());
+                row.createCell(3).setCellValue(item.getQuantity());
+                row.createCell(4).setCellValue(priceFormatter.format(item.getImportPrice()) + "đ");
+                row.createCell(5).setCellValue(formatter.format(item.getImportBillItem().getImportBill().getWhenCreated()));
+            }
+            try (FileOutputStream out = new FileOutputStream(new File(
+                    savedPath.replace("\\", "/") + EXCEL_FILENAME_EXTENSION
+            ))) {
+                workbook.write(out);
+            }
+        } catch (IOException e) {
+            return CommonResponseDTO
+                    .builder()
+                    .success(false)
+                    .message("Có lỗi trong quá trình ghi file.")
+                    .build();
+        }
+
+        return CommonResponseDTO
+                .builder()
+                .success(true)
+                .message(String.format("Xuất thành công %d mặt hàng tồn kho.", items.size()))
                 .build();
     }
 
